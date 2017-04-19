@@ -1,0 +1,743 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="并发,Java," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="The Java platfrom is designed from ground up to support concurrent. There are two units of excution: Processes and Threads. A system normally has multipul processes and threads, even if there is only">
+<meta name="keywords" content="并发,Java">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Basic Concepts in Java Concurrent">
+<meta property="og:url" content="http://jeffzzf.github.io/2015/06/30/Basic-Concepts-in-Java-Concurrent/index.html">
+<meta property="og:site_name" content="Noob">
+<meta property="og:description" content="The Java platfrom is designed from ground up to support concurrent. There are two units of excution: Processes and Threads. A system normally has multipul processes and threads, even if there is only">
+<meta property="og:updated_time" content="2016-04-20T11:22:04.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Basic Concepts in Java Concurrent">
+<meta name="twitter:description" content="The Java platfrom is designed from ground up to support concurrent. There are two units of excution: Processes and Threads. A system normally has multipul processes and threads, even if there is only">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://jeffzzf.github.io/2015/06/30/Basic-Concepts-in-Java-Concurrent/"/>
+
+
+
+
+
+  <title> Basic Concepts in Java Concurrent | Noob </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Noob</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+    
+      <p class="site-subtitle"></p>
+    
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://jeffzzf.github.io/2015/06/30/Basic-Concepts-in-Java-Concurrent/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="Jeffzzf">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="/images/avatar.gif">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="Noob">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="Noob" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                Basic Concepts in Java Concurrent
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2015-06-30T16:02:45+08:00">
+                2015-06-30
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Java/" itemprop="url" rel="index">
+                    <span itemprop="name">Java</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Java/并发/" itemprop="url" rel="index">
+                    <span itemprop="name">并发</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>The Java platfrom is designed from ground up to support concurrent. There are two units of excution: <em>Processes</em> and <em>Threads</em>. A system normally has multipul processes and threads, even if there is only single excution core, because processing time can be shared among threads and processes through time clicing.</p>
+<a id="more"></a>
+<p>#Processes#<br>A process generally has a complete, private set of basic run-time resources, for example each process has its own memory space. To facilitate comunication between processes, most systems support <em>Inter Processes communication(IPC)</em> resources, such as pips and sockets. IPC can be used not only between processes on the same system but also processes on different systems.</p>
+<p>Most implements of Java virtual mechine run as single process. A Java application can create additional processes using a ProcessBuilder.</p>
+<p>#Threads#<br>Thread can be called <em>lightweight process</em>, creating a new thread requires fewer resources than creating a process.</p>
+<p>Threads exist within a process, every process has at least one thread. Threads share resources of the process it belongs to, including memory space and open files.</p>
+<p>Every running application has at least sevral threads(<em>system threads</em> and <em>main</em> thread), system threads do thing like memory management and signal handling. From the view of programmer’s view, application start with just one thread(<em>main thread</em>), this thread has the ability to create additional threads.</p>
+<p>#Ways to use threads#</p>
+<ul>
+<li>Directly create and manage thread, simply instantiate Thread each time the application needs to initiate an asynchronous task.<ul>
+<li>Implement <em>Runnable</em> interface and pass Runnable object to Thread constructor</li>
+<li>Subclass Thread (This way is limited by the fact that the task class can not subclass a class other than Thread. So the way to employ Runnable object is more general)</li>
+</ul>
+</li>
+<li>Pass application’s tasks to an excutor.</li>
+</ul>
+<p>#Methods of Thread Class#</p>
+<p>##Sleep##<br><em>Thread.sleep()</em> cause the current thread to suspend excution for a specifited period. This is an efficitent means of making processor time available to the other threads of an application or other applications that might be running on the system. These sleep times are not guaranteed to be precise, because the are limit by the facilities provided by the underlying OS. The periods can be terminated by interrupts. </p>
+<p>##Interrupt##<br>The interrupt mechanism is implemented using an internal flag known as <em>interrupt status</em>. Invokeing ThreadObject.interrupt sets this flag. When a thread checks for an interrupt by Thread.interrupted, interrupt status is cleared. The non-static isInterrupt method, which is used by other thread to query status will not clear flag. Any method exits by throwing <em>InterruptedException</em> clears interrupt status when it does so.</p>
+<p>##Join##<br>The <em>join</em> method allows one thread to wait for the completion of another. <em>t.join()</em> cause the current thread to pause execution until t’s thread complete.</p>
+<p>#Synchronized#<br>Constructors can not be synchronized, it is a syntax error and doesn’t make sense, because only the thread that creates an object should have the access to it while it is being constructed.</p>
+<p>#Intrinsic Locks and Reentrant Locks#<br>Synchronized is built around an internal entity known as the intrinsic lock or monitor lock. Intrinsic lock paly a role in both aspects of synchronization: enforcing exclusive access to an object’s state and establishing happens-before relationship.</p>
+<p>Every object has a intrinsic lock associated with it. A thread is said to own the object’s intrinsic lock between the time it has acquire the lock and release the lock. As long as the thread owns object’s lock no other thread can acquire the same lock, and will block until the lock has release. When a thread relase an intrinsic lock, a happends-before relationship is established between that action and subsequent acquisition of the same lock.</p>
+<p>##Synchronized methods##<br>When a thread invoke a synchronized method, it automatically acquires the intrinsic lock of the method’s object and release it before it return. The lock release even if the return was caused by an uncaught exception.</p>
+<p>As with static methods and fields, the thread acquires the intrinsic lock for the Class object associate with the class.</p>
+<p>##Synchronized statements##<br>Synchronized statements must specify the object that provides the instrinsic lock.</p>
+<p>##Reentrant Synchcronized##<br>Allowing a thread to acquire the same lock more than once enables Reentrant Synchronized. This describle a situation where synchronized code, directly or indirectly invokes a method that also contains synchronized code, and both sets of code use the same lock.</p>
+<p>##Atomic Access##<br>In programming, an atomic action means that it either happens completely or it doesn’t happen at all. It cann’t be interrupt in the middle.</p>
+<p>Some actions can be specify atomic:</p>
+<ul>
+<li>Reads and writes are atomic for reference variables and for most primitive variables(all type except long and double)</li>
+<li>Reads and writes are atomic for all variables declared volatile(including long and double)</li>
+</ul>
+<p>Atomic actions cann’t be interleaved, but this does not eliminate all possible memory consistency errors.</p>
+<p>#Deadlock, Starvation and livelock#<br>Deaklock describes a situation where two or more threads are blocked forever, waiting for each other.</p>
+<p>Starvation describe a situation where a thread is unable to gain regular access to shared resources and is unable to make progress.</p>
+<p>#Thread communication#</p>
+<p>##wait()##<br>Object.wait() suspend the current thread, and wait() does not return until another thread has issued a notification that some special event have occured – though not necessarity the event this thread is waiting for.</p>
+<p>When a thread invokes d.wait(), it must own the intrinsic lock for d. When wait() has invoked, the Thread release the lock and suspends execution. At some future time, another thread acquires the same lock and invokes Object.notifyAll(), infroming all threads waiting for that lock that something important has happened.</p>
+<blockquote>
+<p>Always invoke wait inside a loop that tests for the condition being waiting for.</p>
+</blockquote>
+<p>##Producer-Consumer##<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Plate</span> </span>&#123;</div><div class="line">    <span class="keyword">private</span> <span class="keyword">int</span> size;</div><div class="line">    <span class="keyword">private</span> List&lt;Integer&gt; fruits;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Plate</span><span class="params">()</span> </span>&#123;</div><div class="line">        fruits = <span class="keyword">new</span> ArrayList&lt;Integer&gt;();</div><div class="line">        size = <span class="number">0</span>;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">synchronized</span> <span class="keyword">int</span> <span class="title">take</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">while</span> (size == <span class="number">0</span>) &#123;</div><div class="line">            <span class="keyword">try</span> &#123;</div><div class="line">                wait();</div><div class="line">            &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</div><div class="line">                e.printStackTrace();</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        --size;</div><div class="line">        notifyAll();</div><div class="line">        <span class="keyword">return</span> fruits.remove(fruits.size() - <span class="number">1</span>);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">synchronized</span> <span class="keyword">void</span> <span class="title">put</span><span class="params">(<span class="keyword">int</span> num)</span> </span>&#123;</div><div class="line">        <span class="keyword">while</span> (size &gt; <span class="number">5</span>) &#123;</div><div class="line">            <span class="keyword">try</span> &#123;</div><div class="line">                wait();</div><div class="line">            &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</div><div class="line">                e.printStackTrace();</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        ++size;</div><div class="line">        fruits.add(num);</div><div class="line">        notifyAll();</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Producer</span> <span class="keyword">implements</span> <span class="title">Runnable</span> </span>&#123;</div><div class="line">    <span class="keyword">private</span> Plate plate;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Producer</span><span class="params">(Plate plate)</span> </span>&#123;</div><div class="line">        <span class="keyword">this</span>.plate = plate;</div><div class="line">    &#125;</div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</div><div class="line">        Random random = <span class="keyword">new</span> Random();</div><div class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">50</span>; ++i) &#123;</div><div class="line">            <span class="keyword">int</span> tmp = random.nextInt(<span class="number">50</span>);</div><div class="line">            plate.put(tmp);</div><div class="line">            System.out.println(<span class="string">"Put "</span> + tmp);</div><div class="line">            <span class="keyword">try</span> &#123;</div><div class="line">                Thread.sleep(random.nextInt(<span class="number">1000</span>));</div><div class="line">            &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</div><div class="line">                e.printStackTrace();</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Consumer</span> <span class="keyword">implements</span> <span class="title">Runnable</span></span>&#123;</div><div class="line">    <span class="keyword">private</span> Plate plate;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Consumer</span><span class="params">(Plate plate)</span> </span>&#123;</div><div class="line">        <span class="keyword">this</span>.plate = plate;</div><div class="line">    &#125;</div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</div><div class="line">        Random random = <span class="keyword">new</span> Random();</div><div class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">50</span>; ++i) &#123;</div><div class="line">            System.out.println(<span class="string">"Take "</span> + plate.take());</div><div class="line">            <span class="keyword">try</span> &#123;</div><div class="line">                Thread.sleep(random.nextInt(<span class="number">5000</span>));</div><div class="line">            &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</div><div class="line">                e.printStackTrace();</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>#Locks#<br>The biggeast advantages of Lock objects over implicit locks is the ability to back out of an attempt to acquire a lock. The tryLock() method backs out if the lock is not availiable immediately or before a timeout expires.</p>
+<p>#Executors#<br>Executors encapsulate threads creation and management, The java.util.concurrent package defines three executor interfaces:</p>
+<ul>
+<li>Executor, a simple interface that supports launching new tasks. The low-level idiom creates a new thread and launches it immediately. Depending on the Executor implementation, execute may do the same thing, but is more likely to use an existing worker thread to run r, or to place r in a queue to wait for a worker thread to become available. </li>
+<li>ExecutorService, a subinterface of Executor, which adds features that help manage the lifecycle, both of the individual tasks and of the executor itself. The ExecutorService interface supplements execute with a similar, but more versatile submit method. Like execute, submit accepts Runnable objects, but also accepts Callable objects, which allow the task to return a value. The submit method returns a Future object, which is used to retrieve the Callable return value and to manage the status of both Callable and Runnable tasks.</li>
+<li>ScheduledExecutorService, a subinterface of ExecutorService, supports future and/or periodic execution of tasks. The ScheduledExecutorService interface supplements the methods of its parent ExecutorService with schedule, which executes a Runnable or Callable task after a specified delay. In addition, the interface defines scheduleAtFixedRate and scheduleWithFixedDelay, which executes specified tasks repeatedly, at defined intervals.</li>
+</ul>
+<p>#Thread Pools#<br>Most of the executor implementations in java.util.concurrent use thread pools, which consist of worker threads. This kind of thread exists separately from the Runnable and Callable tasks it executes and is often used to execute multiple tasks.</p>
+<p>Using worker threads minimizes the overhead due to thread creation. Thread objects use a significant amount of memory, and in a large-scale application, allocating and deallocating many thread objects creates a significant memory management overhead.</p>
+<p>One common type of thread pool is the fixed thread pool. This type of pool always has a specified number of threads running; if a thread is somehow terminated while it is still in use, it is automatically replaced with a new thread. Tasks are submitted to the pool via an internal queue, which holds extra tasks whenever there are more active tasks than threads.</p>
+<p>#Fork / Join#<br>The fork/join framework is an implementation of the ExecutorService interface that helps you take advantage of multiple processors. It is designed for work that can be broken into smaller pieces recursively. The goal is to use all the available processing power to enhance the performance of your application.</p>
+<p>As with any ExecutorService implementation, the fork/join framework distributes tasks to worker threads in a thread pool. The fork/join framework is distinct because it uses a work-stealing algorithm. Worker threads that run out of things to do can steal tasks from other threads that are still busy.</p>
+<p>#Concurrent Collections#<br>The java.util.concurrent package includes a number of additions to the Java Collections Framework:</p>
+<ul>
+<li>BlockingQueue defines a first-in-first-out data structure that blocks or times out when you attempt to add to a full queue, or retrieve from an empty queue.</li>
+<li>ConcurrentMap is a subinterface of java.util.Map that defines useful atomic operations. These operations remove or replace a key-value pair only if the key is present, or add a key-value pair only if the key is absent. Making these operations atomic helps avoid synchronization. The standard general-purpose implementation of ConcurrentMap is ConcurrentHashMap, which is a concurrent analog of HashMap.</li>
+<li><p>ConcurrentNavigableMap is a subinterface of ConcurrentMap that supports approximate matches. The standard general-purpose implementation of ConcurrentNavigableMap is ConcurrentSkipListMap, which is a concurrent analog of TreeMap.</p>
+<p>All of these collections help avoid Memory Consistency Errors by defining a happens-before relationship between an operation that adds an object to the collection with subsequent operations that access or remove that object.</p>
+</li>
+</ul>
+<p>#Atomic Variables#</p>
+<p>The java.util.concurrent.atomic package defines classes that support atomic operations on single variables. All classes have get and set methods that work like reads and writes on volatile variables. That is, a set has a happens-before relationship with any subsequent get on the same variable. The atomic compareAndSet method also has these memory consistency features, as do the simple atomic arithmetic methods that apply to integer atomic variables.</p>
+<p>#Concurrent Random Numbers#</p>
+<p>In JDK 7, java.util.concurrent includes a convenience class, ThreadLocalRandom, for applications that expect to use random numbers from multiple threads or ForkJoinTasks.</p>
+<p>#Reference#<br><a href="http://docs.oracle.com/javase/tutorial/essential/TOC.html" target="_blank" rel="external">http://docs.oracle.com/javase/tutorial/essential/TOC.html</a></p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/并发/" rel="tag"># 并发</a>
+          
+            <a href="/tags/Java/" rel="tag"># Java</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2015/07/01/Sort-colors/" rel="next" title="Sort colors">
+                <i class="fa fa-chevron-left"></i> Sort colors
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2015/06/30/排序算法总结/" rel="prev" title="排序算法总结">
+                排序算法总结 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+          
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <section class="site-overview sidebar-panel sidebar-panel-active">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.gif"
+               alt="Jeffzzf" />
+          <p class="site-author-name" itemprop="name">Jeffzzf</p>
+          <p class="site-description motion-element" itemprop="description">Do one thing at a time, and do well.</p>
+        </div>
+        <nav class="site-state motion-element">
+        
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">77</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">41</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">80</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2015 - 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Jeffzzf</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+      <!-- UY BEGIN -->
+      <script type="text/javascript" src="http://v2.uyan.cc/code/uyan.js?uid="></script>
+      <!-- UY END -->
+  
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+
+</body>
+</html>

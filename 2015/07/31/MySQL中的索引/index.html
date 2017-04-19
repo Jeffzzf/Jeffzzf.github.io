@@ -1,0 +1,734 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="MySQL,索引," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="MySQl中，索引在存储引擎层实现而不是服务器层，  #B-Tree索引#B-Tree（参考B-Tree，B+Tree）对索引列是按顺序组织存储的，所以很适合查找范围数据、全键值或键前缀查找。索引对多个值进行排序的依据是CREATETABLE语句中定义索引的顺序。B-Tree索引有以下限制：  如果不是按照索引的最左列开始查找，则无法使用索引 不能跳过索引中的列 如果查询中有某个列的范围查询，则">
+<meta name="keywords" content="MySQL,索引">
+<meta property="og:type" content="article">
+<meta property="og:title" content="MySQL中的索引">
+<meta property="og:url" content="http://jeffzzf.github.io/2015/07/31/MySQL中的索引/index.html">
+<meta property="og:site_name" content="Noob">
+<meta property="og:description" content="MySQl中，索引在存储引擎层实现而不是服务器层，  #B-Tree索引#B-Tree（参考B-Tree，B+Tree）对索引列是按顺序组织存储的，所以很适合查找范围数据、全键值或键前缀查找。索引对多个值进行排序的依据是CREATETABLE语句中定义索引的顺序。B-Tree索引有以下限制：  如果不是按照索引的最左列开始查找，则无法使用索引 不能跳过索引中的列 如果查询中有某个列的范围查询，则">
+<meta property="og:updated_time" content="2016-04-20T11:22:04.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="MySQL中的索引">
+<meta name="twitter:description" content="MySQl中，索引在存储引擎层实现而不是服务器层，  #B-Tree索引#B-Tree（参考B-Tree，B+Tree）对索引列是按顺序组织存储的，所以很适合查找范围数据、全键值或键前缀查找。索引对多个值进行排序的依据是CREATETABLE语句中定义索引的顺序。B-Tree索引有以下限制：  如果不是按照索引的最左列开始查找，则无法使用索引 不能跳过索引中的列 如果查询中有某个列的范围查询，则">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://jeffzzf.github.io/2015/07/31/MySQL中的索引/"/>
+
+
+
+
+
+  <title> MySQL中的索引 | Noob </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Noob</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+    
+      <p class="site-subtitle"></p>
+    
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://jeffzzf.github.io/2015/07/31/MySQL中的索引/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="Jeffzzf">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="/images/avatar.gif">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="Noob">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="Noob" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                MySQL中的索引
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2015-07-31T08:39:21+08:00">
+                2015-07-31
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/数据库/" itemprop="url" rel="index">
+                    <span itemprop="name">数据库</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/数据库/MySQL/" itemprop="url" rel="index">
+                    <span itemprop="name">MySQL</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <blockquote>
+<p>MySQl中，索引在存储引擎层实现而不是服务器层，</p>
+</blockquote>
+<p>#B-Tree索引#<br>B-Tree（参考<a href="http://jeffzzf.github.io/2015/07/29/B-Tree-B-Tree/">B-Tree，B+Tree</a>）对索引列是按顺序组织存储的，所以很适合查找范围数据、全键值或键前缀查找。<strong>索引对多个值进行排序的依据是CREATETABLE语句中定义索引的顺序</strong>。B-Tree索引有以下限制：</p>
+<ol>
+<li>如果不是按照索引的最左列开始查找，则无法使用索引</li>
+<li>不能跳过索引中的列</li>
+<li>如果查询中有某个列的范围查询，则其右边所有列都无法使用索引优化查询。</li>
+</ol>
+<p>#哈希索引#<br>哈希索引（Hash Index）基于哈希表实现，只有精确匹配所有列的查询才有效。哈希索引的结构非常紧凑，也使得哈希索引的速度非常快。但是，哈希索引也有它的限制：</p>
+<ol>
+<li>哈希索引只包含哈希值和行指针，不存储字段值。所以，不能使用索引中的值来避免读取行。</li>
+<li>哈希索引不是按照索引值顺序存储的，无法用于排序</li>
+<li>哈希索引也不支持部分索引列匹配查找</li>
+<li>哈希索引只支持等值比较查询</li>
+<li>当出现冲突时，需要遍历桶中的所有行指针，性能会有所下降</li>
+</ol>
+<p>#索引策略#</p>
+<p>##独立的列##<br>如果查询中的列不是独立的，MySql就不会使用索引，独立的列是指索引列不能使表达式的一部分。例如，<code>SELECT id FROM user WHERE id + 1 = 5</code>就无法使用id上的索引。</p>
+<p>##前缀索引与索引选择性##<br>索引很长的字符串列，会让索引大且慢。可以通过插入一个hash列模拟哈希索引，或者可以只索引开始的部分字符，这样可以大大节约索引空间，提高索引效率。但这样会降低索引选择性，<strong>索引选择性</strong>是指不重复的索引值（也称为基数，cardinality）和数据表中的记录总数的比值。索引的选择性越高则查询效率越高。前缀索引可以使索引更小更快，但是MySQl无法使用前缀索引做ORDER BY和GROUP BY，也无法使用前缀索引做覆盖扫描。</p>
+<p>##多列索引##<br>在多个列上建立独立的单独索引大部分情况下并不能提高MySQL的查询性能。在5.0之前的版本，MySQL只能使用其中某一个单列索引，在5.0以后的版本中，查询能够同时使用多个单列索引扫描并将结果合并。有三种合并：OR条件联合（Union）、AND条件相交（Intersection）以及联合与相交的组合。索引合并有时候是一种优化，但更多时候说明了索引建的很糟糕：</p>
+<ol>
+<li>当服务器对多个索引做相交操作时（多个And条件），通常说明需要一个包含所有相关列的多列索引，而不是多个独立的单独索引。</li>
+<li>当服务器需要对多个索引做联合操作时（通常有多个OR条件），通常需要耗费大量的CPU、内存资源。</li>
+</ol>
+<p>可以通过optimizer_switch关闭索引合并功能，也可以使用IGNORE_INDEX提示让优化器忽略某些索引。</p>
+<p>##索引顺序##<br><strong>经验法则</strong>：将选择性最高的列放到索引最前面。该法则在一定条件下适用，但是需要综合考虑，最重要的是要尽量避免<strong>随机IO</strong>和<strong>排序</strong>。查询性能也和查询条件的值分布有关，可以根据那些运行频率最高的查询来调整索引列的顺序。</p>
+<p>##聚簇索引##<br>聚簇索引是一种数据存储方式，InnoDB的聚簇索引实际上是在同一个数据结构中保存了B-Tree索引和数据行。叶子页中包含了行的全部数据，节点页中只包含索引项。</p>
+<p>InnoDB通过主键聚集数据，如果没有定义主键，InnoDB会选择一个唯一的非空索引代替，如果没有这样的非空索引，InnoDB会隐式定义一个主键来作为聚簇索引。InnoDB只聚集在同一个页面的记录，包含相邻键值的页面可能会相距甚远。聚集数据的优点：</p>
+<ol>
+<li>相关数据保存在一起，减少随机IO次数</li>
+<li>聚簇索引将索引和数据保存在同一个B树中，从聚簇索引中获取数据通常比在非聚簇索引中查找更快。</li>
+</ol>
+<p>聚簇索引的缺点：</p>
+<ol>
+<li>更新聚簇索引列的代价很高，因为会强制InnoDB将每个被更新的行移动到新的位置</li>
+<li>在基于聚簇索引的表中插入新行，或者更新索引列时可能导致<strong>页分裂（page split）</strong>问题。当行的主键值要求必须将这一行插入到某个已满的页中时，存储引擎会将该页分裂成两个页面来容纳改行，页分裂会导致表占用更多的磁盘空间。</li>
+<li>聚簇索引可能导致全表扫描变慢，尤其是行比较稀疏，或者由于页分裂导致存储不连续时。</li>
+<li>通过二级索引（叶节点中存储主键值而非聚簇索引叶节点中的数据行）查找行时，存储引擎先找到二级索引的叶节点获得对应的主键值，然后根据这个值去聚簇索引中查找对应的行，需要两次B树查找。</li>
+</ol>
+<p>##MyISAM 与InnoDB的数据分布##<br>MyISAM中的主键索引与其他列索引并没有什么不同，都是基于B+树，非叶节点中存储键值，页节点中存储指向数据行的指针。</p>
+<p>InnoDB中的索引也采用B+树组织，不过叶节点中存储的是整个数据行以及事务ID、用于事务和MVCC的回滚指针。InnoDB的二级索引的叶节点中存储的不是行指针，而是主键值，并以此作为指向行的指针从聚簇索引中查找完整数据。这种策略减少了当出现行移动或者数据页分裂时二级索引的维护工作。</p>
+<p>##覆盖索引##<br>如果一个索引包含所有需要查询字段的值，该索引就成为覆盖索引。在索引中满足查询的成本一般比查询行要小得多。覆盖索引必须覆盖索引列的值，MySQL只能使用B树索引做覆盖索引。</p>
+<p>MySQL查询优化器在执行查询前会判断是否有一个索引能够进行覆盖，索引无法覆盖查询的情况有两种：</p>
+<ol>
+<li>没有任何索引能够覆盖这个查询，这种情况下，如果WHERE条件中的列有索引可以覆盖，MySQL可以过滤之后再读取需要的数据行。</li>
+<li>MySQL不能在索引中执行某些LIKE操作   ，MySQL能够执行最左前缀匹配的LIKE查询，但是如果是通配符开头的LIKE查询，存储引擎就无法做比较。</li>
+</ol>
+<p>##压缩索引##<br>MyISAM使用前缀压缩来减少索引大小，先完全保存索引块中的第一个值，然后将其他值和第一个值进行比较得到相同前缀的字节树和剩余的不同后缀部分。例如第一个值“perform”则第二个值“performance”，压缩后第二个值的实际存储值是“7，ance”。随机压缩可以让更多的索引放入内存，对于IO密集型操作，性能更高。由于大量的值依赖于前面的值，随机查找性能降低，CPU密集型应用性能降低。</p>
+<p>#索引优化#</p>
+<ol>
+<li>当多次出现对多个索引做相交操作（有多个AND条件），通常意味着需要一个包含所有相关列的多列索引，而不是多个独立的单列索引。</li>
+<li>设计索引顺序时要尽量避免随机IO，当不需要考虑排序和分组时，将选择性最高的列放在前面通常是很好的。</li>
+<li>索引本身有一定的开销，不是越多越好。例如性别只有两个值，在性别字段建索引对查询速度的提升不高，但是更新时会降低性能。</li>
+<li>复合索引中，只要有一列含有NULL，那么这一列对复合索引无效。在设计数据库时，尽量避免让字段的默认值为NULL。</li>
+<li>使用前缀索引，例如一个CHAR（255）的列，如果前10或20个字段内多数值是唯一的，那么就不需要对整列进行索引。</li>
+<li>在列上进行运算（参与运算或者作为函数参数）将导致索引失效，应尽量避免。</li>
+</ol>
+<p> #参考资料#<br> 《高性能MySQL（第三版）》</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/MySQL/" rel="tag"># MySQL</a>
+          
+            <a href="/tags/索引/" rel="tag"># 索引</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2015/08/18/Median-of-Two-Sorted-Arrays/" rel="next" title="Median of Two Sorted Arrays">
+                <i class="fa fa-chevron-left"></i> Median of Two Sorted Arrays
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2015/07/29/B-Tree-B-Tree/" rel="prev" title="B-Tree, B+Tree">
+                B-Tree, B+Tree <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+          
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <section class="site-overview sidebar-panel sidebar-panel-active">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.gif"
+               alt="Jeffzzf" />
+          <p class="site-author-name" itemprop="name">Jeffzzf</p>
+          <p class="site-description motion-element" itemprop="description">Do one thing at a time, and do well.</p>
+        </div>
+        <nav class="site-state motion-element">
+        
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">77</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">41</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">80</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2015 - 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Jeffzzf</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+      <!-- UY BEGIN -->
+      <script type="text/javascript" src="http://v2.uyan.cc/code/uyan.js?uid="></script>
+      <!-- UY END -->
+  
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+
+</body>
+</html>

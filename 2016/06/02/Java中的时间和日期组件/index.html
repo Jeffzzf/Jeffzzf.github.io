@@ -1,0 +1,700 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Java,Bugs," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="在一个项目中需要获取数据库中某天0时0分0秒到第二天0时0分0秒之间的记录，一开始想到的是之间使用Date对象的getTime()方法获得当前的微秒数，然后截掉小时、分钟和微秒得到该日期的0时0分0秒，代码如下：123456final long MICROSECONDS_PER_DAY = 24 * 60 * 60 * 1000;long curMillis = System.currentTi">
+<meta name="keywords" content="Java,Bugs">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Java中的时间和日期组件">
+<meta property="og:url" content="http://jeffzzf.github.io/2016/06/02/Java中的时间和日期组件/index.html">
+<meta property="og:site_name" content="Noob">
+<meta property="og:description" content="在一个项目中需要获取数据库中某天0时0分0秒到第二天0时0分0秒之间的记录，一开始想到的是之间使用Date对象的getTime()方法获得当前的微秒数，然后截掉小时、分钟和微秒得到该日期的0时0分0秒，代码如下：123456final long MICROSECONDS_PER_DAY = 24 * 60 * 60 * 1000;long curMillis = System.currentTi">
+<meta property="og:updated_time" content="2016-07-13T08:51:03.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Java中的时间和日期组件">
+<meta name="twitter:description" content="在一个项目中需要获取数据库中某天0时0分0秒到第二天0时0分0秒之间的记录，一开始想到的是之间使用Date对象的getTime()方法获得当前的微秒数，然后截掉小时、分钟和微秒得到该日期的0时0分0秒，代码如下：123456final long MICROSECONDS_PER_DAY = 24 * 60 * 60 * 1000;long curMillis = System.currentTi">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://jeffzzf.github.io/2016/06/02/Java中的时间和日期组件/"/>
+
+
+
+
+
+  <title> Java中的时间和日期组件 | Noob </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Noob</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+    
+      <p class="site-subtitle"></p>
+    
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://jeffzzf.github.io/2016/06/02/Java中的时间和日期组件/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="Jeffzzf">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="/images/avatar.gif">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="Noob">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="Noob" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                Java中的时间和日期组件
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-06-02T09:13:49+08:00">
+                2016-06-02
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Java/" itemprop="url" rel="index">
+                    <span itemprop="name">Java</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Java/Basic/" itemprop="url" rel="index">
+                    <span itemprop="name">Basic</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <blockquote>
+<p>在一个项目中需要获取数据库中某天0时0分0秒到第二天0时0分0秒之间的记录，一开始想到的是之间使用Date对象的getTime()方法获得当前的微秒数，然后截掉小时、分钟和微秒得到该日期的0时0分0秒，代码如下：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">final</span> <span class="keyword">long</span> MICROSECONDS_PER_DAY = <span class="number">24</span> * <span class="number">60</span> * <span class="number">60</span> * <span class="number">1000</span>;</div><div class="line"><span class="keyword">long</span> curMillis = System.currentTimeMillis();</div><div class="line"><span class="comment">//当天的0时0分0秒</span></div><div class="line">Date today = <span class="keyword">new</span> Date(curMillis - curMillis % MICROSECONDS_PER_DAY);</div><div class="line"><span class="comment">//昨天的0时0分0秒</span></div><div class="line">Date yesterday = <span class="keyword">new</span> Date(today.getTime() - MICROSECONDS_PER_DAY);</div></pre></td></tr></table></figure></p>
+<p>一切看上去都很reasonable，日期也是对的，不过时间并不是0时0分0秒，而是8时0分0秒<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">System.out.println(today);  <span class="comment">//Wed Jun 01 08:00:00 CST 2016</span></div><div class="line">System.out.println(yesterday);  <span class="comment">//Tue May 31 08:00:00 CST 2016</span></div></pre></td></tr></table></figure></p>
+</blockquote>
+<p>为了搞清楚问题出在哪里，对Java中与date、time相关概念做了一次梳理。</p>
+<p>##时区（TimeZone）##<br>时区（Time Zone)是地球上的区域使用同一个时间的定义，1884年在华盛顿召开国际经度会议时，为了克服时间上的混乱，规定将全球划分为24个时区（东、西各12个时区）。规定英国（格林尼治天文台旧址）为中时区（零时区）、东1-12区，西1-12区。每个时区横跨经度15度，时间正好是1小时。最后的东、西第12区各跨经度7.5度，以东、西经180度为界。每个时区的中央经线上的时间就是这个时区内统一采用的时间，称为<strong>区时</strong>，相邻两个时区的时间相差1小时。例如，中国东8区的时间总比泰国东7区的时间早1小时，而比日本东9区的时间迟1小时。因此，出国旅行的人，必须随时调整自己的手表，才能和当地时间相一致。凡向西走，每过一个时区，就要把表拨慢1小时（比如2点拨到1点）；凡向东走，每过一个时区，就要把表拨快1小时（比如1点拨到2点）。并且规定英国（格林尼治天文台旧址）为本初子午线，即零时（24时）经线。在中国采用首都北京所在地东八区的时间为全国统一使用时间。<br>Java中的TimeZone对应现实世界中的时区，可以使用getTimeZone(String ID)获得某个时区，例如使用TimeZone.getTimeZone(“Asia/Shanghai”)可以得到中国标准时间的时区，使用TimeZone.getDefault()可以得到系统标准时区。</p>
+<p>##Date##<br>在Java 7中，Date类除了Date(long milliseconds)和Date()两个构造器外，其它构造器都废弃了。这两个构造器都基于从1970年1月1日00:00:00GMT算起的微秒数，默认构造器以系统当前的微秒数构造对象。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//Date类的构造器</span></div><div class="line"><span class="function"><span class="keyword">public</span> <span class="title">Date</span><span class="params">(<span class="keyword">long</span> date)</span> </span>&#123;</div><div class="line">    fastTime = date;</div><div class="line">&#125;</div><div class="line"><span class="function"><span class="keyword">public</span> <span class="title">Date</span><span class="params">()</span> </span>&#123;</div><div class="line">    <span class="keyword">this</span>(System.currentTimeMillis());</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>Date对象常用    after(Date when)、before(Date when)和compareTo(Date anotherDate)这三个比较函数，这些比较都是基于上述的微秒数的。另外的一个常用函数getTime()用来获取Date对象的微秒数。<br>值得一提的是Date对象的toString()方法，这个方法在将Date转化为String过程中，会将微秒数表示的格林尼治时间转化到系统的默认时区时间。这就不难解释前文中System.out.println(today)会输出<code>Wed Jun 01 08:00:00 CST 2016</code>了：<code>Date today = new Date(curMillis - curMillis % MICROSECONDS_PER_DAY)</code>得到的是格林威治时间的零点，在输出时根据当前时区（东八区）加了8个小时。</p>
+<p>##Calendar##<br>Calendar是Java提供的一个日期时间类，相对于Date类中废弃的大部分构造器和函数，Calendar类提供了更多的功能。通常使用<code>Calendar now = Calendar.getInstance();</code>获取当前日期和时间。Calendar也是基于与1970年1月1日 00：00：00的毫秒数计时，getInstance()方法中也使用了System.curentMilliseconds()作为当前毫秒数。<br>可以通过Calendar对象的getTime()方法获得对应的Date对象，使用getTimeInMillis()方法获得对应的毫秒数。Calendar对象可以通过setTime()方法设置日期和时间。</p>
+<p>##DataFormat##<br>Date可以按照指定的格式输出对应的字符串，也可以将字符串表示的日期和时间转化为Date对象，它们之间转换的桥梁是DateFormat，常用的DateFormat是SimpleDataFormat。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">DateFormat dateFormat = <span class="keyword">new</span> SimapleDateFormat(<span class="string">"yyyy-MM-dd HH:mm:ss"</span>);</div><div class="line">Date date = <span class="keyword">new</span> Date();</div><div class="line">System.out.println(dateFormat.format(date));    <span class="comment">//2016-06-02 08:31:50</span></div></pre></td></tr></table></figure></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">DateFormat dateFormat = <span class="keyword">new</span> SimpleDateFormat(<span class="string">"yy-M-d hh:mm:s"</span>);</div><div class="line">    <span class="keyword">try</span> &#123;</div><div class="line">        System.out.println(dateFormat.parse(<span class="string">"16-6-2 08:35:12"</span>));</div><div class="line">        <span class="comment">//Thu Jun 02 08:35:12 CST 2016</span></div><div class="line">    &#125; <span class="keyword">catch</span> (ParseException e) &#123;</div><div class="line">        e.printStackTrace();</div><div class="line">    &#125;</div></pre></td></tr></table></figure>
+<p>值得注意的是：Calendar.HOUR表示12小时制，对应DateFormat格式小时位置的”hh”；Calendar.HOUR_OF_DAY表示24小时制，对应DateFormat格式小时位置的”HH”。Calendar.HOUR的表示范围是1-12，Calendar.HOUR_OF_DAY的表示范围是0-23。如果通过Calendar.HOUR设置小时为0点，并通过设置为”hh”的DateFormat打印，小时位将显示12.</p>
+<p>通过以上分析，需要对日期和时间进行操作时，Calendar提供了最为完善的支持，有些操作只能通过Calendar进行，例如涉及到地域和时区的操作等。Date一般用于在数据库、前端等场合对日期时间进行传输，类似于Java中日期和时间的DTO对象。Calendar与Date之间、Date与String之间可以进行非常方便的转换。</p>
+<blockquote>
+<p>针对本文开头提出的需求，可以通过Calendar对象获取前一天的第一刻和最后一刻。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> Date <span class="title">getFirstMoment</span><span class="params">(Date date)</span> </span>&#123;</div><div class="line">    Calendar calendar = Calendar.getInstance();</div><div class="line">    calendar.setTime(date);</div><div class="line">    calendar.add(Calendar.Date, -<span class="number">1</span>);</div><div class="line">    calendar.set(Calendar.HOUR, <span class="number">0</span>);</div><div class="line">    calendar.set(Calendar.MINUTE, <span class="number">0</span>);</div><div class="line">    calendar.set(Calendar.SECOND, <span class="number">0</span>);</div><div class="line">    calendar.set(Calendar.MILLISECOND, <span class="number">0</span>);</div><div class="line">    <span class="keyword">return</span> calendar.getTime();</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">public</span> Date <span class="title">getLastMoment</span><span class="params">(Date date)</span></span>&#123;</div><div class="line">    Calendar calendar = Calendar.getInstance();</div><div class="line">    calendar.setTime(date);</div><div class="line">    calendar.add(Calendar.Date, -<span class="number">1</span>);</div><div class="line">    calendar.set(Calendar.HOUR, <span class="number">23</span>);</div><div class="line">    calendar.set(Calendar.MINUTE, <span class="number">59</span>);</div><div class="line">    calendar.set(Calendar.SECOND, <span class="number">59</span>);</div><div class="line">    calendar.set(Calendar.MILLISECOND, <span class="number">999</span>);</div><div class="line">    <span class="keyword">return</span> calendar.getTime();</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+</blockquote>
+<p>##参考资料##</p>
+<ol>
+<li><p><a href="http://baike.baidu.com/link?url=T4wV7JSut_NfiYDtAFuMVoOt2mMuMuDJawhoAcILjpncMGB9nm9MzA8bnMVFbemDeMOW5IYLVxLhIyp_RkiE5q" target="_blank" rel="external">百度百科-时区</a> </p>
+</li>
+<li><p><a href="https://docs.oracle.com/javase/7/docs/api/overview-summary.html" target="_blank" rel="external">Java 7 Doc</a></p>
+</li>
+<li><p><a href="http://docs.oracle.com/javase/6/docs/api/java/text/SimpleDateFormat.html" target="_blank" rel="external">SimpleDateFormat</a></p>
+</li>
+</ol>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Java/" rel="tag"># Java</a>
+          
+            <a href="/tags/Bugs/" rel="tag"># Bugs</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/06/05/Mac中Terminal路径定制/" rel="next" title="Mac中Terminal路径定制">
+                <i class="fa fa-chevron-left"></i> Mac中Terminal路径定制
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2015/10/26/File-System/" rel="prev" title="File System">
+                File System <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+          
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <section class="site-overview sidebar-panel sidebar-panel-active">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.gif"
+               alt="Jeffzzf" />
+          <p class="site-author-name" itemprop="name">Jeffzzf</p>
+          <p class="site-description motion-element" itemprop="description">Do one thing at a time, and do well.</p>
+        </div>
+        <nav class="site-state motion-element">
+        
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">77</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">41</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">80</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2015 - 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Jeffzzf</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+      <!-- UY BEGIN -->
+      <script type="text/javascript" src="http://v2.uyan.cc/code/uyan.js?uid="></script>
+      <!-- UY END -->
+  
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+
+</body>
+</html>

@@ -1,0 +1,785 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Hibernate," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="#Hibernate综述# Hibernate框架用于实现对数据库的操作，为应用程序构建一个持久层。Hibernate是对JDBC的封装，通过JDBC的DataBaseMetaData类和ResultSetMetaData类获取数据库表的字段名、类型、大小等相关信息。再结合Java的反射机制建立Java类与数据库表以Java对象与数据表中记录之间的关系。  Hibernate定义了以下对象状态（参">
+<meta name="keywords" content="Hibernate">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Hibernate总结">
+<meta property="og:url" content="http://jeffzzf.github.io/2015/06/18/Hibernate总结/index.html">
+<meta property="og:site_name" content="Noob">
+<meta property="og:description" content="#Hibernate综述# Hibernate框架用于实现对数据库的操作，为应用程序构建一个持久层。Hibernate是对JDBC的封装，通过JDBC的DataBaseMetaData类和ResultSetMetaData类获取数据库表的字段名、类型、大小等相关信息。再结合Java的反射机制建立Java类与数据库表以Java对象与数据表中记录之间的关系。  Hibernate定义了以下对象状态（参">
+<meta property="og:updated_time" content="2016-04-20T11:22:04.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Hibernate总结">
+<meta name="twitter:description" content="#Hibernate综述# Hibernate框架用于实现对数据库的操作，为应用程序构建一个持久层。Hibernate是对JDBC的封装，通过JDBC的DataBaseMetaData类和ResultSetMetaData类获取数据库表的字段名、类型、大小等相关信息。再结合Java的反射机制建立Java类与数据库表以Java对象与数据表中记录之间的关系。  Hibernate定义了以下对象状态（参">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://jeffzzf.github.io/2015/06/18/Hibernate总结/"/>
+
+
+
+
+
+  <title> Hibernate总结 | Noob </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Noob</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+    
+      <p class="site-subtitle"></p>
+    
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://jeffzzf.github.io/2015/06/18/Hibernate总结/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="Jeffzzf">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="/images/avatar.gif">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="Noob">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="Noob" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                Hibernate总结
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2015-06-18T13:34:15+08:00">
+                2015-06-18
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Java-Web/" itemprop="url" rel="index">
+                    <span itemprop="name">Java Web</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Java-Web/Hibernate/" itemprop="url" rel="index">
+                    <span itemprop="name">Hibernate</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>#Hibernate综述#<br> Hibernate框架用于实现对数据库的操作，为应用程序构建一个持久层。Hibernate是对JDBC的封装，通过JDBC的DataBaseMetaData类和ResultSetMetaData类获取数据库表的字段名、类型、大小等相关信息。再结合Java的反射机制建立Java类与数据库表以Java对象与数据表中记录之间的关系。</p>
+<p> Hibernate定义了以下对象状态（参考<a href="http://wiki.jikexueyuan.com/project/ssh-noob-learning/three-states.html）。" target="_blank" rel="external">http://wiki.jikexueyuan.com/project/ssh-noob-learning/three-states.html）。</a></p>
+<blockquote>
+<ul>
+<li>Transient - an object is transient if it has just been instantiated using the new operator, and it is not associated with a Hibernate Session. It has no persistent representation in the database and no identifier value has been assigned. Transient instances will be destroyed by the garbage collector if the application does not hold a   reference anymore. Use the Hibernate Session to make an object persistent (and let Hibernate take care of the SQL statements that need to be executed for this transition). </li>
+<li>Persistent - a persistent instance has a representation in the database and an identifier value. It might just have been saved or loaded, however, it is by definition in the scope of a Session. Hibernate will detect any changes made to an object in persistent state and synchronize the state with the database when the unit of work completes. Developers do not execute manual UPDATE statements, or DELETE statements when an object should be made transient. </li>
+<li>Detached - a detached instance is an object that has been persistent, but its Session has been closed. The reference to the object is still valid, of course, and the detached instance might even be modified in this state. A detached instance can be reattached to a new Session at a later point in time, making it (and all the modifications) persistent again. This feature enables a programming model for long running units of work that require user think-time. We call them application transactions, i.e., a unit of work from the point of view of the user.</li>
+</ul>
+</blockquote>
+<p>瞬态、持久态和游离态中，只有持久态态既与Session关联又存在于数据库中，瞬态是Hibernate新建后对象所处的状态，如果使瞬态对象与Session关联并调用save方法，则瞬态对象转化为持久态对象。当Session对象close或者evict某个对象时，该对象从持久态转化为瞬态。<br><a id="more"></a></p>
+<p>#Hibernate对Persistent class的要求#</p>
+<ol>
+<li>实现一个无参构造器，Hibernate通过调用<code>java.lang.reflect.Constructor.newInstance()</code>实例化对象，为了使用运行时动态生成，该构造器至少具有包访问权限。</li>
+<li>提供一个identifier属性，该属性映射到数据库的主键列</li>
+<li>最好使用non-final class，Hibernate的核心属性proxies(lazy loading)要求持久类要么是non-final的，要么是实现了接口中所有public方法的类。</li>
+<li>提供getter和setter（可选）</li>
+</ol>
+<p>#主键生成方式#</p>
+<ul>
+<li>sequence：采用指定序列生成，适用于Oracle数据库。  </li>
+<li>identity:采用数据库自增长机制生成。适用于MySQL, SQLServer, DB2数据库。</li>
+<li>native: 由hibernate决定，hibernate会根据配置文件hibernate.cfg.xml中方言”dialect”决定，如果方言是Mysql，相当于identity，如果方言是Oracle，相当于是sequence。</li>
+<li>increment : 首先获取最大主键值，然后加1，再执行插入操作。适用于各种数据库。</li>
+<li>assigned :Hibernate忽略主键生成，不负责管理。需要程序员在程序中指定主键值，不常用。</li>
+<li>其他<ul>
+<li>uuid：采用UUID算法生成一个字符串主键值</li>
+<li>hilo：采用高地位算法生成一个数值主键值</li>
+</ul>
+</li>
+</ul>
+<p>#实现equals(), hashCode()#</p>
+<blockquote>
+<p>We can’t use an auto-incrementing database id for comparing objects, since the transient and the attached object versions won’t be equal to each other.<br>It is recommended that you implement equals() and hashCode() using Business key equality. Business key equality means that the equals() method compares only the properties that form the business key. It is a key that would identify our instance in the real world (a natural candidate key):Immutable or unique properties are usually good candidates for a business key.</p>
+</blockquote>
+<p>由于数据库自动增长的id值无法用于区分处于瞬态或游离态的对象，最好使用业务键重写equals()和hashCode()方法。</p>
+<p>#Mapping#</p>
+<blockquote>
+<ul>
+<li>Some entities are not mutable. They cannot be updated by the application. This allows Hibernate to make some minor performance optimizations.. Use the @Immutable annotation.</li>
+<li>There is no difference between a view and a base table for a Hibernate mapping. This is transparent at the database level, although some DBMS do not support views properly, especially with updates. </li>
+</ul>
+</blockquote>
+<p>##单向关联##</p>
+<p>###基于外键的N-1单向关联###<br>直接在N的一端使用ManyToOne和JoinColumn注解即可<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@ManyToOne</span>(targetEntity=Address.class)</div><div class="line"><span class="meta">@JoinColumn</span>(name=<span class="string">"addressId"</span>, nullable=<span class="keyword">false</span>)</div><div class="line"><span class="meta">@Cascade</span>(CascadeType.ALL)</div></pre></td></tr></table></figure></p>
+<p>###基于外键的1-1单向关联###<br>基于外键的1-1单向关联与基于外键的N-1单向关联没有区别，只需要在JoinColumn注解中增加unique=true即可: <code>@JoinColumn(name=&quot;addressId&quot;,unique=true)</code></p>
+<p>###基于外键的1-N单向关联###<br>基于外键的1-N单向关联需要在N的一端维护外键列，但只有1的一端控制关联关系，所以直接在1的一端使用@JoinColumn修饰Set集合属性。<code>@OneToMany(targetEntity=Address.class);@JoingColumn(name=&quot;persionId&quot;)</code>（<strong>推荐使用双向关联</strong>）</p>
+<p>###N-N单向关联###<br>N-N关联必须使用连接表<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@ManyToMany</span>(targetEntity=Address.class)</div><div class="line"><span class="meta">@JoinTable</span>(name=<span class="string">"person_address"</span>,</div><div class="line">    joinColumn=<span class="meta">@JoinColumn</span>(name=<span class="string">"personId"</span>,</div><div class="line">        referencedColumnName=<span class="string">"personId"</span>),</div><div class="line">    inverseJoinColumns=<span class="meta">@JoinColumn</span>(name=<span class="string">"addressId"</span>,</div><div class="line">        referencedColumnName=<span class="string">"addressId"</span>)</div><div class="line">        )</div></pre></td></tr></table></figure></p>
+<p>##双向关联##</p>
+<p>###双向1-N关联###<br>数据库为了记录这种1-N关系，在N的一端数据表中添加一个1端的外键。Hibernate推荐1-N关联使用双向关联，由N的一端来控制关联关系（一般不由1的一端控制。因此，在使用@OneToMany注解时指定马匹配到By属性——一旦为@OneToMany、@ManyToMany指定了mappedBy属性，则表示当前实体不能控制关联关系。对于指定了mappedBy属性的@OneToMany、@OneToOne、@ManyToMany注解，不能再使用@JoinColumn或@JoinTable修饰代表关联实体的属性。<br>Person端：<br><code>@OneToMany(targetEntity=Address.class, mappedBy=&quot;person&quot;)</code><br>Address端：<br><code>@ManToOne(targetEntity=Person.class)</code><br><code>@JoinColumn(name=&quot;personId&quot;, nullable=false)</code></p>
+<p>###双向N-N关联###<br>双向N-N关联两端都要使用Set集合属性，两端都增加对集合属性的访问，并且只能采用连接表建立两个实体之间的关联关系。使用时，两端都使用@ManyToMany和@JoinTable注解，两边使用连接表表名和对应列名都应该相等。如果希望一端放弃控制连接关系，可在该端@ManyToMany注解中使用mappedBy属性。<br>Person端：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@ManyToMany</span>(targetEntity=Address.class)</div><div class="line"><span class="meta">@JoinTable</span>(name=<span class="string">"person_address"</span>,</div><div class="line">    joinColumn=<span class="meta">@JoinColumn</span>(name=<span class="string">"personId"</span>,</div><div class="line">        referencedColumnName=<span class="string">"personId"</span>),</div><div class="line">    inverseJoinColumns=<span class="meta">@JoinColumn</span>(name=<span class="string">"addressId"</span>,</div><div class="line">        referencedColumnName=<span class="string">"addressId"</span>)</div><div class="line">        )</div></pre></td></tr></table></figure></p>
+<p>Address端：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@ManyToMany</span>(targetEntity=Person.class)</div><div class="line"><span class="meta">@JoinTable</span>(name=<span class="string">"person_address"</span>,</div><div class="line">    joinColumn=<span class="meta">@JoinColumn</span>(name=<span class="string">"addressId"</span>,</div><div class="line">        referencedColumnName=<span class="string">"addressId"</span>),</div><div class="line">    inverseJoinColumns=<span class="meta">@JoinColumn</span>(name=<span class="string">"personId"</span>,</div><div class="line">        referencedColumnName=<span class="string">"personId"</span>)</div><div class="line">        )</div></pre></td></tr></table></figure></p>
+<p>###双向1-1关联###<br>对于双向的1-1关联，两端处于平等状态，但是应该由建立外键的一端（从表）控制关联关系，另一端（主表）使用mappedBy属性放弃控制关联关系。<br>Person端（主表）：<br><code>@OneToOne(targetEntity=Address.class, mappedBy=&quot;person&quot;)</code></p>
+<p>Address端（从表，外键所在表）：<br><code>@OneToOne(targetEntity=Person.class)</code><br><code>@JoinColumn(name=&quot;personId&quot;, referencedColumnName=&quot;personId&quot;, unique=true)</code></p>
+<p>##Inheritance Strategy##<br>对于继承关系的映射，Hibernate提供了三种策略</p>
+<p>###整个类继承体系对应一个表###<br>整个继承体系的所有类都存放在同一个表中，该策略是Hibernate继承映射的默认策略。使用方法：在父类中设置DiscriminatorColumn添加一个标识列。所有类（包括父类）通过设置不同的DiscriminatorValue区分。</p>
+<blockquote>
+<p>使用这种策略时，父类在子类特有列的值为null，所以所有的子类列都不能是非空的。</p>
+</blockquote>
+<p>###连接子类###<br>该策略不是Hibernate的默认继承映射策略，如果要使用这种策略，只需要在继承体系的根类中使用@Inheritance指定（取值对应为：InheritanceType.SINGLE_TABLE，InheritanceType.JOINED和InheritanceType.TABLE_PER_CLASS）。采用这种策略时，父类信息保存在父类的表中，子类从父类继承来的信息也保存在父类表中，各个子类独有的信息保存在子类独立的表中。</p>
+<blockquote>
+<p>使用连接子类策略，无需使用Discriminator列，子类列也可以有非空约束。在查询子类时需要跨越多表查询，如果继承层次过深，可能导致性能低下。</p>
+</blockquote>
+<p>###每个具体类对应一个表###<br>每个实体类对应一个表，可以把每个实体类当做一个独立实体，如果需要union所有子类，可以在根类中声明@Inheritance（strategy=InheritanceType.TABLE_PER_CLASS）。</p>
+<blockquote>
+<p>采用这种映射策略时，各子类之间具有某种连续性，子类不能使用GenerationType.IDENTITY、GenerationType.AUTO这两种主键生成策略。</p>
+</blockquote>
+<p>#Fetching strategies#<br>By default, Hibernate uses lazy select fetching for collections and lazy proxy fetching for single-valued associations. These defaults make sense for most associations in the majority of applications. </p>
+<p>It is intended that lazy initialization be used for almost all collections and associations. If you define too many non-lazy associations in your object model, Hibernate will fetch the entire database into memory in every transaction.</p>
+<p>Hibernate defines the following fetching strategies:</p>
+<ul>
+<li>Join fetching: Hibernate retrieves the associated instance or collection in the same SELECT, using an OUTER JOIN. </li>
+<li>Select fetching:  a second SELECT is used to retrieve the associated entity or collection. Unless you explicitly disable lazy fetching by specifying lazy=”false”, this second select will only be executed when you access the association. </li>
+<li>Subselect fetching: a second SELECT is used to retrieve the associated collections for all entities retrieved in a previous query or fetch. Unless you explicitly disable lazy fetching by specifying lazy=”false”, this second select will only be  executed when you access the association.</li>
+<li>Batch fetching: an optimization strategy for select fetching. Hibernate retrieves a  batch of entity instances or collections in a single SELECT by specifying a list of primary or foreign keys.</li>
+</ul>
+<p>Hibernate also distinguishes between:</p>
+<ul>
+<li><strong>Immediate fetching</strong>: an association, collection or attribute is fetched immediately when the owner is loaded.</li>
+<li><strong>Lazy collection fetching</strong>: a collection is fetched when the application invokes an operation upon that collection. This is the default for collections.</li>
+<li>Extra-lazy” collection fetching: individual elements of the collection are accessed from the database as needed. Hibernate tries not to fetch the whole collection into memory unless absolutely needed. It is suitable for large collections.</li>
+<li>Proxy fetching: a single-valued association is fetched when a method other than the identifier getter is invoked upon the associated object.</li>
+<li>“No-proxy” fetching: a single-valued association is fetched when the instance variable is accessed. Compared to proxy fetching, this approach is less lazy; the association is fetched even when only the identifier is accessed. It is also more transparent, since no proxy is visible to the application. This approach requires buildtime bytecode instrumentation and is rarely necessary. </li>
+<li>Lazy attribute fetching: an attribute or single valued association is fetched when  the instance variable is accessed. This approach requires buildtime bytecode instrumentation and is rarely necessary.</li>
+</ul>
+<blockquote>
+<p>We have two <strong>orthogonal</strong> notions here: when is the association fetched and how is it fetched. We use fetch to tune performance. We can use lazy to define a contract for what data is always available in any detached instance of a particular class.</p>
+</blockquote>
+<p>#Cache#<br>Whenever you pass an object to save(), update() or saveOrUpdate(), and whenever you retrieve an object using load(), get(), list(), iterate() or scroll(), that object is added to the internal cache of the Session (<strong>First-level local chache</strong>).</p>
+<p>When flush() is subsequently called, the state of that object will be synchronized with the database. If you do not want this synchronization to occur, or if you are processing a huge number of objects and need to manage memory efficiently, the evict() method can be used to remove the object and its collections from the first-level cache.</p>
+<p>For the <strong>second-level cache</strong>, there are methods defined on SessionFactory for evicting the cached state of an instance, entire class, collection instance or entire collection role.</p>
+<p>#延迟加载（默认启用）#</p>
+<p>Hibernate提供一些方法，利用这些方法返回的对象，并没有立刻加载数据库的数据。而是在调用对象的getXxx()方法时才触发数据库查询，加载数据记录。</p>
+<p>其一，如果通过session查询某对象，session将先到缓存中查找是否有查询的对象，找到则直接取出，否则才查询数据库。</p>
+<p>其二，session需要负责实时维护在缓存中的数据，保护缓存中的数据与数据库中数据的一致性，一旦用户对缓存中的数据做了修改，session负责将数据更新到数据库中(前提是调用了commit()或flush()方法)。</p>
+<p>##延迟加载机制的基本原理##</p>
+<p>  当访问实体对象时，并不是立即到数据库中查找。而是在真正要使用实体对象的时候，才去数据库查询数据。有部分方法具备这种功能，比如<code>session.load(),query.iterator()</code></p>
+<blockquote>
+<p>注意：这些方法返回的对象，只有id属性有值，其他属性数据在使用时候（调用getXxx()方法时）才去获取。</p>
+</blockquote>
+<p>##延迟加载优点##</p>
+<p>使用延迟加载，可以降低用户并发量，减少服务器资源占用。</p>
+<p>##get()和load()区别##<br>相同点：按照主键ID做条件查询某个对象<br>不同点如下：</p>
+<ul>
+<li>load采用了延迟加载机制,get为立刻加载。</li>
+<li>load如果没有符合记录，会抛出ObjectNotFoundException;而get方法返回的是null,不会出现异常.</li>
+<li>session.load(Cost.class,11235)如果id不存在，则抛出异常;session.get(Cost.class,11235)为null</li>
+<li>load返回的是一个动态生成一个类型，get方法返回的是实体类型。</li>
+</ul>
+<p>##延迟加载实现原理（动态代理技术）##<br>延迟加载机制是为了避免一些无谓的性能开销而提出来的，所谓延迟加载就是当在真正需要数据的时候，才真正执行数据加载操作。在Hibernate中提供了 对实体对象的延迟加载以及对集合的延迟加载，另外在Hibernate3中还提供了对属性的延迟加载。<br>在hibernate中我们知道如果要从数据库中得到一个对象，通常有两种方式，一种是通过session.get()方法，另一种就是通过session.load()方法，然后其实这两种方法在获得一个实体对象时是有区别的，在查询性能上两者是不同的。<br>     当使用load方法来得到一个对象时，此时hibernate会使用延迟加载的机制来加载这个对象，即：当 我们使用session.load()方法来加载一个对象时，此时并不会发出sql语句，当前得到的这个对象其实是一个代理对象，这个代理对象只保存了实 体对象的id值，只有当我们要使用这个对象，得到其它属性时，这个时候才会发出sql语句，从数据库中去查询我们的对象。</p>
+<p>相对于load的延迟加载方式，get就直接的多，当我们使用session.get()方法来得到一个对象时，不管我们使不使用这个对象，此时都会发出sql语句去从数据库中查询出来。</p>
+<p>当了解了load和get的加载机制以后，我们此时来看看这两种方式会出现的一些小问题：<br>    1、如果使用get方式来加载对象，当我们试图得到一个id不存在的对象时，此时会报NullPointException的异常。这是因为通过get方式我们会去数据库中查询出该对象，但是这个id值不存在，所以此时user对象是null，所以就会报NullPointException的异常了。<br>    2、如果使用load方式来加载对象，当我们试图得到一个id不存在的对象时，此时会报ObjectNotFoundException异常。<br>为什么使用load的方式和get的方式来得到一个不存在的对象报的异常不同呢？其原因还是因为load的延迟加载机制，使用load时，此时的 user对象是一个代理对象，仅仅保存了当前的这个id值，当我们试图得到该对象的username属性时，这个属性其实是不存在的，所以就会报出 ObjectNotFoundException这个异常了。<br>    3、org.hibernate.LazyInitializationException异常<br>这个异常是什么原因呢？还是因为load的延迟加载机制，Lazy只有在session打开的时候才有效,session关闭后lazy就没效了。当我们通过load()方法来加载一个对象时，此时并没有发出sql语句去从数据库中查 询出该对象，当前这个对象仅仅是一个只有id的代理对象，我们还并没有使用该对象，但是此时我们的session已经关闭了，所以当我们在测试用例中使用 该对象时就会报LazyInitializationException这个异常了。<br>    所以当我们看到控制台报LazyInitializationException异常，就知道是使用了load的方式延迟加载一个对象了，解决这个的方法有两种，一种是将load改成get的方式来得到该对象，另一种是在表示层来开启我们的session和关闭session,延长session的有效期。<br>    Hibernate 的延迟加载（lazy load）是一个被广泛使用的技术。这种延迟加载保证了应用只有在需要时才去数据库中抓取相应的记录。通过延迟加载技术可以避免过多、过早地加载数据表里 的数据，从而降低应用的内存开销。Hibernate 的延迟加载本质上就是代理模式的应用，当程序通过 Hibernate 装载一个实体时，默认情况下，Hibernate 并不会立即抓取它的集合属性、关联实体所以对应的记录，而是通过生成一个代理来表示这些集合属性、关联实体，这就是代理模式应用带来的优势。<br>    Hibernate 中主要通过代理（proxy）机制来实现延迟加载的。具体过 程：Hibernate从数据库获取某一个对象数据时、获取某一个对象的集合属性值时，或获取某一个对象所关联的另一对象时，由于没有使用该对象的数据 （除标识符值外），Hibernate并不从数据库加载真正的数据，而只是为该对象创建一个代理对象来代表这个对象，这个对象上的所有属性都为默认值；只 有在真正需要使用该对象的数据时才创建这个真实对象，真正从数据库中加载它的数据。这样在某些情况下，就可以提高查询效率。</p>
+<p>#参考资料#<br>《轻量级Java EE企业应用实战（第四版）》李刚<br><a href="http://docs.jboss.org/hibernate/orm/5.0/manual/en-US/html/" target="_blank" rel="external">http://docs.jboss.org/hibernate/orm/5.0/manual/en-US/html/</a><br><a href="http://blog.csdn.net/zhu_xun/article/details/16876761" target="_blank" rel="external">http://blog.csdn.net/zhu_xun/article/details/16876761</a><br><a href="http://www.ibm.com/developerworks/cn/java/j-lo-hibernatelazy/" target="_blank" rel="external">http://www.ibm.com/developerworks/cn/java/j-lo-hibernatelazy/</a><br><a href="http://blog.csdn.net/sunqing0316/article/details/46238589" target="_blank" rel="external">http://blog.csdn.net/sunqing0316/article/details/46238589</a></p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Hibernate/" rel="tag"># Hibernate</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2015/06/18/MySQL设置默认编码为utf-8/" rel="next" title="MySQL设置默认编码为utf-8">
+                <i class="fa fa-chevron-left"></i> MySQL设置默认编码为utf-8
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2015/06/15/The-kth-largest-element-in-array/" rel="prev" title="The kth largest element in array">
+                The kth largest element in array <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+          
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <section class="site-overview sidebar-panel sidebar-panel-active">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.gif"
+               alt="Jeffzzf" />
+          <p class="site-author-name" itemprop="name">Jeffzzf</p>
+          <p class="site-description motion-element" itemprop="description">Do one thing at a time, and do well.</p>
+        </div>
+        <nav class="site-state motion-element">
+        
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">77</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">41</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">80</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2015 - 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Jeffzzf</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+      <!-- UY BEGIN -->
+      <script type="text/javascript" src="http://v2.uyan.cc/code/uyan.js?uid="></script>
+      <!-- UY END -->
+  
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+
+</body>
+</html>

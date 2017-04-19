@@ -1,0 +1,771 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="并发,Java,面试题," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="#Wait() 和 sleep()的比较#wait() 和 sleep()都可以使线程阻塞，它们的区别如下：  wait是Object的方法，而sleep是Thread类的静态方法 sleep使线程阻塞指定时间，这段时间当前线程让出CPU时间，时间结束后继续执行，该过程不释放线程持有的对象锁；wait方法被调用后线程释放持有的锁并进入该锁的等待队列，当收到持有锁的其它线程释放notify或noti">
+<meta name="keywords" content="并发,Java,面试题">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Java并发面试题整理">
+<meta property="og:url" content="http://jeffzzf.github.io/2015/07/04/Java并发面试题整理/index.html">
+<meta property="og:site_name" content="Noob">
+<meta property="og:description" content="#Wait() 和 sleep()的比较#wait() 和 sleep()都可以使线程阻塞，它们的区别如下：  wait是Object的方法，而sleep是Thread类的静态方法 sleep使线程阻塞指定时间，这段时间当前线程让出CPU时间，时间结束后继续执行，该过程不释放线程持有的对象锁；wait方法被调用后线程释放持有的锁并进入该锁的等待队列，当收到持有锁的其它线程释放notify或noti">
+<meta property="og:updated_time" content="2016-04-20T11:22:04.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Java并发面试题整理">
+<meta name="twitter:description" content="#Wait() 和 sleep()的比较#wait() 和 sleep()都可以使线程阻塞，它们的区别如下：  wait是Object的方法，而sleep是Thread类的静态方法 sleep使线程阻塞指定时间，这段时间当前线程让出CPU时间，时间结束后继续执行，该过程不释放线程持有的对象锁；wait方法被调用后线程释放持有的锁并进入该锁的等待队列，当收到持有锁的其它线程释放notify或noti">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://jeffzzf.github.io/2015/07/04/Java并发面试题整理/"/>
+
+
+
+
+
+  <title> Java并发面试题整理 | Noob </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Noob</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+    
+      <p class="site-subtitle"></p>
+    
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://jeffzzf.github.io/2015/07/04/Java并发面试题整理/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="Jeffzzf">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="/images/avatar.gif">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="Noob">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="Noob" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                Java并发面试题整理
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2015-07-04T19:57:44+08:00">
+                2015-07-04
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Java/" itemprop="url" rel="index">
+                    <span itemprop="name">Java</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Java/并发/" itemprop="url" rel="index">
+                    <span itemprop="name">并发</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>#Wait() 和 sleep()的比较#<br>wait() 和 sleep()都可以使线程阻塞，它们的区别如下：</p>
+<ol>
+<li>wait是Object的方法，而sleep是Thread类的静态方法</li>
+<li>sleep使线程阻塞指定时间，这段时间当前线程让出CPU时间，时间结束后继续执行，该过程不释放线程持有的对象锁；wait方法被调用后线程释放持有的锁并进入该锁的等待队列，当收到持有锁的其它线程释放notify或notifyAll信号后，wait方法返回。所以，一般wait方法放在检查某个变量的循环中。</li>
+</ol>
+<p>#notify和notifyAll的区别#<br>notify随机唤醒一个等待锁的线程，notifyAll唤醒所有等待锁的线程</p>
+<p>#什么是Daemon线程#<br>Daemon线程（守护线程，后台线程）是值程序运行时在后台提供一种通用服务的线程，并且这种线程不是程序中不可或缺的部分（例如垃圾回收线程就是一种后台线程）。所有非后台线程结束时会杀死所有的后台线程。只要有非后台线程没结束，程序就不会结束。</p>
+<ol>
+<li>可以通过Thread的setDaemon方法将线程设置为Daemon线程，该方法必须在线程启动之前调用</li>
+<li>Daemon线程创建的线程也是Daemon线程</li>
+<li>Daemon不应该访问数据库、文件等资源，因为它随时有可能被中断（甚至无法执行finall中的语句）</li>
+</ol>
+<a id="more"></a>
+<p>#Java如何实现多线程之间的通讯和协作？#<br>Java中使用Object类中的wait，notify和notifyAll这三个函数实现线程间的通信和协作。在已经获取某个锁时，使用这个锁对应对象的wait方法将释放这个锁，并且在这个锁上阻塞。这个锁被其他对象获取被释放notify或notifyAll时，在wait方法中阻塞的对象可以重新尝试获取该锁。</p>
+<p>#什么是可重入锁（ReentrantLock）？#<br>ReentrantLock由最近成功获取锁，还没有释放的线程所拥有，当锁被另一个线程拥有时，调用lock方法的线程可以成功获取锁。如果锁已经被当前线程拥有，当前线程会立即返回。在AQS里面有一个state字段，在ReentrantLock中表示锁被持有的次数，它是一个volatile类型的整型值，因此对它的修改可以保证其他线程可以看到。ReentrantLock顾名思义就是锁可以重入，一个线程持有锁，state=1,如果它再次调用lock方法，那么他将继续拥有这把锁，state=2.当前可重入锁要完全释放，调用了多少次lock方法，还得调用等量的unlock方法来完全释放锁。</p>
+<p>#当一个线程进入某个对象的一个synchronized的实例方法后，其它线程是否可进入此对象的其它方法？#</p>
+<ol>
+<li>如果另一个方法不是synchronized则可以进入</li>
+<li>如果另一个方法是static方法，则可以进入，因为对于static方法，获取的是类的class对象（字节码文件）的锁而非同一个实例对象的锁</li>
+<li>如果正在进入的对象可以通过wait方法释放锁，那么该线程还可以进入这个对象的其他synchronized方法</li>
+<li>如果另一个方法也是synchronized的，并且已经进入的方法中不能wait方法释放锁，那么就不能进入那个方法</li>
+</ol>
+<p>#什么是重入#<br>普通情况下，当一个线程试图获取已经被其它线程持有的锁，这个线程会被阻塞。可重入是指，一个线程试图获取由它自己持有的锁时，不会被阻塞。可重入的一种实现方式为：每个锁关联一个获取计数值和持有该锁的线程。当计数值为0时，表示该锁没有被任何线程持有。当一个线程请求获得这个锁时，JVM记下持有这个锁的线程，并且计数值置1.当同一个线程再次获取这个锁时，计数值递增。当线程释放锁时计数值递减。<strong>IntrinsicLock和ReentrantLock都是可重入的</strong></p>
+<p>#synchronized和java.util.concurrent.locks.Lock的异同？#<br>synchronized和ReentrantLock都可以用于线程同步，synchronized中使用的IntrinsicLock和ReentrantLock都是可重入的。它们之间的区别如下：</p>
+<ul>
+<li>synchronized是Java语言的一个特性，得到虚拟机的直接支持，Lock是concurrent包下的类</li>
+<li>synchronized在进入同步方法或同步代码块时会自动获取锁，在返回同步方法或者退出同步代码块时会自动释放锁，但是ReentrantLock必须显式地获取锁，并且一定要在finally中显式释放锁，如果忘了显式释放，获取的锁无法被其他线程获取，有可能造成死锁。</li>
+<li>ReentrantLock提供了更大的灵活性<ul>
+<li>可以通过tryLock实现轮询或定时获取锁，可用于避免死锁的发生</li>
+<li>线程在等待内置锁而阻塞时无法响应中断（因为线程认为它肯定可以获取锁，所以不会响应中断请求）。ReentrantLock的lockInterruptibly方法能够在获取锁的过程中保持对中断的响应</li>
+<li>synchronized方法和synchronized块都是基于块结构的加锁，ReentrantLock可用于非块结构加锁（例如ConcurrentHashMap中的分段锁)</li>
+</ul>
+</li>
+<li>ReentrantLock可以实现公平锁。synchronized使用的内置锁和ReentrantLock默认都是非公平的，ReentrantLock在构造时可选择公平锁。</li>
+</ul>
+<blockquote>
+<p>公平锁是指如果有其它线程持有锁，或者阻塞队列中有其它线程，新请求锁的线程会被放到阻塞队列的末尾，按照先来后到的顺序；非公平锁是指只有锁被其它线程持有时，才会被放入阻塞队列，如果没有其它线程持有，所有线程都可以获取锁。<br>ps1：即使是公平锁，使用可轮询的tryLock，线程仍然可以插队。<br>ps2：使用公平锁会降低吞吐率和性能，只有持有锁的时间相对较长（请求锁的平均时间间隔较长），并且公平性确实很重要时才使用公平锁。默认实现的统计公平性已经足够了。<br>ReentrantLock作为一种高级工具提供了更好的灵活性，只有在synchronized无法满足需求时，才应该考虑使用ReentrantLock。</p>
+</blockquote>
+<p>#乐观锁和悲观锁的理解及如何实现，有哪些实现方式？#<br>悲观锁指的是对数据被外界（包括本系统当前的其他事务，以及来自外部系统的事务处理）修改持保守态度，因此，在整个数据处理过程中，将数据处于锁定 状态。悲观锁的实现，往往依靠数据库提供的锁机制（也只有数据库层提供的锁机制才能 真正保证数据访问的排他性，否则，即使在本系统中实现了加锁机制，也无法保证外部系统不会修改数据）。<br>乐观锁（ Optimistic Locking ）相对悲观锁而言，乐观锁机制采取了更加宽松的加锁机制。悲观锁大多数情况下依靠数据库的锁机制实现，以保证操作最大程度的独占性。但随之而来的就是数据库性能的大量开销，特别是对长事务而言，这样的开销往往无法承受。乐观锁，大多是基于数据版本（ Version ）记录机制实现。何谓数据版本？即为数据增加一个版本标识，在基于数据库表的版本解决方案中，一般是通过为数据库表增加一个 “version” 字段来实现。读取出数据时，将此版本号一同读出，之后更新时，对此版本号加一。此时，将提交数据的版本数据与数据库表对应记录的当前版本信息进行比对，如果提交的数据版本号大于数据库表当前版本号，则予以更新，否则认为是过期数据。乐观锁机制往往基于系统中的数据存储逻辑，因此也具备一定的局限性，如在上例中，由于乐观锁机制是在我们的系统中实现，来自外部系统的用户余额更新操作不受我们系统的控制，因此可能会造成脏数据被更新到数据库中。在系统设计阶段，我们应该充分考虑到这些情况出现的可能性，并进行相应调整（如将乐观锁策略在数据库存储过程中实现，对外只开放基于此存储过程的数据更新途径，而不是将数据库表直接对外公开）。</p>
+<p>#SynchronizedMap和ConcurrentHashMap有什么区别？#<br>SynchronizedMap的方法都是synchronized的，对SynchronizedMap进行get、put、isEmpty、size等操作都会对整个表加锁；ConcurrentHashMap使用了分段锁（Lock Striping）技术，默认情况下ConcurrentHashMap中包含16个ReentrantLock，每个ReentrantLock守护若干个桶。对ConcurrentHashMap执行读操作时不会加锁，对ConcurrentHashMap的写操作会代理到每个分段锁上，相当于只锁住了整个表的1/16，提高了并发度。<br>但是，ConcurrentHashMap提供的是弱一致性，从ConcurrentHashMap读取数据（get，containsKey, size等操作）时使用的是原子语义，有可能读到过时数据。如果需要强一致性，必须使用synchronizedMap。</p>
+<p>#CopyOnWriteArrayList可以用于什么应用场景？#<br>CopyOnWriteArrayList（写时复制）是一个线程安全的容器，它的线程安全性在于：对容器的修改可以和读操作同时进行，只要读操作只能看到完成修改后的结果即可。从容器中读时不需要加锁，对容器中的元素进行修改时，先复制一份所有元素的副本，然后在新的副本上进行操作。CopyOnWriteArrayList适用于读操作远远多于写操作的场景。例如，缓存。</p>
+<p>#什么叫线程安全？servlet是线程安全吗?#<br>线程安全：当多个线程访问某个类时，这个类始终都能表现出正确的行为，那么这个类是线程安全的。或者说，客户端在不采用额外同步措施的情况下，使用单线程或多线程对类暴露的接口进行交替操作，执行结果的正确性不受影响。</p>
+<p>Servlet遵循单例模式，多个线程访问同一个对象，如果多个线程之间没有共享的变量，那么这个Servlet是无状态的。当Servlet是无状态的时候，Servlet是线程安全的，如果是有状态的则是不安全的。</p>
+<p>#同步有几种实现方法？#</p>
+<ol>
+<li>使用synchronized实现同步</li>
+<li>对于有条件的同步使用wait和notify/notifyAll</li>
+<li>显式地使用lock/unlock和await, singnal/signalAll</li>
+<li>更高的抽象级别——直接使用阻塞队列</li>
+</ol>
+<p>#volatile有什么用？能否用一句话说明下volatile的应用场景？#<br>volatile是一种较弱的同步机制，可以解决变量的可见性问题。如果一个变量被声明为volatile的，那么编译器和JVM就会把该变量当做共享变量从而禁止对该变量的一些重排序操作。修改volatile变量后立刻对所有线程可见，从内存可见性的角度来看，读取volatile相当于进入同步代码块，如volatile变量相当于退出同步代码块。</p>
+<p>volatile无法解决原子性问题和一致性问题，例如++i不是原子性的，即使i是volatile的，在多线程环境下也会出现问题。可以用于确保自身状态的可见性，例如检查一个volatile变量以确定是否退出循环，如果该变量被其它变量修改，那么这个线程可以马上检查到。使用volatile可以简化多线程编程，例如ConcurrentHashMap中HashEntry中的val域和next都是volatile，通过使用volatile可以减少锁的获取和释放引起的损失。</p>
+<p>#请说明下Java的内存模型及其工作流程#<br>为了提高性能，程序在编译和运行的过程中会对指令进行重排序。例如编译器在编译的时候，在不影响源代码语义的前提下重新安排语句的执行顺序；在取指和译指阶段，在没有数据依赖和控制依赖的前提下重新安排指令顺序以提高流水线的效率；处理器缓存与主存进行数据交换时，为了提高缓存命中率，也会重新安排安排指令顺序。</p>
+<p>这些重排序可能导致一些内存可见性问题，例如，一个线程对一个多线程共享的变量进行修改，经过重排序后这个值什么时候对另一个线程可见是不确定的。为了解决这些内存可见性问题并消除不同平台内存模型的差异性，Java内存模型提供了一组happens-before关系。如果操作A happens-before操作B，那么操作A的结果对操作B一定是可见的。反之，如果操作B和操作A之间不满足happens-before关系，那么编译器和处理器就可以对A和B进行重排序。</p>
+<p>#如何合理的配置java线程池？#</p>
+<blockquote>
+<p>如CPU密集型的任务，基本线程池应该配置多大？IO密集型的任务，基本线程池应该配置多大？用有界队列好还是无界队列好？任务非常多的时候，使用什么阻塞队列能获取最好的吞吐量？</p>
+</blockquote>
+<p>线程池的好处：</p>
+<ol>
+<li>提高性能，线程的创建和销毁都需要消耗资源，重复利用已有的线程可以降低资源消耗，提高性能</li>
+<li>提高响应速度，任务到达时，可直接利用创建好的线程，提高了响应速度</li>
+<li>便于进行线程管理，如果每来一个任务就创建一个线程，任务太多的话系统会崩溃</li>
+</ol>
+<p>对于对于IO密集型任务，由于需要等待IO操作完成，应该配置尽可能多的线程（例如 2*Ncpu）；混合型的任务，如果可以拆分，则将其拆分成一个CPU密集型任务和一个IO密集型任务，只要这两个任务执行的时间相差不是太大，那么分解后执行的吞吐率要高于串行执行的吞吐率，如果这两个任务执行时间相差太大，则没必要进行分解。<br>有界队列和无界队列的配置需区分业务场景，一般情况下配置有界队列，在一些可能会有爆发性增长的情况下使用无界队列。任务非常多时，使用非阻塞队列使用CAS操作替代锁可以获得好的吞吐量。</p>
+<p>#多读少写的场景应该使用哪个并发容器，为什么使用它？#</p>
+<blockquote>
+<p>比如你做了一个搜索引擎，搜索引擎每次搜索前需要判断搜索关键词是否在黑名单里，黑名单每天更新一次。</p>
+</blockquote>
+<p>CopyOnWriteArrayList这个容器适用于多读少写。读写并不是在同一个对象上。在写时会大面积复制数组，所以写的性能差，在写完成后将读的引用改为执行写的对象</p>
+<p>#如何使用阻塞队列实现一个生产者和消费者模型？#<br>生产者-消费者是一种描述协作关系的设计模式，例如一个人把苹果放到盘子里，另一个人从盘子里面拿走苹果。如果盘子满了，放苹果的人必须等待；如果盘子里面没有苹果，拿苹果的人必须等待。这两个人就构成了生产者消费者关系。生产者-消费者模式的好处：</p>
+<ol>
+<li>提供了清晰的解耦，生产者消费者只需要知道共享对象是谁，可以分别独立开发维护</li>
+<li>生产者和消费者不需要知道对方有多少个</li>
+<li>生产者消费者可以分别以不同的速度放苹果和取苹果</li>
+</ol>
+<p>常用的阻塞队列有ArrayBlockingQueue和LinkedBlockingQueue，ArrayBlockingQueue是自然有界的，LinkedBlockingQueue有可选的边界. </p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Producer</span> <span class="keyword">implements</span> <span class="title">Runnable</span> </span>&#123;</div><div class="line">    <span class="keyword">private</span> BlockingQueue que;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Producer</span><span class="params">(BlockingQueue que)</span> </span>&#123;</div><div class="line">        <span class="keyword">this</span>.que = que;</div><div class="line">    &#125;</div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">try</span> &#123;</div><div class="line">            <span class="keyword">while</span> (<span class="keyword">true</span>) &#123;</div><div class="line">                Thread.sleep(<span class="number">1000</span>);</div><div class="line">                System.out.println(Thread.currentThread().getName() + <span class="string">"get "</span> + que.take());</div><div class="line">            &#125;</div><div class="line">        &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</div><div class="line">            e.printStackTrace();</div><div class="line">        &#125;</div><div class="line"></div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Consumer</span> <span class="keyword">implements</span> <span class="title">Runnable</span> </span>&#123;</div><div class="line">    <span class="keyword">private</span> BlockingQueue que;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Consumer</span><span class="params">(BlockingQueue que)</span> </span>&#123;</div><div class="line">        <span class="keyword">this</span>.que = que;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">private</span> <span class="keyword">static</span> AtomicLong id = <span class="keyword">new</span> AtomicLong(<span class="number">0</span>);</div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">try</span> &#123;</div><div class="line">            <span class="keyword">while</span> (<span class="keyword">true</span>) &#123;</div><div class="line">                que.put(id.getAndIncrement());</div><div class="line">                System.out.println(Thread.currentThread().getName() + <span class="string">"put "</span> + id);</div><div class="line">                Thread.sleep(<span class="number">300</span>);</div><div class="line">            &#125;</div><div class="line">        &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</div><div class="line">            e.printStackTrace();</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>#如何实现乐观锁（CAS）？如何避免ABA问题？#<br>传统的基于synchronized和显式lock（互斥同步）的方式是一种悲观锁，这种策略认为，只要不做正确的同步措施（加锁），一定会出现问题。CAS（Compare and swap）是一种非阻塞的乐观加锁策略，CAS直接使用处理器提供的cmpxchg提供同步。CAS的三个参数内存地址值V，预测值A和新值B。在执行CAS操作时，处理器先比较内存中的值和预测值是否相等，如果相等就用新值B更新；如果和预测值不相等，表示内存中的值已被修改，更新失败。更新失败的线程不会被阻塞，可以再次尝试更新。</p>
+<p>ABA问题是指，如果CAS中V的值首先由A变为B，再由B变为A，CAS比较时会认为V的值没有发生变化。解决ABA问题可以引入另外一个变量表示V的版本号，即使由A变为B再由B变为A，V的版本号是不一样的。Java的Concurr包中提供了AtomicStampedReference和AtomicMarkableReference来解决ABA问题。</p>
+<p>#什么场景下可以使用volatile替换synchronized？#</p>
+<ol>
+<li>只需要保证共享资源的可见性的时候可以使用volatile替代，synchronized保证可操作的原子性一致性和可见性。</li>
+<li>volatile适用于新值不依赖于旧值的情形。</li>
+<li>1写N读</li>
+<li>不与其他变量构成不变性条件时候使用volatile</li>
+</ol>
+<p>#如何让一段程序并发的执行，并最终汇总结果？#</p>
+<ol>
+<li>CountDownLatch：允许一个或者多个线程等待前面的一个或多个线程完成，构造一个CountDownLatch时指定需要CountDown的点的数量，每完成一点就count down一下，当所有点都完成，latch.wait就解除阻塞。</li>
+<li>CyclicBarrier：可循环使用的Barrier，它的作用是让一组线程到达一个Barrier后阻塞，直到所有线程都到达Barrier后才能继续执行。CountDownLatch的计数值只能使用一次，CyclicBarrier可以通过使用reset重置；还可以指定到达栅栏后优先执行的任务。</li>
+<li>fork/join框架，fork把大任务分解成多个小任务，然后汇总多个小任务的结果得到最终结果。使用一个双端队列，当线程空闲时从双端队列的另一端领取任务。</li>
+</ol>
+<p>#参考资料#<br><a href="http://blog.csdn.net/yyaf2013/article/details/12774717" target="_blank" rel="external">http://blog.csdn.net/yyaf2013/article/details/12774717</a><br><a href="http://www.cnblogs.com/dolphin0520/p/3932921.html" target="_blank" rel="external">http://www.cnblogs.com/dolphin0520/p/3932921.html</a><br> JDK源码分析ArrayBlockingQueue 和 LinkedBlockingQueue：<a href="http://blog.csdn.net/xin_jmail/article/details/26157971" target="_blank" rel="external">http://blog.csdn.net/xin_jmail/article/details/26157971</a><br>等待多线程完成的CountDownLatch：<a href="http://ifeve.com/talk-concurrency-countdownlatch/" target="_blank" rel="external">http://ifeve.com/talk-concurrency-countdownlatch/</a><br>fork/join框架：<a href="http://ifeve.com/talk-concurrency-forkjoin/" target="_blank" rel="external">http://ifeve.com/talk-concurrency-forkjoin/</a></p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/并发/" rel="tag"># 并发</a>
+          
+            <a href="/tags/Java/" rel="tag"># Java</a>
+          
+            <a href="/tags/面试题/" rel="tag"># 面试题</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2015/07/07/Unique-Paths/" rel="next" title="Unique Paths">
+                <i class="fa fa-chevron-left"></i> Unique Paths
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2015/07/03/Trie树的实现及应用/" rel="prev" title="Trie树的实现及应用">
+                Trie树的实现及应用 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+          
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <section class="site-overview sidebar-panel sidebar-panel-active">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.gif"
+               alt="Jeffzzf" />
+          <p class="site-author-name" itemprop="name">Jeffzzf</p>
+          <p class="site-description motion-element" itemprop="description">Do one thing at a time, and do well.</p>
+        </div>
+        <nav class="site-state motion-element">
+        
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">77</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">41</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">80</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2015 - 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Jeffzzf</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+      <!-- UY BEGIN -->
+      <script type="text/javascript" src="http://v2.uyan.cc/code/uyan.js?uid="></script>
+      <!-- UY END -->
+  
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+
+</body>
+</html>

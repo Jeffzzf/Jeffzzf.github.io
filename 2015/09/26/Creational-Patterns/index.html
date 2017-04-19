@@ -1,0 +1,694 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Design Patterns," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="Creational patterns provide a way to create objects while hiding the creation logic, rather than instantiating objects directly using new operator. This gives program more flexibility in deciding whic">
+<meta name="keywords" content="Design Patterns">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Creational Patterns">
+<meta property="og:url" content="http://jeffzzf.github.io/2015/09/26/Creational-Patterns/index.html">
+<meta property="og:site_name" content="Noob">
+<meta property="og:description" content="Creational patterns provide a way to create objects while hiding the creation logic, rather than instantiating objects directly using new operator. This gives program more flexibility in deciding whic">
+<meta property="og:image" content="https://upload.wikimedia.org/wikipedia/commons/thumb/9/9d/Abstract_factory_UML.svg/677px-Abstract_factory_UML.svg.png">
+<meta property="og:image" content="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/Abstract_factory.svg/517px-Abstract_factory.svg.png">
+<meta property="og:image" content="https://upload.wikimedia.org/wikipedia/commons/thumb/1/14/Prototype_UML.svg/600px-Prototype_UML.svg.png">
+<meta property="og:updated_time" content="2016-04-20T11:22:04.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Creational Patterns">
+<meta name="twitter:description" content="Creational patterns provide a way to create objects while hiding the creation logic, rather than instantiating objects directly using new operator. This gives program more flexibility in deciding whic">
+<meta name="twitter:image" content="https://upload.wikimedia.org/wikipedia/commons/thumb/9/9d/Abstract_factory_UML.svg/677px-Abstract_factory_UML.svg.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://jeffzzf.github.io/2015/09/26/Creational-Patterns/"/>
+
+
+
+
+
+  <title> Creational Patterns | Noob </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Noob</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+    
+      <p class="site-subtitle"></p>
+    
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://jeffzzf.github.io/2015/09/26/Creational-Patterns/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="Jeffzzf">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="/images/avatar.gif">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="Noob">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="Noob" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                Creational Patterns
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2015-09-26T19:48:14+08:00">
+                2015-09-26
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Design-Patterns/" itemprop="url" rel="index">
+                    <span itemprop="name">Design Patterns</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>Creational patterns provide a way to create objects while hiding the creation logic, rather than instantiating objects directly using new operator. This gives program more flexibility in deciding which objects need to be created for a given use case.</p>
+<p>#Factory Method Pattern#<br>With factory pattern, objects are created without exposing the creation logic to the client. It refers to the factory method that encapsulates the creation of objects such that factory method can be override in a subclass.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MazeGame</span> </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="title">MazeGame</span><span class="params">()</span> </span>&#123;</div><div class="line">        Room room1 = makeRoom();</div><div class="line">        Room room2 = makeRoom();</div><div class="line">        room1.connect(room2);</div><div class="line">        <span class="keyword">this</span>.addRoom(room1);</div><div class="line">        <span class="keyword">this</span>.addRoom(room2);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">protected</span> Room <span class="title">makeRoom</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> <span class="keyword">new</span> OrdinaryRoom();</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MagicMazeGame</span> <span class="keyword">extends</span> <span class="title">MazeGame</span> </span>&#123;</div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">protected</span> Room <span class="title">makeRoom</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> <span class="keyword">new</span> MagicRoom(); </div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>#Abstract Factory Pattern#<br>Abstract factory pattern works around a super factory which creates other factories. This factory is also called the factory of factories.</p>
+<p><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/9d/Abstract_factory_UML.svg/677px-Abstract_factory_UML.svg.png" alt="此处输入图片的描述"></p>
+<p>  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/Abstract_factory.svg/517px-Abstract_factory.svg.png" alt="此处输入图片的描述"></p>
+<p>The method createButton on the GuiFactory interface returns objects of type Button. What implementation of Button is returned depends on which implementation of GuiFactory is handling the method call.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">interface</span> <span class="title">Button</span> </span>&#123;</div><div class="line">	<span class="function"><span class="keyword">void</span> <span class="title">paint</span><span class="params">()</span></span>;</div><div class="line">&#125;</div><div class="line"><span class="comment">//Abstract Product</span></div><div class="line"><span class="class"><span class="keyword">interface</span> <span class="title">Label</span> </span>&#123;</div><div class="line">	<span class="function"><span class="keyword">void</span> <span class="title">paint</span><span class="params">()</span></span>;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">//Abstract Factory</span></div><div class="line"><span class="class"><span class="keyword">interface</span> <span class="title">GUIFactory</span> </span>&#123;</div><div class="line">	<span class="function">Button <span class="title">createButton</span><span class="params">()</span></span>;</div><div class="line">	<span class="function">Label <span class="title">createLabel</span><span class="params">()</span></span>;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">//Concrete Factory</span></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">WinFactory</span> <span class="keyword">implements</span> <span class="title">GUIFactory</span> </span>&#123;</div><div class="line">	<span class="function"><span class="keyword">public</span> Button <span class="title">createButton</span><span class="params">()</span> </span>&#123;</div><div class="line">		<span class="keyword">return</span> <span class="keyword">new</span> WinButton();</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="function"><span class="keyword">public</span> Label <span class="title">createLabel</span><span class="params">()</span> </span>&#123;</div><div class="line">		<span class="keyword">return</span> <span class="keyword">new</span> WinLabel();</div><div class="line">	&#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">//Concrete Factory</span></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">OSXFactory</span> <span class="keyword">implements</span> <span class="title">GUIFactory</span> </span>&#123;</div><div class="line">	<span class="function"><span class="keyword">public</span> Button <span class="title">createButton</span><span class="params">()</span> </span>&#123;</div><div class="line">		<span class="keyword">return</span> <span class="keyword">new</span> OSXButton();</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="function"><span class="keyword">public</span> Label <span class="title">createLabel</span><span class="params">()</span> </span>&#123;</div><div class="line">		<span class="keyword">return</span> <span class="keyword">new</span> OSXLabel();</div><div class="line">	&#125;</div><div class="line"></div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">//Concrete Product</span></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">OSXButton</span> <span class="keyword">implements</span> <span class="title">Button</span> </span>&#123;</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">paint</span><span class="params">()</span> </span>&#123;</div><div class="line">		System.out.println(<span class="string">"I'm an OSXButton"</span>);</div><div class="line">	&#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">//Concrete Product</span></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">WinButton</span> <span class="keyword">implements</span> <span class="title">Button</span> </span>&#123;</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">paint</span><span class="params">()</span> </span>&#123;</div><div class="line">		System.out.println(<span class="string">"I'm a WinButton"</span>);</div><div class="line">	&#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">//Concrete Product</span></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">OSXLabel</span> <span class="keyword">implements</span> <span class="title">Label</span> </span>&#123;</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">paint</span><span class="params">()</span> </span>&#123;</div><div class="line">		System.out.println(<span class="string">"I'm an OSXLabel"</span>);</div><div class="line">	&#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">//Concrete Product</span></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">WinLabel</span> <span class="keyword">implements</span> <span class="title">Label</span> </span>&#123;</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">paint</span><span class="params">()</span> </span>&#123;</div><div class="line">		System.out.println(<span class="string">"I'm a WinLabel"</span>);</div><div class="line">	&#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">//Client application is not aware about the how the product is created. Its only responsible to give a name of </span></div><div class="line"><span class="comment">//concrete factory</span></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Application</span> </span>&#123;</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="title">Application</span><span class="params">(GUIFactory factory)</span> </span>&#123;</div><div class="line">		Button button = factory.createButton();</div><div class="line">		Label label = factory.createLabel();</div><div class="line">		button.paint();</div><div class="line">		label.paint();</div><div class="line">	&#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ApplicationRunner</span> </span>&#123;</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</div><div class="line">		<span class="keyword">new</span> Application(createOsSpecificFactory());</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> GUIFactory <span class="title">createOsSpecificFactory</span><span class="params">()</span> </span>&#123;</div><div class="line">		String osname = System.getProperty(<span class="string">"os.name"</span>).toLowerCase();</div><div class="line">		<span class="keyword">if</span>(osname != <span class="keyword">null</span> &amp;&amp; osname.contains(<span class="string">"windows"</span>))</div><div class="line">			<span class="keyword">return</span> <span class="keyword">new</span> WinFactory();</div><div class="line">		<span class="keyword">else</span></div><div class="line">			<span class="keyword">return</span> <span class="keyword">new</span> OSXFactory();</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>#Singleton Pattern#<br>Singleton pattern is a design pattern that restricts the instantiation of a class to one object. This is useful when exactly one object is needed to coordinate actions across the system.</p>
+<ul>
+<li>The Abstract Factory, Builder, and Prototype patterns can use Singletons in their implementation.</li>
+<li>Facade objects are often singletons because only one Facade object is required.</li>
+<li>State objects are often singletons.</li>
+<li>Singletons are often preferred to global variables because:<ul>
+<li>They do not pollute the global namespace (or, in languages with namespaces, their containing namespace) with unnecessary variables.</li>
+<li>They permit lazy allocation and initialization, whereas global variables in many languages will always consume resources.<br>##Eager Initialization##<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Singleton</span> </span>&#123;</div><div class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> Singleton instance = <span class="keyword">new</span> Singleton();</div><div class="line">    <span class="function"><span class="keyword">private</span> <span class="title">Singleton</span><span class="params">()</span> </span>&#123;&#125;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Singleton <span class="title">getInstance</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> instance;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+</ul>
+<p>##Lazy Initialization##<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Singleton</span> </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">private</span> <span class="title">Singleton</span><span class="params">()</span> </span>&#123;&#125;</div><div class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">Holder</span> </span>&#123;</div><div class="line">        <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> Singleton instance = <span class="keyword">new</span> Singleton();</div><div class="line">    &#125;</div><div class="line">    <span class="function"><span class="keyword">public</span> Singleton <span class="title">getInstance</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> Holder.instance;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>#Prototype Pattern#<br>Prototype pattern is used when creation of object directly is costly. For example, an object is to be created after a costly database operation. We can cache the object, returns its clone on next request and update the database when needed thus reducing database calls.</p>
+<p>The mitotic division of a cell — resulting in two identical cells — is an example of a prototype that plays an active role in copying itself and thus, demonstrates the Prototype pattern. When a cell splits, two cells of identical genotype result. In other words, the cell clones itself.</p>
+<p><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/14/Prototype_UML.svg/600px-Prototype_UML.svg.png" alt="此处输入图片的描述"><br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="class"><span class="keyword">class</span> <span class="title">Prototype</span> </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">abstract</span> Prototype <span class="title">clone</span><span class="params">()</span></span>;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ConcretePrototype1</span> <span class="keyword">extends</span> <span class="title">Prototype</span> </span>&#123;</div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> Prototype <span class="title">clone</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> <span class="keyword">super</span>.clone();</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ConcretePrototype2</span> <span class="keyword">extends</span> <span class="title">Prototype</span> </span>&#123;</div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> Prototype <span class="title">clone</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> <span class="keyword">super</span>.clone();</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>#Builder Pattern#<br> Instead of using numerous constructors, the builder pattern uses another object, a builder, that receives each initialization parameter step by step and then returns the resulting constructed object at once.</p>
+<p> Builder often builds a composition object. Often, designs start out using Factory Method (less complicated, more customizable, subclasses proliferate) and evolve toward Abstract Factory, Prototype, or Builder (more flexible, more complex) as the designer discovers where more flexibility is needed. Sometimes creational patterns are complementary: Builder can use one of the other patterns to implement which components are built. </p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div></pre></td><td class="code"><pre><div class="line"> <span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">StreetMap</span> </span>&#123;</div><div class="line">	<span class="keyword">private</span> <span class="keyword">final</span> Point origin;</div><div class="line">	<span class="keyword">private</span> <span class="keyword">final</span> Point destination;</div><div class="line"></div><div class="line">	<span class="keyword">private</span> <span class="keyword">final</span> Color waterColor;</div><div class="line">	<span class="keyword">private</span> <span class="keyword">final</span> Color landColor;</div><div class="line">	<span class="keyword">private</span> <span class="keyword">final</span> Color highTrafficColor;</div><div class="line">	<span class="keyword">private</span> <span class="keyword">final</span> Color mediumTrafficColor;</div><div class="line">	<span class="keyword">private</span> <span class="keyword">final</span> Color lowTrafficColor;</div><div class="line"></div><div class="line">	<span class="keyword">public</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">Builder</span> </span>&#123;</div><div class="line">		<span class="comment">// Required parameters</span></div><div class="line">		<span class="keyword">private</span> <span class="keyword">final</span> Point origin;</div><div class="line">		<span class="keyword">private</span> <span class="keyword">final</span> Point destination;</div><div class="line"></div><div class="line">		<span class="comment">// Optional parameters - initialize with default values</span></div><div class="line">		<span class="keyword">private</span> Color waterColor         = Color.BLUE;</div><div class="line">		<span class="keyword">private</span> Color landColor          = <span class="keyword">new</span> Color(<span class="number">30</span>, <span class="number">30</span>, <span class="number">30</span>);</div><div class="line">		<span class="keyword">private</span> Color highTrafficColor   = Color.RED;</div><div class="line">		<span class="keyword">private</span> Color mediumTrafficColor = Color.YELLOW;</div><div class="line">		<span class="keyword">private</span> Color lowTrafficColor    = Color.GREEN;</div><div class="line"></div><div class="line">		<span class="function"><span class="keyword">public</span> <span class="title">Builder</span><span class="params">(Point origin, Point destination)</span> </span>&#123;</div><div class="line">			<span class="keyword">this</span>.origin      = origin;</div><div class="line">			<span class="keyword">this</span>.destination = destination;</div><div class="line">		&#125;</div><div class="line"></div><div class="line">		<span class="function"><span class="keyword">public</span> Builder <span class="title">waterColor</span><span class="params">(Color color)</span> </span>&#123;</div><div class="line">			waterColor = color;</div><div class="line">			<span class="keyword">return</span> <span class="keyword">this</span>;</div><div class="line">		&#125;</div><div class="line"></div><div class="line">		<span class="function"><span class="keyword">public</span> Builder <span class="title">landColor</span><span class="params">(Color color)</span> </span>&#123;</div><div class="line">			landColor = color;</div><div class="line">			<span class="keyword">return</span> <span class="keyword">this</span>;</div><div class="line">		&#125;</div><div class="line"></div><div class="line">		<span class="function"><span class="keyword">public</span> Builder <span class="title">highTrafficColor</span><span class="params">(Color color)</span> </span>&#123;</div><div class="line">			highTrafficColor = color;</div><div class="line">			<span class="keyword">return</span> <span class="keyword">this</span>;</div><div class="line">		&#125;</div><div class="line"></div><div class="line">		<span class="function"><span class="keyword">public</span> Builder <span class="title">mediumTrafficColor</span><span class="params">(Color color)</span> </span>&#123;</div><div class="line">			mediumTrafficColor = color;</div><div class="line">			<span class="keyword">return</span> <span class="keyword">this</span>;</div><div class="line">		&#125;</div><div class="line"></div><div class="line">		<span class="function"><span class="keyword">public</span> Builder <span class="title">lowTrafficColor</span><span class="params">(Color color)</span> </span>&#123;</div><div class="line">			lowTrafficColor = color;</div><div class="line">			<span class="keyword">return</span> <span class="keyword">this</span>;</div><div class="line">		&#125;</div><div class="line"></div><div class="line">		<span class="function"><span class="keyword">public</span> StreetMap <span class="title">build</span><span class="params">()</span> </span>&#123;</div><div class="line">			<span class="keyword">return</span> <span class="keyword">new</span> StreetMap(<span class="keyword">this</span>);</div><div class="line">		&#125;</div><div class="line"></div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="function"><span class="keyword">private</span> <span class="title">StreetMap</span><span class="params">(Builder builder)</span> </span>&#123;</div><div class="line">		<span class="comment">// Required parameters</span></div><div class="line">		origin      = builder.origin;</div><div class="line">		destination = builder.destination;</div><div class="line"></div><div class="line">		<span class="comment">// Optional parameters</span></div><div class="line">		waterColor         = builder.waterColor;</div><div class="line">		landColor          = builder.landColor;</div><div class="line">		highTrafficColor   = builder.highTrafficColor;</div><div class="line">		mediumTrafficColor = builder.mediumTrafficColor;</div><div class="line">		lowTrafficColor    = builder.lowTrafficColor;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String args[])</span> </span>&#123;</div><div class="line">		StreetMap map = <span class="keyword">new</span> StreetMap.Builder(<span class="keyword">new</span> Point(<span class="number">50</span>, <span class="number">50</span>), <span class="keyword">new</span> Point(<span class="number">100</span>,</div><div class="line">				<span class="number">100</span>)).landColor(Color.GRAY).waterColor(Color.BLUE.brighter())</div><div class="line">				.build();</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>#References#<br><a href="https://en.wikipedia.org/wiki/Abstract_factory_pattern" target="_blank" rel="external">Abstract factory pattern</a><br><a href="https://en.wikipedia.org/wiki/Factory_method_pattern" target="_blank" rel="external">Factory Method Pattern</a></p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Design-Patterns/" rel="tag"># Design Patterns</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2015/09/27/Nested-Classes/" rel="next" title="Nested Classes">
+                <i class="fa fa-chevron-left"></i> Nested Classes
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2015/09/26/二分快速幂与斐波拉契矩阵快速幂/" rel="prev" title="二分快速幂与斐波拉契矩阵快速幂">
+                二分快速幂与斐波拉契矩阵快速幂 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+          
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <section class="site-overview sidebar-panel sidebar-panel-active">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.gif"
+               alt="Jeffzzf" />
+          <p class="site-author-name" itemprop="name">Jeffzzf</p>
+          <p class="site-description motion-element" itemprop="description">Do one thing at a time, and do well.</p>
+        </div>
+        <nav class="site-state motion-element">
+        
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">77</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">41</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">80</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2015 - 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Jeffzzf</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+      <!-- UY BEGIN -->
+      <script type="text/javascript" src="http://v2.uyan.cc/code/uyan.js?uid="></script>
+      <!-- UY END -->
+  
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+
+</body>
+</html>
