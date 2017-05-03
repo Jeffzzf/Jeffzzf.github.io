@@ -91,7 +91,7 @@
 <meta property="og:url" content="http://jeffzzf.github.io/2017/04/20/JVM调优/index.html">
 <meta property="og:site_name" content="Noob">
 <meta property="og:description" content="定位JVM相关的问题时，知识和经验是关键基础，数据是依据，工具是运用知识处理数据的手段。JVM数据包括运行日志、异常堆栈、GC日志、线程快照(threaddump/javacore文件)、堆转储快照(heapdump/hprof文件)等。使用JVM监控和分析工具可以提高分析数据、定位解决问题的效率，常用监控工具如下表所示，具体各工具的用法可以Google对应JDK版本的文档。    名称 用途">
-<meta property="og:updated_time" content="2017-05-03T12:51:09.000Z">
+<meta property="og:updated_time" content="2017-05-03T12:53:10.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="JVM调优">
 <meta name="twitter:description" content="定位JVM相关的问题时，知识和经验是关键基础，数据是依据，工具是运用知识处理数据的手段。JVM数据包括运行日志、异常堆栈、GC日志、线程快照(threaddump/javacore文件)、堆转储快照(heapdump/hprof文件)等。使用JVM监控和分析工具可以提高分析数据、定位解决问题的效率，常用监控工具如下表所示，具体各工具的用法可以Google对应JDK版本的文档。    名称 用途">
@@ -383,7 +383,7 @@
 </tr>
 </tbody>
 </table>
-<h1 id="JDK可视化工具"><a href="#JDK可视化工具" class="headerlink" title="# JDK可视化工具"></a># JDK可视化工具</h1><p>Java虚拟机规范详细描述了虚拟机指令级中每条指令的执行过程，执行前后对操作数栈、局部变量表的影响等细节。但随着技术的发展，虚拟机规范中的描述逐渐成为虚拟机实现的概念模型，即实际实现的虚拟机只能保证与规范实现等效。在分析程序执行语义时（虚拟机做了什么）时，在字节码层面上分析完全可行，但分析程序的执行行为时（虚拟机是怎么做的、性能如何）时，在字节码层面上分析就没有什么意义了。需要使用HSDIS这类反汇编插件，把动态生成的本地代码还原为汇编代码输出。</p>
+<h1 id="JDK可视化工具"><a href="#JDK可视化工具" class="headerlink" title="JDK可视化工具"></a>JDK可视化工具</h1><p>Java虚拟机规范详细描述了虚拟机指令级中每条指令的执行过程，执行前后对操作数栈、局部变量表的影响等细节。但随着技术的发展，虚拟机规范中的描述逐渐成为虚拟机实现的概念模型，即实际实现的虚拟机只能保证与规范实现等效。在分析程序执行语义时（虚拟机做了什么）时，在字节码层面上分析完全可行，但分析程序的执行行为时（虚拟机是怎么做的、性能如何）时，在字节码层面上分析就没有什么意义了。需要使用HSDIS这类反汇编插件，把动态生成的本地代码还原为汇编代码输出。</p>
 
       
     </div>
@@ -553,7 +553,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#JDK可视化工具"><span class="nav-number">1.</span> <span class="nav-text"># JDK可视化工具</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#JDK可视化工具"><span class="nav-number">1.</span> <span class="nav-text">JDK可视化工具</span></a></li></ol></div>
             
 
           </div>

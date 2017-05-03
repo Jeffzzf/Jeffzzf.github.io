@@ -91,7 +91,7 @@
 <meta property="og:url" content="http://jeffzzf.github.io/2015/07/23/MySql总结-概述/index.html">
 <meta property="og:site_name" content="Noob">
 <meta property="og:description" content="Mysql服务器逻辑架构最上层：连接/线程处理，提供连接处理、授权认证、安全等服务（与其他客户端/服务器C/S架构类似） 第二层：包含了MySql大多数的核心服务功能，包括查询解析、分析、优化、缓存以及所有内置函数（日期、时间、数学、加密……），所有跨存储引擎的功能都在这一层实现：存储过程、触发器、试图等。 最下层：存储引擎，存储引擎负责Mysql中数据的存储和提取，上层通过存储引擎API与存储引">
-<meta property="og:updated_time" content="2017-05-03T12:51:14.000Z">
+<meta property="og:updated_time" content="2017-05-03T12:53:10.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="MySQL总结-概述">
 <meta name="twitter:description" content="Mysql服务器逻辑架构最上层：连接/线程处理，提供连接处理、授权认证、安全等服务（与其他客户端/服务器C/S架构类似） 第二层：包含了MySql大多数的核心服务功能，包括查询解析、分析、优化、缓存以及所有内置函数（日期、时间、数学、加密……），所有跨存储引擎的功能都在这一层实现：存储过程、触发器、试图等。 最下层：存储引擎，存储引擎负责Mysql中数据的存储和提取，上层通过存储引擎API与存储引">
@@ -367,14 +367,14 @@
 <p>读锁是共享的，读锁之间互不阻塞，多个客户端可以在同一个时刻读取同一个资源而互不干扰；写锁是排它的，写锁会阻塞其它写锁或读锁。这样可以保证在某个时刻只有一个用户能执行写入。<strong>锁策略</strong>就是在锁的开销和数据安全性之间寻求平衡，大多数商业数据库都是在表上施加行级锁（row-level lock），并以多种方式实现，以便在锁比较多的情况下提供尽可能好的性能。MySql则提供了更多的选择，MySql存储引擎可以实现自己的锁策略和锁粒度。</p>
 <p><strong>表锁（table lock）</strong>是MySql中最基本的锁，也是开销最小的锁，它会锁定整个表。写操作（插入、删除、更新）时必须先获取写锁，这会阻塞其它用户对该表的所有读写操作。写锁比读锁有更高的优先级，写锁请求可能会被插入到读锁队列前面。除了存储引擎可以管理自己的锁外，MySql本身也会使用表锁来实现不同的目的，例如Alter Table时MySql会使用表锁。<strong>行锁(row lock)</strong>可以最大程度地支持并发处理，同时也带来了最大的锁开销（InnoDB和XtraDb）中实现了行锁，行锁只在存储引擎中实现，MySql服务器中没有实现。</p>
 <h1 id="事务"><a href="#事务" class="headerlink" title="事务"></a>事务</h1><p>事务就是一组原子性的SQL查询，或者说一个独立的工作单元。如果MySql能够成功执行该组查询的全部语句就执行该组查询。如果其中有任何一条语句因为崩溃或其它原因无法执行，那么所有语句都不会执行。也就是说，事务内部的语句要么全部执行成功，要么全部执行失败。</p>
-<h1 id="事务的ACID属性"><a href="#事务的ACID属性" class="headerlink" title="# 事务的ACID属性"></a># 事务的ACID属性</h1><ul>
+<h1 id="事务的ACID属性"><a href="#事务的ACID属性" class="headerlink" title="事务的ACID属性"></a>事务的ACID属性</h1><ul>
 <li>原子性（atomicity），一个事务必须被视为不可分割的最小工作单元，整个事务中的所有操作要么全部提交成功，要么全部失败回滚，对于一个事务来说，不可能执行其中的一部分操作。</li>
 <li>一致性（consistency），系统总是从一个一致性的状态转换到另一个一致性的状态，例如转账时转入的数目必须与转出的数目相等。</li>
 <li>隔离性（isolation），一个事务所做的修改在最终提交前对其他事务是不可见的。</li>
 <li>持久性（durability），一旦事务提交，事务所做的修改就会永久保存到数据库中。</li>
 </ul>
 <p>实现ACID需要更多的系统开销，可以根据业务是否需要事务处理来选择合适的存储引擎，对于一个不需要事务的查询类应用，选择一个非事务型的存储引擎可以获得更高的性能。即使存储引擎不支持事务，也可以通过LOCK TABLES为应用提供一定程度的保护。</p>
-<h1 id="隔离级别"><a href="#隔离级别" class="headerlink" title="# 隔离级别"></a># 隔离级别</h1><ol>
+<h1 id="隔离级别"><a href="#隔离级别" class="headerlink" title="隔离级别"></a>隔离级别</h1><ol>
 <li>READ UNCOMMITTED（未提交读），事务中的修改，即使没有提交，对其它事务也都是可见的。读取未提交的数据被称为<strong>脏读（dirty read）</strong>，该级别的性能并不会比其它级别高，实际应用中很少使用。</li>
 <li>READ COMMITTED（提交读），一个事务从开始直到提交前，所做的任何修改对其它事务都是不可见的。该级别也叫不可重复读（nonrepeatable read）。因为在并发修改的情况下，执行两次（写操作提交前后）同样的读操作，可能得到不一致的结果。（<em>大多数数据库系统的默认隔离级别</em>）</li>
 <li>REPEATABLE READ（可重复读），该级别解决了脏读和不可重复读的问题，但是不能解决<strong>幻读（Phantom READ）</strong>问题，即某个事务在读取某个范围内的记录时，另外一个事务又在该范围内插入新的记录（幻行Phantom），不可重复读问题可以通过加锁解决，但是幻读问题不能通过加锁解决，因为无法对新插入的记录加锁。InnoDB和XtraDBM通过多版本并发控制（MVCC，Multiversion Concurrency Control）解决了幻读问题。（<em>MySql的默认隔离级别</em>）</li>
@@ -395,9 +395,9 @@
 <li>DELETE<br>　　对于删除,innodb直接把该行的被删除版本号设置为当前的事务号,相当于标记为删除,而不是实际删除</li>
 <li>UPDATE<br>　　在更新行的时候,innodb会把原来的行复制一份到回滚段中,并把当前的事务号作为该行的更新版本</li>
 </ol>
-<h1 id="存储引擎"><a href="#存储引擎" class="headerlink" title="存储引擎"></a>存储引擎</h1><h1 id="InnoDB"><a href="#InnoDB" class="headerlink" title="# InnoDB"></a># InnoDB</h1><p>InnoDB(in-no-db)采用采用MVCC来支持高并发，并且实现四个标准的隔离级别，默认隔离级别为REPEATABLE READ（可重复读），并且通过间隙锁（next-key locking）策略防止幻读，间隙锁使得InnoDB不仅仅锁定涉及的行，还会对索引中的间隙进行锁定，以防止幻影行的插入。</p>
+<h1 id="存储引擎"><a href="#存储引擎" class="headerlink" title="存储引擎"></a>存储引擎</h1><h1 id="InnoDB"><a href="#InnoDB" class="headerlink" title="InnoDB"></a>InnoDB</h1><p>InnoDB(in-no-db)采用采用MVCC来支持高并发，并且实现四个标准的隔离级别，默认隔离级别为REPEATABLE READ（可重复读），并且通过间隙锁（next-key locking）策略防止幻读，间隙锁使得InnoDB不仅仅锁定涉及的行，还会对索引中的间隙进行锁定，以防止幻影行的插入。</p>
 <p>InnoDB表基于聚簇索引建立，对主键查询有很高的性能，不过它的二级索引（secondary index非主键索引）中必须包含主键列。如果表的索引很多的话，主键应当尽可能的小。</p>
-<h1 id="MyISAM"><a href="#MyISAM" class="headerlink" title="# MyISAM"></a># MyISAM</h1><p>MyISAM（my-z[ei]-m）不支持事务和行级锁，而且崩溃后无法安全恢复。MyISAM设计简单，在写少读多的情况下，速度很快。默认情况下应该选择InnoDB，只要在需要快速读取并且不需要事务支持和崩溃恢复的情况下才考虑使用MyISAM。</p>
+<h1 id="MyISAM"><a href="#MyISAM" class="headerlink" title="MyISAM"></a>MyISAM</h1><p>MyISAM（my-z[ei]-m）不支持事务和行级锁，而且崩溃后无法安全恢复。MyISAM设计简单，在写少读多的情况下，速度很快。默认情况下应该选择InnoDB，只要在需要快速读取并且不需要事务支持和崩溃恢复的情况下才考虑使用MyISAM。</p>
 <h1 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h1><ol>
 <li>《高性能MySql》</li>
 <li><a href="http://blog.csdn.net/chosen0ne/article/details/10036775" target="_blank" rel="external">理解事务——原子性、一致性、隔离性和持久性</a></li>
@@ -571,7 +571,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Mysql服务器逻辑架构"><span class="nav-number">1.</span> <span class="nav-text">Mysql服务器逻辑架构</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#连接管理与安全性"><span class="nav-number">2.</span> <span class="nav-text">连接管理与安全性</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#并发读写"><span class="nav-number">3.</span> <span class="nav-text">并发读写</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#事务"><span class="nav-number">4.</span> <span class="nav-text">事务</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#事务的ACID属性"><span class="nav-number">5.</span> <span class="nav-text"># 事务的ACID属性</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#隔离级别"><span class="nav-number">6.</span> <span class="nav-text"># 隔离级别</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#死锁"><span class="nav-number">7.</span> <span class="nav-text">死锁</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#事务日志"><span class="nav-number">8.</span> <span class="nav-text">事务日志</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#自动提交"><span class="nav-number">9.</span> <span class="nav-text">自动提交</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#多版本并发控制MVCC"><span class="nav-number">10.</span> <span class="nav-text">多版本并发控制MVCC</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#存储引擎"><span class="nav-number">11.</span> <span class="nav-text">存储引擎</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#InnoDB"><span class="nav-number">12.</span> <span class="nav-text"># InnoDB</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#MyISAM"><span class="nav-number">13.</span> <span class="nav-text"># MyISAM</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考资料"><span class="nav-number">14.</span> <span class="nav-text">参考资料</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Mysql服务器逻辑架构"><span class="nav-number">1.</span> <span class="nav-text">Mysql服务器逻辑架构</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#连接管理与安全性"><span class="nav-number">2.</span> <span class="nav-text">连接管理与安全性</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#并发读写"><span class="nav-number">3.</span> <span class="nav-text">并发读写</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#事务"><span class="nav-number">4.</span> <span class="nav-text">事务</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#事务的ACID属性"><span class="nav-number">5.</span> <span class="nav-text">事务的ACID属性</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#隔离级别"><span class="nav-number">6.</span> <span class="nav-text">隔离级别</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#死锁"><span class="nav-number">7.</span> <span class="nav-text">死锁</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#事务日志"><span class="nav-number">8.</span> <span class="nav-text">事务日志</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#自动提交"><span class="nav-number">9.</span> <span class="nav-text">自动提交</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#多版本并发控制MVCC"><span class="nav-number">10.</span> <span class="nav-text">多版本并发控制MVCC</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#存储引擎"><span class="nav-number">11.</span> <span class="nav-text">存储引擎</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#InnoDB"><span class="nav-number">12.</span> <span class="nav-text">InnoDB</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#MyISAM"><span class="nav-number">13.</span> <span class="nav-text">MyISAM</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考资料"><span class="nav-number">14.</span> <span class="nav-text">参考资料</span></a></li></ol></div>
             
 
           </div>

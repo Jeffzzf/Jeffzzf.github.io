@@ -84,17 +84,17 @@
 
 
 
-<meta name="description" content="自动内存管理的优缺点# 优点在C/C++等语言中，内存管理是程序员的责任，程序员需要在内存的分配和释放上花费大量的时间，手动内存管理过程中容易出现以下问题：  悬垂指针问题（Dangling references，tries to access the original object, but the space has been reallocated to a new object, the">
+<meta name="description" content="自动内存管理的优缺点优点在C/C++等语言中，内存管理是程序员的责任，程序员需要在内存的分配和释放上花费大量的时间，手动内存管理过程中容易出现以下问题：  悬垂指针问题（Dangling references，tries to access the original object, but the space has been reallocated to a new object, the re">
 <meta name="keywords" content="Java,JVM">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Java垃圾回收器">
 <meta property="og:url" content="http://jeffzzf.github.io/2015/06/03/Java垃圾回收器/index.html">
 <meta property="og:site_name" content="Noob">
-<meta property="og:description" content="自动内存管理的优缺点# 优点在C/C++等语言中，内存管理是程序员的责任，程序员需要在内存的分配和释放上花费大量的时间，手动内存管理过程中容易出现以下问题：  悬垂指针问题（Dangling references，tries to access the original object, but the space has been reallocated to a new object, the">
-<meta property="og:updated_time" content="2017-05-03T12:51:06.000Z">
+<meta property="og:description" content="自动内存管理的优缺点优点在C/C++等语言中，内存管理是程序员的责任，程序员需要在内存的分配和释放上花费大量的时间，手动内存管理过程中容易出现以下问题：  悬垂指针问题（Dangling references，tries to access the original object, but the space has been reallocated to a new object, the re">
+<meta property="og:updated_time" content="2017-05-03T12:53:10.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Java垃圾回收器">
-<meta name="twitter:description" content="自动内存管理的优缺点# 优点在C/C++等语言中，内存管理是程序员的责任，程序员需要在内存的分配和释放上花费大量的时间，手动内存管理过程中容易出现以下问题：  悬垂指针问题（Dangling references，tries to access the original object, but the space has been reallocated to a new object, the">
+<meta name="twitter:description" content="自动内存管理的优缺点优点在C/C++等语言中，内存管理是程序员的责任，程序员需要在内存的分配和释放上花费大量的时间，手动内存管理过程中容易出现以下问题：  悬垂指针问题（Dangling references，tries to access the original object, but the space has been reallocated to a new object, the re">
 
 
 
@@ -359,12 +359,12 @@
       
 
       
-        <h1 id="自动内存管理的优缺点"><a href="#自动内存管理的优缺点" class="headerlink" title="自动内存管理的优缺点"></a>自动内存管理的优缺点</h1><h1 id="优点"><a href="#优点" class="headerlink" title="# 优点"></a># 优点</h1><p>在C/C++等语言中，内存管理是程序员的责任，程序员需要在内存的分配和释放上花费大量的时间，手动内存管理过程中容易出现以下问题：</p>
+        <h1 id="自动内存管理的优缺点"><a href="#自动内存管理的优缺点" class="headerlink" title="自动内存管理的优缺点"></a>自动内存管理的优缺点</h1><h1 id="优点"><a href="#优点" class="headerlink" title="优点"></a>优点</h1><p>在C/C++等语言中，内存管理是程序员的责任，程序员需要在内存的分配和释放上花费大量的时间，手动内存管理过程中容易出现以下问题：</p>
 <ol>
 <li>悬垂指针问题（Dangling references，tries to access the original object, but the space has been reallocated to a new object, the result is unpredictable and not what was intended）</li>
 <li>内存泄露问题（Memory/Space Leaks， memory is allocated and no longer referenced but not released)<br>包括Java在内的现代面向对象语言中都提供了自动内存管理机制，垃圾回收器保证正在使用的对象不会被回收从而解决悬垂指针问题；通过自动释放不再使用对象占用的内存空间来解决内存泄露问题。内存管理机制有助于程序员将精力集中在业务实现上并且可以写出更加可靠的代码。</li>
 </ol>
-<h1 id="缺点"><a href="#缺点" class="headerlink" title="# 缺点"></a># 缺点</h1><p>自动内存管理机制的缺点在于，垃圾回收器本身需要CPU时间和其它资源，从一定程度上降低了性能。</p>
+<h1 id="缺点"><a href="#缺点" class="headerlink" title="缺点"></a>缺点</h1><p>自动内存管理机制的缺点在于，垃圾回收器本身需要CPU时间和其它资源，从一定程度上降低了性能。</p>
 <h1 id="垃圾回收器的职责"><a href="#垃圾回收器的职责" class="headerlink" title="垃圾回收器的职责"></a>垃圾回收器的职责</h1><p>在JVM运行时数据区中，线程私有的虚拟机栈，本地方法栈和程序计数器随着线程的启动而创建，线程结束后资源就被回收了，所以一般不需要对线程私有的数据进行垃圾回收。JVM主要对各线程共享的方法区和堆进行垃圾回收，方法区（也叫永久代）中的垃圾主要包括废弃的常量和无用的类，由于永久代垃圾回收的效率较低，一般在大量使用反射、动态代理、CGLib等ByteCode框架、动态生成JSP以及OSGI这类频繁自定义ClassLoader是场景下使用，垃圾回收器的工作主要包括：</p>
 <ol>
 <li>分配内存</li>
@@ -372,8 +372,8 @@
 <li>回收从正在执行的代码中引用的对象出发不可达的对象占用的空间</li>
 </ol>
 <a id="more"></a>
-<h1 id="垃圾标记算法"><a href="#垃圾标记算法" class="headerlink" title="垃圾标记算法"></a>垃圾标记算法</h1><h1 id="引用计数法（Reference-Counting）"><a href="#引用计数法（Reference-Counting）" class="headerlink" title="# 引用计数法（Reference Counting）"></a># 引用计数法（Reference Counting）</h1><p>给对象中添加一个引用计数器，当这个对象被引用时，引用计数加一；不再引用它时，计数器减一。当对象的计数器值为0时，该对象不再被其它对象引用。<br><strong>缺点</strong>：难以解决对象的循环引用问题</p>
-<h1 id="可达性分析法"><a href="#可达性分析法" class="headerlink" title="# 可达性分析法"></a># 可达性分析法</h1><p>通过一系列正在被使用的对象“GC root”作为起点，从这些节点开始搜索，如果一个对象没有被搜索到，则证明此对象不再被使用。可作为GC Root是的对象包括：</p>
+<h1 id="垃圾标记算法"><a href="#垃圾标记算法" class="headerlink" title="垃圾标记算法"></a>垃圾标记算法</h1><h1 id="引用计数法（Reference-Counting）"><a href="#引用计数法（Reference-Counting）" class="headerlink" title="引用计数法（Reference Counting）"></a>引用计数法（Reference Counting）</h1><p>给对象中添加一个引用计数器，当这个对象被引用时，引用计数加一；不再引用它时，计数器减一。当对象的计数器值为0时，该对象不再被其它对象引用。<br><strong>缺点</strong>：难以解决对象的循环引用问题</p>
+<h1 id="可达性分析法"><a href="#可达性分析法" class="headerlink" title="可达性分析法"></a>可达性分析法</h1><p>通过一系列正在被使用的对象“GC root”作为起点，从这些节点开始搜索，如果一个对象没有被搜索到，则证明此对象不再被使用。可作为GC Root是的对象包括：</p>
 <ul>
 <li>虚拟机栈中引用的对象</li>
 <li>方法区中类静态属性引用的对象</li>
@@ -389,7 +389,7 @@
 <blockquote>
 <p>ps:即使可达性分析中不可达的对象，回收之前也至少经过两次标记过程。</p>
 </blockquote>
-<h1 id="垃圾收集算法"><a href="#垃圾收集算法" class="headerlink" title="垃圾收集算法"></a>垃圾收集算法</h1><h1 id="标记-清除（Mark-Sweep）算法"><a href="#标记-清除（Mark-Sweep）算法" class="headerlink" title="# 标记-清除（Mark-Sweep）算法"></a># 标记-清除（Mark-Sweep）算法</h1><p>该算法分为标记和清除两个阶段：</p>
+<h1 id="垃圾收集算法"><a href="#垃圾收集算法" class="headerlink" title="垃圾收集算法"></a>垃圾收集算法</h1><h1 id="标记-清除（Mark-Sweep）算法"><a href="#标记-清除（Mark-Sweep）算法" class="headerlink" title="标记-清除（Mark-Sweep）算法"></a>标记-清除（Mark-Sweep）算法</h1><p>该算法分为标记和清除两个阶段：</p>
 <ul>
 <li><strong>标记</strong>，标记出所有需要回收的对象</li>
 <li><strong>回收</strong>，标记完成之后同一回收所有被标记的对象</li>
@@ -401,29 +401,29 @@
 <li>空间问题，标记清除后会留下大量不连续的内存碎片，碎片过多时可能导致以后需要分配较大对象时，无法找到足够的连续内存而不得不执行一次垃圾回收</li>
 </ol>
 </blockquote>
-<h1 id="复制（Copy）算法"><a href="#复制（Copy）算法" class="headerlink" title="# 复制（Copy）算法"></a># 复制（Copy）算法</h1><p> 将可用内存划分为大小相等的两块，每次只使用其中的一块，当其中一块用完了，就将其中还存活的对象复制到另一块内存上，然后将使用过的这块清空。</p>
+<h1 id="复制（Copy）算法"><a href="#复制（Copy）算法" class="headerlink" title="复制（Copy）算法"></a>复制（Copy）算法</h1><p> 将可用内存划分为大小相等的两块，每次只使用其中的一块，当其中一块用完了，就将其中还存活的对象复制到另一块内存上，然后将使用过的这块清空。</p>
 <p>现代商业虚拟机都采用这种算法来回收新生代，由于新生代中98%的对象的生命周期都很短，新生代回收并不需要1:1的比例划分空间。Hotspot将新生代内存划分为一个Eden区和两个Survivor区，Eden区与Survivor区的大小比例为8:1. 回收时，将Eden区和一个Survivor区中存活的对象复制到另一个Survivor区，然后清理掉刚才用过的Eden和Surviror区。</p>
 <blockquote>
 <p>复制算法不用考虑内存碎片问题，简单高效；缺点是划分比例低于1:1时需要额外的空间进行分配担保，分配比例等于1:1时，每次内存只能使用一半。</p>
 </blockquote>
-<h1 id="标记-整理算法"><a href="#标记-整理算法" class="headerlink" title="# 标记-整理算法"></a># 标记-整理算法</h1><p>复制算法适用于对象存活率低的场景，当对象存活率较高时，需要复制大量的对象，复制算法的效率会降低。老年代中对象的存活率较高，一般不能直接使用复制算法。</p>
+<h1 id="标记-整理算法"><a href="#标记-整理算法" class="headerlink" title="标记-整理算法"></a>标记-整理算法</h1><p>复制算法适用于对象存活率低的场景，当对象存活率较高时，需要复制大量的对象，复制算法的效率会降低。老年代中对象的存活率较高，一般不能直接使用复制算法。</p>
 <p>标记-整理算法可用于回收老年代对象，与标记-清除算法类似，标记-整理算法不是直接对可回收对象进行清理，而是让所有存活的对象都向一段移动，然后直接清理掉边界以外的内存。</p>
-<h1 id="分代收集（Generational-Collection）算法"><a href="#分代收集（Generational-Collection）算法" class="headerlink" title="# 分代收集（Generational Collection）算法"></a># 分代收集（Generational Collection）算法</h1><p>商业虚拟机都采用分代收集算法，其核心思想是：根据对象存活周期的不同将内存划分为几块，一般将Java堆分为新生代和老年代，这样就可以根据各年代的特点采用最适用的收集算法。在新生代中，每次垃圾回收都有大量的对象死去，只有少量对象存活。选用复制算法可以只复制较少的存活对象完成垃圾收集。而老年代中对象存活率高/没有额外的空间进行分配担保，必须使用”标记-清理“或者”标记-整理“算法进行收集。</p>
+<h1 id="分代收集（Generational-Collection）算法"><a href="#分代收集（Generational-Collection）算法" class="headerlink" title="分代收集（Generational Collection）算法"></a>分代收集（Generational Collection）算法</h1><p>商业虚拟机都采用分代收集算法，其核心思想是：根据对象存活周期的不同将内存划分为几块，一般将Java堆分为新生代和老年代，这样就可以根据各年代的特点采用最适用的收集算法。在新生代中，每次垃圾回收都有大量的对象死去，只有少量对象存活。选用复制算法可以只复制较少的存活对象完成垃圾收集。而老年代中对象存活率高/没有额外的空间进行分配担保，必须使用”标记-清理“或者”标记-整理“算法进行收集。</p>
 <h1 id="HotSpot垃圾回收实现"><a href="#HotSpot垃圾回收实现" class="headerlink" title="HotSpot垃圾回收实现"></a>HotSpot垃圾回收实现</h1><p>直接使用枚举根节点算法会导致时间消耗过多（扫描方法区和虚拟机栈很耗时）和GC停顿问题（Stop The World，枚举根节点期间，为了保持一致性，整个执行系统看起来就像被冻结在某个时间点上，不可以出现分析过程中引用关系还在变化的情况，改点不满足的话分析结果的准确性就无法得到保障）。</p>
-<h1 id="OopMap"><a href="#OopMap" class="headerlink" title="# OopMap"></a># OopMap</h1><p>在Hotspot垃圾标记的实现中，使用了OopMap数据结构，在类加载时就把对象内各偏移位置的数据结构记录下来，JIT编译过程中也会在特定位置记录栈和寄存器中哪些位置是引用。</p>
-<h1 id="安全点"><a href="#安全点" class="headerlink" title="# 安全点"></a># 安全点</h1><p>在OopMap协助下，HotSpot可以快速准确地完成GC Roots枚举，由于可以引起引用关系变化的情况很多，为每一条指令生成OopMap需要大量的空间。所以HotSpot只会在特定的位置（安全点，Safepoint）记录这些信息，在安全点枚举根节点是安全的。当GC触发一次垃圾回收，它只是简单的设置一个标志； 当前执行函数会轮询这个标志， 当发现这个标志置位的时候，他们就会阻塞。那些轮询的点都是安全点。 多数情况下， JIT负责在合适的位置插入轮询程序。 安全点不能太少，否则GC一次需要等待太长时间，也不能过于频繁以致于过分增大运行时的负荷。<br>最好的结果是刚好有足够的轮询点满足需求：</p>
+<h1 id="OopMap"><a href="#OopMap" class="headerlink" title="OopMap"></a>OopMap</h1><p>在Hotspot垃圾标记的实现中，使用了OopMap数据结构，在类加载时就把对象内各偏移位置的数据结构记录下来，JIT编译过程中也会在特定位置记录栈和寄存器中哪些位置是引用。</p>
+<h1 id="安全点"><a href="#安全点" class="headerlink" title="安全点"></a>安全点</h1><p>在OopMap协助下，HotSpot可以快速准确地完成GC Roots枚举，由于可以引起引用关系变化的情况很多，为每一条指令生成OopMap需要大量的空间。所以HotSpot只会在特定的位置（安全点，Safepoint）记录这些信息，在安全点枚举根节点是安全的。当GC触发一次垃圾回收，它只是简单的设置一个标志； 当前执行函数会轮询这个标志， 当发现这个标志置位的时候，他们就会阻塞。那些轮询的点都是安全点。 多数情况下， JIT负责在合适的位置插入轮询程序。 安全点不能太少，否则GC一次需要等待太长时间，也不能过于频繁以致于过分增大运行时的负荷。<br>最好的结果是刚好有足够的轮询点满足需求：</p>
 <ol>
 <li>一类强制的轮询点是内存分配点。分配可以触发一次垃圾收集，因此分配必须是安全点</li>
 <li>长时间的执行总是和方法调用或者循环有关。因此，调用点和循环回边点也是期望的轮询点　　<br>这些就是Harmony中的轮询点： 分配点，调用点和循环回边点，多数情况下运行时负载小于1%。</li>
 </ol>
-<h1 id="安全区域"><a href="#安全区域" class="headerlink" title="# 安全区域"></a># 安全区域</h1><p>由于有一些情况不能及时响应GC触发事件，例如Sleep状态或者Blocked状态，在这些状态中引用关系不会发生变化，所以线程执行到这些区域时，将设置Ready flag表示可以进行GC。当线程离开安全区域时会检查GC是否完成，如果还未完成将会像安全点一样阻塞。</p>
+<h1 id="安全区域"><a href="#安全区域" class="headerlink" title="安全区域"></a>安全区域</h1><p>由于有一些情况不能及时响应GC触发事件，例如Sleep状态或者Blocked状态，在这些状态中引用关系不会发生变化，所以线程执行到这些区域时，将设置Ready flag表示可以进行GC。当线程离开安全区域时会检查GC是否完成，如果还未完成将会像安全点一样阻塞。</p>
 <h1 id="垃圾回收器的选择"><a href="#垃圾回收器的选择" class="headerlink" title="垃圾回收器的选择"></a>垃圾回收器的选择</h1><p>一个好的垃圾回收器必须保证所有存活的对象都不能被回收，垃圾必须在几个垃圾回收周期内被回收；好的垃圾回收器必须高效，在程序运行期间不能引入长时间暂停。同时，垃圾回收器还负责整理碎片以保证大的对象能够读入。实际的垃圾回收器在时间，空间和回收频率之间取得平衡。</p>
-<h1 id="Serial收集器"><a href="#Serial收集器" class="headerlink" title="# Serial收集器"></a># Serial收集器</h1><p>Serial收集器是Hotspot虚拟机Client模式下新生代的默认收集器，它的特点是简单高效，在单个CPU环境下，Serial由于没有线程交互的开销，可以获得很高的单线程收集效率。停顿时间可以控制在几十至一百毫秒左右。</p>
-<h1 id="ParNew收集器"><a href="#ParNew收集器" class="headerlink" title="# ParNew收集器"></a># ParNew收集器</h1><p>ParNew收集器是Serial收集器的多线程版本，是Server模式下虚拟机中的首选新生代收集器。</p>
-<h1 id="Parallel-Scavenge（吞吐量优先的收集器）"><a href="#Parallel-Scavenge（吞吐量优先的收集器）" class="headerlink" title="# Parallel Scavenge（吞吐量优先的收集器）"></a># Parallel Scavenge（吞吐量优先的收集器）</h1><p>Parallel Scavenge也是一个使用复制算法的新生代收集器，它是一个并行的多线程收集器，它的目标是达到一个可控制的吞吐量（ThroughPut， 即CPU用于运行用户代码的时间与CPU消耗总时间的比值）。Parallel Scavenge收集器有一个-XX：+UseAdaptiveSizePolicy参数，打开这个参数后虚拟机会根据当前系统的运行情况收集性能监控信息，动态调整新生代大小（-Xmm）、Eden和Survivor区比例（-XX：SurvivorRatio）、晋升老年代对象年龄（-XX：PretenureSizeThreshold）等参数。</p>
-<h1 id="Serial-Old收集器"><a href="#Serial-Old收集器" class="headerlink" title="# Serial Old收集器"></a># Serial Old收集器</h1><p>Serial Old是Serial收集器的老年代版本，它同样是一个单线程收集器，使用“标记-整理”算法。</p>
-<h1 id="Parallel-Old收集器"><a href="#Parallel-Old收集器" class="headerlink" title="# Parallel Old收集器"></a># Parallel Old收集器</h1><p>Parallel Old是Parallel Scavenge收集器的老年代版本，使用多线程和“标记-整理”算法，在注重吞吐量以及CPU资源敏感的场合，可以考虑Parallel Scavenge加Parallel Old收集器。</p>
-<h1 id="CMS（Concurrent-Mark-Sweep）收集器"><a href="#CMS（Concurrent-Mark-Sweep）收集器" class="headerlink" title="# CMS（Concurrent Mark Sweep）收集器"></a># CMS（Concurrent Mark Sweep）收集器</h1><p>CMS收集器是一种以获取最短回收停顿时间为目标的并发收集器，适用于响应速度重要的场合。CMS基于标记-清除算法实现，整个收集过程包括4步：</p>
+<h1 id="Serial收集器"><a href="#Serial收集器" class="headerlink" title="Serial收集器"></a>Serial收集器</h1><p>Serial收集器是Hotspot虚拟机Client模式下新生代的默认收集器，它的特点是简单高效，在单个CPU环境下，Serial由于没有线程交互的开销，可以获得很高的单线程收集效率。停顿时间可以控制在几十至一百毫秒左右。</p>
+<h1 id="ParNew收集器"><a href="#ParNew收集器" class="headerlink" title="ParNew收集器"></a>ParNew收集器</h1><p>ParNew收集器是Serial收集器的多线程版本，是Server模式下虚拟机中的首选新生代收集器。</p>
+<h1 id="Parallel-Scavenge（吞吐量优先的收集器）"><a href="#Parallel-Scavenge（吞吐量优先的收集器）" class="headerlink" title="Parallel Scavenge（吞吐量优先的收集器）"></a>Parallel Scavenge（吞吐量优先的收集器）</h1><p>Parallel Scavenge也是一个使用复制算法的新生代收集器，它是一个并行的多线程收集器，它的目标是达到一个可控制的吞吐量（ThroughPut， 即CPU用于运行用户代码的时间与CPU消耗总时间的比值）。Parallel Scavenge收集器有一个-XX：+UseAdaptiveSizePolicy参数，打开这个参数后虚拟机会根据当前系统的运行情况收集性能监控信息，动态调整新生代大小（-Xmm）、Eden和Survivor区比例（-XX：SurvivorRatio）、晋升老年代对象年龄（-XX：PretenureSizeThreshold）等参数。</p>
+<h1 id="Serial-Old收集器"><a href="#Serial-Old收集器" class="headerlink" title="Serial Old收集器"></a>Serial Old收集器</h1><p>Serial Old是Serial收集器的老年代版本，它同样是一个单线程收集器，使用“标记-整理”算法。</p>
+<h1 id="Parallel-Old收集器"><a href="#Parallel-Old收集器" class="headerlink" title="Parallel Old收集器"></a>Parallel Old收集器</h1><p>Parallel Old是Parallel Scavenge收集器的老年代版本，使用多线程和“标记-整理”算法，在注重吞吐量以及CPU资源敏感的场合，可以考虑Parallel Scavenge加Parallel Old收集器。</p>
+<h1 id="CMS（Concurrent-Mark-Sweep）收集器"><a href="#CMS（Concurrent-Mark-Sweep）收集器" class="headerlink" title="CMS（Concurrent Mark Sweep）收集器"></a>CMS（Concurrent Mark Sweep）收集器</h1><p>CMS收集器是一种以获取最短回收停顿时间为目标的并发收集器，适用于响应速度重要的场合。CMS基于标记-清除算法实现，整个收集过程包括4步：</p>
 <ol>
 <li>初始标记（CMS inital mark）</li>
 <li>并发标记（CMS concurrent mark）</li>
@@ -431,7 +431,7 @@
 <li>并发清除（CMS concurrent sweep）</li>
 </ol>
 <p>初始标记和重新标记需要（Stop the world， STW），初始标记只是标记一下GC roots能直接关联到的对象，速度较快；并发标记阶段就是进行GC Roots Tracing的过程；重新标记是为了修正并发标记期间因为用户程序继续运作而导致标记产生变动的那一部分对象的标记记录，这个阶段的停顿时间一般比初始标记阶段稍长，但远比并发标记时间时间短。</p>
-<h1 id="G1收集器"><a href="#G1收集器" class="headerlink" title="# G1收集器"></a># G1收集器</h1><p>G1之前的收集器收集的范围都是整个新生代或者整个老年代，但G1将整个Java堆划分为多个大小相等的独立区域（Region），</p>
+<h1 id="G1收集器"><a href="#G1收集器" class="headerlink" title="G1收集器"></a>G1收集器</h1><p>G1之前的收集器收集的范围都是整个新生代或者整个老年代，但G1将整个Java堆划分为多个大小相等的独立区域（Region），</p>
 <h1 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h1><p><a href="http://www.cnblogs.com/ridox/p/3646381.html" target="_blank" rel="external">http://www.cnblogs.com/ridox/p/3646381.html</a><br>周志明《深入理解Java虚拟机：JVM高级特性与最佳实践》第二版</p>
 
       
@@ -602,7 +602,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#自动内存管理的优缺点"><span class="nav-number">1.</span> <span class="nav-text">自动内存管理的优缺点</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#优点"><span class="nav-number">2.</span> <span class="nav-text"># 优点</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#缺点"><span class="nav-number">3.</span> <span class="nav-text"># 缺点</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#垃圾回收器的职责"><span class="nav-number">4.</span> <span class="nav-text">垃圾回收器的职责</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#垃圾标记算法"><span class="nav-number">5.</span> <span class="nav-text">垃圾标记算法</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#引用计数法（Reference-Counting）"><span class="nav-number">6.</span> <span class="nav-text"># 引用计数法（Reference Counting）</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#可达性分析法"><span class="nav-number">7.</span> <span class="nav-text"># 可达性分析法</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#垃圾收集算法"><span class="nav-number">8.</span> <span class="nav-text">垃圾收集算法</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#标记-清除（Mark-Sweep）算法"><span class="nav-number">9.</span> <span class="nav-text"># 标记-清除（Mark-Sweep）算法</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#复制（Copy）算法"><span class="nav-number">10.</span> <span class="nav-text"># 复制（Copy）算法</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#标记-整理算法"><span class="nav-number">11.</span> <span class="nav-text"># 标记-整理算法</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#分代收集（Generational-Collection）算法"><span class="nav-number">12.</span> <span class="nav-text"># 分代收集（Generational Collection）算法</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#HotSpot垃圾回收实现"><span class="nav-number">13.</span> <span class="nav-text">HotSpot垃圾回收实现</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#OopMap"><span class="nav-number">14.</span> <span class="nav-text"># OopMap</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#安全点"><span class="nav-number">15.</span> <span class="nav-text"># 安全点</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#安全区域"><span class="nav-number">16.</span> <span class="nav-text"># 安全区域</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#垃圾回收器的选择"><span class="nav-number">17.</span> <span class="nav-text">垃圾回收器的选择</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Serial收集器"><span class="nav-number">18.</span> <span class="nav-text"># Serial收集器</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#ParNew收集器"><span class="nav-number">19.</span> <span class="nav-text"># ParNew收集器</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Parallel-Scavenge（吞吐量优先的收集器）"><span class="nav-number">20.</span> <span class="nav-text"># Parallel Scavenge（吞吐量优先的收集器）</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Serial-Old收集器"><span class="nav-number">21.</span> <span class="nav-text"># Serial Old收集器</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Parallel-Old收集器"><span class="nav-number">22.</span> <span class="nav-text"># Parallel Old收集器</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#CMS（Concurrent-Mark-Sweep）收集器"><span class="nav-number">23.</span> <span class="nav-text"># CMS（Concurrent Mark Sweep）收集器</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#G1收集器"><span class="nav-number">24.</span> <span class="nav-text"># G1收集器</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考文献"><span class="nav-number">25.</span> <span class="nav-text">参考文献</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#自动内存管理的优缺点"><span class="nav-number">1.</span> <span class="nav-text">自动内存管理的优缺点</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#优点"><span class="nav-number">2.</span> <span class="nav-text">优点</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#缺点"><span class="nav-number">3.</span> <span class="nav-text">缺点</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#垃圾回收器的职责"><span class="nav-number">4.</span> <span class="nav-text">垃圾回收器的职责</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#垃圾标记算法"><span class="nav-number">5.</span> <span class="nav-text">垃圾标记算法</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#引用计数法（Reference-Counting）"><span class="nav-number">6.</span> <span class="nav-text">引用计数法（Reference Counting）</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#可达性分析法"><span class="nav-number">7.</span> <span class="nav-text">可达性分析法</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#垃圾收集算法"><span class="nav-number">8.</span> <span class="nav-text">垃圾收集算法</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#标记-清除（Mark-Sweep）算法"><span class="nav-number">9.</span> <span class="nav-text">标记-清除（Mark-Sweep）算法</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#复制（Copy）算法"><span class="nav-number">10.</span> <span class="nav-text">复制（Copy）算法</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#标记-整理算法"><span class="nav-number">11.</span> <span class="nav-text">标记-整理算法</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#分代收集（Generational-Collection）算法"><span class="nav-number">12.</span> <span class="nav-text">分代收集（Generational Collection）算法</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#HotSpot垃圾回收实现"><span class="nav-number">13.</span> <span class="nav-text">HotSpot垃圾回收实现</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#OopMap"><span class="nav-number">14.</span> <span class="nav-text">OopMap</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#安全点"><span class="nav-number">15.</span> <span class="nav-text">安全点</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#安全区域"><span class="nav-number">16.</span> <span class="nav-text">安全区域</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#垃圾回收器的选择"><span class="nav-number">17.</span> <span class="nav-text">垃圾回收器的选择</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Serial收集器"><span class="nav-number">18.</span> <span class="nav-text">Serial收集器</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#ParNew收集器"><span class="nav-number">19.</span> <span class="nav-text">ParNew收集器</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Parallel-Scavenge（吞吐量优先的收集器）"><span class="nav-number">20.</span> <span class="nav-text">Parallel Scavenge（吞吐量优先的收集器）</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Serial-Old收集器"><span class="nav-number">21.</span> <span class="nav-text">Serial Old收集器</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Parallel-Old收集器"><span class="nav-number">22.</span> <span class="nav-text">Parallel Old收集器</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#CMS（Concurrent-Mark-Sweep）收集器"><span class="nav-number">23.</span> <span class="nav-text">CMS（Concurrent Mark Sweep）收集器</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#G1收集器"><span class="nav-number">24.</span> <span class="nav-text">G1收集器</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考文献"><span class="nav-number">25.</span> <span class="nav-text">参考文献</span></a></li></ol></div>
             
 
           </div>

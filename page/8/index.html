@@ -838,12 +838,12 @@
 
       
         
-          <h1 id="自动内存管理的优缺点"><a href="#自动内存管理的优缺点" class="headerlink" title="自动内存管理的优缺点"></a>自动内存管理的优缺点</h1><h1 id="优点"><a href="#优点" class="headerlink" title="# 优点"></a># 优点</h1><p>在C/C++等语言中，内存管理是程序员的责任，程序员需要在内存的分配和释放上花费大量的时间，手动内存管理过程中容易出现以下问题：</p>
+          <h1 id="自动内存管理的优缺点"><a href="#自动内存管理的优缺点" class="headerlink" title="自动内存管理的优缺点"></a>自动内存管理的优缺点</h1><h1 id="优点"><a href="#优点" class="headerlink" title="优点"></a>优点</h1><p>在C/C++等语言中，内存管理是程序员的责任，程序员需要在内存的分配和释放上花费大量的时间，手动内存管理过程中容易出现以下问题：</p>
 <ol>
 <li>悬垂指针问题（Dangling references，tries to access the original object, but the space has been reallocated to a new object, the result is unpredictable and not what was intended）</li>
 <li>内存泄露问题（Memory/Space Leaks， memory is allocated and no longer referenced but not released)<br>包括Java在内的现代面向对象语言中都提供了自动内存管理机制，垃圾回收器保证正在使用的对象不会被回收从而解决悬垂指针问题；通过自动释放不再使用对象占用的内存空间来解决内存泄露问题。内存管理机制有助于程序员将精力集中在业务实现上并且可以写出更加可靠的代码。</li>
 </ol>
-<h1 id="缺点"><a href="#缺点" class="headerlink" title="# 缺点"></a># 缺点</h1><p>自动内存管理机制的缺点在于，垃圾回收器本身需要CPU时间和其它资源，从一定程度上降低了性能。</p>
+<h1 id="缺点"><a href="#缺点" class="headerlink" title="缺点"></a>缺点</h1><p>自动内存管理机制的缺点在于，垃圾回收器本身需要CPU时间和其它资源，从一定程度上降低了性能。</p>
 <h1 id="垃圾回收器的职责"><a href="#垃圾回收器的职责" class="headerlink" title="垃圾回收器的职责"></a>垃圾回收器的职责</h1><p>在JVM运行时数据区中，线程私有的虚拟机栈，本地方法栈和程序计数器随着线程的启动而创建，线程结束后资源就被回收了，所以一般不需要对线程私有的数据进行垃圾回收。JVM主要对各线程共享的方法区和堆进行垃圾回收，方法区（也叫永久代）中的垃圾主要包括废弃的常量和无用的类，由于永久代垃圾回收的效率较低，一般在大量使用反射、动态代理、CGLib等ByteCode框架、动态生成JSP以及OSGI这类频繁自定义ClassLoader是场景下使用，垃圾回收器的工作主要包括：</p>
 <ol>
 <li>分配内存</li>
@@ -1008,8 +1008,8 @@
           
           
 JVM运行时数据区如上图所示：其中方法区和堆由所有线程共享；虚拟机栈，本地方法栈和程序计数器是线程似有的。
-# 堆堆（heap）和方法区(Method Area)被JVM内的所有线程共享，堆中存放的是类的对象和数组。
-# 方法区方法区(Method Area)用于储存被虚拟机加载的类信息，常量，即
+堆堆（heap）和方法区(Method Area)被JVM内的所有线程共享，堆中存放的是类的对象和数组。
+方法区方法区(Method Area)用于储存被虚拟机加载的类信息，常量，即时编译后
           ...
           <!--noindex-->
           <div class="post-button text-center">
@@ -1650,7 +1650,7 @@ JVM运行时数据区如上图所示：其中方法区和堆由所有线程共�
 
       
         
-          <h1 id="HashMap"><a href="#HashMap" class="headerlink" title="# HashMap"></a># HashMap</h1><p>HashMap permits <code>null</code> key and <code>null</code> value, HashMap is equivalent to HashTabel except it is  unsynchronized and permits nulls. Iteration over collection views requires time proportional to the “capacity” of the HashMap instance (the number of buckets) plus its size (the number of key-value mappings).<br>An instance of HashMap has two parameters that affect its performance: initial capacity and load factor. The capacity is the number of buckets in the hash table.The load factor is a measure of how full the hash table is allowed to get before its capacity is automatically increased. Thus, it’s very important not to set the initial capacity too high (or the load factor too low) if iteration performance is important.</p>
+          <h1 id="HashMap"><a href="#HashMap" class="headerlink" title="HashMap"></a>HashMap</h1><p>HashMap permits <code>null</code> key and <code>null</code> value, HashMap is equivalent to HashTabel except it is  unsynchronized and permits nulls. Iteration over collection views requires time proportional to the “capacity” of the HashMap instance (the number of buckets) plus its size (the number of key-value mappings).<br>An instance of HashMap has two parameters that affect its performance: initial capacity and load factor. The capacity is the number of buckets in the hash table.The load factor is a measure of how full the hash table is allowed to get before its capacity is automatically increased. Thus, it’s very important not to set the initial capacity too high (or the load factor too low) if iteration performance is important.</p>
 <blockquote>
 <p><strong>Changes in JDK 1.8</strong>:The principal idea is that once the number of items in a hash bucket grows beyond a certain threshold, that bucket will switch from using a linked list of entries to a balanced tree. In the case of high hash collisions, this will improve worst-case performance from O(n) to O(log n).This technique has already been implemented in the latest version of the <strong>java.util.concurrent.ConcurrentHashMap</strong> class, which is also slated for inclusion in JDK 8 as part of JEP 155. Portions of that code will be re-used to implement the same idea in the <strong>HashMap</strong> and <strong>LinkedHashMap</strong> classes. Only the implementations will be changed; no interfaces or specifications will be modified. Some user-visible behaviors, such as iteration order, will change within the bounds of their current specifications.</p>
 </blockquote>

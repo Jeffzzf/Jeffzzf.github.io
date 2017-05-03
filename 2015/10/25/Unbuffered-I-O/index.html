@@ -91,7 +91,7 @@
 <meta property="og:url" content="http://jeffzzf.github.io/2015/10/25/Unbuffered-I-O/index.html">
 <meta property="og:site_name" content="Noob">
 <meta property="og:description" content="The term unbuffered means that each read or write invokes a system call in the kernel. These unbuffered I/O functions are not part of ISO C, but are part of POSIX.1. File descriptorsTo the kernel, all">
-<meta property="og:updated_time" content="2017-05-03T12:51:22.000Z">
+<meta property="og:updated_time" content="2017-05-03T12:53:10.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Buffered I/O">
 <meta name="twitter:description" content="The term unbuffered means that each read or write invokes a system call in the kernel. These unbuffered I/O functions are not part of ISO C, but are part of POSIX.1. File descriptorsTo the kernel, all">
@@ -382,7 +382,7 @@
 <ol>
 <li>Each open file(or device) has a v-node structure that contains information about the type of file and pointers to functions that operate on the file. For most file, the v-node also contains the i-node for the file. This information is read from disk when the file is opened, so that all the pertinent information about the file is readily available. For information, the i-node contains the owner of the file, the size of the file, pointers to where the actural data blocks for the file are located on disk, and so on.</li>
 </ol>
-<h1 id="File-descriptor-flags-VS-File-status-flags"><a href="#File-descriptor-flags-VS-File-status-flags" class="headerlink" title="# File descriptor flags VS File status flags"></a># File descriptor flags VS File status flags</h1><p>File descriptor flags apply only to a single descriptor in a single process, whereas File status flags apply to all descriptors in any process that point to the given file table entry.</p>
+<h1 id="File-descriptor-flags-VS-File-status-flags"><a href="#File-descriptor-flags-VS-File-status-flags" class="headerlink" title="File descriptor flags VS File status flags"></a>File descriptor flags VS File status flags</h1><p>File descriptor flags apply only to a single descriptor in a single process, whereas File status flags apply to all descriptors in any process that point to the given file table entry.</p>
 <h1 id="Atomic-Operations"><a href="#Atomic-Operations" class="headerlink" title="Atomic Operations"></a>Atomic Operations</h1><p>When a file is shared among mutiple processes, each process has its own file table entry with its own current file offset.  Unexpected results can arise when mutiple processes write to the same file. Unix provides atomic operation to solve these probloms. Atomic operation refers to an operation that might be composed of mutiple steps. If the operation is performed atomically, either all the steps are performed(on success) or none are performed(on failure). It must not be possible for only a subset of the steps to be performed.</p>
 <h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><p><em>Adcanced Programming in the Unix Environment(Third Edition)</em></p>
 
@@ -552,7 +552,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#File-descriptors"><span class="nav-number">1.</span> <span class="nav-text">File descriptors</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#File-sharing"><span class="nav-number">2.</span> <span class="nav-text">File sharing</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#File-descriptor-flags-VS-File-status-flags"><span class="nav-number">3.</span> <span class="nav-text"># File descriptor flags VS File status flags</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Atomic-Operations"><span class="nav-number">4.</span> <span class="nav-text">Atomic Operations</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Reference"><span class="nav-number">5.</span> <span class="nav-text">Reference</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#File-descriptors"><span class="nav-number">1.</span> <span class="nav-text">File descriptors</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#File-sharing"><span class="nav-number">2.</span> <span class="nav-text">File sharing</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#File-descriptor-flags-VS-File-status-flags"><span class="nav-number">3.</span> <span class="nav-text">File descriptor flags VS File status flags</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Atomic-Operations"><span class="nav-number">4.</span> <span class="nav-text">Atomic Operations</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Reference"><span class="nav-number">5.</span> <span class="nav-text">Reference</span></a></li></ol></div>
             
 
           </div>
