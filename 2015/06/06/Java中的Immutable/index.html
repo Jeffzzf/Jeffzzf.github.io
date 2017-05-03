@@ -84,17 +84,17 @@
 
 
 
-<meta name="description" content="#Java Immutable#Java中Immutable对象表示这个对象一旦创建就不能被更改，常用的String、Integer等都是Immutable的，Immutable对象创建后存放在JVM方法区的常量池里，需要用到时只需要一个引用指向它即可，因此Immutable对象具有效率高的优点；同时，Immutable对象可以在多线程环境中保持一致的状态，这一特性可以大大减小并发编程的复杂度。其">
+<meta name="description" content="Java ImmutableJava中Immutable对象表示这个对象一旦创建就不能被更改，常用的String、Integer等都是Immutable的，Immutable对象创建后存放在JVM方法区的常量池里，需要用到时只需要一个引用指向它即可，因此Immutable对象具有效率高的优点；同时，Immutable对象可以在多线程环境中保持一致的状态，这一特性可以大大减小并发编程的复杂度。其它线">
 <meta name="keywords" content="Java">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Java中的Immutable">
 <meta property="og:url" content="http://jeffzzf.github.io/2015/06/06/Java中的Immutable/index.html">
 <meta property="og:site_name" content="Noob">
-<meta property="og:description" content="#Java Immutable#Java中Immutable对象表示这个对象一旦创建就不能被更改，常用的String、Integer等都是Immutable的，Immutable对象创建后存放在JVM方法区的常量池里，需要用到时只需要一个引用指向它即可，因此Immutable对象具有效率高的优点；同时，Immutable对象可以在多线程环境中保持一致的状态，这一特性可以大大减小并发编程的复杂度。其">
-<meta property="og:updated_time" content="2016-04-20T11:22:04.000Z">
+<meta property="og:description" content="Java ImmutableJava中Immutable对象表示这个对象一旦创建就不能被更改，常用的String、Integer等都是Immutable的，Immutable对象创建后存放在JVM方法区的常量池里，需要用到时只需要一个引用指向它即可，因此Immutable对象具有效率高的优点；同时，Immutable对象可以在多线程环境中保持一致的状态，这一特性可以大大减小并发编程的复杂度。其它线">
+<meta property="og:updated_time" content="2017-05-03T12:51:05.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Java中的Immutable">
-<meta name="twitter:description" content="#Java Immutable#Java中Immutable对象表示这个对象一旦创建就不能被更改，常用的String、Integer等都是Immutable的，Immutable对象创建后存放在JVM方法区的常量池里，需要用到时只需要一个引用指向它即可，因此Immutable对象具有效率高的优点；同时，Immutable对象可以在多线程环境中保持一致的状态，这一特性可以大大减小并发编程的复杂度。其">
+<meta name="twitter:description" content="Java ImmutableJava中Immutable对象表示这个对象一旦创建就不能被更改，常用的String、Integer等都是Immutable的，Immutable对象创建后存放在JVM方法区的常量池里，需要用到时只需要一个引用指向它即可，因此Immutable对象具有效率高的优点；同时，Immutable对象可以在多线程环境中保持一致的状态，这一特性可以大大减小并发编程的复杂度。其它线">
 
 
 
@@ -359,10 +359,9 @@
       
 
       
-        <p>#Java Immutable#<br>Java中Immutable对象表示这个对象一旦创建就不能被更改，常用的String、Integer等都是Immutable的，Immutable对象创建后存放在JVM方法区的常量池里，需要用到时只需要一个引用指向它即可，因此Immutable对象具有<strong>效率高</strong>的优点；同时，Immutable对象可以<strong>在多线程环境中保持一致的状态</strong>，这一特性可以大大减小并发编程的复杂度。其它线程需要修改这一对象时，只能copy它的副本，新建对象的性能消耗可以被同步机制的简化抵消（与mutable对象上加锁、解锁相比）。</p>
+        <h1 id="Java-Immutable"><a href="#Java-Immutable" class="headerlink" title="Java Immutable"></a>Java Immutable</h1><p>Java中Immutable对象表示这个对象一旦创建就不能被更改，常用的String、Integer等都是Immutable的，Immutable对象创建后存放在JVM方法区的常量池里，需要用到时只需要一个引用指向它即可，因此Immutable对象具有<strong>效率高</strong>的优点；同时，Immutable对象可以<strong>在多线程环境中保持一致的状态</strong>，这一特性可以大大减小并发编程的复杂度。其它线程需要修改这一对象时，只能copy它的副本，新建对象的性能消耗可以被同步机制的简化抵消（与mutable对象上加锁、解锁相比）。</p>
 <a id="more"></a>
-<p>#定义Immutable对象的方法#</p>
-<ol>
+<h1 id="定义Immutable对象的方法"><a href="#定义Immutable对象的方法" class="headerlink" title="定义Immutable对象的方法"></a>定义Immutable对象的方法</h1><ol>
 <li>不要提供setter方法，因为Immutable对象是不可修改的</li>
 <li>所有的域是private &amp; final的</li>
 <li>将该类申明为final的，禁止子类重写。更好的办法是隐藏该类的构造函数，使用工厂方法构造对象。</li>
@@ -372,8 +371,8 @@
 </ul>
 </li>
 </ol>
-<p>#Immutable 示例#<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="keyword">final</span> <span class="class"><span class="keyword">class</span> <span class="title">RGB</span> </span>&#123;</div><div class="line">    <span class="keyword">private</span> <span class="keyword">final</span> <span class="keyword">int</span> r;</div><div class="line">    <span class="keyword">private</span> <span class="keyword">final</span> <span class="keyword">int</span> g;</div><div class="line">    <span class="keyword">private</span> <span class="keyword">final</span> <span class="keyword">int</span> b;</div><div class="line">    </div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="title">RGB</span><span class="params">(<span class="keyword">int</span> r, <span class="keyword">int</span> g, <span class="keyword">int</span> b)</span> </span>&#123;</div><div class="line">        <span class="keyword">this</span>.r = r;</div><div class="line">        <span class="keyword">this</span>.g = g;</div><div class="line">        <span class="keyword">this</span>.b = b;</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">getRgb</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> ((r &lt;&lt; <span class="number">16</span> | g &lt;&lt; <span class="number">8</span> | b));</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    <span class="function"><span class="keyword">public</span> RGB <span class="title">plus</span><span class="params">(<span class="keyword">int</span> t)</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> <span class="keyword">new</span> RGB(r + t, g + t, b + t);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>#参考资料#<br><a href="https://docs.oracle.com/javase/tutorial/essential/concurrency/imstrat.html" target="_blank" rel="external">https://docs.oracle.com/javase/tutorial/essential/concurrency/imstrat.html</a></p>
+<h1 id="Immutable-示例"><a href="#Immutable-示例" class="headerlink" title="Immutable 示例"></a>Immutable 示例</h1><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="keyword">final</span> <span class="class"><span class="keyword">class</span> <span class="title">RGB</span> </span>&#123;</div><div class="line">    <span class="keyword">private</span> <span class="keyword">final</span> <span class="keyword">int</span> r;</div><div class="line">    <span class="keyword">private</span> <span class="keyword">final</span> <span class="keyword">int</span> g;</div><div class="line">    <span class="keyword">private</span> <span class="keyword">final</span> <span class="keyword">int</span> b;</div><div class="line">    </div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="title">RGB</span><span class="params">(<span class="keyword">int</span> r, <span class="keyword">int</span> g, <span class="keyword">int</span> b)</span> </span>&#123;</div><div class="line">        <span class="keyword">this</span>.r = r;</div><div class="line">        <span class="keyword">this</span>.g = g;</div><div class="line">        <span class="keyword">this</span>.b = b;</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">getRgb</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> ((r &lt;&lt; <span class="number">16</span> | g &lt;&lt; <span class="number">8</span> | b));</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    <span class="function"><span class="keyword">public</span> RGB <span class="title">plus</span><span class="params">(<span class="keyword">int</span> t)</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> <span class="keyword">new</span> RGB(r + t, g + t, b + t);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h1 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h1><p><a href="https://docs.oracle.com/javase/tutorial/essential/concurrency/imstrat.html" target="_blank" rel="external">https://docs.oracle.com/javase/tutorial/essential/concurrency/imstrat.html</a></p>
 
       
     </div>
@@ -465,8 +464,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel sidebar-panel-active">
+      <section class="site-overview sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/images/avatar.png"
@@ -522,6 +530,22 @@
 
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Java-Immutable"><span class="nav-number">1.</span> <span class="nav-text">Java Immutable</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#定义Immutable对象的方法"><span class="nav-number">2.</span> <span class="nav-text">定义Immutable对象的方法</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Immutable-示例"><span class="nav-number">3.</span> <span class="nav-text">Immutable 示例</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考资料"><span class="nav-number">4.</span> <span class="nav-text">参考资料</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
     </div>

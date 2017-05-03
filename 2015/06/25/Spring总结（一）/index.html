@@ -84,17 +84,17 @@
 
 
 
-<meta name="description" content="#综述#Spring框架的基本思想就是，通过XML配置来驱动Java代码，这样就可以把原来由Java代码管理的耦合关系，提取到XML配置文件中管理。通过这种方式实现系统中各组件的解耦，有利于系统的维护和升级。 #依赖注入#Spring提供了两种注入方式：构造注入和设值注入，构造注入通过&amp;lt;constructor-arg.../&amp;gt;调用对应含参构造器；设值注入通过&amp;lt;property..">
+<meta name="description" content="综述Spring框架的基本思想就是，通过XML配置来驱动Java代码，这样就可以把原来由Java代码管理的耦合关系，提取到XML配置文件中管理。通过这种方式实现系统中各组件的解耦，有利于系统的维护和升级。 依赖注入Spring提供了两种注入方式：构造注入和设值注入，构造注入通过&amp;lt;constructor-arg.../&amp;gt;调用对应含参构造器；设值注入通过&amp;lt;property.../&amp;g">
 <meta name="keywords" content="Spring,SSH">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Spring总结（一）">
 <meta property="og:url" content="http://jeffzzf.github.io/2015/06/25/Spring总结（一）/index.html">
 <meta property="og:site_name" content="Noob">
-<meta property="og:description" content="#综述#Spring框架的基本思想就是，通过XML配置来驱动Java代码，这样就可以把原来由Java代码管理的耦合关系，提取到XML配置文件中管理。通过这种方式实现系统中各组件的解耦，有利于系统的维护和升级。 #依赖注入#Spring提供了两种注入方式：构造注入和设值注入，构造注入通过&amp;lt;constructor-arg.../&amp;gt;调用对应含参构造器；设值注入通过&amp;lt;property..">
-<meta property="og:updated_time" content="2016-04-20T11:22:04.000Z">
+<meta property="og:description" content="综述Spring框架的基本思想就是，通过XML配置来驱动Java代码，这样就可以把原来由Java代码管理的耦合关系，提取到XML配置文件中管理。通过这种方式实现系统中各组件的解耦，有利于系统的维护和升级。 依赖注入Spring提供了两种注入方式：构造注入和设值注入，构造注入通过&amp;lt;constructor-arg.../&amp;gt;调用对应含参构造器；设值注入通过&amp;lt;property.../&amp;g">
+<meta property="og:updated_time" content="2017-05-03T12:51:18.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Spring总结（一）">
-<meta name="twitter:description" content="#综述#Spring框架的基本思想就是，通过XML配置来驱动Java代码，这样就可以把原来由Java代码管理的耦合关系，提取到XML配置文件中管理。通过这种方式实现系统中各组件的解耦，有利于系统的维护和升级。 #依赖注入#Spring提供了两种注入方式：构造注入和设值注入，构造注入通过&amp;lt;constructor-arg.../&amp;gt;调用对应含参构造器；设值注入通过&amp;lt;property..">
+<meta name="twitter:description" content="综述Spring框架的基本思想就是，通过XML配置来驱动Java代码，这样就可以把原来由Java代码管理的耦合关系，提取到XML配置文件中管理。通过这种方式实现系统中各组件的解耦，有利于系统的维护和升级。 依赖注入Spring提供了两种注入方式：构造注入和设值注入，构造注入通过&amp;lt;constructor-arg.../&amp;gt;调用对应含参构造器；设值注入通过&amp;lt;property.../&amp;g">
 
 
 
@@ -359,8 +359,8 @@
       
 
       
-        <p>#综述#<br>Spring框架的基本思想就是，通过XML配置来驱动Java代码，这样就可以把原来由Java代码管理的耦合关系，提取到XML配置文件中管理。通过这种方式实现系统中各组件的解耦，有利于系统的维护和升级。</p>
-<p>#依赖注入#<br>Spring提供了两种注入方式：构造注入和设值注入，构造注入通过<code>&lt;constructor-arg.../&gt;</code>调用对应含参构造器；设值注入通过<code>&lt;property.../&gt;</code>调用对应的setter方法。Bean注入的成员变量可以分为四种。</p>
+        <h1 id="综述"><a href="#综述" class="headerlink" title="综述"></a>综述</h1><p>Spring框架的基本思想就是，通过XML配置来驱动Java代码，这样就可以把原来由Java代码管理的耦合关系，提取到XML配置文件中管理。通过这种方式实现系统中各组件的解耦，有利于系统的维护和升级。</p>
+<h1 id="依赖注入"><a href="#依赖注入" class="headerlink" title="依赖注入"></a>依赖注入</h1><p>Spring提供了两种注入方式：构造注入和设值注入，构造注入通过<code>&lt;constructor-arg.../&gt;</code>调用对应含参构造器；设值注入通过<code>&lt;property.../&gt;</code>调用对应的setter方法。Bean注入的成员变量可以分为四种。</p>
 <ul>
 <li>普通成员变量。 通过指定property的value属性实现。<code>&lt;property name=&quot;intField&quot; value=&quot;1&quot;/&gt;</code>,<code>&lt;property name=&quot;double&quot; value=&quot;2.3&quot;/&gt;</code></li>
 <li>引用成员变量。通过指定property的ref属性实现<code>&lt;property name=&quot;axe&quot; ref=&quot;steelAxe&quot;/&gt;</code>。也可以通过配置autowrite属性让Spring自动装配Bean的引用成员变量，但在大型应用中自动装配会降低依赖关系的清晰度和透明度。如果被引用的Bean不需要被Spring容器访问，可以考虑使用嵌套Bean。</li>
@@ -368,22 +368,21 @@
 <li>组合成员变量。Spring允许直接为Bean成员变量的属性赋值，<code>&lt;bean id=&quot;exam&quot; class=&quot;com.jeff.Exam&quot;&gt;&lt;property name=&quot;foo.bar.x.y&quot; value=&quot;12&quot;/&gt;&lt;/bean&gt;</code>相当于执行<code>exam.getFoo().getBar().getX.setY(12)</code></li>
 </ul>
 <a id="more"></a>
-<p>#Spring Bean和Java Bean的区别#</p>
-<ol>
+<h1 id="Spring-Bean和Java-Bean的区别"><a href="#Spring-Bean和Java-Bean的区别" class="headerlink" title="Spring Bean和Java Bean的区别"></a>Spring Bean和Java Bean的区别</h1><ol>
 <li>JavaBean一般作为值对象传递参数：Spring Bean几乎无所不包，任何组件都可以当做Bean。</li>
 <li>JavaBean作为传值对象，要求每个属性都提供setter和getter；Spring Bean只需为接受设置注入的属性提供setter即可</li>
 <li>JavaBean作为值对象传递，其生命周期直接由JVM控制；Spring Bean由Spring管理其生命周期。</li>
 </ol>
-<p>#创建Bean的方法#<br>Spring提供了三种创建Bean的方法：</p>
+<h1 id="创建Bean的方法"><a href="#创建Bean的方法" class="headerlink" title="创建Bean的方法"></a>创建Bean的方法</h1><p>Spring提供了三种创建Bean的方法：</p>
 <ol>
 <li>使用构造器创建Bean，如果采用构造注入，Spring通过反射调用对应的构造函数创建Bean；如果采用设值注入，Spring调用默认构造函数创建Bean，通过setter注入参数。</li>
 <li>使用静态工厂创建Bean，<code>&lt;bean&gt;</code>元素中需要指定class——静态工厂类的类名和factory-method——使用的静态方法。如果静态工厂需要参数，通过<code>&lt;constructor-arg&gt;</code>传入。</li>
 <li>使用实例工厂方法创建Bean，与静态工厂不同，实例工厂也是一个由Spring管理的Bean。使用实例工厂方法创建Bean时，需要指定factory-bean——工厂Bean的id和factory-method——实例工厂的方法。</li>
 </ol>
-<p>#Bean的生命周期#<br>Spring容器负责管理singleton作用域的Bean生命周期，包括创建、初始化和销毁等。对于prototype作用域的Bean，Spring只负责创建，创建完成之后就交给客户端代码管理。</p>
-<p>##Bean依赖注入完成后的行为##<br>Spring提供两种方式在Bean的全部属性设置完成执行特定操作：使用init-method属性和实现InitializingBean接口。如果同时实现这两种方法，inti-method属性指定的方法后执行。</p>
-<p>##Bean销毁前的行为##<br>Spring也提供了两种方式定制Bean实例销毁前的特定性为：使用destory-method属性和实现DisposableBean接口。如果同时实现这两种方法，destory-method属性指定的方法后执行。</p>
-<p>##不同作用域Bean之间的协同##<br>如果singleton Bean调用prototype Bean，在不采用协同措施的情况下，singleton Bean每次访问prototype Bean时都只会得到注入时的Bean。prototy Bean的行为会变成singleton Bean的行为。<br>为了让protot Bean表现正常的行为，可以采用lookup方法注入，Spring通过使用JDK动态代理或者cglib库修改客户端代码。具体方法为：</p>
+<h1 id="Bean的生命周期"><a href="#Bean的生命周期" class="headerlink" title="Bean的生命周期"></a>Bean的生命周期</h1><p>Spring容器负责管理singleton作用域的Bean生命周期，包括创建、初始化和销毁等。对于prototype作用域的Bean，Spring只负责创建，创建完成之后就交给客户端代码管理。</p>
+<h1 id="Bean依赖注入完成后的行为"><a href="#Bean依赖注入完成后的行为" class="headerlink" title="# Bean依赖注入完成后的行为"></a># Bean依赖注入完成后的行为</h1><p>Spring提供两种方式在Bean的全部属性设置完成执行特定操作：使用init-method属性和实现InitializingBean接口。如果同时实现这两种方法，inti-method属性指定的方法后执行。</p>
+<h1 id="Bean销毁前的行为"><a href="#Bean销毁前的行为" class="headerlink" title="# Bean销毁前的行为"></a># Bean销毁前的行为</h1><p>Spring也提供了两种方式定制Bean实例销毁前的特定性为：使用destory-method属性和实现DisposableBean接口。如果同时实现这两种方法，destory-method属性指定的方法后执行。</p>
+<h1 id="不同作用域Bean之间的协同"><a href="#不同作用域Bean之间的协同" class="headerlink" title="# 不同作用域Bean之间的协同"></a># 不同作用域Bean之间的协同</h1><p>如果singleton Bean调用prototype Bean，在不采用协同措施的情况下，singleton Bean每次访问prototype Bean时都只会得到注入时的Bean。prototy Bean的行为会变成singleton Bean的行为。<br>为了让protot Bean表现正常的行为，可以采用lookup方法注入，Spring通过使用JDK动态代理或者cglib库修改客户端代码。具体方法为：</p>
 <ol>
 <li>调用者Bean的实现类定义为抽象类，并定义一个抽象方法来获取被依赖的Bean。</li>
 <li>在调用者<bean...>元素中添加<lookup-method...>子元素，指定Spring需要实现的抽象方法。<br>Spring为抽象方法提供实现之后，这个方法就变成具体的方法，这个类也变成具体类，接下来Spring就可以创建该Bean的实例了。</lookup-method...></bean...></li>
@@ -481,8 +480,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel sidebar-panel-active">
+      <section class="site-overview sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/images/avatar.png"
@@ -538,6 +546,22 @@
 
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#综述"><span class="nav-number">1.</span> <span class="nav-text">综述</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#依赖注入"><span class="nav-number">2.</span> <span class="nav-text">依赖注入</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Spring-Bean和Java-Bean的区别"><span class="nav-number">3.</span> <span class="nav-text">Spring Bean和Java Bean的区别</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#创建Bean的方法"><span class="nav-number">4.</span> <span class="nav-text">创建Bean的方法</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Bean的生命周期"><span class="nav-number">5.</span> <span class="nav-text">Bean的生命周期</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Bean依赖注入完成后的行为"><span class="nav-number">6.</span> <span class="nav-text"># Bean依赖注入完成后的行为</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Bean销毁前的行为"><span class="nav-number">7.</span> <span class="nav-text"># Bean销毁前的行为</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#不同作用域Bean之间的协同"><span class="nav-number">8.</span> <span class="nav-text"># 不同作用域Bean之间的协同</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
     </div>

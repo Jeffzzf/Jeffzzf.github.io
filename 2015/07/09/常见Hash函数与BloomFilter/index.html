@@ -84,19 +84,19 @@
 
 
 
-<meta name="description" content="#哈希函数#哈希函数（散列函数，Hash Function）是一种从任何数据中创建数字指纹的方法，如果两个散列值是不相同的（根据同一函数），那么这两个散列值的原始输入也是不相同的。这个特性是散列函数具有确定性的结果，具有这种性质的散列函数称为单向散列函数。 #常用构造方法#  直接定址法：hash(key) = a*key + b   折叠法： 取数据的某部分进行折叠计算：   12536798">
+<meta name="description" content="哈希函数哈希函数（散列函数，Hash Function）是一种从任何数据中创建数字指纹的方法，如果两个散列值是不相同的（根据同一函数），那么这两个散列值的原始输入也是不相同的。这个特性是散列函数具有确定性的结果，具有这种性质的散列函数称为单向散列函数。 常用构造方法 直接定址法：hash(key) = a*key + b   折叠法： 取数据的某部分进行折叠计算：   12536798    ——">
 <meta name="keywords" content="Hash">
 <meta property="og:type" content="article">
 <meta property="og:title" content="常见Hash函数与BloomFilter">
 <meta property="og:url" content="http://jeffzzf.github.io/2015/07/09/常见Hash函数与BloomFilter/index.html">
 <meta property="og:site_name" content="Noob">
-<meta property="og:description" content="#哈希函数#哈希函数（散列函数，Hash Function）是一种从任何数据中创建数字指纹的方法，如果两个散列值是不相同的（根据同一函数），那么这两个散列值的原始输入也是不相同的。这个特性是散列函数具有确定性的结果，具有这种性质的散列函数称为单向散列函数。 #常用构造方法#  直接定址法：hash(key) = a*key + b   折叠法： 取数据的某部分进行折叠计算：   12536798">
+<meta property="og:description" content="哈希函数哈希函数（散列函数，Hash Function）是一种从任何数据中创建数字指纹的方法，如果两个散列值是不相同的（根据同一函数），那么这两个散列值的原始输入也是不相同的。这个特性是散列函数具有确定性的结果，具有这种性质的散列函数称为单向散列函数。 常用构造方法 直接定址法：hash(key) = a*key + b   折叠法： 取数据的某部分进行折叠计算：   12536798    ——">
 <meta property="og:image" content="https://upload.wikimedia.org/math/2/1/8/2180ac79da81e5b3721963b4d80cf5a6.png">
 <meta property="og:image" content="https://upload.wikimedia.org/math/b/0/3/b034d3e23c33e9fe7748bb05eb4e0dec.png">
-<meta property="og:updated_time" content="2016-04-20T11:22:04.000Z">
+<meta property="og:updated_time" content="2017-05-03T12:51:26.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="常见Hash函数与BloomFilter">
-<meta name="twitter:description" content="#哈希函数#哈希函数（散列函数，Hash Function）是一种从任何数据中创建数字指纹的方法，如果两个散列值是不相同的（根据同一函数），那么这两个散列值的原始输入也是不相同的。这个特性是散列函数具有确定性的结果，具有这种性质的散列函数称为单向散列函数。 #常用构造方法#  直接定址法：hash(key) = a*key + b   折叠法： 取数据的某部分进行折叠计算：   12536798">
+<meta name="twitter:description" content="哈希函数哈希函数（散列函数，Hash Function）是一种从任何数据中创建数字指纹的方法，如果两个散列值是不相同的（根据同一函数），那么这两个散列值的原始输入也是不相同的。这个特性是散列函数具有确定性的结果，具有这种性质的散列函数称为单向散列函数。 常用构造方法 直接定址法：hash(key) = a*key + b   折叠法： 取数据的某部分进行折叠计算：   12536798    ——">
 <meta name="twitter:image" content="https://upload.wikimedia.org/math/2/1/8/2180ac79da81e5b3721963b4d80cf5a6.png">
 
 
@@ -362,9 +362,8 @@
       
 
       
-        <p>#哈希函数#<br>哈希函数（散列函数，Hash Function）是一种从任何数据中创建数字指纹的方法，如果两个散列值是不相同的（根据同一函数），那么这两个散列值的原始输入也是不相同的。这个特性是散列函数具有确定性的结果，具有这种性质的散列函数称为单向散列函数。</p>
-<p>#常用构造方法#</p>
-<ol>
+        <h1 id="哈希函数"><a href="#哈希函数" class="headerlink" title="哈希函数"></a>哈希函数</h1><p>哈希函数（散列函数，Hash Function）是一种从任何数据中创建数字指纹的方法，如果两个散列值是不相同的（根据同一函数），那么这两个散列值的原始输入也是不相同的。这个特性是散列函数具有确定性的结果，具有这种性质的散列函数称为单向散列函数。</p>
+<h1 id="常用构造方法"><a href="#常用构造方法" class="headerlink" title="常用构造方法"></a>常用构造方法</h1><ol>
 <li>直接定址法：hash(key) = a*key + b  </li>
 <li>折叠法： 取数据的某部分进行折叠计算：   12536798    ——&gt;   1253 + 6798</li>
 <li>平方取中 ： 类似随机数产生的算法，取中间一部分作为地址 </li>
@@ -373,14 +372,13 @@
 <li>根据数据特征分析</li>
 <li>综合法</li>
 </ol>
-<p>#BloomFilter#<br>BloomFilter（布隆过滤器）是一种多哈希映射的快速查找算法，一般用来快速判断一个对象是否属于某个集合，例如最常用的网络爬虫中的地址去重策略。</p>
+<h1 id="BloomFilter"><a href="#BloomFilter" class="headerlink" title="BloomFilter"></a>BloomFilter</h1><p>BloomFilter（布隆过滤器）是一种多哈希映射的快速查找算法，一般用来快速判断一个对象是否属于某个集合，例如最常用的网络爬虫中的地址去重策略。</p>
 <p>将一个对象放入集合时，BloomFilter的多个独立哈希函数把同一对象映射到不同的Bit位，并将这些比特位置位；判断对象是否属于集合时，查找哈希函数映射到的bit位是否已经被置位过，如果没有被置位过，那么该元素一定不属于集合。但是，如果映射到的位全部都被置位过，该元素有可能不属于集合（false positive）。如果m表示bit个数，n表示已经放入BloomFilter的元素个数，k表示哈希函数的个数，那么元素被误判为属于集合的概率为公式一：<br><img src="https://upload.wikimedia.org/math/2/1/8/2180ac79da81e5b3721963b4d80cf5a6.png" alt="误判概率"><br>当k=ln2*(m/n)时，可以使误差概率最小，此时误差为公式二：<br><img src="https://upload.wikimedia.org/math/b/0/3/b034d3e23c33e9fe7748bb05eb4e0dec.png" alt="此处输入图片的描述"></p>
-<p>#BloomFilter的实现#<br> 该实现中bit位个数m = 1 &lt;&lt; 30(1073741824约10亿)，独立Hash函数的个数K为9，假设已插入的字符串个数n = 10000000（1千万）。则根据公式一，再次插入一个新字符串时，误判为字符串已存在的概率为1.4041653253261077E-10（10亿分之1.4）。根据公式二，此时最佳的K值为74.42611179548929。</p>
+<h1 id="BloomFilter的实现"><a href="#BloomFilter的实现" class="headerlink" title="BloomFilter的实现"></a>BloomFilter的实现</h1><p> 该实现中bit位个数m = 1 &lt;&lt; 30(1073741824约10亿)，独立Hash函数的个数K为9，假设已插入的字符串个数n = 10000000（1千万）。则根据公式一，再次插入一个新字符串时，误判为字符串已存在的概率为1.4041653253261077E-10（10亿分之1.4）。根据公式二，此时最佳的K值为74.42611179548929。</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">BloomFilter</span> <span class="keyword">implements</span> <span class="title">Serializable</span> </span>&#123;</div><div class="line">    <span class="keyword">private</span> <span class="keyword">final</span> <span class="keyword">int</span> BITS_NUM = <span class="number">1</span> &lt;&lt; <span class="number">30</span>;</div><div class="line">    <span class="keyword">private</span> <span class="keyword">final</span> <span class="keyword">int</span> K_NUM = <span class="number">9</span>;</div><div class="line">    <span class="keyword">private</span> BitSet bits;</div><div class="line">    <span class="keyword">private</span> <span class="keyword">int</span>[] seeds;</div><div class="line">    <span class="keyword">private</span> HashFunc[] hashs;</div><div class="line"></div><div class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> BloomFilter bloomFilter = <span class="keyword">new</span> BloomFilter();</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">private</span> <span class="title">BloomFilter</span><span class="params">()</span> </span>&#123;</div><div class="line">        bits = <span class="keyword">new</span> BitSet(BITS_NUM);</div><div class="line">        seeds = <span class="keyword">new</span> <span class="keyword">int</span>[]&#123;<span class="number">3</span>, <span class="number">5</span>, <span class="number">7</span>, <span class="number">11</span>, <span class="number">13</span>, <span class="number">17</span>, <span class="number">19</span>, <span class="number">23</span>, <span class="number">29</span>&#125;;</div><div class="line">        hashs = <span class="keyword">new</span> HashFunc[K_NUM];</div><div class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; K_NUM; ++i)</div><div class="line">            hashs[i] = <span class="keyword">new</span> HashFunc(seeds[i], BITS_NUM);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> BloomFilter <span class="title">getBloomFilter</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> bloomFilter;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">isIn</span><span class="params">(String s)</span> </span>&#123;</div><div class="line">        <span class="keyword">for</span>(HashFunc hashFunc : hashs)</div><div class="line">            <span class="keyword">if</span>(!bits.get(hashFunc.hash(s)))</div><div class="line">                <span class="keyword">return</span> <span class="keyword">false</span>;</div><div class="line">        <span class="keyword">return</span> <span class="keyword">true</span>;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">insert</span><span class="params">(String s)</span> </span>&#123;</div><div class="line">        System.out.println(bits);</div><div class="line">        <span class="keyword">for</span>(HashFunc hashFunc : hashs)</div><div class="line">            bits.set(hashFunc.hash(s));</div><div class="line">        System.out.println(bits);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p> 哈希函数的实现选择BKDR Hash模板，选择了3, 5, 7, 11, 13, 17, 19, 23, 29这9个质数作为BKDR Hash的种子。</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"> <span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">HashFunc</span> </span>&#123;</div><div class="line">    <span class="keyword">private</span> <span class="keyword">int</span> seed;</div><div class="line">    <span class="keyword">private</span> <span class="keyword">int</span> size;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="title">HashFunc</span><span class="params">(<span class="keyword">int</span> seed, <span class="keyword">int</span> size)</span> </span>&#123;</div><div class="line">        <span class="keyword">this</span>.seed = seed;</div><div class="line">        <span class="keyword">this</span>.size = size;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">hash</span><span class="params">(String s)</span> </span>&#123;</div><div class="line">        <span class="keyword">int</span> result = <span class="number">0</span>;</div><div class="line">        <span class="keyword">for</span> (<span class="keyword">char</span> c : s.toCharArray())</div><div class="line">            result = seed * result + c;</div><div class="line">        <span class="keyword">return</span> (size - <span class="number">1</span>) &amp; result;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>#参考资料#</p>
-<ol>
+<h1 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h1><ol>
 <li>Hash原理及常用hash函数：<a href="http://gubaojian.blog.163.com/blog/static/1661799082010103126182/" target="_blank" rel="external">http://gubaojian.blog.163.com/blog/static/1661799082010103126182/</a></li>
 <li>各种字符串哈希函数比较：<a href="https://www.byvoid.com/blog/string-hash-compare" target="_blank" rel="external">https://www.byvoid.com/blog/string-hash-compare</a></li>
 <li>BloomFilter–大规模数据处理利器(解决空查问题):<a href="http://www.dbafree.net/?p=36" target="_blank" rel="external">http://www.dbafree.net/?p=36</a></li>
@@ -479,8 +477,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel sidebar-panel-active">
+      <section class="site-overview sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/images/avatar.png"
@@ -536,6 +543,22 @@
 
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#哈希函数"><span class="nav-number">1.</span> <span class="nav-text">哈希函数</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#常用构造方法"><span class="nav-number">2.</span> <span class="nav-text">常用构造方法</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#BloomFilter"><span class="nav-number">3.</span> <span class="nav-text">BloomFilter</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#BloomFilter的实现"><span class="nav-number">4.</span> <span class="nav-text">BloomFilter的实现</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考资料"><span class="nav-number">5.</span> <span class="nav-text">参考资料</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
     </div>

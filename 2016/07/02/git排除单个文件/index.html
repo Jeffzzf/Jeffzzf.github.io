@@ -84,17 +84,17 @@
 
 
 
-<meta name="description" content="##不追踪某些文件的变化##项目中生成的一些临时文件往往不需要添加到版本管理中，这些文件可以通过在.git/info/exclude文件中设置，例如在该文件中添加以下内容的话，以.iml结尾的文件和target、.idea、test目录下的文件就不会被git监控：1234*.imltarget/.idea/test/ 如果这些文件已经被添加到git中，可以通过git rm --cached 文件全">
+<meta name="description" content="# 不追踪某些文件的变化项目中生成的一些临时文件往往不需要添加到版本管理中，这些文件可以通过在.git/info/exclude文件中设置，例如在该文件中添加以下内容的话，以.iml结尾的文件和target、.idea、test目录下的文件就不会被git监控：1234*.imltarget/.idea/test/ 如果这些文件已经被添加到git中，可以通过git rm --cached 文件全路径">
 <meta name="keywords" content="git">
 <meta property="og:type" content="article">
 <meta property="og:title" content="git排除单个文件">
 <meta property="og:url" content="http://jeffzzf.github.io/2016/07/02/git排除单个文件/index.html">
 <meta property="og:site_name" content="Noob">
-<meta property="og:description" content="##不追踪某些文件的变化##项目中生成的一些临时文件往往不需要添加到版本管理中，这些文件可以通过在.git/info/exclude文件中设置，例如在该文件中添加以下内容的话，以.iml结尾的文件和target、.idea、test目录下的文件就不会被git监控：1234*.imltarget/.idea/test/ 如果这些文件已经被添加到git中，可以通过git rm --cached 文件全">
-<meta property="og:updated_time" content="2016-07-02T02:10:37.000Z">
+<meta property="og:description" content="# 不追踪某些文件的变化项目中生成的一些临时文件往往不需要添加到版本管理中，这些文件可以通过在.git/info/exclude文件中设置，例如在该文件中添加以下内容的话，以.iml结尾的文件和target、.idea、test目录下的文件就不会被git监控：1234*.imltarget/.idea/test/ 如果这些文件已经被添加到git中，可以通过git rm --cached 文件全路径">
+<meta property="og:updated_time" content="2017-05-03T12:51:36.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="git排除单个文件">
-<meta name="twitter:description" content="##不追踪某些文件的变化##项目中生成的一些临时文件往往不需要添加到版本管理中，这些文件可以通过在.git/info/exclude文件中设置，例如在该文件中添加以下内容的话，以.iml结尾的文件和target、.idea、test目录下的文件就不会被git监控：1234*.imltarget/.idea/test/ 如果这些文件已经被添加到git中，可以通过git rm --cached 文件全">
+<meta name="twitter:description" content="# 不追踪某些文件的变化项目中生成的一些临时文件往往不需要添加到版本管理中，这些文件可以通过在.git/info/exclude文件中设置，例如在该文件中添加以下内容的话，以.iml结尾的文件和target、.idea、test目录下的文件就不会被git监控：1234*.imltarget/.idea/test/ 如果这些文件已经被添加到git中，可以通过git rm --cached 文件全路径">
 
 
 
@@ -359,11 +359,11 @@
       
 
       
-        <p>##不追踪某些文件的变化##<br>项目中生成的一些临时文件往往不需要添加到版本管理中，这些文件可以通过在<code>.git/info/exclude</code>文件中设置，例如在该文件中添加以下内容的话，以.iml结尾的文件和target、.idea、test目录下的文件就不会被git监控：<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">*.iml</div><div class="line">target/</div><div class="line">.idea/</div><div class="line"><span class="built_in">test</span>/</div></pre></td></tr></table></figure></p>
+        <h1 id="不追踪某些文件的变化"><a href="#不追踪某些文件的变化" class="headerlink" title="# 不追踪某些文件的变化"></a># 不追踪某些文件的变化</h1><p>项目中生成的一些临时文件往往不需要添加到版本管理中，这些文件可以通过在<code>.git/info/exclude</code>文件中设置，例如在该文件中添加以下内容的话，以.iml结尾的文件和target、.idea、test目录下的文件就不会被git监控：<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">*.iml</div><div class="line">target/</div><div class="line">.idea/</div><div class="line"><span class="built_in">test</span>/</div></pre></td></tr></table></figure></p>
 <p>如果这些文件已经被添加到git中，可以通过<code>git rm --cached 文件全路径名</code>将文件从git索引中删除（不删除文件本身），然后在配置到exclude中</p>
-<p>##merge分支时不merge特定文件##<br>在一些场景下不同分支的一些文件不应该合并，例如测试环境和生产环境的数据库配置文件。这种情况下即使在<code>.git/info/exclude</code>配置了不追踪这些文件，merge的时候还是会被merge。一种很好的办法是在<code>.git/info/attributes</code>中配置不被merge的文件（不包含文件路径），例如：<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">SpringDispatcher-servlet.xml merge=ours</div><div class="line"><span class="built_in">log</span>4j.xml merge=ours</div></pre></td></tr></table></figure></p>
+<h1 id="merge分支时不merge特定文件"><a href="#merge分支时不merge特定文件" class="headerlink" title="# merge分支时不merge特定文件"></a># merge分支时不merge特定文件</h1><p>在一些场景下不同分支的一些文件不应该合并，例如测试环境和生产环境的数据库配置文件。这种情况下即使在<code>.git/info/exclude</code>配置了不追踪这些文件，merge的时候还是会被merge。一种很好的办法是在<code>.git/info/attributes</code>中配置不被merge的文件（不包含文件路径），例如：<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">SpringDispatcher-servlet.xml merge=ours</div><div class="line"><span class="built_in">log</span>4j.xml merge=ours</div></pre></td></tr></table></figure></p>
 <p>然后执行<code>git config --global merge.ours.driver true</code>定义一个merge策略ours，再执行merge命令时，定义在attributes中的文件就不会参与merge了。</p>
-<p>##参考资料##<br><a href="https://git-scm.com/book/en/v2/Customizing-Git-Git-Attributes#Merge-Strategies" target="_blank" rel="external">Git Documentation</a></p>
+<h1 id="参考资料"><a href="#参考资料" class="headerlink" title="# 参考资料"></a># 参考资料</h1><p><a href="https://git-scm.com/book/en/v2/Customizing-Git-Git-Attributes#Merge-Strategies" target="_blank" rel="external">Git Documentation</a></p>
 
       
     </div>
@@ -455,8 +455,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel sidebar-panel-active">
+      <section class="site-overview sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/images/avatar.png"
@@ -512,6 +521,22 @@
 
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#不追踪某些文件的变化"><span class="nav-number">1.</span> <span class="nav-text"># 不追踪某些文件的变化</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#merge分支时不merge特定文件"><span class="nav-number">2.</span> <span class="nav-text"># merge分支时不merge特定文件</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考资料"><span class="nav-number">3.</span> <span class="nav-text"># 参考资料</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
     </div>

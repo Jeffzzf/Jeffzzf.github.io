@@ -91,7 +91,7 @@
 <meta property="og:url" content="http://jeffzzf.github.io/2016/06/05/Mac中Terminal路径定制/index.html">
 <meta property="og:site_name" content="Noob">
 <meta property="og:description" content="使用Mac的终端（Terminal）时，如果主机名或者用户名过长，命令行的很大一部分都会被这些无关信息占据。作为一个有强迫症的boy，是无法忍受这种情况发生的，好在这些信息都可以非常方便地进行定制。  OSX系统的Terminal命令行前面显示的信息保存在PS1变量中，可以通过echo $PS!命令查看当前显示格式。各字段含义如下： \a ASCII 响铃字符（也可以键入 \007）\d “We">
-<meta property="og:updated_time" content="2016-06-06T00:06:04.000Z">
+<meta property="og:updated_time" content="2017-05-03T12:51:11.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Mac中Terminal路径定制">
 <meta name="twitter:description" content="使用Mac的终端（Terminal）时，如果主机名或者用户名过长，命令行的很大一部分都会被这些无关信息占据。作为一个有强迫症的boy，是无法忍受这种情况发生的，好在这些信息都可以非常方便地进行定制。  OSX系统的Terminal命令行前面显示的信息保存在PS1变量中，可以通过echo $PS!命令查看当前显示格式。各字段含义如下： \a ASCII 响铃字符（也可以键入 \007）\d “We">
@@ -354,7 +354,7 @@
 <p>OSX系统的Terminal命令行前面显示的信息保存在PS1变量中，可以通过echo $PS!命令查看当前显示格式。各字段含义如下：</p>
 <p>\a ASCII 响铃字符（也可以键入 \007）<br>\d “Wed Sep 06” 格式的日期<br>\e ASCII 转义字符（也可以键入 \033）<br>\h 主机名的第一部分（如 “mybox”）<br>\H 主机的全称（如 “mybox.mydomain.com”）<br>\j 在此 shell 中通过按 ^Z 挂起的进程数<br>\l 此 shell 的终端设备名（如 “ttyp4”）<br>\n 换行符<br>\r 回车符<br>\s shell 的名称（如 “bash”）<br>\t 24 小时制时间（如 “23:01:01”）<br>\T 12 小时制时间（如 “11:01:01”）<br>\@ 带有 am/pm 的 12 小时制时间<br>\u 用户名<br>\v bash 的版本（如 2.04）<br>\V Bash 版本（包括补丁级别） ?/td&gt;<br>\w 当前工作目录（如 “/home/drobbins”）<br>\W 当前工作目录的“基名 (basename)”（如 “drobbins”）<br>! 当前命令在历史缓冲区中的位置<br># 命令编号（只要您键入内容，它就会在每次提示时累加）<br>\$ 如果您不是超级用户 (root)，则插入一个 “$”；如果您是超级用户，则显示一个 “#”<br>\xxx 插入一个用三位数 xxx（用零代替未使用的数字，如 “\007”）表示的 ASCII 字符<br>\ 反斜杠<br>[ 这个序列应该出现在不移动光标的字符序列（如颜色转义序列）之前。它使 bash 能够正确计算自动换行。<br>] 这个序列应该出现在非打印字符序列之后。</p>
 <p>例如PS1=”\W $ “就表示命令行前面显示的信息为相对路径 $,该变量信息可以保存在~/.bash_profile文件中，例如export PS1=”\W $ “。<br>值得一提的是，个人其它一些定制化命令和信息都可以保存在~/.bash_profile文件中，例如：</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#快捷执行mysql命令</span></div><div class="line"><span class="built_in">alias</span> mysql=<span class="string">'/usr/local/mysql/bin/mysql'</span> </div><div class="line"><span class="comment">#cd ..和cd ../..的简记形式</span></div><div class="line"><span class="built_in">alias</span> ..=<span class="string">"cd .."</span></div><div class="line"><span class="built_in">alias</span> ...=<span class="string">"cd ../.."</span></div></pre></td></tr></table></figure>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># 快捷执行mysql命令</span></div><div class="line"><span class="built_in">alias</span> mysql=<span class="string">'/usr/local/mysql/bin/mysql'</span> </div><div class="line"><span class="comment"># cd ..和cd ../..的简记形式</span></div><div class="line"><span class="built_in">alias</span> ..=<span class="string">"cd .."</span></div><div class="line"><span class="built_in">alias</span> ...=<span class="string">"cd ../.."</span></div></pre></td></tr></table></figure>
 
       
     </div>

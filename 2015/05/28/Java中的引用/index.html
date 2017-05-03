@@ -91,7 +91,7 @@
 <meta property="og:url" content="http://jeffzzf.github.io/2015/05/28/Java中的引用/index.html">
 <meta property="og:site_name" content="Noob">
 <meta property="og:description" content="在方法区中所占用的内存大小与在栈帧所占用的内存大小不同，因为在方法区中占用内存以字节为最小单位，但是在栈帧中以字为最小单位。如byte类型在方法区中它占用8位，为一个字节，但是在栈帧中以一个字，即32位来处理，其实就是当作一个int类型来处理。基本数据的类型的大小是固定的，但引用类型对象的大小是可变的，一个空Object对象的大小是8byte，这个大小只是保存堆中一个没有任何属性的对象的大小。1O">
-<meta property="og:updated_time" content="2016-04-20T11:22:04.000Z">
+<meta property="og:updated_time" content="2017-05-03T12:51:04.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Java中的引用">
 <meta name="twitter:description" content="在方法区中所占用的内存大小与在栈帧所占用的内存大小不同，因为在方法区中占用内存以字节为最小单位，但是在栈帧中以字为最小单位。如byte类型在方法区中它占用8位，为一个字节，但是在栈帧中以一个字，即32位来处理，其实就是当作一个int类型来处理。基本数据的类型的大小是固定的，但引用类型对象的大小是可变的，一个空Object对象的大小是8byte，这个大小只是保存堆中一个没有任何属性的对象的大小。1O">
@@ -368,7 +368,7 @@
 <li>引用本身是保留在栈中的</li>
 <li>引用所指的对象，是存放在堆中的</li>
 </ol>
-<p>##引用类型##<br>对象引用类型分为强引用、软引用、弱引用和虚引用。</p>
+<h1 id="引用类型"><a href="#引用类型" class="headerlink" title="# 引用类型"></a># 引用类型</h1><p>对象引用类型分为强引用、软引用、弱引用和虚引用。</p>
 <p><strong>强引用</strong>:就是我们一般声明对象是时虚拟机生成的引用，强引用环境下，垃圾回收时需要严格判断当前对象是否被强引用，如果被强引用，则不会被垃圾回收</p>
 <p><strong>软引用</strong>:软引用一般被做为缓存来使用。与强引用的区别是，软引用在垃圾回收时，虚拟机会根据当前系统的剩余内存来决定是否对软引用进行回收。如果剩余内存比较紧张，则虚拟机会回收软引用所引用的空间；如果剩余内存相对富裕，则不会进行回收。换句话说，虚拟机在发生OutOfMemory时，肯定是没有软引用存在的。</p>
 <p><strong>弱引用</strong>:弱引用与软引用类似，都是作为缓存来使用。但与软引用不同，弱引用在进行垃圾回收时，是一定会被回收掉的，因此其生命周期只存在于一个垃圾回收周期内。</p>
@@ -465,8 +465,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel sidebar-panel-active">
+      <section class="site-overview sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/images/avatar.png"
@@ -522,6 +531,22 @@
 
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#引用类型"><span class="nav-number">1.</span> <span class="nav-text"># 引用类型</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
     </div>

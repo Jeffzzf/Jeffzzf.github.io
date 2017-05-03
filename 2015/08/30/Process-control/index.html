@@ -84,17 +84,17 @@
 
 
 
-<meta name="description" content="#Process Identifiers#Every process has a unique ID, a non-negative integer. Process ID 0 is usually the scheduler process and is often known as the swapper. No process on disk correspons to this proce">
+<meta name="description" content="Process IdentifiersEvery process has a unique ID, a non-negative integer. Process ID 0 is usually the scheduler process and is often known as the swapper. No process on disk correspons to this process">
 <meta name="keywords" content="Linux,Process">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Process control">
 <meta property="og:url" content="http://jeffzzf.github.io/2015/08/30/Process-control/index.html">
 <meta property="og:site_name" content="Noob">
-<meta property="og:description" content="#Process Identifiers#Every process has a unique ID, a non-negative integer. Process ID 0 is usually the scheduler process and is often known as the swapper. No process on disk correspons to this proce">
-<meta property="og:updated_time" content="2016-04-20T11:22:04.000Z">
+<meta property="og:description" content="Process IdentifiersEvery process has a unique ID, a non-negative integer. Process ID 0 is usually the scheduler process and is often known as the swapper. No process on disk correspons to this process">
+<meta property="og:updated_time" content="2017-05-03T12:51:17.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Process control">
-<meta name="twitter:description" content="#Process Identifiers#Every process has a unique ID, a non-negative integer. Process ID 0 is usually the scheduler process and is often known as the swapper. No process on disk correspons to this proce">
+<meta name="twitter:description" content="Process IdentifiersEvery process has a unique ID, a non-negative integer. Process ID 0 is usually the scheduler process and is often known as the swapper. No process on disk correspons to this process">
 
 
 
@@ -359,8 +359,8 @@
       
 
       
-        <p>#Process Identifiers#<br>Every process has a unique ID, a non-negative integer. <strong>Process ID 0</strong> is usually the scheduler process and is often known as the <em>swapper</em>. No process on disk correspons to this process, which is part of the kernel and is konwn as a system process. <strong>Process ID 1</strong> is usually the <em>init</em> process and is invoked by the kernel at the end of the bootstrap procedure. The program file for this process was /etc/init in older verion of the UNIX System and is /sbin/init in newer version. This process is responsible for bringing up a UNIX system after the kernel has been bootstraped. <em>init</em> usually reads the system-dependent initialization files - the /etc/rc<em> files or /etc/inittab and the files in /etc/init.d - and brings the system to a certain state, such as multiuser. The </em>init* process never dies, it is a normal user process althrough it runs with superuser privileges.</p>
-<p>#fork function#<br>An existing process can create a new one by calling the fork function.<br><figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;unistd.h&gt;</span></span></div><div class="line"><span class="comment">//Returns: 0 in child, process ID of child in parent, -1 on error</span></div><div class="line"><span class="keyword">pid_t</span> fork(<span class="keyword">void</span>);</div></pre></td></tr></table></figure></p>
+        <h1 id="Process-Identifiers"><a href="#Process-Identifiers" class="headerlink" title="Process Identifiers"></a>Process Identifiers</h1><p>Every process has a unique ID, a non-negative integer. <strong>Process ID 0</strong> is usually the scheduler process and is often known as the <em>swapper</em>. No process on disk correspons to this process, which is part of the kernel and is konwn as a system process. <strong>Process ID 1</strong> is usually the <em>init</em> process and is invoked by the kernel at the end of the bootstrap procedure. The program file for this process was /etc/init in older verion of the UNIX System and is /sbin/init in newer version. This process is responsible for bringing up a UNIX system after the kernel has been bootstraped. <em>init</em> usually reads the system-dependent initialization files - the /etc/rc<em> files or /etc/inittab and the files in /etc/init.d - and brings the system to a certain state, such as multiuser. The </em>init* process never dies, it is a normal user process althrough it runs with superuser privileges.</p>
+<h1 id="fork-function"><a href="#fork-function" class="headerlink" title="fork function"></a>fork function</h1><p>An existing process can create a new one by calling the fork function.<br><figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="meta"># <span class="meta-keyword">include</span><span class="meta-string">&lt;unistd.h&gt;</span></span></div><div class="line"><span class="comment">//Returns: 0 in child, process ID of child in parent, -1 on error</span></div><div class="line"><span class="keyword">pid_t</span> fork(<span class="keyword">void</span>);</div></pre></td></tr></table></figure></p>
 <p>This function is called once but return twice. The reason the child’s process ID is returned to the parent is that a process can have more than one child, and there is no function that allows a process to obtain the process IDs of its children. The reason fork returns 0 to the child is that a process can have only a single parent, and the child can always call getppid to obtain the process ID of its parent.(Process ID 0 is reserved for use by the kernelit’s not possible for 0 to by the process ID of a child).</p>
 <p>Both the child and the parent continue executing with the instruction that follows the call to fork. The child is a copy of the parent, for example, the child gets a copy of the parent’s data space, heap, and stack. This is a copy for the child, the parent and the child do not share these portions of memory. The parent and the child share the <strong>text segment</strong>.</p>
 <p>Modern implements don’t perform a complete copy of the parent’s data, stack and heap, since a fork is often followed by an exec. Instend, a technique called <em>copy-on-write(COM)</em> is used. These regions are shared by the parent and the child and have their protection changed by the kernel to read-only. If either process tries to modify these regions, the kernel then makes a copy of that piece of memeory only, typically a “page” in a virtual memory system.</p>
@@ -403,14 +403,14 @@
 <li>When a process wants to duplicate itself so that the parent and the child can each execute different sections of code at the same time. This is common for network servers - the parent waits for a service request from a client. When the request arrives, the parent calls fork and lets the child handle the request. The parent goes back to waiting for the next service request to arrive.</li>
 <li>When a process wants to execute a different program. This is comman for shells. In this case, the child does an exec right after it return from the fork.</li>
 </ol>
-<p>#exit#<br>If the parent terminates before the child, the init process becomes the parent. We say the process has been inherited by init. What normally happens is that whether a process terminates, the kernel goes through all active processes to see whether the terminating process is the parent of any process that still exits. If so, the parent process ID of the surviving process is changed to be 1(the process ID of init).</p>
+<h1 id="exit"><a href="#exit" class="headerlink" title="exit"></a>exit</h1><p>If the parent terminates before the child, the init process becomes the parent. We say the process has been inherited by init. What normally happens is that whether a process terminates, the kernel goes through all active processes to see whether the terminating process is the parent of any process that still exits. If so, the parent process ID of the surviving process is changed to be 1(the process ID of init).</p>
 <p>The kernel kepps a small amount of information for every terminating process, the information is available when the parent of the terminating process calls wait or waitpid. Minimally, this information consists of the process ID, the termination status of the process, and the amount of CPU time taken by the process. The kernel can discard all the memory used by the process and close its open files. A process that has terminated, but whose parent has not yet waited for it is called zombie.</p>
 <p>Process init is written so that whenever one of its children terminates, init calls one of the wait functions to getch the termination status. By doing this, init prevents the system from being clogged by zombies.</p>
-<p>#wait, waitpid#<br>The wait function can block the caller until a child process terminates, whereas waitpid has an option that prevents it from blocking.</p>
+<h1 id="wait-waitpid"><a href="#wait-waitpid" class="headerlink" title="wait, waitpid"></a>wait, waitpid</h1><p>The wait function can block the caller until a child process terminates, whereas waitpid has an option that prevents it from blocking.</p>
 <p>The waitpid function doesn’t wait for the child that terminates first; it has a number of options that control which process it waits for.</p>
 <p>if a child has already terminated and is a zombie, wait returns immediately with that child’s status. Otherwise, it blocks that calller until a child terminates. If the caller bolcks and has multiple children, wait returns when one terminates.</p>
-<p>#exec#<br>When a process calls one of exec functions, that process is completely replaced by the new program, and the new program starts executing at its main function. The process ID does not change across an exec, because a new process is not created, exec merely replaces the current process - its text, data, heap and stack segments with a brand-new program from disk.</p>
-<p>#Reference#<br><em>Advanced Programming in the Unix Environment</em></p>
+<h1 id="exec"><a href="#exec" class="headerlink" title="exec"></a>exec</h1><p>When a process calls one of exec functions, that process is completely replaced by the new program, and the new program starts executing at its main function. The process ID does not change across an exec, because a new process is not created, exec merely replaces the current process - its text, data, heap and stack segments with a brand-new program from disk.</p>
+<h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><p><em>Advanced Programming in the Unix Environment</em></p>
 
       
     </div>
@@ -504,8 +504,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel sidebar-panel-active">
+      <section class="site-overview sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/images/avatar.png"
@@ -561,6 +570,22 @@
 
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Process-Identifiers"><span class="nav-number">1.</span> <span class="nav-text">Process Identifiers</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#fork-function"><span class="nav-number">2.</span> <span class="nav-text">fork function</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#exit"><span class="nav-number">3.</span> <span class="nav-text">exit</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#wait-waitpid"><span class="nav-number">4.</span> <span class="nav-text">wait, waitpid</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#exec"><span class="nav-number">5.</span> <span class="nav-text">exec</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Reference"><span class="nav-number">6.</span> <span class="nav-text">Reference</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
     </div>

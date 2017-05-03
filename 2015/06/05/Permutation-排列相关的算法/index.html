@@ -84,17 +84,17 @@
 
 
 
-<meta name="description" content="#All Permutations(Recursive)#  该算法采用DFS递归的方法，每次从当前元素出发，依次与它后面的元素交换，到序列结尾时表示完成一次全排列，输出结果。注意，每次递归返回后再把元素交换回来，否则会出现重复序列。该算法时间复杂度为O(n!)，序列不是递增的。例如对“123”全排列的结果为：123 132 213 231 321 312。  123456789101112131">
+<meta name="description" content="All Permutations(Recursive) 该算法采用DFS递归的方法，每次从当前元素出发，依次与它后面的元素交换，到序列结尾时表示完成一次全排列，输出结果。注意，每次递归返回后再把元素交换回来，否则会出现重复序列。该算法时间复杂度为O(n!)，序列不是递增的。例如对“123”全排列的结果为：123 132 213 231 321 312。  1234567891011121314pr">
 <meta name="keywords" content="LeetCode,算法,DFS,排列,字符串">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Permutation(排列相关的算法)">
 <meta property="og:url" content="http://jeffzzf.github.io/2015/06/05/Permutation-排列相关的算法/index.html">
 <meta property="og:site_name" content="Noob">
-<meta property="og:description" content="#All Permutations(Recursive)#  该算法采用DFS递归的方法，每次从当前元素出发，依次与它后面的元素交换，到序列结尾时表示完成一次全排列，输出结果。注意，每次递归返回后再把元素交换回来，否则会出现重复序列。该算法时间复杂度为O(n!)，序列不是递增的。例如对“123”全排列的结果为：123 132 213 231 321 312。  123456789101112131">
-<meta property="og:updated_time" content="2016-04-20T11:22:04.000Z">
+<meta property="og:description" content="All Permutations(Recursive) 该算法采用DFS递归的方法，每次从当前元素出发，依次与它后面的元素交换，到序列结尾时表示完成一次全排列，输出结果。注意，每次递归返回后再把元素交换回来，否则会出现重复序列。该算法时间复杂度为O(n!)，序列不是递增的。例如对“123”全排列的结果为：123 132 213 231 321 312。  1234567891011121314pr">
+<meta property="og:updated_time" content="2017-05-03T12:51:17.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Permutation(排列相关的算法)">
-<meta name="twitter:description" content="#All Permutations(Recursive)#  该算法采用DFS递归的方法，每次从当前元素出发，依次与它后面的元素交换，到序列结尾时表示完成一次全排列，输出结果。注意，每次递归返回后再把元素交换回来，否则会出现重复序列。该算法时间复杂度为O(n!)，序列不是递增的。例如对“123”全排列的结果为：123 132 213 231 321 312。  123456789101112131">
+<meta name="twitter:description" content="All Permutations(Recursive) 该算法采用DFS递归的方法，每次从当前元素出发，依次与它后面的元素交换，到序列结尾时表示完成一次全排列，输出结果。注意，每次递归返回后再把元素交换回来，否则会出现重复序列。该算法时间复杂度为O(n!)，序列不是递增的。例如对“123”全排列的结果为：123 132 213 231 321 312。  1234567891011121314pr">
 
 
 
@@ -359,14 +359,12 @@
       
 
       
-        <p>#All Permutations(Recursive)#</p>
-<blockquote>
+        <h1 id="All-Permutations-Recursive"><a href="#All-Permutations-Recursive" class="headerlink" title="All Permutations(Recursive)"></a>All Permutations(Recursive)</h1><blockquote>
 <p>该算法采用DFS递归的方法，每次从当前元素出发，依次与它后面的元素交换，到序列结尾时表示完成一次全排列，输出结果。注意，每次递归返回后再把元素交换回来，否则会出现重复序列。该算法时间复杂度为O(n!)，序列不是递增的。例如对“123”全排列的结果为：123 132 213 231 321 312。</p>
 </blockquote>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">swap</span><span class="params">(StringBuilder sb, <span class="keyword">int</span> i, <span class="keyword">int</span> j)</span> </span>&#123;</div><div class="line">        <span class="keyword">char</span> c = sb.charAt(i);</div><div class="line">        sb.setCharAt(i, sb.charAt(j));</div><div class="line">        sb.setCharAt(j, c);</div><div class="line">&#125;</div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">nextPermutation</span><span class="params">(StringBuilder sb, <span class="keyword">int</span> start)</span> </span>&#123;</div><div class="line">    <span class="keyword">if</span>(start == sb.length())</div><div class="line">        println(sb);</div><div class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = start; i &lt; sb.length(); ++i) &#123;</div><div class="line">        swap(sb, start, i);</div><div class="line">        nextPermutation(sb, start + <span class="number">1</span>);</div><div class="line">        swap(sb, start, i);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <a id="more"></a>
-<p>#Next permutation#</p>
-<blockquote>
+<h1 id="Next-permutation"><a href="#Next-permutation" class="headerlink" title="Next permutation"></a>Next permutation</h1><blockquote>
 <p>以[2, 4, 5, 3, 1]为例，算法思路：</p>
 <ol>
 <li>从右向左扫描，找到第一个非递增数（4）<ol>
@@ -378,7 +376,7 @@
 </ol>
 </blockquote>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">swap</span><span class="params">(StringBuilder sb, <span class="keyword">int</span> i, <span class="keyword">int</span> j)</span> </span>&#123;</div><div class="line">    <span class="keyword">char</span> c = sb.charAt(i);</div><div class="line">    sb.setCharAt(i, sb.charAt(j));</div><div class="line">    sb.setCharAt(j, c);</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">reverse</span><span class="params">(StringBuilder sb, <span class="keyword">int</span> start, <span class="keyword">int</span> end)</span> </span>&#123;</div><div class="line">    <span class="keyword">int</span> mid = (end - start + <span class="number">1</span>) / <span class="number">2</span>;</div><div class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; mid; ++i) &#123;</div><div class="line">        <span class="keyword">char</span> c = sb.charAt(start + i);</div><div class="line">        sb.setCharAt(start + i, sb.charAt(end - i));</div><div class="line">        sb.setCharAt(end - i, c);</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">public</span> String <span class="title">nextPermutation</span><span class="params">(StringBuilder sb, <span class="keyword">int</span> cnt, <span class="keyword">int</span> k)</span> </span>&#123;</div><div class="line">    <span class="keyword">while</span>(cnt &lt; k) &#123;</div><div class="line">        ++cnt;</div><div class="line">        <span class="keyword">int</span> i = sb.length() - <span class="number">1</span>;</div><div class="line">        <span class="keyword">while</span>(i - <span class="number">1</span> &gt;= <span class="number">0</span> &amp;&amp; sb.charAt(i) &lt;= sb.charAt(i - <span class="number">1</span>))</div><div class="line">            --i;</div><div class="line">        <span class="keyword">if</span>(i &lt;= <span class="number">0</span>) &#123;</div><div class="line">            reverse(sb, <span class="number">0</span>, sb.length() - <span class="number">1</span>);</div><div class="line">            <span class="keyword">continue</span>;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">int</span> j = sb.length() - <span class="number">1</span>;</div><div class="line">        <span class="keyword">while</span>(j &gt; i - <span class="number">1</span> &amp;&amp; sb.charAt(j) &lt;= sb.charAt(i - <span class="number">1</span>) )</div><div class="line">            --j;</div><div class="line">        swap(sb, j, i - <span class="number">1</span>);</div><div class="line">        reverse(sb, i, sb.length() - <span class="number">1</span>);</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> <span class="keyword">new</span> String(sb);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>#Kth Permutation#<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> String <span class="title">getPermutation</span><span class="params">(<span class="keyword">int</span> n, <span class="keyword">int</span> k)</span> </span>&#123;</div><div class="line">    StringBuilder init = <span class="keyword">new</span> StringBuilder();</div><div class="line">    StringBuilder result = <span class="keyword">new</span> StringBuilder();</div><div class="line">    <span class="keyword">int</span> total = <span class="number">1</span>;</div><div class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; ++i) &#123;</div><div class="line">        total *= i;</div><div class="line">        init.append(i);</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = n; i &gt;= <span class="number">1</span>; --i) &#123;</div><div class="line">        total /= i;</div><div class="line">        <span class="keyword">int</span> index = (k - <span class="number">1</span>) / total;</div><div class="line">        k = k - index * total;</div><div class="line">        result.append(init.charAt(index));</div><div class="line">        init.deleteCharAt(index);</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> <span class="keyword">new</span> String(result);</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h1 id="Kth-Permutation"><a href="#Kth-Permutation" class="headerlink" title="Kth Permutation"></a>Kth Permutation</h1><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> String <span class="title">getPermutation</span><span class="params">(<span class="keyword">int</span> n, <span class="keyword">int</span> k)</span> </span>&#123;</div><div class="line">    StringBuilder init = <span class="keyword">new</span> StringBuilder();</div><div class="line">    StringBuilder result = <span class="keyword">new</span> StringBuilder();</div><div class="line">    <span class="keyword">int</span> total = <span class="number">1</span>;</div><div class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; ++i) &#123;</div><div class="line">        total *= i;</div><div class="line">        init.append(i);</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = n; i &gt;= <span class="number">1</span>; --i) &#123;</div><div class="line">        total /= i;</div><div class="line">        <span class="keyword">int</span> index = (k - <span class="number">1</span>) / total;</div><div class="line">        k = k - index * total;</div><div class="line">        result.append(init.charAt(index));</div><div class="line">        init.deleteCharAt(index);</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> <span class="keyword">new</span> String(result);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 
       
     </div>
@@ -478,8 +476,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel sidebar-panel-active">
+      <section class="site-overview sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/images/avatar.png"
@@ -535,6 +542,22 @@
 
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#All-Permutations-Recursive"><span class="nav-number">1.</span> <span class="nav-text">All Permutations(Recursive)</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Next-permutation"><span class="nav-number">2.</span> <span class="nav-text">Next permutation</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Kth-Permutation"><span class="nav-number">3.</span> <span class="nav-text">Kth Permutation</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
     </div>

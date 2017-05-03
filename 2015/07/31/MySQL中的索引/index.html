@@ -84,17 +84,17 @@
 
 
 
-<meta name="description" content="MySQl中，索引在存储引擎层实现而不是服务器层，  #B-Tree索引#B-Tree（参考B-Tree，B+Tree）对索引列是按顺序组织存储的，所以很适合查找范围数据、全键值或键前缀查找。索引对多个值进行排序的依据是CREATETABLE语句中定义索引的顺序。B-Tree索引有以下限制：  如果不是按照索引的最左列开始查找，则无法使用索引 不能跳过索引中的列 如果查询中有某个列的范围查询，则">
+<meta name="description" content="MySQl中，索引在存储引擎层实现而不是服务器层，  B-Tree索引B-Tree（参考B-Tree，B+Tree）对索引列是按顺序组织存储的，所以很适合查找范围数据、全键值或键前缀查找。索引对多个值进行排序的依据是CREATETABLE语句中定义索引的顺序。B-Tree索引有以下限制：  如果不是按照索引的最左列开始查找，则无法使用索引 不能跳过索引中的列 如果查询中有某个列的范围查询，则其右">
 <meta name="keywords" content="MySQL,索引">
 <meta property="og:type" content="article">
 <meta property="og:title" content="MySQL中的索引">
 <meta property="og:url" content="http://jeffzzf.github.io/2015/07/31/MySQL中的索引/index.html">
 <meta property="og:site_name" content="Noob">
-<meta property="og:description" content="MySQl中，索引在存储引擎层实现而不是服务器层，  #B-Tree索引#B-Tree（参考B-Tree，B+Tree）对索引列是按顺序组织存储的，所以很适合查找范围数据、全键值或键前缀查找。索引对多个值进行排序的依据是CREATETABLE语句中定义索引的顺序。B-Tree索引有以下限制：  如果不是按照索引的最左列开始查找，则无法使用索引 不能跳过索引中的列 如果查询中有某个列的范围查询，则">
-<meta property="og:updated_time" content="2016-04-20T11:22:04.000Z">
+<meta property="og:description" content="MySQl中，索引在存储引擎层实现而不是服务器层，  B-Tree索引B-Tree（参考B-Tree，B+Tree）对索引列是按顺序组织存储的，所以很适合查找范围数据、全键值或键前缀查找。索引对多个值进行排序的依据是CREATETABLE语句中定义索引的顺序。B-Tree索引有以下限制：  如果不是按照索引的最左列开始查找，则无法使用索引 不能跳过索引中的列 如果查询中有某个列的范围查询，则其右">
+<meta property="og:updated_time" content="2017-05-03T12:51:13.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="MySQL中的索引">
-<meta name="twitter:description" content="MySQl中，索引在存储引擎层实现而不是服务器层，  #B-Tree索引#B-Tree（参考B-Tree，B+Tree）对索引列是按顺序组织存储的，所以很适合查找范围数据、全键值或键前缀查找。索引对多个值进行排序的依据是CREATETABLE语句中定义索引的顺序。B-Tree索引有以下限制：  如果不是按照索引的最左列开始查找，则无法使用索引 不能跳过索引中的列 如果查询中有某个列的范围查询，则">
+<meta name="twitter:description" content="MySQl中，索引在存储引擎层实现而不是服务器层，  B-Tree索引B-Tree（参考B-Tree，B+Tree）对索引列是按顺序组织存储的，所以很适合查找范围数据、全键值或键前缀查找。索引对多个值进行排序的依据是CREATETABLE语句中定义索引的顺序。B-Tree索引有以下限制：  如果不是按照索引的最左列开始查找，则无法使用索引 不能跳过索引中的列 如果查询中有某个列的范围查询，则其右">
 
 
 
@@ -362,13 +362,13 @@
         <blockquote>
 <p>MySQl中，索引在存储引擎层实现而不是服务器层，</p>
 </blockquote>
-<p>#B-Tree索引#<br>B-Tree（参考<a href="http://jeffzzf.github.io/2015/07/29/B-Tree-B-Tree/">B-Tree，B+Tree</a>）对索引列是按顺序组织存储的，所以很适合查找范围数据、全键值或键前缀查找。<strong>索引对多个值进行排序的依据是CREATETABLE语句中定义索引的顺序</strong>。B-Tree索引有以下限制：</p>
+<h1 id="B-Tree索引"><a href="#B-Tree索引" class="headerlink" title="B-Tree索引"></a>B-Tree索引</h1><p>B-Tree（参考<a href="http://jeffzzf.github.io/2015/07/29/B-Tree-B-Tree/">B-Tree，B+Tree</a>）对索引列是按顺序组织存储的，所以很适合查找范围数据、全键值或键前缀查找。<strong>索引对多个值进行排序的依据是CREATETABLE语句中定义索引的顺序</strong>。B-Tree索引有以下限制：</p>
 <ol>
 <li>如果不是按照索引的最左列开始查找，则无法使用索引</li>
 <li>不能跳过索引中的列</li>
 <li>如果查询中有某个列的范围查询，则其右边所有列都无法使用索引优化查询。</li>
 </ol>
-<p>#哈希索引#<br>哈希索引（Hash Index）基于哈希表实现，只有精确匹配所有列的查询才有效。哈希索引的结构非常紧凑，也使得哈希索引的速度非常快。但是，哈希索引也有它的限制：</p>
+<h1 id="哈希索引"><a href="#哈希索引" class="headerlink" title="哈希索引"></a>哈希索引</h1><p>哈希索引（Hash Index）基于哈希表实现，只有精确匹配所有列的查询才有效。哈希索引的结构非常紧凑，也使得哈希索引的速度非常快。但是，哈希索引也有它的限制：</p>
 <ol>
 <li>哈希索引只包含哈希值和行指针，不存储字段值。所以，不能使用索引中的值来避免读取行。</li>
 <li>哈希索引不是按照索引值顺序存储的，无法用于排序</li>
@@ -376,17 +376,16 @@
 <li>哈希索引只支持等值比较查询</li>
 <li>当出现冲突时，需要遍历桶中的所有行指针，性能会有所下降</li>
 </ol>
-<p>#索引策略#</p>
-<p>##独立的列##<br>如果查询中的列不是独立的，MySql就不会使用索引，独立的列是指索引列不能使表达式的一部分。例如，<code>SELECT id FROM user WHERE id + 1 = 5</code>就无法使用id上的索引。</p>
-<p>##前缀索引与索引选择性##<br>索引很长的字符串列，会让索引大且慢。可以通过插入一个hash列模拟哈希索引，或者可以只索引开始的部分字符，这样可以大大节约索引空间，提高索引效率。但这样会降低索引选择性，<strong>索引选择性</strong>是指不重复的索引值（也称为基数，cardinality）和数据表中的记录总数的比值。索引的选择性越高则查询效率越高。前缀索引可以使索引更小更快，但是MySQl无法使用前缀索引做ORDER BY和GROUP BY，也无法使用前缀索引做覆盖扫描。</p>
-<p>##多列索引##<br>在多个列上建立独立的单独索引大部分情况下并不能提高MySQL的查询性能。在5.0之前的版本，MySQL只能使用其中某一个单列索引，在5.0以后的版本中，查询能够同时使用多个单列索引扫描并将结果合并。有三种合并：OR条件联合（Union）、AND条件相交（Intersection）以及联合与相交的组合。索引合并有时候是一种优化，但更多时候说明了索引建的很糟糕：</p>
+<h1 id="索引策略"><a href="#索引策略" class="headerlink" title="索引策略"></a>索引策略</h1><h1 id="独立的列"><a href="#独立的列" class="headerlink" title="# 独立的列"></a># 独立的列</h1><p>如果查询中的列不是独立的，MySql就不会使用索引，独立的列是指索引列不能使表达式的一部分。例如，<code>SELECT id FROM user WHERE id + 1 = 5</code>就无法使用id上的索引。</p>
+<h1 id="前缀索引与索引选择性"><a href="#前缀索引与索引选择性" class="headerlink" title="# 前缀索引与索引选择性"></a># 前缀索引与索引选择性</h1><p>索引很长的字符串列，会让索引大且慢。可以通过插入一个hash列模拟哈希索引，或者可以只索引开始的部分字符，这样可以大大节约索引空间，提高索引效率。但这样会降低索引选择性，<strong>索引选择性</strong>是指不重复的索引值（也称为基数，cardinality）和数据表中的记录总数的比值。索引的选择性越高则查询效率越高。前缀索引可以使索引更小更快，但是MySQl无法使用前缀索引做ORDER BY和GROUP BY，也无法使用前缀索引做覆盖扫描。</p>
+<h1 id="多列索引"><a href="#多列索引" class="headerlink" title="# 多列索引"></a># 多列索引</h1><p>在多个列上建立独立的单独索引大部分情况下并不能提高MySQL的查询性能。在5.0之前的版本，MySQL只能使用其中某一个单列索引，在5.0以后的版本中，查询能够同时使用多个单列索引扫描并将结果合并。有三种合并：OR条件联合（Union）、AND条件相交（Intersection）以及联合与相交的组合。索引合并有时候是一种优化，但更多时候说明了索引建的很糟糕：</p>
 <ol>
 <li>当服务器对多个索引做相交操作时（多个And条件），通常说明需要一个包含所有相关列的多列索引，而不是多个独立的单独索引。</li>
 <li>当服务器需要对多个索引做联合操作时（通常有多个OR条件），通常需要耗费大量的CPU、内存资源。</li>
 </ol>
 <p>可以通过optimizer_switch关闭索引合并功能，也可以使用IGNORE_INDEX提示让优化器忽略某些索引。</p>
-<p>##索引顺序##<br><strong>经验法则</strong>：将选择性最高的列放到索引最前面。该法则在一定条件下适用，但是需要综合考虑，最重要的是要尽量避免<strong>随机IO</strong>和<strong>排序</strong>。查询性能也和查询条件的值分布有关，可以根据那些运行频率最高的查询来调整索引列的顺序。</p>
-<p>##聚簇索引##<br>聚簇索引是一种数据存储方式，InnoDB的聚簇索引实际上是在同一个数据结构中保存了B-Tree索引和数据行。叶子页中包含了行的全部数据，节点页中只包含索引项。</p>
+<h1 id="索引顺序"><a href="#索引顺序" class="headerlink" title="# 索引顺序"></a># 索引顺序</h1><p><strong>经验法则</strong>：将选择性最高的列放到索引最前面。该法则在一定条件下适用，但是需要综合考虑，最重要的是要尽量避免<strong>随机IO</strong>和<strong>排序</strong>。查询性能也和查询条件的值分布有关，可以根据那些运行频率最高的查询来调整索引列的顺序。</p>
+<h1 id="聚簇索引"><a href="#聚簇索引" class="headerlink" title="# 聚簇索引"></a># 聚簇索引</h1><p>聚簇索引是一种数据存储方式，InnoDB的聚簇索引实际上是在同一个数据结构中保存了B-Tree索引和数据行。叶子页中包含了行的全部数据，节点页中只包含索引项。</p>
 <p>InnoDB通过主键聚集数据，如果没有定义主键，InnoDB会选择一个唯一的非空索引代替，如果没有这样的非空索引，InnoDB会隐式定义一个主键来作为聚簇索引。InnoDB只聚集在同一个页面的记录，包含相邻键值的页面可能会相距甚远。聚集数据的优点：</p>
 <ol>
 <li>相关数据保存在一起，减少随机IO次数</li>
@@ -399,17 +398,16 @@
 <li>聚簇索引可能导致全表扫描变慢，尤其是行比较稀疏，或者由于页分裂导致存储不连续时。</li>
 <li>通过二级索引（叶节点中存储主键值而非聚簇索引叶节点中的数据行）查找行时，存储引擎先找到二级索引的叶节点获得对应的主键值，然后根据这个值去聚簇索引中查找对应的行，需要两次B树查找。</li>
 </ol>
-<p>##MyISAM 与InnoDB的数据分布##<br>MyISAM中的主键索引与其他列索引并没有什么不同，都是基于B+树，非叶节点中存储键值，页节点中存储指向数据行的指针。</p>
+<h1 id="MyISAM-与InnoDB的数据分布"><a href="#MyISAM-与InnoDB的数据分布" class="headerlink" title="# MyISAM 与InnoDB的数据分布"></a># MyISAM 与InnoDB的数据分布</h1><p>MyISAM中的主键索引与其他列索引并没有什么不同，都是基于B+树，非叶节点中存储键值，页节点中存储指向数据行的指针。</p>
 <p>InnoDB中的索引也采用B+树组织，不过叶节点中存储的是整个数据行以及事务ID、用于事务和MVCC的回滚指针。InnoDB的二级索引的叶节点中存储的不是行指针，而是主键值，并以此作为指向行的指针从聚簇索引中查找完整数据。这种策略减少了当出现行移动或者数据页分裂时二级索引的维护工作。</p>
-<p>##覆盖索引##<br>如果一个索引包含所有需要查询字段的值，该索引就成为覆盖索引。在索引中满足查询的成本一般比查询行要小得多。覆盖索引必须覆盖索引列的值，MySQL只能使用B树索引做覆盖索引。</p>
+<h1 id="覆盖索引"><a href="#覆盖索引" class="headerlink" title="# 覆盖索引"></a># 覆盖索引</h1><p>如果一个索引包含所有需要查询字段的值，该索引就成为覆盖索引。在索引中满足查询的成本一般比查询行要小得多。覆盖索引必须覆盖索引列的值，MySQL只能使用B树索引做覆盖索引。</p>
 <p>MySQL查询优化器在执行查询前会判断是否有一个索引能够进行覆盖，索引无法覆盖查询的情况有两种：</p>
 <ol>
 <li>没有任何索引能够覆盖这个查询，这种情况下，如果WHERE条件中的列有索引可以覆盖，MySQL可以过滤之后再读取需要的数据行。</li>
 <li>MySQL不能在索引中执行某些LIKE操作   ，MySQL能够执行最左前缀匹配的LIKE查询，但是如果是通配符开头的LIKE查询，存储引擎就无法做比较。</li>
 </ol>
-<p>##压缩索引##<br>MyISAM使用前缀压缩来减少索引大小，先完全保存索引块中的第一个值，然后将其他值和第一个值进行比较得到相同前缀的字节树和剩余的不同后缀部分。例如第一个值“perform”则第二个值“performance”，压缩后第二个值的实际存储值是“7，ance”。随机压缩可以让更多的索引放入内存，对于IO密集型操作，性能更高。由于大量的值依赖于前面的值，随机查找性能降低，CPU密集型应用性能降低。</p>
-<p>#索引优化#</p>
-<ol>
+<h1 id="压缩索引"><a href="#压缩索引" class="headerlink" title="# 压缩索引"></a># 压缩索引</h1><p>MyISAM使用前缀压缩来减少索引大小，先完全保存索引块中的第一个值，然后将其他值和第一个值进行比较得到相同前缀的字节树和剩余的不同后缀部分。例如第一个值“perform”则第二个值“performance”，压缩后第二个值的实际存储值是“7，ance”。随机压缩可以让更多的索引放入内存，对于IO密集型操作，性能更高。由于大量的值依赖于前面的值，随机查找性能降低，CPU密集型应用性能降低。</p>
+<h1 id="索引优化"><a href="#索引优化" class="headerlink" title="索引优化"></a>索引优化</h1><ol>
 <li>当多次出现对多个索引做相交操作（有多个AND条件），通常意味着需要一个包含所有相关列的多列索引，而不是多个独立的单列索引。</li>
 <li>设计索引顺序时要尽量避免随机IO，当不需要考虑排序和分组时，将选择性最高的列放在前面通常是很好的。</li>
 <li>索引本身有一定的开销，不是越多越好。例如性别只有两个值，在性别字段建索引对查询速度的提升不高，但是更新时会降低性能。</li>
@@ -417,7 +415,7 @@
 <li>使用前缀索引，例如一个CHAR（255）的列，如果前10或20个字段内多数值是唯一的，那么就不需要对整列进行索引。</li>
 <li>在列上进行运算（参与运算或者作为函数参数）将导致索引失效，应尽量避免。</li>
 </ol>
-<p> #参考资料#<br> 《高性能MySQL（第三版）》</p>
+<p> #参考资料<br> 《高性能MySQL（第三版）》</p>
 
       
     </div>
@@ -511,8 +509,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel sidebar-panel-active">
+      <section class="site-overview sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/images/avatar.png"
@@ -568,6 +575,22 @@
 
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#B-Tree索引"><span class="nav-number">1.</span> <span class="nav-text">B-Tree索引</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#哈希索引"><span class="nav-number">2.</span> <span class="nav-text">哈希索引</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#索引策略"><span class="nav-number">3.</span> <span class="nav-text">索引策略</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#独立的列"><span class="nav-number">4.</span> <span class="nav-text"># 独立的列</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#前缀索引与索引选择性"><span class="nav-number">5.</span> <span class="nav-text"># 前缀索引与索引选择性</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#多列索引"><span class="nav-number">6.</span> <span class="nav-text"># 多列索引</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#索引顺序"><span class="nav-number">7.</span> <span class="nav-text"># 索引顺序</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#聚簇索引"><span class="nav-number">8.</span> <span class="nav-text"># 聚簇索引</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#MyISAM-与InnoDB的数据分布"><span class="nav-number">9.</span> <span class="nav-text"># MyISAM 与InnoDB的数据分布</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#覆盖索引"><span class="nav-number">10.</span> <span class="nav-text"># 覆盖索引</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#压缩索引"><span class="nav-number">11.</span> <span class="nav-text"># 压缩索引</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#索引优化"><span class="nav-number">12.</span> <span class="nav-text">索引优化</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
     </div>

@@ -84,18 +84,18 @@
 
 
 
-<meta name="description" content="#背景#  在Java之前的编程语言（例如C，C++）直接使用操作系统的内存模型，不同平台的差异性会导致程序出现运行结果不一致或者移植性问题。为了屏蔽不同平台的底层差异，实现“一次编写，到处运行（WORA，Write once， run anywhere）”，Java定义了一个内存模型（JMM，Java Memory Model）。 在命令式编程中，有两种并发编程模型：共享内存和消息传递，Java">
+<meta name="description" content="背景 在Java之前的编程语言（例如C，C++）直接使用操作系统的内存模型，不同平台的差异性会导致程序出现运行结果不一致或者移植性问题。为了屏蔽不同平台的底层差异，实现“一次编写，到处运行（WORA，Write once， run anywhere）”，Java定义了一个内存模型（JMM，Java Memory Model）。 在命令式编程中，有两种并发编程模型：共享内存和消息传递，Java中采用">
 <meta name="keywords" content="Java,JVM,内存">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Java内存模型">
 <meta property="og:url" content="http://jeffzzf.github.io/2015/05/29/Java内存模型/index.html">
 <meta property="og:site_name" content="Noob">
-<meta property="og:description" content="#背景#  在Java之前的编程语言（例如C，C++）直接使用操作系统的内存模型，不同平台的差异性会导致程序出现运行结果不一致或者移植性问题。为了屏蔽不同平台的底层差异，实现“一次编写，到处运行（WORA，Write once， run anywhere）”，Java定义了一个内存模型（JMM，Java Memory Model）。 在命令式编程中，有两种并发编程模型：共享内存和消息传递，Java">
+<meta property="og:description" content="背景 在Java之前的编程语言（例如C，C++）直接使用操作系统的内存模型，不同平台的差异性会导致程序出现运行结果不一致或者移植性问题。为了屏蔽不同平台的底层差异，实现“一次编写，到处运行（WORA，Write once， run anywhere）”，Java定义了一个内存模型（JMM，Java Memory Model）。 在命令式编程中，有两种并发编程模型：共享内存和消息传递，Java中采用">
 <meta property="og:image" content="http://ifeve.com/wp-content/uploads/2013/01/552.png">
-<meta property="og:updated_time" content="2016-04-20T11:22:04.000Z">
+<meta property="og:updated_time" content="2017-05-03T12:51:05.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Java内存模型">
-<meta name="twitter:description" content="#背景#  在Java之前的编程语言（例如C，C++）直接使用操作系统的内存模型，不同平台的差异性会导致程序出现运行结果不一致或者移植性问题。为了屏蔽不同平台的底层差异，实现“一次编写，到处运行（WORA，Write once， run anywhere）”，Java定义了一个内存模型（JMM，Java Memory Model）。 在命令式编程中，有两种并发编程模型：共享内存和消息传递，Java">
+<meta name="twitter:description" content="背景 在Java之前的编程语言（例如C，C++）直接使用操作系统的内存模型，不同平台的差异性会导致程序出现运行结果不一致或者移植性问题。为了屏蔽不同平台的底层差异，实现“一次编写，到处运行（WORA，Write once， run anywhere）”，Java定义了一个内存模型（JMM，Java Memory Model）。 在命令式编程中，有两种并发编程模型：共享内存和消息传递，Java中采用">
 <meta name="twitter:image" content="http://ifeve.com/wp-content/uploads/2013/01/552.png">
 
 
@@ -361,12 +361,11 @@
       
 
       
-        <p>#背景#</p>
-<ol>
+        <h1 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h1><ol>
 <li>在Java之前的编程语言（例如C，C++）直接使用操作系统的内存模型，不同平台的差异性会导致程序出现运行结果不一致或者移植性问题。为了屏蔽不同平台的底层差异，实现“一次编写，到处运行（WORA，Write once， run anywhere）”，Java定义了一个内存模型（JMM，Java Memory Model）。</li>
 <li>在命令式编程中，有两种并发编程模型：共享内存和消息传递，Java中采用了共享内存的方式。Java内存模型将内存抽象成主内存和工作内存，内存模型规定了一个变量何时对一个变量可见，实例字段、静态字段这些线程间共享的变量存放在主内存中，被线程使用的共享变量副本、局部变量和方法参数存放在线程各自的本地工作内存中。对变量的修改都是在各线程内部的工作内存中进行的，各线程通过从主内存中读写共享变量实现线程间通信，Java内存模型通过控制主内存与各线程之间的交互提供变量可见性的保证。</li>
 </ol>
-<p>#重排序#<br>为了提高程序的并行度，编译器和处理器会对指令进行重排序，重排序主要分为如下三种：</p>
+<h1 id="重排序"><a href="#重排序" class="headerlink" title="重排序"></a>重排序</h1><p>为了提高程序的并行度，编译器和处理器会对指令进行重排序，重排序主要分为如下三种：</p>
 <ol>
 <li>编译器重排序：在不影响单线程语义的情况下重新安排语句的执行顺序</li>
 <li>指令级并行重排序（Instruction-Level Paralellism， ILP）：在指令不存在依赖的情况下，重新安排指令的执行顺序，以提高流水线效率。</li>
@@ -408,14 +407,13 @@
 </tbody>
 </table>
 <p>StoreLoad Barriers是一个“全能型”的屏障，它同时具有其他三个屏障的效果。现代的多处理器大都支持该屏障（其他类型的屏障不一定被所有处理器支持）。执行该屏障开销会很昂贵，因为当前处理器通常要把写缓冲区中的数据全部刷新到内存中（buffer fully flush）。</p>
-<p>#顺序一致性#<br>JMM对正确同步的多线程内存一致性做出以下保证：如果程序是正确同步的，程序的执行结果与在顺序一致性内存模型中执行的结果一致。<br>顺序一致性模型是一个理论的内存模型，在顺序一致性模型中程序执行的顺序与程序语义一致，该内存模型可以提供以下保证：</p>
+<h1 id="顺序一致性"><a href="#顺序一致性" class="headerlink" title="顺序一致性"></a>顺序一致性</h1><p>JMM对正确同步的多线程内存一致性做出以下保证：如果程序是正确同步的，程序的执行结果与在顺序一致性内存模型中执行的结果一致。<br>顺序一致性模型是一个理论的内存模型，在顺序一致性模型中程序执行的顺序与程序语义一致，该内存模型可以提供以下保证：</p>
 <ol>
 <li>一个线程内的所有操作按照程序顺序执行</li>
 <li>每个操作都是原子的，并且立即对所有线程可见</li>
 </ol>
 <p>顺序一致性模型是一个很强的内存模型，不利于在多线程环境下进行优化。<strong>Java内存模型定义了程序中各个变量的访问规则，这些规则可以用Happens-before order描述。Java内存模型的实现由JVM运行时数据结构提供支持，底层由一系列重排序规则实现</strong>。</p>
-<p>#Happens-Befors#</p>
-<ul>
+<h1 id="Happens-Befors"><a href="#Happens-Befors" class="headerlink" title="Happens-Befors"></a>Happens-Befors</h1><ul>
 <li>程序顺序规则（Program Order Rule）：同一个线程内部，按照代码的语义顺序执行。</li>
 <li>对象终结规则（Finalizer Rule）：对象的构造先于finalizer()方法的开始。</li>
 <li>管程锁定规则（Monitor Lock Rule）：同一个对象的解锁先于上锁（也就是如果在一个对象上加锁，下一次获取这个对象的锁必须在该对象上的锁释放之后）。</li>
@@ -426,25 +424,24 @@
 <li>传递性规则（Transitivity Rule）：如果A先行发生于B，B先行发生于C，那么A先行发生于C。</li>
 </ul>
 <p>注意，两个操作之间具有happens-before关系，并不意味着前一个操作必须要在后一个操作之前执行！happens-before仅仅要求前一个操作（执行的结果）对后一个操作可见，且前一个操作按顺序排在第二个操作之前（the first is visible to and ordered before the second）。<br><img src="http://ifeve.com/wp-content/uploads/2013/01/552.png" alt="happens-befor规则与重排序的关系"><br>如上图所示，一个happens-before规则通常对应于多个编译器和处理器重排序规则。对于java程序员来说，happens-before规则简单易懂，它避免java程序员为了理解JMM提供的内存可见性保证而去学习复杂的重排序规则以及这些规则的具体实现。</p>
-<p>#volatile#<br>被volatile变量修饰的变量具有如下特性：</p>
+<h1 id="volatile"><a href="#volatile" class="headerlink" title="volatile"></a>volatile</h1><p>被volatile变量修饰的变量具有如下特性：</p>
 <ul>
 <li>线程读一个volatile变量时，线程先把本地内存中的变量置为无效，从主内存中读取最新值。</li>
 <li>线程对一个volatile变量执行写操作之后会把本地内存中的值刷新到主内存中。</li>
 <li>可见性：当一个线程执行完volatile变量的写操作后，对其他所有线程可见</li>
 <li>原子性：可以防止64位的long/double出现字撕裂；对于不依赖于自身的多线程读写操作具有原子性，类似++i这种依赖自身值得不具有原子性</li>
 </ul>
-<p>#Final#</p>
-<ol>
+<h1 id="Final"><a href="#Final" class="headerlink" title="Final"></a>Final</h1><ol>
 <li>在构造函数内对一个final域的写入，与随后把这个被构造对象的引用赋值给一个引用变量，这两个操作之间不能重排序。</li>
 <li>初次读一个包含final域的对象的引用，与随后初次读这个final域，这两个操作之间不能重排序。</li>
 </ol>
-<p>#锁#<br>锁是java并发编程中最重要的同步机制，后面的文章会对Java中的各种锁做更加具体的分析。锁除了让临界区互斥执行外，还可以让释放锁的线程向获取同一个锁的线程发送消息。锁的内存语义如下：</p>
+<h1 id="锁"><a href="#锁" class="headerlink" title="锁"></a>锁</h1><p>锁是java并发编程中最重要的同步机制，后面的文章会对Java中的各种锁做更加具体的分析。锁除了让临界区互斥执行外，还可以让释放锁的线程向获取同一个锁的线程发送消息。锁的内存语义如下：</p>
 <ul>
 <li>线程A释放一个锁，实质上是线程A向接下来将要获取这个锁的某个线程发出了（线程A对共享变量所做修改的）消息。</li>
 <li>线程B获取一个锁，实质上是线程B接收了之前某个线程发出的（在释放这个锁之前对共享变量所做修改的）消息。</li>
 <li>程A释放锁，随后线程B获取这个锁，这个过程实质上是线程A通过主内存向线程B发送消息。</li>
 </ul>
-<p>#参考文献#<br><a href="http://ifeve.com/java-memory-model-1/" target="_blank" rel="external">http://ifeve.com/java-memory-model-1/</a><br><a href="http://ifeve.com/java-memory-model/" target="_blank" rel="external">http://ifeve.com/java-memory-model/</a><br>周志明：《JVM高级特性与最佳实践》（第二版）</p>
+<h1 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h1><p><a href="http://ifeve.com/java-memory-model-1/" target="_blank" rel="external">http://ifeve.com/java-memory-model-1/</a><br><a href="http://ifeve.com/java-memory-model/" target="_blank" rel="external">http://ifeve.com/java-memory-model/</a><br>周志明：《JVM高级特性与最佳实践》（第二版）</p>
 
       
     </div>
@@ -540,8 +537,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel sidebar-panel-active">
+      <section class="site-overview sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/images/avatar.png"
@@ -597,6 +603,22 @@
 
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#背景"><span class="nav-number">1.</span> <span class="nav-text">背景</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#重排序"><span class="nav-number">2.</span> <span class="nav-text">重排序</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#顺序一致性"><span class="nav-number">3.</span> <span class="nav-text">顺序一致性</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Happens-Befors"><span class="nav-number">4.</span> <span class="nav-text">Happens-Befors</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#volatile"><span class="nav-number">5.</span> <span class="nav-text">volatile</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Final"><span class="nav-number">6.</span> <span class="nav-text">Final</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#锁"><span class="nav-number">7.</span> <span class="nav-text">锁</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考文献"><span class="nav-number">8.</span> <span class="nav-text">参考文献</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
     </div>

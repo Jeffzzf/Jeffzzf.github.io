@@ -84,17 +84,17 @@
 
 
 
-<meta name="description" content="#运行时类型信息（RTTI）的作用#通过运行时类型信息可以在程序运行时使用类型信息，这一特性使程序员从只能在编译期执行面向类型的操作中解脱出来，从而可以构建更加强大的程序。 #Class对象#类的运行时类型信息由Class对象表示的，每个类都有一个Class对象，每当编写并编译一个新类，就会产生一个Class对象。  Instances of the class Class represent c">
+<meta name="description" content="运行时类型信息（RTTI）的作用通过运行时类型信息可以在程序运行时使用类型信息，这一特性使程序员从只能在编译期执行面向类型的操作中解脱出来，从而可以构建更加强大的程序。 Class对象类的运行时类型信息由Class对象表示的，每个类都有一个Class对象，每当编写并编译一个新类，就会产生一个Class对象。  Instances of the class Class represent class">
 <meta name="keywords" content="RTTI,反射">
 <meta property="og:type" content="article">
 <meta property="og:title" content="RTTI、反射">
 <meta property="og:url" content="http://jeffzzf.github.io/2015/08/25/RTTI、反射/index.html">
 <meta property="og:site_name" content="Noob">
-<meta property="og:description" content="#运行时类型信息（RTTI）的作用#通过运行时类型信息可以在程序运行时使用类型信息，这一特性使程序员从只能在编译期执行面向类型的操作中解脱出来，从而可以构建更加强大的程序。 #Class对象#类的运行时类型信息由Class对象表示的，每个类都有一个Class对象，每当编写并编译一个新类，就会产生一个Class对象。  Instances of the class Class represent c">
-<meta property="og:updated_time" content="2016-04-20T11:22:04.000Z">
+<meta property="og:description" content="运行时类型信息（RTTI）的作用通过运行时类型信息可以在程序运行时使用类型信息，这一特性使程序员从只能在编译期执行面向类型的操作中解脱出来，从而可以构建更加强大的程序。 Class对象类的运行时类型信息由Class对象表示的，每个类都有一个Class对象，每当编写并编译一个新类，就会产生一个Class对象。  Instances of the class Class represent class">
+<meta property="og:updated_time" content="2017-05-03T12:51:01.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="RTTI、反射">
-<meta name="twitter:description" content="#运行时类型信息（RTTI）的作用#通过运行时类型信息可以在程序运行时使用类型信息，这一特性使程序员从只能在编译期执行面向类型的操作中解脱出来，从而可以构建更加强大的程序。 #Class对象#类的运行时类型信息由Class对象表示的，每个类都有一个Class对象，每当编写并编译一个新类，就会产生一个Class对象。  Instances of the class Class represent c">
+<meta name="twitter:description" content="运行时类型信息（RTTI）的作用通过运行时类型信息可以在程序运行时使用类型信息，这一特性使程序员从只能在编译期执行面向类型的操作中解脱出来，从而可以构建更加强大的程序。 Class对象类的运行时类型信息由Class对象表示的，每个类都有一个Class对象，每当编写并编译一个新类，就会产生一个Class对象。  Instances of the class Class represent class">
 
 
 
@@ -359,16 +359,15 @@
       
 
       
-        <p>#运行时类型信息（RTTI）的作用#<br>通过运行时类型信息可以在程序运行时使用类型信息，这一特性使程序员从只能在编译期执行面向类型的操作中解脱出来，从而可以构建更加强大的程序。</p>
-<p>#Class对象#<br>类的运行时类型信息由Class对象表示的，每个类都有一个Class对象，每当编写并编译一个新类，就会产生一个Class对象。</p>
+        <h1 id="运行时类型信息（RTTI）的作用"><a href="#运行时类型信息（RTTI）的作用" class="headerlink" title="运行时类型信息（RTTI）的作用"></a>运行时类型信息（RTTI）的作用</h1><p>通过运行时类型信息可以在程序运行时使用类型信息，这一特性使程序员从只能在编译期执行面向类型的操作中解脱出来，从而可以构建更加强大的程序。</p>
+<h1 id="Class对象"><a href="#Class对象" class="headerlink" title="Class对象"></a>Class对象</h1><p>类的运行时类型信息由Class对象表示的，每个类都有一个Class对象，每当编写并编译一个新类，就会产生一个Class对象。</p>
 <blockquote>
 <p>Instances of the class Class represent classes and interfaces in a running Java application. An enum is a kind of class and an annotation is a kind of interface. Every array also belongs to a class that is reflected as a Class object that is shared by all arrays with the same element type and number of dimensions. The primitive Java types (boolean, byte, char, short, int, long, float, and double), and the keyword void are also represented as Class objects.</p>
 </blockquote>
 <p>Class类没有构造器，当某个类被加载时，这个类的Class对象由虚拟机自动创建。</p>
-<p>#反射#<br>Class类与java.lang.reflect类一起实现了Java的反射，reflect类库包含了Field、Method以及Constructor类（都实现了Member接口）、这些类型的对象是由JVM在运行时创建的，用以表示未知类对应的成员。可以通过Constructor创建新的对象，用get()和set()方法读取和修改与Field对象关联的字段，用invoke()方法调用与Method对象关联的字段，还可以调用getField()、getMethod()和getConstructor()返回字段、方法以及构造器的数组。这样匿名对象的类信息就能在运行时被确定下来，在编译期不需要知道任何信息。</p>
+<h1 id="反射"><a href="#反射" class="headerlink" title="反射"></a>反射</h1><p>Class类与java.lang.reflect类一起实现了Java的反射，reflect类库包含了Field、Method以及Constructor类（都实现了Member接口）、这些类型的对象是由JVM在运行时创建的，用以表示未知类对应的成员。可以通过Constructor创建新的对象，用get()和set()方法读取和修改与Field对象关联的字段，用invoke()方法调用与Method对象关联的字段，还可以调用getField()、getMethod()和getConstructor()返回字段、方法以及构造器的数组。这样匿名对象的类信息就能在运行时被确定下来，在编译期不需要知道任何信息。</p>
 <p>当通过反射与一个未知类型的对象打交道时，JVM只是简单地检查这个对象，看它属于哪个特定的类（与RTTI一样）。RTTI与反射之间的区别只在于：对RTTI来说，编译器在编译时打开和检查.class文件，可以用普通方式调用对象的所有方法；而对于反射机制来说，.Class文件在编译时是不可获取的，只能在运行时打开和检查.class 文件。</p>
-<p>#参考资料#</p>
-<ol>
+<h1 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h1><ol>
 <li>《Java编程思想（第五版）》</li>
 <li><a href="http://docs.oracle.com/javase/7/docs/api/index.html?java/lang/Class.html" target="_blank" rel="external">Java Doc</a></li>
 </ol>
@@ -465,8 +464,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel sidebar-panel-active">
+      <section class="site-overview sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/images/avatar.png"
@@ -522,6 +530,22 @@
 
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#运行时类型信息（RTTI）的作用"><span class="nav-number">1.</span> <span class="nav-text">运行时类型信息（RTTI）的作用</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Class对象"><span class="nav-number">2.</span> <span class="nav-text">Class对象</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#反射"><span class="nav-number">3.</span> <span class="nav-text">反射</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考资料"><span class="nav-number">4.</span> <span class="nav-text">参考资料</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
     </div>

@@ -84,17 +84,17 @@
 
 
 
-<meta name="description" content="每个进程各自有不同的用户地址空间，任何一个进程的全局变量在另一个进程中都是看不到的，所以进程间要交换数据必须通过内核，在内核中开辟一个缓冲区，进程1把数据从用户空间拷到内核缓冲区，进程2再从内核缓冲区把数据读走，内核提供的这种机制称为进程间通信（IPC， InterProcess Communication）。 #管道#管道是一种最基本的IPC机制，由pipe函数创建, pipe函数在内核中开辟一">
+<meta name="description" content="每个进程各自有不同的用户地址空间，任何一个进程的全局变量在另一个进程中都是看不到的，所以进程间要交换数据必须通过内核，在内核中开辟一个缓冲区，进程1把数据从用户空间拷到内核缓冲区，进程2再从内核缓冲区把数据读走，内核提供的这种机制称为进程间通信（IPC， InterProcess Communication）。 管道管道是一种最基本的IPC机制，由pipe函数创建, pipe函数在内核中开辟一块缓">
 <meta name="keywords" content="Linux,IPC">
 <meta property="og:type" content="article">
 <meta property="og:title" content="进程间通信">
 <meta property="og:url" content="http://jeffzzf.github.io/2015/08/30/进程间通信/index.html">
 <meta property="og:site_name" content="Noob">
-<meta property="og:description" content="每个进程各自有不同的用户地址空间，任何一个进程的全局变量在另一个进程中都是看不到的，所以进程间要交换数据必须通过内核，在内核中开辟一个缓冲区，进程1把数据从用户空间拷到内核缓冲区，进程2再从内核缓冲区把数据读走，内核提供的这种机制称为进程间通信（IPC， InterProcess Communication）。 #管道#管道是一种最基本的IPC机制，由pipe函数创建, pipe函数在内核中开辟一">
-<meta property="og:updated_time" content="2016-04-20T11:22:04.000Z">
+<meta property="og:description" content="每个进程各自有不同的用户地址空间，任何一个进程的全局变量在另一个进程中都是看不到的，所以进程间要交换数据必须通过内核，在内核中开辟一个缓冲区，进程1把数据从用户空间拷到内核缓冲区，进程2再从内核缓冲区把数据读走，内核提供的这种机制称为进程间通信（IPC， InterProcess Communication）。 管道管道是一种最基本的IPC机制，由pipe函数创建, pipe函数在内核中开辟一块缓">
+<meta property="og:updated_time" content="2017-05-03T12:51:31.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="进程间通信">
-<meta name="twitter:description" content="每个进程各自有不同的用户地址空间，任何一个进程的全局变量在另一个进程中都是看不到的，所以进程间要交换数据必须通过内核，在内核中开辟一个缓冲区，进程1把数据从用户空间拷到内核缓冲区，进程2再从内核缓冲区把数据读走，内核提供的这种机制称为进程间通信（IPC， InterProcess Communication）。 #管道#管道是一种最基本的IPC机制，由pipe函数创建, pipe函数在内核中开辟一">
+<meta name="twitter:description" content="每个进程各自有不同的用户地址空间，任何一个进程的全局变量在另一个进程中都是看不到的，所以进程间要交换数据必须通过内核，在内核中开辟一个缓冲区，进程1把数据从用户空间拷到内核缓冲区，进程2再从内核缓冲区把数据读走，内核提供的这种机制称为进程间通信（IPC， InterProcess Communication）。 管道管道是一种最基本的IPC机制，由pipe函数创建, pipe函数在内核中开辟一块缓">
 
 
 
@@ -360,9 +360,9 @@
 
       
         <p>每个进程各自有不同的用户地址空间，任何一个进程的全局变量在另一个进程中都是看不到的，所以进程间要交换数据必须通过内核，在内核中开辟一个缓冲区，进程1把数据从用户空间拷到内核缓冲区，进程2再从内核缓冲区把数据读走，内核提供的这种机制称为进程间通信（IPC， InterProcess Communication）。</p>
-<p>#管道#<br>管道是一种最基本的IPC机制，由pipe函数创建, pipe函数在内核中开辟一块缓冲区（称为管道）用于通信，它有一个读端和一个写端。<br><figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;unistd.h&gt;</span></span></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">pipe</span><span class="params">(<span class="keyword">int</span> fd[<span class="number">2</span>])</span></span>;</div></pre></td></tr></table></figure></p>
+<h1 id="管道"><a href="#管道" class="headerlink" title="管道"></a>管道</h1><p>管道是一种最基本的IPC机制，由pipe函数创建, pipe函数在内核中开辟一块缓冲区（称为管道）用于通信，它有一个读端和一个写端。<br><figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="meta"># <span class="meta-keyword">include</span><span class="meta-string">&lt;unistd.h&gt;</span></span></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">pipe</span><span class="params">(<span class="keyword">int</span> fd[<span class="number">2</span>])</span></span>;</div></pre></td></tr></table></figure></p>
 <p>fd[0]指向管道的读端，fd[1]指向管道的写端。管道在用户程序看来就像一个打开的文件，通过read(fd[0])或者write(fd[1])向这个文件读写数据其实是在读写内核缓冲区。pipe函数调用成功返回0，调用失败返回-1.</p>
-<p>#FIFO#<br>FIFO有时候被称为命名管道，未命名的pipe只能在两个相关的进程间通信，FIFO可以用在不相关的进程间通信。FIFO有如下两种用途：</p>
+<h1 id="FIFO"><a href="#FIFO" class="headerlink" title="FIFO"></a>FIFO</h1><p>FIFO有时候被称为命名管道，未命名的pipe只能在两个相关的进程间通信，FIFO可以用在不相关的进程间通信。FIFO有如下两种用途：</p>
 <ol>
 <li>Shell命令使用FIFO将数据从一条管道传递到另一条时，无需创建中间临时文件</li>
 <li>客户端-服务器进程应用中，FIFO用作汇聚点，在客户进程和服务器进程之间传递数据</li>
@@ -379,7 +379,7 @@
 <li>SYS V IPC，包括消息队列、信号量和共享内存，现在已经基本废弃</li>
 <li>UNIX Domain Socket，目前最广泛使用的IPC机制</li>
 </ul>
-<p>#参考资料#<br>《Linux C编程一站式学习》<br>《Unix环境高级编程》</p>
+<h1 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h1><p>《Linux C编程一站式学习》<br>《Unix环境高级编程》</p>
 
       
     </div>
@@ -473,8 +473,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel sidebar-panel-active">
+      <section class="site-overview sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/images/avatar.png"
@@ -530,6 +539,22 @@
 
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#管道"><span class="nav-number">1.</span> <span class="nav-text">管道</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#FIFO"><span class="nav-number">2.</span> <span class="nav-text">FIFO</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考资料"><span class="nav-number">3.</span> <span class="nav-text">参考资料</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
     </div>

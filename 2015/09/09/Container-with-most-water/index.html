@@ -84,17 +84,17 @@
 
 
 
-<meta name="description" content="#Container With Most Water#Given n non-negative integers a1, a2, …, an, where each represents a point at coordinate (i, ai). n vertical lines are drawn such that the two endpoints of line i is at (i,">
+<meta name="description" content="Container With Most WaterGiven n non-negative integers a1, a2, …, an, where each represents a point at coordinate (i, ai). n vertical lines are drawn such that the two endpoints of line i is at (i, ai">
 <meta name="keywords" content="Two Pointers">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Container with most water">
 <meta property="og:url" content="http://jeffzzf.github.io/2015/09/09/Container-with-most-water/index.html">
 <meta property="og:site_name" content="Noob">
-<meta property="og:description" content="#Container With Most Water#Given n non-negative integers a1, a2, …, an, where each represents a point at coordinate (i, ai). n vertical lines are drawn such that the two endpoints of line i is at (i,">
-<meta property="og:updated_time" content="2016-04-20T11:22:04.000Z">
+<meta property="og:description" content="Container With Most WaterGiven n non-negative integers a1, a2, …, an, where each represents a point at coordinate (i, ai). n vertical lines are drawn such that the two endpoints of line i is at (i, ai">
+<meta property="og:updated_time" content="2017-05-03T12:51:33.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Container with most water">
-<meta name="twitter:description" content="#Container With Most Water#Given n non-negative integers a1, a2, …, an, where each represents a point at coordinate (i, ai). n vertical lines are drawn such that the two endpoints of line i is at (i,">
+<meta name="twitter:description" content="Container With Most WaterGiven n non-negative integers a1, a2, …, an, where each represents a point at coordinate (i, ai). n vertical lines are drawn such that the two endpoints of line i is at (i, ai">
 
 
 
@@ -359,7 +359,7 @@
       
 
       
-        <p>#Container With Most Water#<br>Given n non-negative integers a1, a2, …, an, where each represents a point at coordinate (i, ai). n vertical lines are drawn such that the two endpoints of line i is at (i, ai) and (i, 0). Find two lines, which together with x-axis forms a container, such that the container contains the most water.</p>
+        <h1 id="Container-With-Most-Water"><a href="#Container-With-Most-Water" class="headerlink" title="Container With Most Water"></a>Container With Most Water</h1><p>Given n non-negative integers a1, a2, …, an, where each represents a point at coordinate (i, ai). n vertical lines are drawn such that the two endpoints of line i is at (i, ai) and (i, 0). Find two lines, which together with x-axis forms a container, such that the container contains the most water.</p>
 <p>Note: You may not slant the container.<br><a href="https://leetcode.com/problems/container-with-most-water/" target="_blank" rel="external">https://leetcode.com/problems/container-with-most-water/</a></p>
 <p>使用首尾两个指针，每次收缩高度较小的那个。因为如果收缩高度大的那端，无论收缩后高度变高还是变低，收缩后面积一定变小（因为收缩后宽度减1，高度不会大于高度小的那端）。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">maxArea</span><span class="params">(<span class="keyword">int</span>[] height)</span> </span>&#123;</div><div class="line">    <span class="keyword">if</span>(height == <span class="keyword">null</span> || height.length &lt;= <span class="number">1</span>) <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">    <span class="keyword">int</span> left = <span class="number">0</span>, right = height.length - <span class="number">1</span>, max = <span class="number">0</span>;</div><div class="line">    <span class="keyword">while</span>(left &lt; right) &#123;</div><div class="line">        max = Math.max(max, (right - left) * Math.min(height[left], height[right]));</div><div class="line">        <span class="keyword">if</span>(height[left] &lt; height[right])</div><div class="line">            ++left;</div><div class="line">        <span class="keyword">else</span></div><div class="line">            --right;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> max;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
 
@@ -453,8 +453,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel sidebar-panel-active">
+      <section class="site-overview sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/images/avatar.png"
@@ -510,6 +519,22 @@
 
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Container-With-Most-Water"><span class="nav-number">1.</span> <span class="nav-text">Container With Most Water</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
     </div>

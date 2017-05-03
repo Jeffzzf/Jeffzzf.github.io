@@ -363,7 +363,7 @@
 
       
         
-          <p>#Java Immutable#<br>Java中Immutable对象表示这个对象一旦创建就不能被更改，常用的String、Integer等都是Immutable的，Immutable对象创建后存放在JVM方法区的常量池里，需要用到时只需要一个引用指向它即可，因此Immutable对象具有<strong>效率高</strong>的优点；同时，Immutable对象可以<strong>在多线程环境中保持一致的状态</strong>，这一特性可以大大减小并发编程的复杂度。其它线程需要修改这一对象时，只能copy它的副本，新建对象的性能消耗可以被同步机制的简化抵消（与mutable对象上加锁、解锁相比）。</p>
+          <h1 id="Java-Immutable"><a href="#Java-Immutable" class="headerlink" title="Java Immutable"></a>Java Immutable</h1><p>Java中Immutable对象表示这个对象一旦创建就不能被更改，常用的String、Integer等都是Immutable的，Immutable对象创建后存放在JVM方法区的常量池里，需要用到时只需要一个引用指向它即可，因此Immutable对象具有<strong>效率高</strong>的优点；同时，Immutable对象可以<strong>在多线程环境中保持一致的状态</strong>，这一特性可以大大减小并发编程的复杂度。其它线程需要修改这一对象时，只能copy它的副本，新建对象的性能消耗可以被同步机制的简化抵消（与mutable对象上加锁、解锁相比）。</p>
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/2015/06/06/Java中的Immutable/#more" rel="contents">
@@ -519,8 +519,7 @@
 
       
         
-          <p>#All Permutations(Recursive)#</p>
-<blockquote>
+          <h1 id="All-Permutations-Recursive"><a href="#All-Permutations-Recursive" class="headerlink" title="All Permutations(Recursive)"></a>All Permutations(Recursive)</h1><blockquote>
 <p>该算法采用DFS递归的方法，每次从当前元素出发，依次与它后面的元素交换，到序列结尾时表示完成一次全排列，输出结果。注意，每次递归返回后再把元素交换回来，否则会出现重复序列。该算法时间复杂度为O(n!)，序列不是递增的。例如对“123”全排列的结果为：123 132 213 231 321 312。</p>
 </blockquote>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">swap</span><span class="params">(StringBuilder sb, <span class="keyword">int</span> i, <span class="keyword">int</span> j)</span> </span>&#123;</div><div class="line">        <span class="keyword">char</span> c = sb.charAt(i);</div><div class="line">        sb.setCharAt(i, sb.charAt(j));</div><div class="line">        sb.setCharAt(j, c);</div><div class="line">&#125;</div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">nextPermutation</span><span class="params">(StringBuilder sb, <span class="keyword">int</span> start)</span> </span>&#123;</div><div class="line">    <span class="keyword">if</span>(start == sb.length())</div><div class="line">        println(sb);</div><div class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = start; i &lt; sb.length(); ++i) &#123;</div><div class="line">        swap(sb, start, i);</div><div class="line">        nextPermutation(sb, start + <span class="number">1</span>);</div><div class="line">        swap(sb, start, i);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
@@ -680,9 +679,9 @@
       
         
           
-          #Linux系统结构#Linux系统结构如图所示，位于最内层的kernel管理计算机的硬件资源，提供硬件访问、内存管理、进程调度、文件管理、用户管理和网络等系统服务。为了保护系统，进程不能直接访问内核的内存空间和内核函数，当进程需要内核提供的服务时，通过内核与外界的接口（也就是系统调用）来实现。
+          Linux系统结构Linux系统结构如图所示，位于最内层的kernel管理计算机的硬件资源，提供硬件访问、内存管理、进程调度、文件管理、用户管理和网络等系统服务。为了保护系统，进程不能直接访问内核的内存空间和内核函数，当进程需要内核提供的服务时，通过内核与外界的接口（也就是系统调用）来实现。
 
-
+用户
           ...
           <!--noindex-->
           <div class="post-button text-center">
@@ -839,14 +838,13 @@
 
       
         
-          <p>#自动内存管理的优缺点#</p>
-<p>##优点##<br>在C/C++等语言中，内存管理是程序员的责任，程序员需要在内存的分配和释放上花费大量的时间，手动内存管理过程中容易出现以下问题：</p>
+          <h1 id="自动内存管理的优缺点"><a href="#自动内存管理的优缺点" class="headerlink" title="自动内存管理的优缺点"></a>自动内存管理的优缺点</h1><h1 id="优点"><a href="#优点" class="headerlink" title="# 优点"></a># 优点</h1><p>在C/C++等语言中，内存管理是程序员的责任，程序员需要在内存的分配和释放上花费大量的时间，手动内存管理过程中容易出现以下问题：</p>
 <ol>
 <li>悬垂指针问题（Dangling references，tries to access the original object, but the space has been reallocated to a new object, the result is unpredictable and not what was intended）</li>
 <li>内存泄露问题（Memory/Space Leaks， memory is allocated and no longer referenced but not released)<br>包括Java在内的现代面向对象语言中都提供了自动内存管理机制，垃圾回收器保证正在使用的对象不会被回收从而解决悬垂指针问题；通过自动释放不再使用对象占用的内存空间来解决内存泄露问题。内存管理机制有助于程序员将精力集中在业务实现上并且可以写出更加可靠的代码。</li>
 </ol>
-<p>##缺点##<br>自动内存管理机制的缺点在于，垃圾回收器本身需要CPU时间和其它资源，从一定程度上降低了性能。</p>
-<p>#垃圾回收器的职责#<br>在JVM运行时数据区中，线程私有的虚拟机栈，本地方法栈和程序计数器随着线程的启动而创建，线程结束后资源就被回收了，所以一般不需要对线程私有的数据进行垃圾回收。JVM主要对各线程共享的方法区和堆进行垃圾回收，方法区（也叫永久代）中的垃圾主要包括废弃的常量和无用的类，由于永久代垃圾回收的效率较低，一般在大量使用反射、动态代理、CGLib等ByteCode框架、动态生成JSP以及OSGI这类频繁自定义ClassLoader是场景下使用，垃圾回收器的工作主要包括：</p>
+<h1 id="缺点"><a href="#缺点" class="headerlink" title="# 缺点"></a># 缺点</h1><p>自动内存管理机制的缺点在于，垃圾回收器本身需要CPU时间和其它资源，从一定程度上降低了性能。</p>
+<h1 id="垃圾回收器的职责"><a href="#垃圾回收器的职责" class="headerlink" title="垃圾回收器的职责"></a>垃圾回收器的职责</h1><p>在JVM运行时数据区中，线程私有的虚拟机栈，本地方法栈和程序计数器随着线程的启动而创建，线程结束后资源就被回收了，所以一般不需要对线程私有的数据进行垃圾回收。JVM主要对各线程共享的方法区和堆进行垃圾回收，方法区（也叫永久代）中的垃圾主要包括废弃的常量和无用的类，由于永久代垃圾回收的效率较低，一般在大量使用反射、动态代理、CGLib等ByteCode框架、动态生成JSP以及OSGI这类频繁自定义ClassLoader是场景下使用，垃圾回收器的工作主要包括：</p>
 <ol>
 <li>分配内存</li>
 <li>保证所有被引用的对象保存在内存中</li>
@@ -1010,8 +1008,8 @@
           
           
 JVM运行时数据区如上图所示：其中方法区和堆由所有线程共享；虚拟机栈，本地方法栈和程序计数器是线程似有的。
-##堆##堆（heap）和方法区(Method Area)被JVM内的所有线程共享，堆中存放的是类的对象和数组。
-##方法区##方法区(Method Area)用于储存被虚拟机加载的类信息，
+# 堆堆（heap）和方法区(Method Area)被JVM内的所有线程共享，堆中存放的是类的对象和数组。
+# 方法区方法区(Method Area)用于储存被虚拟机加载的类信息，常量，即
           ...
           <!--noindex-->
           <div class="post-button text-center">
@@ -1168,12 +1166,11 @@ JVM运行时数据区如上图所示：其中方法区和堆由所有线程共�
 
       
         
-          <p>#背景#</p>
-<ol>
+          <h1 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h1><ol>
 <li>在Java之前的编程语言（例如C，C++）直接使用操作系统的内存模型，不同平台的差异性会导致程序出现运行结果不一致或者移植性问题。为了屏蔽不同平台的底层差异，实现“一次编写，到处运行（WORA，Write once， run anywhere）”，Java定义了一个内存模型（JMM，Java Memory Model）。</li>
 <li>在命令式编程中，有两种并发编程模型：共享内存和消息传递，Java中采用了共享内存的方式。Java内存模型将内存抽象成主内存和工作内存，内存模型规定了一个变量何时对一个变量可见，实例字段、静态字段这些线程间共享的变量存放在主内存中，被线程使用的共享变量副本、局部变量和方法参数存放在线程各自的本地工作内存中。对变量的修改都是在各线程内部的工作内存中进行的，各线程通过从主内存中读写共享变量实现线程间通信，Java内存模型通过控制主内存与各线程之间的交互提供变量可见性的保证。</li>
 </ol>
-<p>#重排序#<br>为了提高程序的并行度，编译器和处理器会对指令进行重排序，重排序主要分为如下三种：</p>
+<h1 id="重排序"><a href="#重排序" class="headerlink" title="重排序"></a>重排序</h1><p>为了提高程序的并行度，编译器和处理器会对指令进行重排序，重排序主要分为如下三种：</p>
 <ol>
 <li>编译器重排序：在不影响单线程语义的情况下重新安排语句的执行顺序</li>
 <li>指令级并行重排序（Instruction-Level Paralellism， ILP）：在指令不存在依赖的情况下，重新安排指令的执行顺序，以提高流水线效率。</li>
@@ -1339,8 +1336,8 @@ JVM运行时数据区如上图所示：其中方法区和堆由所有线程共�
           <blockquote>
 <p>本文中ConcurrentHashMap源码分析基于jdk1.7，与jdk1.8中ConcurrentHashMap的实现有很大差别，在学完《Java并发编程实战》和《Linux程序设计》之后如果有时间再具体研究jdk1.8中新的锁和并发机制。（<a href="http://ifeve.com/jdk1-8-abstractqueuedsynchronizer/）">http://ifeve.com/jdk1-8-abstractqueuedsynchronizer/）</a></p>
 </blockquote>
-<p>#背景知识#<br>与ConcurrentHashMap类似的Java Conllections还有Hashtable和HashMap，HashMap不是一个线程安全的类，key和value的值都可以是null，ConcurrentHashMap和HashMap都是线程安全的类，但是key和value的值都不能是null。Hashtable保证线程安全的做法是每个可调用的方法都是synchronized的。这意味着每个线程访问Hashtable时都会把整个Hashtable锁起来。ConcurrentHashMap则采用了分段锁（Segment）的机制，使得竞态条件只发生在Segment内，增加了并发度；同时，在HashMap.Entry的基础上进行改进，ConcurrentHashMap.Entry的value和next域都是volatile的，可以保证在多线程环境下对于其他线程的可见性。由于ConcurrentHashMap不是对整个表加锁，在执行size()这些全局性质的方法时需要遍历整个Segment数组。</p>
-<p>#HashEntry<K, V>类<br>HashEntry 用来封装散列映射表中的键值对<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">static</span> <span class="keyword">final</span> <span class="class"><span class="keyword">class</span> <span class="title">HashEntry</span>&lt;<span class="title">K</span>, <span class="title">V</span>&gt; </span>&#123;</div><div class="line">        <span class="keyword">final</span> <span class="keyword">int</span> hash;</div><div class="line">        <span class="keyword">final</span> K key;</div><div class="line">        <span class="keyword">volatile</span> V value;</div><div class="line">        <span class="keyword">volatile</span> ConcurrentHashMap.HashEntry&lt;K, V&gt; next;</div><div class="line">    &#125;</div></pre></td></tr></table></figure></p>
+<h1 id="背景知识"><a href="#背景知识" class="headerlink" title="背景知识"></a>背景知识</h1><p>与ConcurrentHashMap类似的Java Conllections还有Hashtable和HashMap，HashMap不是一个线程安全的类，key和value的值都可以是null，ConcurrentHashMap和HashMap都是线程安全的类，但是key和value的值都不能是null。Hashtable保证线程安全的做法是每个可调用的方法都是synchronized的。这意味着每个线程访问Hashtable时都会把整个Hashtable锁起来。ConcurrentHashMap则采用了分段锁（Segment）的机制，使得竞态条件只发生在Segment内，增加了并发度；同时，在HashMap.Entry的基础上进行改进，ConcurrentHashMap.Entry的value和next域都是volatile的，可以保证在多线程环境下对于其他线程的可见性。由于ConcurrentHashMap不是对整个表加锁，在执行size()这些全局性质的方法时需要遍历整个Segment数组。</p>
+<h1 id="HashEntry类"><a href="#HashEntry类" class="headerlink" title="HashEntry类"></a>HashEntry<K, V>类</h1><p>HashEntry 用来封装散列映射表中的键值对<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">static</span> <span class="keyword">final</span> <span class="class"><span class="keyword">class</span> <span class="title">HashEntry</span>&lt;<span class="title">K</span>, <span class="title">V</span>&gt; </span>&#123;</div><div class="line">        <span class="keyword">final</span> <span class="keyword">int</span> hash;</div><div class="line">        <span class="keyword">final</span> K key;</div><div class="line">        <span class="keyword">volatile</span> V value;</div><div class="line">        <span class="keyword">volatile</span> ConcurrentHashMap.HashEntry&lt;K, V&gt; next;</div><div class="line">    &#125;</div></pre></td></tr></table></figure></p>
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/2015/05/29/Java-ConcurrentHashMap源码分析/#more" rel="contents">
@@ -1653,7 +1650,7 @@ JVM运行时数据区如上图所示：其中方法区和堆由所有线程共�
 
       
         
-          <p>##HashMap##<br>HashMap permits <code>null</code> key and <code>null</code> value, HashMap is equivalent to HashTabel except it is  unsynchronized and permits nulls. Iteration over collection views requires time proportional to the “capacity” of the HashMap instance (the number of buckets) plus its size (the number of key-value mappings).<br>An instance of HashMap has two parameters that affect its performance: initial capacity and load factor. The capacity is the number of buckets in the hash table.The load factor is a measure of how full the hash table is allowed to get before its capacity is automatically increased. Thus, it’s very important not to set the initial capacity too high (or the load factor too low) if iteration performance is important.</p>
+          <h1 id="HashMap"><a href="#HashMap" class="headerlink" title="# HashMap"></a># HashMap</h1><p>HashMap permits <code>null</code> key and <code>null</code> value, HashMap is equivalent to HashTabel except it is  unsynchronized and permits nulls. Iteration over collection views requires time proportional to the “capacity” of the HashMap instance (the number of buckets) plus its size (the number of key-value mappings).<br>An instance of HashMap has two parameters that affect its performance: initial capacity and load factor. The capacity is the number of buckets in the hash table.The load factor is a measure of how full the hash table is allowed to get before its capacity is automatically increased. Thus, it’s very important not to set the initial capacity too high (or the load factor too low) if iteration performance is important.</p>
 <blockquote>
 <p><strong>Changes in JDK 1.8</strong>:The principal idea is that once the number of items in a hash bucket grows beyond a certain threshold, that bucket will switch from using a linked list of entries to a balanced tree. In the case of high hash collisions, this will improve worst-case performance from O(n) to O(log n).This technique has already been implemented in the latest version of the <strong>java.util.concurrent.ConcurrentHashMap</strong> class, which is also slated for inclusion in JDK 8 as part of JEP 155. Portions of that code will be re-used to implement the same idea in the <strong>HashMap</strong> and <strong>LinkedHashMap</strong> classes. Only the implementations will be changed; no interfaces or specifications will be modified. Some user-visible behaviors, such as iteration order, will change within the bounds of their current specifications.</p>
 </blockquote>

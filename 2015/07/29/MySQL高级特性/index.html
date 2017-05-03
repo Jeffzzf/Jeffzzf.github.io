@@ -84,17 +84,17 @@
 
 
 
-<meta name="description" content="#分区表#MySQL分区表的底层由多个物理子表组成，每个分区表都有一个使用#分隔命名的表文件。分区表对SQL层是透明的，，对分区表的请求会通过分区表的句柄（Handler Object）转化成对存储引擎接口的调用。每个分区表有自己的独立索引，整个表没有全局索引。查询时，优化器根据分区定义过滤不包含查询数据的分区。分区表是一种粗粒度的索引策略，单表最多1024个分区（最好不超过150），分区表无法使">
+<meta name="description" content="分区表MySQL分区表的底层由多个物理子表组成，每个分区表都有一个使用#分隔命名的表文件。分区表对SQL层是透明的，，对分区表的请求会通过分区表的句柄（Handler Object）转化成对存储引擎接口的调用。每个分区表有自己的独立索引，整个表没有全局索引。查询时，优化器根据分区定义过滤不包含查询数据的分区。分区表是一种粗粒度的索引策略，单表最多1024个分区（最好不超过150），分区表无法使用外">
 <meta name="keywords" content="MySQL,触发器,存储过程,视图">
 <meta property="og:type" content="article">
 <meta property="og:title" content="MySQL高级特性">
 <meta property="og:url" content="http://jeffzzf.github.io/2015/07/29/MySQL高级特性/index.html">
 <meta property="og:site_name" content="Noob">
-<meta property="og:description" content="#分区表#MySQL分区表的底层由多个物理子表组成，每个分区表都有一个使用#分隔命名的表文件。分区表对SQL层是透明的，，对分区表的请求会通过分区表的句柄（Handler Object）转化成对存储引擎接口的调用。每个分区表有自己的独立索引，整个表没有全局索引。查询时，优化器根据分区定义过滤不包含查询数据的分区。分区表是一种粗粒度的索引策略，单表最多1024个分区（最好不超过150），分区表无法使">
-<meta property="og:updated_time" content="2016-04-20T11:22:04.000Z">
+<meta property="og:description" content="分区表MySQL分区表的底层由多个物理子表组成，每个分区表都有一个使用#分隔命名的表文件。分区表对SQL层是透明的，，对分区表的请求会通过分区表的句柄（Handler Object）转化成对存储引擎接口的调用。每个分区表有自己的独立索引，整个表没有全局索引。查询时，优化器根据分区定义过滤不包含查询数据的分区。分区表是一种粗粒度的索引策略，单表最多1024个分区（最好不超过150），分区表无法使用外">
+<meta property="og:updated_time" content="2017-05-03T12:51:16.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="MySQL高级特性">
-<meta name="twitter:description" content="#分区表#MySQL分区表的底层由多个物理子表组成，每个分区表都有一个使用#分隔命名的表文件。分区表对SQL层是透明的，，对分区表的请求会通过分区表的句柄（Handler Object）转化成对存储引擎接口的调用。每个分区表有自己的独立索引，整个表没有全局索引。查询时，优化器根据分区定义过滤不包含查询数据的分区。分区表是一种粗粒度的索引策略，单表最多1024个分区（最好不超过150），分区表无法使">
+<meta name="twitter:description" content="分区表MySQL分区表的底层由多个物理子表组成，每个分区表都有一个使用#分隔命名的表文件。分区表对SQL层是透明的，，对分区表的请求会通过分区表的句柄（Handler Object）转化成对存储引擎接口的调用。每个分区表有自己的独立索引，整个表没有全局索引。查询时，优化器根据分区定义过滤不包含查询数据的分区。分区表是一种粗粒度的索引策略，单表最多1024个分区（最好不超过150），分区表无法使用外">
 
 
 
@@ -359,7 +359,7 @@
       
 
       
-        <p>#分区表#<br>MySQL分区表的底层由多个物理子表组成，每个分区表都有一个使用#分隔命名的表文件。分区表对SQL层是透明的，，对分区表的请求会通过分区表的句柄（Handler Object）转化成对存储引擎接口的调用。每个分区表有自己的独立索引，整个表没有全局索引。查询时，优化器根据分区定义过滤不包含查询数据的分区。分区表是一种粗粒度的索引策略，单表最多1024个分区（最好不超过150），分区表无法使用外键约束。</p>
+        <h1 id="分区表"><a href="#分区表" class="headerlink" title="分区表"></a>分区表</h1><p>MySQL分区表的底层由多个物理子表组成，每个分区表都有一个使用#分隔命名的表文件。分区表对SQL层是透明的，，对分区表的请求会通过分区表的句柄（Handler Object）转化成对存储引擎接口的调用。每个分区表有自己的独立索引，整个表没有全局索引。查询时，优化器根据分区定义过滤不包含查询数据的分区。分区表是一种粗粒度的索引策略，单表最多1024个分区（最好不超过150），分区表无法使用外键约束。</p>
 <p>分区表适用于以下场景：</p>
 <ol>
 <li>在没有合适索引时，对其中几个分区进行全表扫描</li>
@@ -369,27 +369,27 @@
 <li>使用分区表规避特殊限制（如InnoDB的单个索引互斥访问，ext3文件系统的inode锁竞争等）</li>
 </ol>
 <p>分区表使用方法<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">create</span> <span class="keyword">table</span> sales &#123;</div><div class="line">    order_date DATATIME <span class="keyword">NOT</span> <span class="literal">NULL</span>,</div><div class="line">    ...</div><div class="line">&#125;<span class="keyword">ENGINE</span>=InnoDN <span class="keyword">PARTITION</span> <span class="keyword">BY</span> <span class="keyword">RANGE</span>(<span class="keyword">YEAR</span>(order_date)) &#123;</div><div class="line">    <span class="keyword">PARTITION</span> p2012 <span class="keyword">VALUES</span> <span class="keyword">LESS</span> <span class="keyword">THEN</span>(<span class="number">2012</span>),</div><div class="line">    <span class="keyword">PARTITION</span> p2013 <span class="keyword">VALUES</span> <span class="keyword">LESS</span> <span class="keyword">THEN</span>(<span class="number">2013</span>),</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>#视图#<br>视图是一种虚拟的数据表，它的行为和数据表一样，但是并不真正包含数据，<strong>但是不能对视图创建索引和触发器</strong>。实现视图的两种方法：</p>
+<h1 id="视图"><a href="#视图" class="headerlink" title="视图"></a>视图</h1><p>视图是一种虚拟的数据表，它的行为和数据表一样，但是并不真正包含数据，<strong>但是不能对视图创建索引和触发器</strong>。实现视图的两种方法：</p>
 <ol>
 <li>将SELECT语句的结果放到临时表中，即临时表算法（TEMPTABE），使用这种算法会有明显的性能问题。</li>
 <li>重写使用视图的查询语句，将视图定义SQL合并到查询SQL中，即合并算法（MERGE）。</li>
 </ol>
 <p>如果视图中包含GROUP BY，DISTINCT，聚合函数，UNION，子查询等，原表记录和视图记录中无法建立一一映射，MySQL将使用临时表算法来实现视图。可以通过视图来更新视图相关数据表的视图成为<strong>可更新视图</strong>，更新视图查询也可以是关联语句，但是被更新的列必须来自同一个表，<strong>所有使用临时表算法的视图都无法被更新</strong>。</p>
 <p>MySQL不支持物化视图（将视图结果数据存放在一个可以查看的表中，并定期从原始数据表中刷新数据到这个表中）。</p>
-<p>#外键约束#<br>InnoDB是MySQL唯一支持外键的内存存储引擎，外键通常要求每次修改数据时在另外一个表中多执行一次检查操作。如果向子表中写入一条记录，需要对父表中对应记录进行加锁操作，以确保这条记录在事务完成之前没有被删除。这回导致额外的锁等待，甚至导致一些死锁。如果要维护两表之间数据的一致性，使用外键比在应用程序中检查一致性性能要高得多。</p>
-<p>#MySQL内部存储代码#<br>有四种在MySQL内部存储代码的方法：存储过程、存储函数、触发器和事件。存储过程和存储函数都可以接受参数然后返回值，触发器和事件都不可以。使用内部存储代码优点如下：</p>
+<h1 id="外键约束"><a href="#外键约束" class="headerlink" title="外键约束"></a>外键约束</h1><p>InnoDB是MySQL唯一支持外键的内存存储引擎，外键通常要求每次修改数据时在另外一个表中多执行一次检查操作。如果向子表中写入一条记录，需要对父表中对应记录进行加锁操作，以确保这条记录在事务完成之前没有被删除。这回导致额外的锁等待，甚至导致一些死锁。如果要维护两表之间数据的一致性，使用外键比在应用程序中检查一致性性能要高得多。</p>
+<h1 id="MySQL内部存储代码"><a href="#MySQL内部存储代码" class="headerlink" title="MySQL内部存储代码"></a>MySQL内部存储代码</h1><p>有四种在MySQL内部存储代码的方法：存储过程、存储函数、触发器和事件。存储过程和存储函数都可以接受参数然后返回值，触发器和事件都不可以。使用内部存储代码优点如下：</p>
 <ol>
 <li>在服务器内部执行，离数据最近，可以节省数据传输带宽和延迟</li>
 <li>这是一种代码复用，保证某些行为保持一致，提供一定的安全性</li>
 <li>可以简化代码的维护和版本更新</li>
 </ol>
-<p>##触发器##<br>触发器是指在执行INSERT、UPDATE或者DELETE时，执行一些特定的操作。可以指定触发器在SQL执行前触发还是执行后触发。触发器本身没有返回值，不过它们可以读取或改变触发SQL语句所影响的数据。可以使用触发器实现一些强制限制，或者某些业务逻辑。</p>
+<h1 id="触发器"><a href="#触发器" class="headerlink" title="# 触发器"></a># 触发器</h1><p>触发器是指在执行INSERT、UPDATE或者DELETE时，执行一些特定的操作。可以指定触发器在SQL执行前触发还是执行后触发。触发器本身没有返回值，不过它们可以读取或改变触发SQL语句所影响的数据。可以使用触发器实现一些强制限制，或者某些业务逻辑。</p>
 <p>对于每个表上的每一个时间，最多只能定义一个触发器（不能在AFTER INSERT上定义两个触发器）。MySQL只支持<strong>基于行的触发</strong>，触发器始终是针对一条记录的，而不是针对整个SQL语句的。</p>
 <figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">CREATE TRIGGER trigger</div><div class="line">BEFORE INSERT ON table</div><div class="line">FOR  EACH ROW</div><div class="line">    DECLEAR rowCnt INT DEFAULT ROW_COUNT();</div><div class="line">    IF rowCnt &lt;&gt; 1 THEN</div><div class="line">        ...</div><div class="line">    END IF;</div><div class="line">END;</div></pre></td></tr></table></figure>
 <p>使用触发器可以减少客户端和服务器之间的通信，可以简化应用逻辑还可以提高性能。在InnoDB上的触发器是在同一个事务中完成的，它们执行的操作是原子性的。</p>
-<p>#事件#<br>事件可以指定MySQL在某个时间执行一段SQL代码，或者每隔一段时间执行一段SQL代码。通常可以把复杂的SQL封装到一个存储过程中，事件在执行时，只需要一个简单的Call调用。</p>
+<h1 id="事件"><a href="#事件" class="headerlink" title="事件"></a>事件</h1><p>事件可以指定MySQL在某个时间执行一段SQL代码，或者每隔一段时间执行一段SQL代码。通常可以把复杂的SQL封装到一个存储过程中，事件在执行时，只需要一个简单的Call调用。</p>
 <p>事件在一个独立的线程中被初始化，它与处理连接的线程没有任何关系，也不接受任何参数，没有任何返回值。事件的典型应用包括定期地维护任务、重建缓存、构建汇总表来模拟物化视图或者用于监控和诊断数据库状态等。</p>
-<p>#绑定变量（prepared statement）#<br>当创建一个绑定变量SQL时，客户端向服务器发送一个SQL语句原型，服务器端收到这个SQL语句框架后，解析并存储这个SQL语句的部分执行计划，返回给客户端一个SQL语句处理句柄。以后每次执行这类查询，客户端都指定使用这个句柄。</p>
+<h1 id="绑定变量（prepared-statement）"><a href="#绑定变量（prepared-statement）" class="headerlink" title="绑定变量（prepared statement）"></a>绑定变量（prepared statement）</h1><p>当创建一个绑定变量SQL时，客户端向服务器发送一个SQL语句原型，服务器端收到这个SQL语句框架后，解析并存储这个SQL语句的部分执行计划，返回给客户端一个SQL语句处理句柄。以后每次执行这类查询，客户端都指定使用这个句柄。</p>
 <p>绑定变量的SQL使用问号标记可以接受参数的位置，当真正需要执行具体查询时，使用具体值代替这些问号。客户端通过向服务器发送各个问号的取值和这个SQL句柄来执行一个具体的查询。MySQL在使用绑定变量的时候可以更加高效地执行执行大量的重复语句。</p>
 <ol>
 <li>在服务器端只需要解析一次SQL语句</li>
@@ -397,13 +397,13 @@
 <li>以二进制的方式只发送参数和句柄比起每次发送ASCII码文本效率更高，绑定变量的形式可以分块传输。</li>
 <li>使用绑定变量网络开销更小而且可以节省将数据从存储原始格式转换成文本格式的开销。</li>
 </ol>
-<p>#字符集和校对规则#<br>MySQL的字符集和校对规则可以分为两类：创建对象时的默认值、在服务器和客户端通信时的设定值。</p>
+<h1 id="字符集和校对规则"><a href="#字符集和校对规则" class="headerlink" title="字符集和校对规则"></a>字符集和校对规则</h1><p>MySQL的字符集和校对规则可以分为两类：创建对象时的默认值、在服务器和客户端通信时的设定值。</p>
 <p>创建数据库时，将根据服务器上的character_set_server设置来设定该数据库的默认字符集。创建表和列时也可以针对表和列设置特定的字符集。实际采用的字符集按照数据库-&gt;表-&gt;列的顺序，如果没有为表指定字符集，则采用它所属数据库的字符集，如果没有为列设置字符集，则采用表设置的字符集。</p>
 <p>服务器端总是假设客户端按照character_set_client设置的字符集来传输数据和SQL语句。当服务器收到客户端的SQL语句时，先转换成字符集character_set_connection。</p>
 <p>从服务器取数据时将数据从character_set_server转换成character_set_connection，再从character_set_connection转换成character_set_result。</p>
 <p>选择字符集和校对规则的正确方法是：先为服务器或数据库选择一个合理的字符集。然后根据特殊情况为特定表或列指定字符集和校对规则。_cs, _ci和_bin分别表示按照大小写敏感、大小写不敏感或者直接比较字节的方式比较字符串。</p>
 <p>为了保证缓存中有足够的空间存储字符串，MySQL使用一个定长的空间来存储字符串。例如，utf-8的char(10)需要30个字节，索引一个utf-8字符集的列时，每个字符都是三个字节，最大索引前缀的限制缩短为1/3。变长字段类型（varchar text）存储时不会采用这种方法，但是当它们存储在临时表中用来处理或排序时，也会分配最大可能长度。</p>
-<p>#查询缓存#<br>MySQL查询缓存保存查询返回的完整结果，当查询命中该缓存，MySQL会立刻返回结果，跳过了解析、优化和执行阶段。查询缓存系统会跟踪查询涉及的每个表，如果这些表发生变化，那么和这个表相关的所有缓存数据都将失效。</p>
+<h1 id="查询缓存"><a href="#查询缓存" class="headerlink" title="查询缓存"></a>查询缓存</h1><p>MySQL查询缓存保存查询返回的完整结果，当查询命中该缓存，MySQL会立刻返回结果，跳过了解析、优化和执行阶段。查询缓存系统会跟踪查询涉及的每个表，如果这些表发生变化，那么和这个表相关的所有缓存数据都将失效。</p>
 <p>缓存存放在一个引用表中，通过一个哈希值引用，这个哈希值包括了查询本身、当前要查询的数据库、客户端协议的版本等可能会影响返回结果的信息。</p>
 <p>当查询语句中有一些不确定的数据时，则不会被缓存。例如包含NOW(),CURRENT(),DATE()的查询不会被缓存。如果查询中包含任何用户自定义函数、存储函数、用户变量、临时表或者包含列级别权限的表都不会被缓存。查询缓存存在的问题：</p>
 <ol>
@@ -412,7 +412,7 @@
 <li>当向某个表写入数据时，必须将所有缓存都设置失效，如果查询缓存非常大或者碎片很多，该操作可能带来很大的开销</li>
 <li>查询缓存操作是一个加锁排他操作，锁的开销也会相当可观。如果查询缓存使用了大量的内存，对全局锁的竞争可能导致整个系统僵死。</li>
 </ol>
-<p>#参考资料#<br>《高性能MySQL（第三版）》</p>
+<h1 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h1><p>《高性能MySQL（第三版）》</p>
 
       
     </div>
@@ -510,8 +510,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel sidebar-panel-active">
+      <section class="site-overview sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/images/avatar.png"
@@ -567,6 +576,22 @@
 
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#分区表"><span class="nav-number">1.</span> <span class="nav-text">分区表</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#视图"><span class="nav-number">2.</span> <span class="nav-text">视图</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#外键约束"><span class="nav-number">3.</span> <span class="nav-text">外键约束</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#MySQL内部存储代码"><span class="nav-number">4.</span> <span class="nav-text">MySQL内部存储代码</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#触发器"><span class="nav-number">5.</span> <span class="nav-text"># 触发器</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#事件"><span class="nav-number">6.</span> <span class="nav-text">事件</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#绑定变量（prepared-statement）"><span class="nav-number">7.</span> <span class="nav-text">绑定变量（prepared statement）</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#字符集和校对规则"><span class="nav-number">8.</span> <span class="nav-text">字符集和校对规则</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#查询缓存"><span class="nav-number">9.</span> <span class="nav-text">查询缓存</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考资料"><span class="nav-number">10.</span> <span class="nav-text">参考资料</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
     </div>

@@ -84,17 +84,17 @@
 
 
 
-<meta name="description" content="#B-Tree#B-Tree即B树，是一种为磁盘等存储设备而设计的多路平衡查找树，很多数据库系统都使用了B树或者B树的各种变种来存取信息（InnoDB使用了B+树）。m阶B树的定义  树中每个节点最多含有m（m &amp;gt;= 2）个孩子 除根节点和叶节点外，每个节点最少有ceil（m/2）个孩子 若根节点不是叶节点，那么根节点最少有2个孩子 所有叶节点位于同一层，叶节点中不包含任何信息，可以当做外部">
+<meta name="description" content="B-TreeB-Tree即B树，是一种为磁盘等存储设备而设计的多路平衡查找树，很多数据库系统都使用了B树或者B树的各种变种来存取信息（InnoDB使用了B+树）。m阶B树的定义  树中每个节点最多含有m（m &amp;gt;= 2）个孩子 除根节点和叶节点外，每个节点最少有ceil（m/2）个孩子 若根节点不是叶节点，那么根节点最少有2个孩子 所有叶节点位于同一层，叶节点中不包含任何信息，可以当做外部节点">
 <meta name="keywords" content="MySQL,B-Tree">
 <meta property="og:type" content="article">
 <meta property="og:title" content="B-Tree, B+Tree">
 <meta property="og:url" content="http://jeffzzf.github.io/2015/07/29/B-Tree-B-Tree/index.html">
 <meta property="og:site_name" content="Noob">
-<meta property="og:description" content="#B-Tree#B-Tree即B树，是一种为磁盘等存储设备而设计的多路平衡查找树，很多数据库系统都使用了B树或者B树的各种变种来存取信息（InnoDB使用了B+树）。m阶B树的定义  树中每个节点最多含有m（m &amp;gt;= 2）个孩子 除根节点和叶节点外，每个节点最少有ceil（m/2）个孩子 若根节点不是叶节点，那么根节点最少有2个孩子 所有叶节点位于同一层，叶节点中不包含任何信息，可以当做外部">
-<meta property="og:updated_time" content="2016-04-20T11:22:04.000Z">
+<meta property="og:description" content="B-TreeB-Tree即B树，是一种为磁盘等存储设备而设计的多路平衡查找树，很多数据库系统都使用了B树或者B树的各种变种来存取信息（InnoDB使用了B+树）。m阶B树的定义  树中每个节点最多含有m（m &amp;gt;= 2）个孩子 除根节点和叶节点外，每个节点最少有ceil（m/2）个孩子 若根节点不是叶节点，那么根节点最少有2个孩子 所有叶节点位于同一层，叶节点中不包含任何信息，可以当做外部节点">
+<meta property="og:updated_time" content="2017-05-03T12:51:32.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="B-Tree, B+Tree">
-<meta name="twitter:description" content="#B-Tree#B-Tree即B树，是一种为磁盘等存储设备而设计的多路平衡查找树，很多数据库系统都使用了B树或者B树的各种变种来存取信息（InnoDB使用了B+树）。m阶B树的定义  树中每个节点最多含有m（m &amp;gt;= 2）个孩子 除根节点和叶节点外，每个节点最少有ceil（m/2）个孩子 若根节点不是叶节点，那么根节点最少有2个孩子 所有叶节点位于同一层，叶节点中不包含任何信息，可以当做外部">
+<meta name="twitter:description" content="B-TreeB-Tree即B树，是一种为磁盘等存储设备而设计的多路平衡查找树，很多数据库系统都使用了B树或者B树的各种变种来存取信息（InnoDB使用了B+树）。m阶B树的定义  树中每个节点最多含有m（m &amp;gt;= 2）个孩子 除根节点和叶节点外，每个节点最少有ceil（m/2）个孩子 若根节点不是叶节点，那么根节点最少有2个孩子 所有叶节点位于同一层，叶节点中不包含任何信息，可以当做外部节点">
 
 
 
@@ -359,7 +359,7 @@
       
 
       
-        <p>#B-Tree#<br>B-Tree即B树，是一种为磁盘等存储设备而设计的多路平衡查找树，很多数据库系统都使用了B树或者B树的各种变种来存取信息（InnoDB使用了B+树）。<br><strong>m阶B树的定义</strong></p>
+        <h1 id="B-Tree"><a href="#B-Tree" class="headerlink" title="B-Tree"></a>B-Tree</h1><p>B-Tree即B树，是一种为磁盘等存储设备而设计的多路平衡查找树，很多数据库系统都使用了B树或者B树的各种变种来存取信息（InnoDB使用了B+树）。<br><strong>m阶B树的定义</strong></p>
 <ol>
 <li>树中每个节点最多含有m（m &gt;= 2）个孩子</li>
 <li>除根节点和叶节点外，每个节点最少有ceil（m/2）个孩子</li>
@@ -367,7 +367,7 @@
 <li>所有叶节点位于同一层，叶节点中不包含任何信息，可以当做外部节点或者查询失败的节点</li>
 <li>每个非叶节点的节点包含n个关键字信息：n，p0，k1，p1，k2……p（n-1），k（n-1），pn，kn。其中，k（1…n）表示关键字，同一个节点中的关键字按递增次序排列，p(0…n)表示指向子树的指针，pi指向的子树中的所有关键字的值都大于p（i-1）并且小于p（i）。</li>
 </ol>
-<p>#B+树#<br> B+树是应文件系统所需而产生的一种B-树的变形树。一棵m阶的B+树和m阶的B树的差异在于：</p>
+<h1 id="B-树"><a href="#B-树" class="headerlink" title="B+树"></a>B+树</h1><p> B+树是应文件系统所需而产生的一种B-树的变形树。一棵m阶的B+树和m阶的B树的差异在于：</p>
 <ol>
 <li>有n 棵子树的结点中含有n 个关键码；</li>
 <li>所有的叶子结点中包含了全部关键码的信息，及指向含有这些关键码记录的指针，且叶子结点本身依关键码的大小自小而大的顺序链接。</li>
@@ -375,7 +375,7 @@
 </ol>
 <p>通常在B+树上有两个头指针，一个指向根节点，另一个指向关键字最小的叶子节点。因此可以对B+树进行两种查找运算：一种是从最小关键字起顺序查找，另一种是从根节点开始查找。 </p>
 <p>在B+树上进行随机查找、插入和删除的过程基本上与B-树类似。只是在查找时，若非终端结点上的关键码等于给定值，并不终止，而是继续向下直到叶子结点。因此，在B+树，不管查找成功与否，每次查找都是走了一条从根到叶子结点的路径。</p>
-<p>#参考资料#<br><a href="http://blog.csdn.net/v_JULY_v/article/details/6530142" target="_blank" rel="external">B树，B+树，B*树</a><br><a href="http://blog.csdn.net/hguisu/article/details/7786014" target="_blank" rel="external">B树、B+树的应用</a></p>
+<h1 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h1><p><a href="http://blog.csdn.net/v_JULY_v/article/details/6530142" target="_blank" rel="external">B树，B+树，B*树</a><br><a href="http://blog.csdn.net/hguisu/article/details/7786014" target="_blank" rel="external">B树、B+树的应用</a></p>
 
       
     </div>
@@ -469,8 +469,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel sidebar-panel-active">
+      <section class="site-overview sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/images/avatar.png"
@@ -526,6 +535,22 @@
 
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#B-Tree"><span class="nav-number">1.</span> <span class="nav-text">B-Tree</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#B-树"><span class="nav-number">2.</span> <span class="nav-text">B+树</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考资料"><span class="nav-number">3.</span> <span class="nav-text">参考资料</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
     </div>

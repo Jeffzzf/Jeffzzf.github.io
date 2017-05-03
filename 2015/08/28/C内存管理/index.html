@@ -84,18 +84,18 @@
 
 
 
-<meta name="description" content="#C程序存储空间布局#  正文段（Text Segment），由CPU执行的机器指令部分，通常是只读并共享的，即使频繁执行的程序（文本编辑器，编译器，Shell等等） 初始化数据段（数据段，Data Segment），包含了程序中明确赋予初始值的变量，例如在所有函数体外定义int max = 99; 未初始化数据段（bss， block started by symbol 由符号开始的块），内核会">
+<meta name="description" content="C程序存储空间布局 正文段（Text Segment），由CPU执行的机器指令部分，通常是只读并共享的，即使频繁执行的程序（文本编辑器，编译器，Shell等等） 初始化数据段（数据段，Data Segment），包含了程序中明确赋予初始值的变量，例如在所有函数体外定义int max = 99; 未初始化数据段（bss， block started by symbol 由符号开始的块），内核会在程序">
 <meta name="keywords" content="C/C++,Linux">
 <meta property="og:type" content="article">
 <meta property="og:title" content="C内存管理">
 <meta property="og:url" content="http://jeffzzf.github.io/2015/08/28/C内存管理/index.html">
 <meta property="og:site_name" content="Noob">
-<meta property="og:description" content="#C程序存储空间布局#  正文段（Text Segment），由CPU执行的机器指令部分，通常是只读并共享的，即使频繁执行的程序（文本编辑器，编译器，Shell等等） 初始化数据段（数据段，Data Segment），包含了程序中明确赋予初始值的变量，例如在所有函数体外定义int max = 99; 未初始化数据段（bss， block started by symbol 由符号开始的块），内核会">
+<meta property="og:description" content="C程序存储空间布局 正文段（Text Segment），由CPU执行的机器指令部分，通常是只读并共享的，即使频繁执行的程序（文本编辑器，编译器，Shell等等） 初始化数据段（数据段，Data Segment），包含了程序中明确赋予初始值的变量，例如在所有函数体外定义int max = 99; 未初始化数据段（bss， block started by symbol 由符号开始的块），内核会在程序">
 <meta property="og:image" content="http://www.johnloomis.org/ece537/notes/Processes/fig7_6.gif">
-<meta property="og:updated_time" content="2016-04-20T11:22:04.000Z">
+<meta property="og:updated_time" content="2017-05-03T12:51:33.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="C内存管理">
-<meta name="twitter:description" content="#C程序存储空间布局#  正文段（Text Segment），由CPU执行的机器指令部分，通常是只读并共享的，即使频繁执行的程序（文本编辑器，编译器，Shell等等） 初始化数据段（数据段，Data Segment），包含了程序中明确赋予初始值的变量，例如在所有函数体外定义int max = 99; 未初始化数据段（bss， block started by symbol 由符号开始的块），内核会">
+<meta name="twitter:description" content="C程序存储空间布局 正文段（Text Segment），由CPU执行的机器指令部分，通常是只读并共享的，即使频繁执行的程序（文本编辑器，编译器，Shell等等） 初始化数据段（数据段，Data Segment），包含了程序中明确赋予初始值的变量，例如在所有函数体外定义int max = 99; 未初始化数据段（bss， block started by symbol 由符号开始的块），内核会在程序">
 <meta name="twitter:image" content="http://www.johnloomis.org/ece537/notes/Processes/fig7_6.gif">
 
 
@@ -361,8 +361,7 @@
       
 
       
-        <p>#C程序存储空间布局#</p>
-<ul>
+        <h1 id="C程序存储空间布局"><a href="#C程序存储空间布局" class="headerlink" title="C程序存储空间布局"></a>C程序存储空间布局</h1><ul>
 <li>正文段（Text Segment），由CPU执行的机器指令部分，通常是只读并共享的，即使频繁执行的程序（文本编辑器，编译器，Shell等等）</li>
 <li>初始化数据段（数据段，Data Segment），包含了程序中明确赋予初始值的变量，例如在所有函数体外定义<code>int max = 99;</code></li>
 <li>未初始化数据段（bss， block started by symbol 由符号开始的块），内核会在程序执行之前将包含在bss段的变量初始化为0或者空指针。例如在所有函数体外定义<code>long sum[100];</code>，sum存放在未初始化数据段中。</li>
@@ -370,15 +369,15 @@
 <li>堆，通常在堆中动态分配内存，堆位于未初始化数据段和栈之间</li>
 </ul>
 <p><img src="http://www.johnloomis.org/ece537/notes/Processes/fig7_6.gif" alt="内存布局"></p>
-<p>#共享库#<br>共享库中包含了多个可执行文件需要的库，在内存中只维护一个副本。这会减小可执行文件的大小，但是会增加一些运行时开销，这种开销产生于程序第一次执行或者共享库函数第一次被调用时。共享库的另一个优势在于，更新库函数版本时不用重新链接每个使用共享库的程序。</p>
-<p>#存储空间分配#<br><figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stdlib.c&gt;</span></span></div><div class="line"><span class="function"><span class="keyword">void</span> *<span class="title">malloc</span><span class="params">(<span class="keyword">size_t</span> size)</span></span>;</div><div class="line"><span class="function"><span class="keyword">void</span> *<span class="title">calloc</span><span class="params">(<span class="keyword">size_t</span> nobj, <span class="keyword">size_t</span> size)</span></span>;</div><div class="line"><span class="function"><span class="keyword">void</span> *<span class="title">realloc</span><span class="params">(<span class="keyword">size_t</span> *ptr, <span class="keyword">size_t</span> newsize)</span></span>;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">free</span><span class="params">(<span class="keyword">void</span> *ptr)</span></span>;</div></pre></td></tr></table></figure></p>
+<h1 id="共享库"><a href="#共享库" class="headerlink" title="共享库"></a>共享库</h1><p>共享库中包含了多个可执行文件需要的库，在内存中只维护一个副本。这会减小可执行文件的大小，但是会增加一些运行时开销，这种开销产生于程序第一次执行或者共享库函数第一次被调用时。共享库的另一个优势在于，更新库函数版本时不用重新链接每个使用共享库的程序。</p>
+<h1 id="存储空间分配"><a href="#存储空间分配" class="headerlink" title="存储空间分配"></a>存储空间分配</h1><figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="meta"># <span class="meta-keyword">include</span><span class="meta-string">&lt;stdlib.c&gt;</span></span></div><div class="line"><span class="function"><span class="keyword">void</span> *<span class="title">malloc</span><span class="params">(<span class="keyword">size_t</span> size)</span></span>;</div><div class="line"><span class="function"><span class="keyword">void</span> *<span class="title">calloc</span><span class="params">(<span class="keyword">size_t</span> nobj, <span class="keyword">size_t</span> size)</span></span>;</div><div class="line"><span class="function"><span class="keyword">void</span> *<span class="title">realloc</span><span class="params">(<span class="keyword">size_t</span> *ptr, <span class="keyword">size_t</span> newsize)</span></span>;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">free</span><span class="params">(<span class="keyword">void</span> *ptr)</span></span>;</div></pre></td></tr></table></figure>
 <p>这三个分配函数返回的指针一定是适当对齐的，使得它可以用于任何数据对象。alloc函数的返回值都是void *，当把这些函数返回的指针赋予一个不同类型的指针时，不需要显式地执行强制类型转换。</p>
 <p>free释放ptr指向的存储空间，被释放的空间通常被送入可用存储区池，可被malloc函数再次分配。</p>
 <p>realloc函数可以增减以前分配的存储区长度，如果该存储区后有足够的空间可以扩充，则可以在原存储区位置上向高地址方向扩充，无需移动任何原先的内容；如果在原存储区后没有足够的空间，则realloc分配另一个足够大的存储区，将当前存储区的内容复制到新分配的存储区，然后释放原存储区。</p>
 <p>这些函数通过sbrk系统调用实现，该系统调用可扩充（或缩小）进程的堆。虽然sbrk可以扩充或缩小进程的存储空间，但是大多数malloc和free的实现都不缩小进程的存储空间。释放的空间可供以后再分配，但将它们保存在malloc池中而不返回给内核。</p>
 <p>大多数实现分配的存储空间比要求的要稍大一些，额外的空间用来记录管理信息——分配块的长度、指向下一个分配块的指针等。如果超过分配块起始位置或结束位置写，会修改分配块的管理信息，这种错误是灾难性的并且很难发现。</p>
 <p>另外的致命性错误包括：释放一个已经释放的块；释放并非由malloc函数创建的指针。如果一个进程调用malloc函数，但是忘了调用free，那么该进程占用的存储空间会持续增加，这被称为泄露（leakage）。如果不调用free返回不再使用的内存，进程的地址空间会不断增长，直至不再有空闲空间。此时由于过度的换页开销，性能会下降。</p>
-<p>#参考资料#<br>《Unix环境高级编程（第三版）》<br><a href="http://programmers.stackexchange.com/questions/207386/how-are-the-size-of-the-stack-and-heap-limited-by-the-os" target="_blank" rel="external">How are the size of the stack and heap limited by the OS?</a></p>
+<h1 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h1><p>《Unix环境高级编程（第三版）》<br><a href="http://programmers.stackexchange.com/questions/207386/how-are-the-size-of-the-stack-and-heap-limited-by-the-os" target="_blank" rel="external">How are the size of the stack and heap limited by the OS?</a></p>
 
       
     </div>
@@ -472,8 +471,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel sidebar-panel-active">
+      <section class="site-overview sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/images/avatar.png"
@@ -529,6 +537,22 @@
 
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#C程序存储空间布局"><span class="nav-number">1.</span> <span class="nav-text">C程序存储空间布局</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#共享库"><span class="nav-number">2.</span> <span class="nav-text">共享库</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#存储空间分配"><span class="nav-number">3.</span> <span class="nav-text">存储空间分配</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考资料"><span class="nav-number">4.</span> <span class="nav-text">参考资料</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
     </div>

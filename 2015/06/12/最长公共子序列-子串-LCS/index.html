@@ -84,17 +84,17 @@
 
 
 
-<meta name="description" content="#求最长公共子序列#使用DP算法，i, j分别表示,s1和s2的下标，转移方程为:  dp[i][j] = 0;   if(i == 0 || j == 0) dp[i][j] = dp[i - 1][j - 1] + 1; if(s1[i] == s2[j]) dp[i][j] = max(dp[i - 1][j], dp[i][j - 1]); if(s1[i] != s2[j])  求最长公">
+<meta name="description" content="求最长公共子序列使用DP算法，i, j分别表示,s1和s2的下标，转移方程为:  dp[i][j] = 0;   if(i == 0 || j == 0) dp[i][j] = dp[i - 1][j - 1] + 1; if(s1[i] == s2[j]) dp[i][j] = max(dp[i - 1][j], dp[i][j - 1]); if(s1[i] != s2[j])  求最长公共子">
 <meta name="keywords" content="算法,字符串,LCS">
 <meta property="og:type" content="article">
 <meta property="og:title" content="最长公共子序列/子串(LCS)">
 <meta property="og:url" content="http://jeffzzf.github.io/2015/06/12/最长公共子序列-子串-LCS/index.html">
 <meta property="og:site_name" content="Noob">
-<meta property="og:description" content="#求最长公共子序列#使用DP算法，i, j分别表示,s1和s2的下标，转移方程为:  dp[i][j] = 0;   if(i == 0 || j == 0) dp[i][j] = dp[i - 1][j - 1] + 1; if(s1[i] == s2[j]) dp[i][j] = max(dp[i - 1][j], dp[i][j - 1]); if(s1[i] != s2[j])  求最长公">
-<meta property="og:updated_time" content="2016-04-20T11:22:04.000Z">
+<meta property="og:description" content="求最长公共子序列使用DP算法，i, j分别表示,s1和s2的下标，转移方程为:  dp[i][j] = 0;   if(i == 0 || j == 0) dp[i][j] = dp[i - 1][j - 1] + 1; if(s1[i] == s2[j]) dp[i][j] = max(dp[i - 1][j], dp[i][j - 1]); if(s1[i] != s2[j])  求最长公共子">
+<meta property="og:updated_time" content="2017-05-03T12:51:29.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="最长公共子序列/子串(LCS)">
-<meta name="twitter:description" content="#求最长公共子序列#使用DP算法，i, j分别表示,s1和s2的下标，转移方程为:  dp[i][j] = 0;   if(i == 0 || j == 0) dp[i][j] = dp[i - 1][j - 1] + 1; if(s1[i] == s2[j]) dp[i][j] = max(dp[i - 1][j], dp[i][j - 1]); if(s1[i] != s2[j])  求最长公">
+<meta name="twitter:description" content="求最长公共子序列使用DP算法，i, j分别表示,s1和s2的下标，转移方程为:  dp[i][j] = 0;   if(i == 0 || j == 0) dp[i][j] = dp[i - 1][j - 1] + 1; if(s1[i] == s2[j]) dp[i][j] = max(dp[i - 1][j], dp[i][j - 1]); if(s1[i] != s2[j])  求最长公共子">
 
 
 
@@ -359,14 +359,14 @@
       
 
       
-        <p>#求最长公共子序列#<br>使用DP算法，i, j分别表示,s1和s2的下标，转移方程为:</p>
+        <h1 id="求最长公共子序列"><a href="#求最长公共子序列" class="headerlink" title="求最长公共子序列"></a>求最长公共子序列</h1><p>使用DP算法，i, j分别表示,s1和s2的下标，转移方程为:</p>
 <ul>
 <li>dp[i][j] = 0;   if(i == 0 || j == 0)</li>
 <li>dp[i][j] = dp[i - 1][j - 1] + 1; if(s1[i] == s2[j])</li>
 <li>dp[i][j] = max(dp[i - 1][j], dp[i][j - 1]); if(s1[i] != s2[j])</li>
 </ul>
 <p>求最长公共子序列的方法是，在遍历过程中标记当前值从哪里来的（斜对角，上面还是下面），再从从后到前递归即可：<br><a id="more"></a><br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> String <span class="title">Lcsequence</span><span class="params">(String s1, String s2)</span> </span>&#123;</div><div class="line">    <span class="keyword">if</span>(s1 == <span class="keyword">null</span> || s2 ==<span class="keyword">null</span> || s1.length() == <span class="number">0</span> || s2.length() == <span class="number">0</span>)</div><div class="line">        <span class="keyword">return</span> <span class="string">""</span>;</div><div class="line">    <span class="keyword">int</span>[][] dp = <span class="keyword">new</span> <span class="keyword">int</span>[s1.length() + <span class="number">1</span>][s2.length() + <span class="number">1</span>];</div><div class="line">    <span class="keyword">int</span>[][] flag = <span class="keyword">new</span> <span class="keyword">int</span>[s1.length() + <span class="number">1</span>][s2.length() + <span class="number">1</span>];</div><div class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; s1.length(); ++i) &#123;</div><div class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; s2.length(); ++j) &#123;</div><div class="line">            <span class="keyword">if</span>(s1.charAt(i) == s2.charAt(j)) &#123;</div><div class="line">                dp[i + <span class="number">1</span>][j + <span class="number">1</span>] = dp[i][j] + <span class="number">1</span>;</div><div class="line">                flag[i + <span class="number">1</span>][j + <span class="number">1</span>] = <span class="number">1</span>;</div><div class="line">            &#125;</div><div class="line">            <span class="keyword">else</span> <span class="keyword">if</span>(dp[i][j + <span class="number">1</span>] &gt;= dp[i + <span class="number">1</span>][j]) &#123;</div><div class="line">                dp[i + <span class="number">1</span>][j + <span class="number">1</span>] = dp[i][j + <span class="number">1</span>];</div><div class="line">                flag[i + <span class="number">1</span>][j + <span class="number">1</span>] = <span class="number">2</span>;</div><div class="line">            &#125; <span class="keyword">else</span> &#123;</div><div class="line">                dp[i + <span class="number">1</span>][j + <span class="number">1</span>] = dp[i + <span class="number">1</span>][j];</div><div class="line">                flag[i + <span class="number">1</span>][j + <span class="number">1</span>] = <span class="number">3</span>;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    System.out.println(dp[s1.length()][s2.length()]);</div><div class="line">    StringBuilder tmp = <span class="keyword">new</span> StringBuilder();</div><div class="line">    getLcs(s1, s2, s1.length(), s2.length(), flag, tmp);</div><div class="line">    <span class="keyword">return</span> tmp.toString();</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">getLcs</span><span class="params">(String s1, String s2, <span class="keyword">int</span> len1, <span class="keyword">int</span> len2, </span></span></div><div class="line">        <span class="keyword">int</span>[][] flag, StringBuilder tmp) &#123;</div><div class="line">    <span class="keyword">if</span>(len1 &lt; <span class="number">1</span> || len2 &lt; <span class="number">1</span>) <span class="keyword">return</span>;</div><div class="line">    <span class="keyword">if</span>(flag[len1][len2] == <span class="number">1</span>) &#123;</div><div class="line">        getLcs(s1,s2, len1 - <span class="number">1</span>, len2 - <span class="number">1</span>, flag, tmp);</div><div class="line">        tmp.append(s1.charAt(len1 - <span class="number">1</span>));</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">else</span> <span class="keyword">if</span>(flag[len1][len2] == <span class="number">2</span>)</div><div class="line">        getLcs(s1,s2, len1 - <span class="number">1</span>, len2, flag, tmp);</div><div class="line">    <span class="keyword">else</span> <span class="keyword">if</span>(flag[len1][len2] == <span class="number">3</span>)</div><div class="line">        getLcs(s1,s2, len1, len2 - <span class="number">1</span>, flag, tmp);</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>#求最长公共子串#<br>求最长公共子串的思路与求最长公共子序列基本一样，不同之处在于，只有i - 1， j - 1处字符相等i， j处的值才加1，如果不相等直接置0：</p>
+<h1 id="求最长公共子串"><a href="#求最长公共子串" class="headerlink" title="求最长公共子串"></a>求最长公共子串</h1><p>求最长公共子串的思路与求最长公共子序列基本一样，不同之处在于，只有i - 1， j - 1处字符相等i， j处的值才加1，如果不相等直接置0：</p>
 <ul>
 <li>dp[i][j] = 0;   if(i == 0 || j == 0)<ul>
 <li>dp[i][j] = dp[i - 1][j - 1]; if(s1[i] == s2[j])</li>
@@ -470,8 +470,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel sidebar-panel-active">
+      <section class="site-overview sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/images/avatar.png"
@@ -527,6 +536,22 @@
 
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#求最长公共子序列"><span class="nav-number">1.</span> <span class="nav-text">求最长公共子序列</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#求最长公共子串"><span class="nav-number">2.</span> <span class="nav-text">求最长公共子串</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
     </div>

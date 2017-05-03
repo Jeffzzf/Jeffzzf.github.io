@@ -84,17 +84,17 @@
 
 
 
-<meta name="description" content="TCP（传输控制协议）在两个端点之间提供可靠的、面向连接的、双向字节流通信信道。 #确认、重传和超时#当一个TCP报文无错地到达目的地时，接受TCP会发送一个确认报文给发送端，该报文的确认序号字段被设置为接收方期望接收的下一个报文的逻辑序号。如果报文存在错误，那么这个报文会被丢弃，确认信息也不会被发送。发送方在发送报文后一段时间没有收到确认，就会重传报文。 #流量控制（滑动窗口机制）#为了防止发送">
+<meta name="description" content="TCP（传输控制协议）在两个端点之间提供可靠的、面向连接的、双向字节流通信信道。 确认、重传和超时当一个TCP报文无错地到达目的地时，接受TCP会发送一个确认报文给发送端，该报文的确认序号字段被设置为接收方期望接收的下一个报文的逻辑序号。如果报文存在错误，那么这个报文会被丢弃，确认信息也不会被发送。发送方在发送报文后一段时间没有收到确认，就会重传报文。 流量控制（滑动窗口机制）为了防止发送方发送速">
 <meta name="keywords" content="网络,TCP">
 <meta property="og:type" content="article">
 <meta property="og:title" content="TCP总结">
 <meta property="og:url" content="http://jeffzzf.github.io/2015/08/31/TCP总结/index.html">
 <meta property="og:site_name" content="Noob">
-<meta property="og:description" content="TCP（传输控制协议）在两个端点之间提供可靠的、面向连接的、双向字节流通信信道。 #确认、重传和超时#当一个TCP报文无错地到达目的地时，接受TCP会发送一个确认报文给发送端，该报文的确认序号字段被设置为接收方期望接收的下一个报文的逻辑序号。如果报文存在错误，那么这个报文会被丢弃，确认信息也不会被发送。发送方在发送报文后一段时间没有收到确认，就会重传报文。 #流量控制（滑动窗口机制）#为了防止发送">
-<meta property="og:updated_time" content="2016-04-20T11:22:04.000Z">
+<meta property="og:description" content="TCP（传输控制协议）在两个端点之间提供可靠的、面向连接的、双向字节流通信信道。 确认、重传和超时当一个TCP报文无错地到达目的地时，接受TCP会发送一个确认报文给发送端，该报文的确认序号字段被设置为接收方期望接收的下一个报文的逻辑序号。如果报文存在错误，那么这个报文会被丢弃，确认信息也不会被发送。发送方在发送报文后一段时间没有收到确认，就会重传报文。 流量控制（滑动窗口机制）为了防止发送方发送速">
+<meta property="og:updated_time" content="2017-05-03T12:51:20.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="TCP总结">
-<meta name="twitter:description" content="TCP（传输控制协议）在两个端点之间提供可靠的、面向连接的、双向字节流通信信道。 #确认、重传和超时#当一个TCP报文无错地到达目的地时，接受TCP会发送一个确认报文给发送端，该报文的确认序号字段被设置为接收方期望接收的下一个报文的逻辑序号。如果报文存在错误，那么这个报文会被丢弃，确认信息也不会被发送。发送方在发送报文后一段时间没有收到确认，就会重传报文。 #流量控制（滑动窗口机制）#为了防止发送">
+<meta name="twitter:description" content="TCP（传输控制协议）在两个端点之间提供可靠的、面向连接的、双向字节流通信信道。 确认、重传和超时当一个TCP报文无错地到达目的地时，接受TCP会发送一个确认报文给发送端，该报文的确认序号字段被设置为接收方期望接收的下一个报文的逻辑序号。如果报文存在错误，那么这个报文会被丢弃，确认信息也不会被发送。发送方在发送报文后一段时间没有收到确认，就会重传报文。 流量控制（滑动窗口机制）为了防止发送方发送速">
 
 
 
@@ -360,37 +360,36 @@
 
       
         <p>TCP（传输控制协议）在两个端点之间提供可靠的、面向连接的、双向字节流通信信道。</p>
-<p>#确认、重传和超时#<br>当一个TCP报文无错地到达目的地时，接受TCP会发送一个确认报文给发送端，该报文的确认序号字段被设置为接收方期望接收的下一个报文的逻辑序号。如果报文存在错误，那么这个报文会被丢弃，确认信息也不会被发送。发送方在发送报文后一段时间没有收到确认，就会重传报文。</p>
-<p>#流量控制（滑动窗口机制）#<br>为了防止发送方发送速度过快而导致接收方来不及接收，在三次握手建立TCP连接的过程中就会告知对方接收缓冲区大小。从发送方接收数据到缓冲区时，空闲缓冲区大小减小；当上层应用从缓冲区读取数据时，空闲缓冲区大小增大。每次确认时，会告诉对方空闲缓冲区大小。如果缓冲区被填满，发送方暂停传输数据。</p>
-<p>#TCP连接的建立#<br>在套接字API层，两个流式套接字通过以下步骤建立连接：</p>
+<h1 id="确认、重传和超时"><a href="#确认、重传和超时" class="headerlink" title="确认、重传和超时"></a>确认、重传和超时</h1><p>当一个TCP报文无错地到达目的地时，接受TCP会发送一个确认报文给发送端，该报文的确认序号字段被设置为接收方期望接收的下一个报文的逻辑序号。如果报文存在错误，那么这个报文会被丢弃，确认信息也不会被发送。发送方在发送报文后一段时间没有收到确认，就会重传报文。</p>
+<h1 id="流量控制（滑动窗口机制）"><a href="#流量控制（滑动窗口机制）" class="headerlink" title="流量控制（滑动窗口机制）"></a>流量控制（滑动窗口机制）</h1><p>为了防止发送方发送速度过快而导致接收方来不及接收，在三次握手建立TCP连接的过程中就会告知对方接收缓冲区大小。从发送方接收数据到缓冲区时，空闲缓冲区大小减小；当上层应用从缓冲区读取数据时，空闲缓冲区大小增大。每次确认时，会告诉对方空闲缓冲区大小。如果缓冲区被填满，发送方暂停传输数据。</p>
+<h1 id="TCP连接的建立"><a href="#TCP连接的建立" class="headerlink" title="TCP连接的建立"></a>TCP连接的建立</h1><p>在套接字API层，两个流式套接字通过以下步骤建立连接：</p>
 <ol>
 <li>服务器调用listen()在套接字上执行被动打开，然后调用accept()阻塞服务器进程直到连接建立完成。</li>
 <li>客户端调用connect()在套接字上执行主动打开，以此来同服务器端的被动打开套接字之间建立连接。</li>
 </ol>
-<p>##三次握手##<br>建立一个TCP连接，需要传送3个报文，步骤如下：</p>
+<h1 id="三次握手"><a href="#三次握手" class="headerlink" title="# 三次握手"></a># 三次握手</h1><p>建立一个TCP连接，需要传送3个报文，步骤如下：</p>
 <ol>
 <li>connect()调用导致客户端TCP节点发送一个SYN报文到服务器端TCP节点，告知服务器客户端TCP节点的序列号（SYN=1，seq=x）。</li>
 <li>服务器TCP节点收到客户端发来的TCP报文后，返回一个设置SYN和ACK控制位的报文（SYN=1，ACK=x+1，seq=y）</li>
 <li>客户端TCP节点发送一个ACK报文来确认服务器端TCP节点的SYN报文（ACK=y+1）</li>
 </ol>
-<p>#TCP连接的终止#<br>关闭一个TCP连接的过程：</p>
+<h1 id="TCP连接的终止"><a href="#TCP连接的终止" class="headerlink" title="TCP连接的终止"></a>TCP连接的终止</h1><p>关闭一个TCP连接的过程：</p>
 <ol>
 <li>TCP连接的一段执行close()系统调用，主动关闭TCP连接</li>
 <li>稍后另一端也执行一个close()系统调用被动关闭</li>
 </ol>
-<p>##四次挥手##<br>假设由客户端发起主动关闭，TCP连接的终止过程需要传送四个报文：</p>
+<h1 id="四次挥手"><a href="#四次挥手" class="headerlink" title="# 四次挥手"></a># 四次挥手</h1><p>假设由客户端发起主动关闭，TCP连接的终止过程需要传送四个报文：</p>
 <ol>
 <li>客户端TCP节点发送一个FIN报文给服务器（FIN=1，seq=x）</li>
 <li>服务器端TCP节点接收到FIN报文后，发出ACK报文作为响应。之后，服务器端的read()都会返回0(ACK=x+1)</li>
 <li>当服务器端完成数据传输时，服务器端TCP节点发送FIN报文到客户端（FIN=1，seq=y）</li>
 <li>客户端TCP节点发送ACK报文并进入TIME_WAIT状态，如果服务器端没有收到客户端传来的ACK报文，则可以重传FIN报文。客户端等待2个MSL（最大报文段生存时间）</li>
 </ol>
-<p>##TIME_WAIT状态的作用##</p>
-<ol>
+<h1 id="TIME-WAIT状态的作用"><a href="#TIME-WAIT状态的作用" class="headerlink" title="# TIME_WAIT状态的作用"></a># TIME_WAIT状态的作用</h1><ol>
 <li>确保能可靠地终止连接，如果执行主动关闭的一方发出的最后一个ACK报文丢失，那么执行TCP被动关闭的一方会重传FIN报文。让执行主动关闭的一方在TIME_WAIT状态保持2个最大报文生存时间，可以确保收到执行被动关闭的一方重传的FIN报文，并发送ACK确认报文。如果执行主动关闭的一方已经不存在了，那么TCP协议将针对重发的FIN发送一个RST（重置）给执行被动关闭的一方，这个RST会被解释成一个错误。</li>
 <li>确保老的重复报文在网络中过期失效TCP节点处于TIEM_WAIT状态时无法通过该节点创建新的连接。TCP重传的报文有可能在连接终止后才到达。假设通信双方使用相同的IP和端口重新建立TCP连接，如果没有TIME_WAIT状态使老的报文失效，这新老的报文有可能被当做新的合法报文。</li>
 </ol>
-<p>#参考资料#<br>《Linux编程手册（下）》<br><a href="http://www.nowcoder.com/discuss/1937" target="_blank" rel="external">计算机网络之面试常考</a><br><a href="https://github.com/skyline75489/what-happens-when-zh_CN" target="_blank" rel="external">在浏览器中输入 google.com 并且按下回车之后发生了什么？</a><br><a href="http://www.cyberciti.biz/faq/key-differences-between-tcp-and-udp-protocols/" target="_blank" rel="external">What is the difference between UDP and TCP internet protocols?</a></p>
+<h1 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h1><p>《Linux编程手册（下）》<br><a href="http://www.nowcoder.com/discuss/1937" target="_blank" rel="external">计算机网络之面试常考</a><br><a href="https://github.com/skyline75489/what-happens-when-zh_CN" target="_blank" rel="external">在浏览器中输入 google.com 并且按下回车之后发生了什么？</a><br><a href="http://www.cyberciti.biz/faq/key-differences-between-tcp-and-udp-protocols/" target="_blank" rel="external">What is the difference between UDP and TCP internet protocols?</a></p>
 
       
     </div>
@@ -484,8 +483,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel sidebar-panel-active">
+      <section class="site-overview sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/images/avatar.png"
@@ -541,6 +549,22 @@
 
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#确认、重传和超时"><span class="nav-number">1.</span> <span class="nav-text">确认、重传和超时</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#流量控制（滑动窗口机制）"><span class="nav-number">2.</span> <span class="nav-text">流量控制（滑动窗口机制）</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#TCP连接的建立"><span class="nav-number">3.</span> <span class="nav-text">TCP连接的建立</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#三次握手"><span class="nav-number">4.</span> <span class="nav-text"># 三次握手</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#TCP连接的终止"><span class="nav-number">5.</span> <span class="nav-text">TCP连接的终止</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#四次挥手"><span class="nav-number">6.</span> <span class="nav-text"># 四次挥手</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#TIME-WAIT状态的作用"><span class="nav-number">7.</span> <span class="nav-text"># TIME_WAIT状态的作用</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考资料"><span class="nav-number">8.</span> <span class="nav-text">参考资料</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
     </div>

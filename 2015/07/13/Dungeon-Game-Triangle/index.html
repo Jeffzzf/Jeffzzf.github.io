@@ -84,17 +84,17 @@
 
 
 
-<meta name="description" content="#Dungeon Game#题目大意：公主被困在迷宫的右下角，骑士初始位于迷宫的左上角。迷宫的每个单元格（包括左上角和右下角）都有一个整数值x，如果x &amp;lt; 0，骑士到达该单元格时掉|x|的血；如果x &amp;gt; 0骑士在该单元格加|x|的血；如果 x == 0，骑士的血不掉也不加。如果骑士的血为0，那么他马上死亡。 要使骑士活着见到公主，那么骑士出发时最少需要加多少血。https://leet">
+<meta name="description" content="Dungeon Game题目大意：公主被困在迷宫的右下角，骑士初始位于迷宫的左上角。迷宫的每个单元格（包括左上角和右下角）都有一个整数值x，如果x &amp;lt; 0，骑士到达该单元格时掉|x|的血；如果x &amp;gt; 0骑士在该单元格加|x|的血；如果 x == 0，骑士的血不掉也不加。如果骑士的血为0，那么他马上死亡。 要使骑士活着见到公主，那么骑士出发时最少需要加多少血。https://leetco">
 <meta name="keywords" content="DP,逆向思维">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Dungeon Game && Triangle">
 <meta property="og:url" content="http://jeffzzf.github.io/2015/07/13/Dungeon-Game-Triangle/index.html">
 <meta property="og:site_name" content="Noob">
-<meta property="og:description" content="#Dungeon Game#题目大意：公主被困在迷宫的右下角，骑士初始位于迷宫的左上角。迷宫的每个单元格（包括左上角和右下角）都有一个整数值x，如果x &amp;lt; 0，骑士到达该单元格时掉|x|的血；如果x &amp;gt; 0骑士在该单元格加|x|的血；如果 x == 0，骑士的血不掉也不加。如果骑士的血为0，那么他马上死亡。 要使骑士活着见到公主，那么骑士出发时最少需要加多少血。https://leet">
-<meta property="og:updated_time" content="2016-04-20T11:22:04.000Z">
+<meta property="og:description" content="Dungeon Game题目大意：公主被困在迷宫的右下角，骑士初始位于迷宫的左上角。迷宫的每个单元格（包括左上角和右下角）都有一个整数值x，如果x &amp;lt; 0，骑士到达该单元格时掉|x|的血；如果x &amp;gt; 0骑士在该单元格加|x|的血；如果 x == 0，骑士的血不掉也不加。如果骑士的血为0，那么他马上死亡。 要使骑士活着见到公主，那么骑士出发时最少需要加多少血。https://leetco">
+<meta property="og:updated_time" content="2017-05-03T12:51:36.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Dungeon Game && Triangle">
-<meta name="twitter:description" content="#Dungeon Game#题目大意：公主被困在迷宫的右下角，骑士初始位于迷宫的左上角。迷宫的每个单元格（包括左上角和右下角）都有一个整数值x，如果x &amp;lt; 0，骑士到达该单元格时掉|x|的血；如果x &amp;gt; 0骑士在该单元格加|x|的血；如果 x == 0，骑士的血不掉也不加。如果骑士的血为0，那么他马上死亡。 要使骑士活着见到公主，那么骑士出发时最少需要加多少血。https://leet">
+<meta name="twitter:description" content="Dungeon Game题目大意：公主被困在迷宫的右下角，骑士初始位于迷宫的左上角。迷宫的每个单元格（包括左上角和右下角）都有一个整数值x，如果x &amp;lt; 0，骑士到达该单元格时掉|x|的血；如果x &amp;gt; 0骑士在该单元格加|x|的血；如果 x == 0，骑士的血不掉也不加。如果骑士的血为0，那么他马上死亡。 要使骑士活着见到公主，那么骑士出发时最少需要加多少血。https://leetco">
 
 
 
@@ -359,13 +359,13 @@
       
 
       
-        <p>#Dungeon Game#<br>题目大意：公主被困在迷宫的右下角，骑士初始位于迷宫的左上角。迷宫的每个单元格（包括左上角和右下角）都有一个整数值x，如果x &lt; 0，骑士到达该单元格时掉|x|的血；如果x &gt; 0骑士在该单元格加|x|的血；如果 x == 0，骑士的血不掉也不加。如果骑士的血为0，那么他马上死亡。</p>
+        <h1 id="Dungeon-Game"><a href="#Dungeon-Game" class="headerlink" title="Dungeon Game"></a>Dungeon Game</h1><p>题目大意：公主被困在迷宫的右下角，骑士初始位于迷宫的左上角。迷宫的每个单元格（包括左上角和右下角）都有一个整数值x，如果x &lt; 0，骑士到达该单元格时掉|x|的血；如果x &gt; 0骑士在该单元格加|x|的血；如果 x == 0，骑士的血不掉也不加。如果骑士的血为0，那么他马上死亡。</p>
 <p>要使骑士活着见到公主，那么骑士出发时最少需要加多少血。<br><a href="https://leetcode.com/submissions/detail/32832133/" target="_blank" rel="external">https://leetcode.com/submissions/detail/32832133/</a></p>
 <blockquote>
 <p>如果按照常规思维，从左上角到右下角的计算顺序，需要保存到某个单元格时最少需要的血以及剩下的血。如果逆向思维一下，从右下角向左上角计算，如果单元格需要更多的血，就加上需要的血；否则减去当前需要的血值。这种思维方式可以简化解题思路。</p>
 </blockquote>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">calculateMinimumHP</span><span class="params">(<span class="keyword">int</span>[][] d)</span> </span>&#123;</div><div class="line">    <span class="keyword">if</span>(d == <span class="keyword">null</span> || d.length == <span class="number">0</span> || d[<span class="number">0</span>].length == <span class="number">0</span>) <span class="keyword">return</span> <span class="number">1</span>;</div><div class="line">    <span class="keyword">int</span>[][] dp = <span class="keyword">new</span> <span class="keyword">int</span>[d.length][d[<span class="number">0</span>].length];</div><div class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = d.length - <span class="number">1</span>; i &gt;= <span class="number">0</span>; --i) &#123;</div><div class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j = d[<span class="number">0</span>].length - <span class="number">1</span>; j &gt;= <span class="number">0</span>; --j) &#123;</div><div class="line">            <span class="keyword">if</span>(i == d.length - <span class="number">1</span> &amp;&amp; j == d[<span class="number">0</span>].length -<span class="number">1</span>)</div><div class="line">                dp[i][j] = Math.max(<span class="number">1</span>, <span class="number">1</span> - d[i][j]);</div><div class="line">            <span class="keyword">else</span> <span class="keyword">if</span>(i == d.length - <span class="number">1</span>)</div><div class="line">                dp[i][j] = Math.max(<span class="number">1</span>, dp[i][j + <span class="number">1</span>] - d[i][j]);</div><div class="line">            <span class="keyword">else</span> <span class="keyword">if</span>(j == d[<span class="number">0</span>].length - <span class="number">1</span>)</div><div class="line">                dp[i][j] = Math.max(<span class="number">1</span>, dp[i + <span class="number">1</span>][j] - d[i][j]);</div><div class="line">            <span class="keyword">else</span></div><div class="line">                dp[i][j] = Math.max(<span class="number">1</span>, Math.min(dp[i][j + <span class="number">1</span>], dp[i + <span class="number">1</span>][j]) - d[i][j]);</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> dp[<span class="number">0</span>][<span class="number">0</span>];</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>#Triangle#<br>Given a triangle, find the minimum path sum from top to bottom. Each step you may move to adjacent numbers on the row below.</p>
+<h1 id="Triangle"><a href="#Triangle" class="headerlink" title="Triangle"></a>Triangle</h1><p>Given a triangle, find the minimum path sum from top to bottom. Each step you may move to adjacent numbers on the row below.</p>
 <p><a href="https://leetcode.com/problems/triangle/" target="_blank" rel="external">https://leetcode.com/problems/triangle/</a><br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">minimumTotal</span><span class="params">(List&lt;List&lt;Integer&gt;&gt; tri)</span> </span>&#123;</div><div class="line">    <span class="keyword">if</span>(tri == <span class="keyword">null</span> || tri.size() == <span class="number">0</span>) <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">    <span class="keyword">int</span> len = tri.get(tri.size() - <span class="number">1</span>).size();</div><div class="line">    <span class="keyword">int</span>[] dp = <span class="keyword">new</span> <span class="keyword">int</span>[len + <span class="number">1</span>];</div><div class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = len - <span class="number">1</span>; i &gt;= <span class="number">0</span>; --i) &#123;</div><div class="line">        List&lt;Integer&gt; list = tri.get(i);</div><div class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; list.size(); ++j)</div><div class="line">            dp[j] = list.get(j) + Math.min(dp[j], dp[j + <span class="number">1</span>]);</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> dp[<span class="number">0</span>];</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
 
       
@@ -460,8 +460,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel sidebar-panel-active">
+      <section class="site-overview sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/images/avatar.png"
@@ -517,6 +526,22 @@
 
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Dungeon-Game"><span class="nav-number">1.</span> <span class="nav-text">Dungeon Game</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Triangle"><span class="nav-number">2.</span> <span class="nav-text">Triangle</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
     </div>

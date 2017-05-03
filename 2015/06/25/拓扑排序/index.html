@@ -84,17 +84,17 @@
 
 
 
-<meta name="description" content="#拓扑排序#拓扑排序（Topological Order）：将一个有向无环图（Directed Acyclic Graph, DAG）进行排序以得到一个有序线性序列，使得如果图中存在一条从A到B的路径，那么该序列中A出现在B的前面。 #基于BFS的拓扑排序（入度）#  在构建图的过程中统计每个节点的入度，维护一个入度为0的队列，每次选择一个入度为0的节点，将它指向的节点入度减1，重复该过程，直到没">
+<meta name="description" content="拓扑排序拓扑排序（Topological Order）：将一个有向无环图（Directed Acyclic Graph, DAG）进行排序以得到一个有序线性序列，使得如果图中存在一条从A到B的路径，那么该序列中A出现在B的前面。 基于BFS的拓扑排序（入度） 在构建图的过程中统计每个节点的入度，维护一个入度为0的队列，每次选择一个入度为0的节点，将它指向的节点入度减1，重复该过程，直到没有入度为0">
 <meta name="keywords" content="图,拓扑排序,BFS">
 <meta property="og:type" content="article">
 <meta property="og:title" content="拓扑排序">
 <meta property="og:url" content="http://jeffzzf.github.io/2015/06/25/拓扑排序/index.html">
 <meta property="og:site_name" content="Noob">
-<meta property="og:description" content="#拓扑排序#拓扑排序（Topological Order）：将一个有向无环图（Directed Acyclic Graph, DAG）进行排序以得到一个有序线性序列，使得如果图中存在一条从A到B的路径，那么该序列中A出现在B的前面。 #基于BFS的拓扑排序（入度）#  在构建图的过程中统计每个节点的入度，维护一个入度为0的队列，每次选择一个入度为0的节点，将它指向的节点入度减1，重复该过程，直到没">
-<meta property="og:updated_time" content="2016-04-20T11:22:04.000Z">
+<meta property="og:description" content="拓扑排序拓扑排序（Topological Order）：将一个有向无环图（Directed Acyclic Graph, DAG）进行排序以得到一个有序线性序列，使得如果图中存在一条从A到B的路径，那么该序列中A出现在B的前面。 基于BFS的拓扑排序（入度） 在构建图的过程中统计每个节点的入度，维护一个入度为0的队列，每次选择一个入度为0的节点，将它指向的节点入度减1，重复该过程，直到没有入度为0">
+<meta property="og:updated_time" content="2017-05-03T12:51:27.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="拓扑排序">
-<meta name="twitter:description" content="#拓扑排序#拓扑排序（Topological Order）：将一个有向无环图（Directed Acyclic Graph, DAG）进行排序以得到一个有序线性序列，使得如果图中存在一条从A到B的路径，那么该序列中A出现在B的前面。 #基于BFS的拓扑排序（入度）#  在构建图的过程中统计每个节点的入度，维护一个入度为0的队列，每次选择一个入度为0的节点，将它指向的节点入度减1，重复该过程，直到没">
+<meta name="twitter:description" content="拓扑排序拓扑排序（Topological Order）：将一个有向无环图（Directed Acyclic Graph, DAG）进行排序以得到一个有序线性序列，使得如果图中存在一条从A到B的路径，那么该序列中A出现在B的前面。 基于BFS的拓扑排序（入度） 在构建图的过程中统计每个节点的入度，维护一个入度为0的队列，每次选择一个入度为0的节点，将它指向的节点入度减1，重复该过程，直到没有入度为0">
 
 
 
@@ -359,9 +359,8 @@
       
 
       
-        <p>#拓扑排序#<br>拓扑排序（Topological Order）：将一个有向无环图（Directed Acyclic Graph, DAG）进行排序以得到一个有序线性序列，使得如果图中存在一条从A到B的路径，那么该序列中A出现在B的前面。</p>
-<p>#基于BFS的拓扑排序（入度）#</p>
-<blockquote>
+        <h1 id="拓扑排序"><a href="#拓扑排序" class="headerlink" title="拓扑排序"></a>拓扑排序</h1><p>拓扑排序（Topological Order）：将一个有向无环图（Directed Acyclic Graph, DAG）进行排序以得到一个有序线性序列，使得如果图中存在一条从A到B的路径，那么该序列中A出现在B的前面。</p>
+<h1 id="基于BFS的拓扑排序（入度）"><a href="#基于BFS的拓扑排序（入度）" class="headerlink" title="基于BFS的拓扑排序（入度）"></a>基于BFS的拓扑排序（入度）</h1><blockquote>
 <p>在构建图的过程中统计每个节点的入度，维护一个入度为0的队列，每次选择一个入度为0的节点，将它指向的节点入度减1，重复该过程，直到没有入度为0的节点。</p>
 </blockquote>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="keyword">int</span>[] findOrder(<span class="keyword">int</span> num, <span class="keyword">int</span>[][] pre) &#123;</div><div class="line">    <span class="keyword">if</span>(num &lt;= <span class="number">0</span> || pre == <span class="keyword">null</span>) <span class="keyword">return</span> <span class="keyword">null</span>;</div><div class="line">    <span class="keyword">int</span>[] indegree = <span class="keyword">new</span> <span class="keyword">int</span>[num];</div><div class="line">    Deque&lt;Integer&gt; que = <span class="keyword">new</span> ArrayDeque&lt;Integer&gt;();</div><div class="line">    List&lt;List&gt; graph = <span class="keyword">new</span> ArrayList&lt;&gt;();</div><div class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; num; ++i)</div><div class="line">        graph.add(<span class="keyword">new</span> ArrayList&lt;Integer&gt;());</div><div class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; pre.length; ++i) &#123;</div><div class="line">        graph.get(pre[i][<span class="number">1</span>]).add(pre[i][<span class="number">0</span>]);</div><div class="line">        indegree[pre[i][<span class="number">0</span>]]++;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; num; ++i)</div><div class="line">        <span class="keyword">if</span>(indegree[i] == <span class="number">0</span>)</div><div class="line">            que.add(i);</div><div class="line">    <span class="keyword">int</span>[] result = <span class="keyword">new</span> <span class="keyword">int</span>[num];</div><div class="line">    <span class="keyword">int</span> i = <span class="number">0</span>;</div><div class="line">    <span class="keyword">while</span>(!que.isEmpty()) &#123;</div><div class="line">        <span class="keyword">int</span> zero = que.remove();</div><div class="line">        result[i++] = zero;</div><div class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; graph.get(zero).size(); ++j) &#123;</div><div class="line">            <span class="keyword">int</span> nei = (<span class="keyword">int</span>)graph.get(zero).get(j);</div><div class="line">            indegree[nei]--;</div><div class="line">            <span class="keyword">if</span>(indegree[nei] == <span class="number">0</span>)</div><div class="line">                que.add(nei);</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">if</span>(i == num) <span class="keyword">return</span> result;</div><div class="line">    <span class="keyword">else</span> <span class="keyword">return</span> <span class="keyword">new</span> <span class="keyword">int</span>[<span class="number">0</span>];</div><div class="line">&#125;</div></pre></td></tr></table></figure>
@@ -460,8 +459,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel sidebar-panel-active">
+      <section class="site-overview sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/images/avatar.png"
@@ -517,6 +525,22 @@
 
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#拓扑排序"><span class="nav-number">1.</span> <span class="nav-text">拓扑排序</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#基于BFS的拓扑排序（入度）"><span class="nav-number">2.</span> <span class="nav-text">基于BFS的拓扑排序（入度）</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
     </div>

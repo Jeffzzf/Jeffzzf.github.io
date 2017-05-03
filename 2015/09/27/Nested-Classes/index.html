@@ -91,7 +91,7 @@
 <meta property="og:url" content="http://jeffzzf.github.io/2015/09/27/Nested-Classes/index.html">
 <meta property="og:site_name" content="Noob">
 <meta property="og:description" content="Terminology: Nested classes are divided into two categories: static and non-static. Nested classes that are declared static are called static nested classes. Non-static nested classes are called inner">
-<meta property="og:updated_time" content="2016-04-20T11:22:04.000Z">
+<meta property="og:updated_time" content="2017-05-03T12:51:17.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Nested Classes">
 <meta name="twitter:description" content="Terminology: Nested classes are divided into two categories: static and non-static. Nested classes that are declared static are called static nested classes. Non-static nested classes are called inner">
@@ -361,15 +361,14 @@
       
         <p>Terminology: Nested classes are divided into two categories: static and non-static. Nested classes that are declared static are called static nested classes. Non-static nested classes are called inner classes.</p>
 <p>A nested class is a member of its enclosing class. Non-static nested classes (inner classes) have access to other members of the enclosing class, even if they are declared private. Static nested classes do not have access to other members of the enclosing class. As a member of the OuterClass, a nested class can be declared private, public, protected, or package private. (Recall that outer classes can only be declared public or package private.)</p>
-<p>#Static nested class#<br>As with class methods and variables, a static nested class is associated with its outer class. And like static class methods, a static nested class cannot refer directly to instance variables or methods defined in its enclosing class: it can use them only through an object reference.</p>
+<h1 id="Static-nested-class"><a href="#Static-nested-class" class="headerlink" title="Static nested class"></a>Static nested class</h1><p>As with class methods and variables, a static nested class is associated with its outer class. And like static class methods, a static nested class cannot refer directly to instance variables or methods defined in its enclosing class: it can use them only through an object reference.</p>
 <p>A static nested class interacts with the instance members of its outer class (and other classes) just like any other top-level class. In effect, a static nested class is behaviorally a top-level class that has been nested in another top-level class for packaging convenience.<br>Static nested classes are accessed using the enclosing class name: <code>OuterClass.StaticNestedClass</code><br>For example, to create an object for the static nested class, use this syntax:<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">OuterClass.StaticNestedClass nestedObject =</div><div class="line">     <span class="keyword">new</span> OuterClass.StaticNestedClass();</div></pre></td></tr></table></figure></p>
-<p>#Inner Classes#</p>
-<p>As with instance methods and variables, an inner class is associated with an instance of its enclosing class and has direct access to that object’s methods and fields. Also, because an inner class is associated with an instance, it cannot define any static members itself.</p>
+<h1 id="Inner-Classes"><a href="#Inner-Classes" class="headerlink" title="Inner Classes"></a>Inner Classes</h1><p>As with instance methods and variables, an inner class is associated with an instance of its enclosing class and has direct access to that object’s methods and fields. Also, because an inner class is associated with an instance, it cannot define any static members itself.</p>
 <p>Objects that are instances of an inner class exist within an instance of the outer class. Consider the following classes:<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">OuterClass</span> </span>&#123;</div><div class="line">    ...</div><div class="line">    <span class="class"><span class="keyword">class</span> <span class="title">InnerClass</span> </span>&#123;</div><div class="line">        ...</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
 <p>An instance of InnerClass can exist only within an instance of OuterClass and has direct access to the methods and fields of its enclosing instance.</p>
 <p>To instantiate an inner class, you must first instantiate the outer class. Then, create the inner object within the outer object with this syntax:</p>
 <p>OuterClass.InnerClass innerObject = outerObject.new InnerClass();<br>There are two special kinds of inner classes: local classes and anonymous classes.</p>
-<p>#References#<br><a href="https://docs.oracle.com/javase/tutorial/java/javaOO/nested.html" target="_blank" rel="external">Nested Classes</a></p>
+<h1 id="References"><a href="#References" class="headerlink" title="References"></a>References</h1><p><a href="https://docs.oracle.com/javase/tutorial/java/javaOO/nested.html" target="_blank" rel="external">Nested Classes</a></p>
 
       
     </div>
@@ -461,8 +460,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel sidebar-panel-active">
+      <section class="site-overview sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/images/avatar.png"
@@ -518,6 +526,22 @@
 
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Static-nested-class"><span class="nav-number">1.</span> <span class="nav-text">Static nested class</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Inner-Classes"><span class="nav-number">2.</span> <span class="nav-text">Inner Classes</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#References"><span class="nav-number">3.</span> <span class="nav-text">References</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
     </div>

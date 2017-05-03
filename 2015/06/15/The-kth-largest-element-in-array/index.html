@@ -84,17 +84,17 @@
 
 
 
-<meta name="description" content="#方法1：结合快排和二分的思想#123456789101112131415161718192021222324public int findKthLargest(int[] nums, int k) &amp;#123;    if(nums == null || k &amp;lt; 1 || k &amp;gt; nums.length) return -1;    return kthElement(nums, k">
+<meta name="description" content="方法1：结合快排和二分的思想123456789101112131415161718192021222324public int findKthLargest(int[] nums, int k) &amp;#123;    if(nums == null || k &amp;lt; 1 || k &amp;gt; nums.length) return -1;    return kthElement(nums, k,">
 <meta name="keywords" content="数组,二分,堆">
 <meta property="og:type" content="article">
 <meta property="og:title" content="The kth largest element in array">
 <meta property="og:url" content="http://jeffzzf.github.io/2015/06/15/The-kth-largest-element-in-array/index.html">
 <meta property="og:site_name" content="Noob">
-<meta property="og:description" content="#方法1：结合快排和二分的思想#123456789101112131415161718192021222324public int findKthLargest(int[] nums, int k) &amp;#123;    if(nums == null || k &amp;lt; 1 || k &amp;gt; nums.length) return -1;    return kthElement(nums, k">
-<meta property="og:updated_time" content="2016-04-20T11:22:04.000Z">
+<meta property="og:description" content="方法1：结合快排和二分的思想123456789101112131415161718192021222324public int findKthLargest(int[] nums, int k) &amp;#123;    if(nums == null || k &amp;lt; 1 || k &amp;gt; nums.length) return -1;    return kthElement(nums, k,">
+<meta property="og:updated_time" content="2017-05-03T12:51:20.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="The kth largest element in array">
-<meta name="twitter:description" content="#方法1：结合快排和二分的思想#123456789101112131415161718192021222324public int findKthLargest(int[] nums, int k) &amp;#123;    if(nums == null || k &amp;lt; 1 || k &amp;gt; nums.length) return -1;    return kthElement(nums, k">
+<meta name="twitter:description" content="方法1：结合快排和二分的思想123456789101112131415161718192021222324public int findKthLargest(int[] nums, int k) &amp;#123;    if(nums == null || k &amp;lt; 1 || k &amp;gt; nums.length) return -1;    return kthElement(nums, k,">
 
 
 
@@ -359,8 +359,8 @@
       
 
       
-        <p>#方法1：结合快排和二分的思想#<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">findKthLargest</span><span class="params">(<span class="keyword">int</span>[] nums, <span class="keyword">int</span> k)</span> </span>&#123;</div><div class="line">    <span class="keyword">if</span>(nums == <span class="keyword">null</span> || k &lt; <span class="number">1</span> || k &gt; nums.length) <span class="keyword">return</span> -<span class="number">1</span>;</div><div class="line">    <span class="keyword">return</span> kthElement(nums, k, <span class="number">0</span>, nums.length - <span class="number">1</span>);</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">int</span> <span class="title">kthElement</span><span class="params">(<span class="keyword">int</span>[] nums, <span class="keyword">int</span> k, <span class="keyword">int</span> beg, <span class="keyword">int</span> end)</span> </span>&#123;</div><div class="line">    <span class="keyword">int</span> t = partation(nums, beg, end);</div><div class="line">    <span class="keyword">if</span>(t + <span class="number">1</span> == k) <span class="keyword">return</span> nums[t];</div><div class="line">    <span class="keyword">if</span>(t + <span class="number">1</span> &lt; k) <span class="keyword">return</span> kthElement(nums, k, t + <span class="number">1</span>, end);</div><div class="line">    <span class="keyword">else</span> <span class="keyword">return</span> kthElement(nums, k, beg, t - <span class="number">1</span>);</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">int</span> <span class="title">partation</span><span class="params">(<span class="keyword">int</span>[] nums, <span class="keyword">int</span> beg, <span class="keyword">int</span> end)</span> </span>&#123;</div><div class="line">    <span class="keyword">int</span> tmp = nums[beg];</div><div class="line">    <span class="keyword">int</span> i = beg, j = end;</div><div class="line">    <span class="keyword">while</span>(i &lt; j) &#123;</div><div class="line">        <span class="keyword">while</span>(j &gt; i &amp;&amp; nums[j] &lt;= tmp) --j;</div><div class="line">        nums[i] = nums[j];</div><div class="line">        <span class="keyword">while</span>(i &lt; j &amp;&amp; nums[i] &gt; tmp) ++i;</div><div class="line">        nums[j] = nums[i];</div><div class="line">    &#125;</div><div class="line">    nums[i] = tmp;</div><div class="line">    <span class="keyword">return</span> i;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>#方法2：最小堆#<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">findKthLargest</span><span class="params">(<span class="keyword">int</span>[] nums, <span class="keyword">int</span> k)</span> </span>&#123;</div><div class="line">    PriorityQueue&lt;Integer&gt; que = <span class="keyword">new</span> PriorityQueue&lt;&gt;();</div><div class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i : nums) &#123;</div><div class="line">        <span class="keyword">if</span>(que.size() &lt; k)</div><div class="line">            que.add(i);</div><div class="line">        <span class="keyword">else</span> &#123;</div><div class="line">            <span class="keyword">if</span>(que.peek() &lt; i) &#123;</div><div class="line">                que.poll();</div><div class="line">                que.add(i);</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> que.poll();</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+        <h1 id="方法1：结合快排和二分的思想"><a href="#方法1：结合快排和二分的思想" class="headerlink" title="方法1：结合快排和二分的思想"></a>方法1：结合快排和二分的思想</h1><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">findKthLargest</span><span class="params">(<span class="keyword">int</span>[] nums, <span class="keyword">int</span> k)</span> </span>&#123;</div><div class="line">    <span class="keyword">if</span>(nums == <span class="keyword">null</span> || k &lt; <span class="number">1</span> || k &gt; nums.length) <span class="keyword">return</span> -<span class="number">1</span>;</div><div class="line">    <span class="keyword">return</span> kthElement(nums, k, <span class="number">0</span>, nums.length - <span class="number">1</span>);</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">int</span> <span class="title">kthElement</span><span class="params">(<span class="keyword">int</span>[] nums, <span class="keyword">int</span> k, <span class="keyword">int</span> beg, <span class="keyword">int</span> end)</span> </span>&#123;</div><div class="line">    <span class="keyword">int</span> t = partation(nums, beg, end);</div><div class="line">    <span class="keyword">if</span>(t + <span class="number">1</span> == k) <span class="keyword">return</span> nums[t];</div><div class="line">    <span class="keyword">if</span>(t + <span class="number">1</span> &lt; k) <span class="keyword">return</span> kthElement(nums, k, t + <span class="number">1</span>, end);</div><div class="line">    <span class="keyword">else</span> <span class="keyword">return</span> kthElement(nums, k, beg, t - <span class="number">1</span>);</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">int</span> <span class="title">partation</span><span class="params">(<span class="keyword">int</span>[] nums, <span class="keyword">int</span> beg, <span class="keyword">int</span> end)</span> </span>&#123;</div><div class="line">    <span class="keyword">int</span> tmp = nums[beg];</div><div class="line">    <span class="keyword">int</span> i = beg, j = end;</div><div class="line">    <span class="keyword">while</span>(i &lt; j) &#123;</div><div class="line">        <span class="keyword">while</span>(j &gt; i &amp;&amp; nums[j] &lt;= tmp) --j;</div><div class="line">        nums[i] = nums[j];</div><div class="line">        <span class="keyword">while</span>(i &lt; j &amp;&amp; nums[i] &gt; tmp) ++i;</div><div class="line">        nums[j] = nums[i];</div><div class="line">    &#125;</div><div class="line">    nums[i] = tmp;</div><div class="line">    <span class="keyword">return</span> i;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h1 id="方法2：最小堆"><a href="#方法2：最小堆" class="headerlink" title="方法2：最小堆"></a>方法2：最小堆</h1><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">findKthLargest</span><span class="params">(<span class="keyword">int</span>[] nums, <span class="keyword">int</span> k)</span> </span>&#123;</div><div class="line">    PriorityQueue&lt;Integer&gt; que = <span class="keyword">new</span> PriorityQueue&lt;&gt;();</div><div class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i : nums) &#123;</div><div class="line">        <span class="keyword">if</span>(que.size() &lt; k)</div><div class="line">            que.add(i);</div><div class="line">        <span class="keyword">else</span> &#123;</div><div class="line">            <span class="keyword">if</span>(que.peek() &lt; i) &#123;</div><div class="line">                que.poll();</div><div class="line">                que.add(i);</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> que.poll();</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 
       
     </div>
@@ -456,8 +456,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel sidebar-panel-active">
+      <section class="site-overview sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/images/avatar.png"
@@ -513,6 +522,22 @@
 
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#方法1：结合快排和二分的思想"><span class="nav-number">1.</span> <span class="nav-text">方法1：结合快排和二分的思想</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#方法2：最小堆"><span class="nav-number">2.</span> <span class="nav-text">方法2：最小堆</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
     </div>

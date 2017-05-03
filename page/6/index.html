@@ -682,13 +682,13 @@ An obstacle and empty space
 
       
         
-          <p>#Wait() 和 sleep()的比较#<br>wait() 和 sleep()都可以使线程阻塞，它们的区别如下：</p>
+          <h1 id="Wait-和-sleep-的比较"><a href="#Wait-和-sleep-的比较" class="headerlink" title="Wait() 和 sleep()的比较"></a>Wait() 和 sleep()的比较</h1><p>wait() 和 sleep()都可以使线程阻塞，它们的区别如下：</p>
 <ol>
 <li>wait是Object的方法，而sleep是Thread类的静态方法</li>
 <li>sleep使线程阻塞指定时间，这段时间当前线程让出CPU时间，时间结束后继续执行，该过程不释放线程持有的对象锁；wait方法被调用后线程释放持有的锁并进入该锁的等待队列，当收到持有锁的其它线程释放notify或notifyAll信号后，wait方法返回。所以，一般wait方法放在检查某个变量的循环中。</li>
 </ol>
-<p>#notify和notifyAll的区别#<br>notify随机唤醒一个等待锁的线程，notifyAll唤醒所有等待锁的线程</p>
-<p>#什么是Daemon线程#<br>Daemon线程（守护线程，后台线程）是值程序运行时在后台提供一种通用服务的线程，并且这种线程不是程序中不可或缺的部分（例如垃圾回收线程就是一种后台线程）。所有非后台线程结束时会杀死所有的后台线程。只要有非后台线程没结束，程序就不会结束。</p>
+<h1 id="notify和notifyAll的区别"><a href="#notify和notifyAll的区别" class="headerlink" title="notify和notifyAll的区别"></a>notify和notifyAll的区别</h1><p>notify随机唤醒一个等待锁的线程，notifyAll唤醒所有等待锁的线程</p>
+<h1 id="什么是Daemon线程"><a href="#什么是Daemon线程" class="headerlink" title="什么是Daemon线程"></a>什么是Daemon线程</h1><p>Daemon线程（守护线程，后台线程）是值程序运行时在后台提供一种通用服务的线程，并且这种线程不是程序中不可或缺的部分（例如垃圾回收线程就是一种后台线程）。所有非后台线程结束时会杀死所有的后台线程。只要有非后台线程没结束，程序就不会结束。</p>
 <ol>
 <li>可以通过Thread的setDaemon方法将线程设置为Daemon线程，该方法必须在线程启动之前调用</li>
 <li>Daemon线程创建的线程也是Daemon线程</li>
@@ -850,8 +850,7 @@ An obstacle and empty space
       
         
           
-          #Trie树的实现#
-12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758596061626364656667class TrieNode
+          Trie树的实现12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758596061626364656667class TrieNode &#
           ...
           <!--noindex-->
           <div class="post-button text-center">
@@ -1484,7 +1483,7 @@ For example,Given [1,3],[2,6],[8,10],[15,18],return [1,6],[8,10],[15,18].https:/
 
       
         
-          <p>#插入排序#<br>基本思想：维护一个已排好序的序列，每次从未排好序的序列中选择一个元素插入排好序的序列中。具体来说，初始已排序序列为第一个元素，从第二个元素开始，每次选择一个未排序元素，将已排序序列中所有大于该元素的元素向后移动一位，然后把该未排序元素放到排序序列的正确位置。该算法平均时间复杂度O(n^2),在元素已排好序的情况下，时间复杂度为O(n),空间复杂度O(1),是一种稳定排序算法。<br><figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">insert_sort</span><span class="params">(<span class="keyword">int</span> a[], <span class="keyword">int</span> n)</span> </span>&#123;</div><div class="line">    <span class="keyword">int</span> i, j, t;</div><div class="line">    <span class="keyword">for</span> (i = <span class="number">1</span>; i &lt; n; ++i) &#123;</div><div class="line">        <span class="keyword">for</span> (j = i - <span class="number">1</span>, t = a[i]; j &gt;= <span class="number">0</span> &amp;&amp; a[j] &gt; t; --j)</div><div class="line">            a[j + <span class="number">1</span>] = a[j];</div><div class="line">        a[j + <span class="number">1</span>] = t;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+          <h1 id="插入排序"><a href="#插入排序" class="headerlink" title="插入排序"></a>插入排序</h1><p>基本思想：维护一个已排好序的序列，每次从未排好序的序列中选择一个元素插入排好序的序列中。具体来说，初始已排序序列为第一个元素，从第二个元素开始，每次选择一个未排序元素，将已排序序列中所有大于该元素的元素向后移动一位，然后把该未排序元素放到排序序列的正确位置。该算法平均时间复杂度O(n^2),在元素已排好序的情况下，时间复杂度为O(n),空间复杂度O(1),是一种稳定排序算法。<br><figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">insert_sort</span><span class="params">(<span class="keyword">int</span> a[], <span class="keyword">int</span> n)</span> </span>&#123;</div><div class="line">    <span class="keyword">int</span> i, j, t;</div><div class="line">    <span class="keyword">for</span> (i = <span class="number">1</span>; i &lt; n; ++i) &#123;</div><div class="line">        <span class="keyword">for</span> (j = i - <span class="number">1</span>, t = a[i]; j &gt;= <span class="number">0</span> &amp;&amp; a[j] &gt; t; --j)</div><div class="line">            a[j + <span class="number">1</span>] = a[j];</div><div class="line">        a[j + <span class="number">1</span>] = t;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/2015/06/30/排序算法总结/#more" rel="contents">
@@ -1799,7 +1798,7 @@ For example,Given [1,3],[2,6],[8,10],[15,18],return [1,6],[8,10],[15,18].https:/
       
         
           
-          #Best Time to Buy and Sell stock (Simple DP)#Giving an array of values, say the ith value is the price of stock of the ith day. If you can perform at 
+          Best Time to Buy and Sell stock (Simple DP)Giving an array of values, say the ith value is the price of stock of the ith day. If you can perform at mo
           ...
           <!--noindex-->
           <div class="post-button text-center">

@@ -91,7 +91,7 @@
 <meta property="og:url" content="http://jeffzzf.github.io/2015/07/01/Sort-colors/index.html">
 <meta property="og:site_name" content="Noob">
 <meta property="og:description" content="Given an array with n objects colored red, white or blue, sort them so that objects of the same color are adjacent, with the colors in the order red, white and blue. Here, we will use the integers 0,">
-<meta property="og:updated_time" content="2016-04-20T11:22:04.000Z">
+<meta property="og:updated_time" content="2017-05-03T12:51:03.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Sort colors">
 <meta name="twitter:description" content="Given an array with n objects colored red, white or blue, sort them so that objects of the same color are adjacent, with the colors in the order red, white and blue. Here, we will use the integers 0,">
@@ -366,9 +366,9 @@
 <p><a href="https://leetcode.com/problems/sort-colors/" target="_blank" rel="external">https://leetcode.com/problems/sort-colors/</a></p>
 </blockquote>
 <a id="more"></a>
-<p>#Counting sort#<br>Iterator the array conounting the number of 0’s, 1’s, 2’s, then overwrite the array with total number of 0’s, 1’s and t2’s.</p>
+<h1 id="Counting-sort"><a href="#Counting-sort" class="headerlink" title="Counting sort"></a>Counting sort</h1><p>Iterator the array conounting the number of 0’s, 1’s, 2’s, then overwrite the array with total number of 0’s, 1’s and t2’s.</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">sortColors</span><span class="params">(<span class="keyword">int</span> A[], <span class="keyword">int</span> n)</span> </span>&#123;</div><div class="line">    <span class="keyword">int</span> num0 = <span class="number">0</span>, num1 = <span class="number">0</span>, num2 = <span class="number">0</span>;</div><div class="line"></div><div class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++) &#123;</div><div class="line">        <span class="keyword">if</span> (A[i] == <span class="number">0</span>) ++num0;</div><div class="line">        <span class="keyword">else</span> <span class="keyword">if</span> (A[i] == <span class="number">1</span>) ++num1;</div><div class="line">        <span class="keyword">else</span> <span class="keyword">if</span> (A[i] == <span class="number">2</span>) ++num2;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; num0; ++i) A[i] = <span class="number">0</span>;</div><div class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; num1; ++i) A[num0+i] = <span class="number">1</span>;</div><div class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; num2; ++i) A[num0+num1+i] = <span class="number">2</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>#Constant space solution#<br>Using three variables i, j and k to record last indices of red, white and blue. </p>
+<h1 id="Constant-space-solution"><a href="#Constant-space-solution" class="headerlink" title="Constant space solution"></a>Constant space solution</h1><p>Using three variables i, j and k to record last indices of red, white and blue. </p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">sortColors</span><span class="params">(<span class="keyword">int</span>[] nums)</span> </span>&#123;</div><div class="line">    <span class="keyword">if</span>(nums == <span class="keyword">null</span> || nums.length == <span class="number">0</span>) <span class="keyword">return</span>;</div><div class="line">    <span class="keyword">int</span> r = -<span class="number">1</span>, w = -<span class="number">1</span>, b = -<span class="number">1</span>;</div><div class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; nums.length; ++i) &#123;</div><div class="line">        <span class="keyword">if</span>(nums[i] == <span class="number">0</span>) &#123;</div><div class="line">            nums[++b] = <span class="number">2</span>;</div><div class="line">            nums[++w] = <span class="number">1</span>;</div><div class="line">            nums[++r] = <span class="number">0</span>;</div><div class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span>(nums[i] == <span class="number">1</span>) &#123;</div><div class="line">            nums[++b] = <span class="number">2</span>;</div><div class="line">            nums[++w] = <span class="number">1</span>;</div><div class="line">        &#125; <span class="keyword">else</span></div><div class="line">            nums[++b] = <span class="number">2</span>;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 
       
@@ -465,8 +465,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel sidebar-panel-active">
+      <section class="site-overview sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/images/avatar.png"
@@ -522,6 +531,22 @@
 
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Counting-sort"><span class="nav-number">1.</span> <span class="nav-text">Counting sort</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Constant-space-solution"><span class="nav-number">2.</span> <span class="nav-text">Constant space solution</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
     </div>

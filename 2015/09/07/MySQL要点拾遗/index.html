@@ -84,17 +84,17 @@
 
 
 
-<meta name="description" content="#LIMIT#LIMIT 5 表示返回不多于5行的结果，带一个值的LIMIT总是从第一行开始，返回指定的行数LIMIT 5, 5表示返回从第5行开始的5行，第一个数为开始位置，第二个数为要检索的行数  检索出来的第一行为行0而不是行1，因此，LIMIT 1，1将检索出第二行而不是第一行。LIMIT 3，4表示从第三行开始4行，LIMIT 4 OFFSET3表示同样意思  #LIKE#LIKE用于过">
+<meta name="description" content="LIMITLIMIT 5 表示返回不多于5行的结果，带一个值的LIMIT总是从第一行开始，返回指定的行数LIMIT 5, 5表示返回从第5行开始的5行，第一个数为开始位置，第二个数为要检索的行数  检索出来的第一行为行0而不是行1，因此，LIMIT 1，1将检索出第二行而不是第一行。LIMIT 3，4表示从第三行开始4行，LIMIT 4 OFFSET3表示同样意思  LIKELIKE用于过滤部分匹">
 <meta name="keywords" content="MySQL">
 <meta property="og:type" content="article">
 <meta property="og:title" content="MySQL要点拾遗">
 <meta property="og:url" content="http://jeffzzf.github.io/2015/09/07/MySQL要点拾遗/index.html">
 <meta property="og:site_name" content="Noob">
-<meta property="og:description" content="#LIMIT#LIMIT 5 表示返回不多于5行的结果，带一个值的LIMIT总是从第一行开始，返回指定的行数LIMIT 5, 5表示返回从第5行开始的5行，第一个数为开始位置，第二个数为要检索的行数  检索出来的第一行为行0而不是行1，因此，LIMIT 1，1将检索出第二行而不是第一行。LIMIT 3，4表示从第三行开始4行，LIMIT 4 OFFSET3表示同样意思  #LIKE#LIKE用于过">
-<meta property="og:updated_time" content="2016-04-20T11:22:04.000Z">
+<meta property="og:description" content="LIMITLIMIT 5 表示返回不多于5行的结果，带一个值的LIMIT总是从第一行开始，返回指定的行数LIMIT 5, 5表示返回从第5行开始的5行，第一个数为开始位置，第二个数为要检索的行数  检索出来的第一行为行0而不是行1，因此，LIMIT 1，1将检索出第二行而不是第一行。LIMIT 3，4表示从第三行开始4行，LIMIT 4 OFFSET3表示同样意思  LIKELIKE用于过滤部分匹">
+<meta property="og:updated_time" content="2017-05-03T12:51:15.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="MySQL要点拾遗">
-<meta name="twitter:description" content="#LIMIT#LIMIT 5 表示返回不多于5行的结果，带一个值的LIMIT总是从第一行开始，返回指定的行数LIMIT 5, 5表示返回从第5行开始的5行，第一个数为开始位置，第二个数为要检索的行数  检索出来的第一行为行0而不是行1，因此，LIMIT 1，1将检索出第二行而不是第一行。LIMIT 3，4表示从第三行开始4行，LIMIT 4 OFFSET3表示同样意思  #LIKE#LIKE用于过">
+<meta name="twitter:description" content="LIMITLIMIT 5 表示返回不多于5行的结果，带一个值的LIMIT总是从第一行开始，返回指定的行数LIMIT 5, 5表示返回从第5行开始的5行，第一个数为开始位置，第二个数为要检索的行数  检索出来的第一行为行0而不是行1，因此，LIMIT 1，1将检索出第二行而不是第一行。LIMIT 3，4表示从第三行开始4行，LIMIT 4 OFFSET3表示同样意思  LIKELIKE用于过滤部分匹">
 
 
 
@@ -359,26 +359,69 @@
       
 
       
-        <p>#LIMIT#<br>LIMIT 5 表示返回不多于5行的结果，带一个值的LIMIT总是从第一行开始，返回指定的行数<br>LIMIT 5, 5表示返回从第5行开始的5行，第一个数为开始位置，第二个数为要检索的行数</p>
+        <h1 id="LIMIT"><a href="#LIMIT" class="headerlink" title="LIMIT"></a>LIMIT</h1><p>LIMIT 5 表示返回不多于5行的结果，带一个值的LIMIT总是从第一行开始，返回指定的行数<br>LIMIT 5, 5表示返回从第5行开始的5行，第一个数为开始位置，第二个数为要检索的行数</p>
 <blockquote>
 <p>检索出来的第一行为行0而不是行1，因此，LIMIT 1，1将检索出第二行而不是第一行。LIMIT 3，4表示从第三行开始4行，LIMIT 4 OFFSET3表示同样意思</p>
 </blockquote>
-<p>#LIKE#<br>LIKE用于过滤部分匹配的情况，可以使用通配符表示若干字符，其中%表示任何字符出现任何次数（包括0次），但是%不能匹配NULL。下划线_可以匹配单个字符。</p>
-<p>#SELECT子句及其顺序#<br>| 子句 | 说明 | 是否必须 |<br>| —— | ——- | ——- |<br>| SELECT | 返回列或表达式 | 是 |<br>| FROM | 指定要检索的表 | 仅在从表选择数据时使用 |<br>| WHERE | 过滤行 | 否 |<br>| GROUP BY | 分组 | 仅在按组计算聚集时使用 |<br>| HAVING | 组级过滤 | 否 |<br>| ORDER BY | 输出排序顺序 | 否 |<br>| LIMIT | 限制结果数 | 否 |</p>
-<p>#联结#</p>
-<ol>
+<h1 id="LIKE"><a href="#LIKE" class="headerlink" title="LIKE"></a>LIKE</h1><p>LIKE用于过滤部分匹配的情况，可以使用通配符表示若干字符，其中%表示任何字符出现任何次数（包括0次），但是%不能匹配NULL。下划线_可以匹配单个字符。</p>
+<h1 id="SELECT子句及其顺序"><a href="#SELECT子句及其顺序" class="headerlink" title="SELECT子句及其顺序"></a>SELECT子句及其顺序</h1><table>
+<thead>
+<tr>
+<th>子句</th>
+<th>说明</th>
+<th>是否必须</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>SELECT</td>
+<td>返回列或表达式</td>
+<td>是</td>
+</tr>
+<tr>
+<td>FROM</td>
+<td>指定要检索的表</td>
+<td>仅在从表选择数据时使用</td>
+</tr>
+<tr>
+<td>WHERE</td>
+<td>过滤行</td>
+<td>否</td>
+</tr>
+<tr>
+<td>GROUP BY</td>
+<td>分组</td>
+<td>仅在按组计算聚集时使用</td>
+</tr>
+<tr>
+<td>HAVING</td>
+<td>组级过滤</td>
+<td>否</td>
+</tr>
+<tr>
+<td>ORDER BY</td>
+<td>输出排序顺序</td>
+<td>否</td>
+</tr>
+<tr>
+<td>LIMIT</td>
+<td>限制结果数</td>
+<td>否</td>
+</tr>
+</tbody>
+</table>
+<h1 id="联结"><a href="#联结" class="headerlink" title="联结"></a>联结</h1><ol>
 <li>等值联结（内部联结），等值联结是在WHERE子句中指定两表中联结的字段：SELECT id FROM ta, tb WHERE ta.vid = tb.vid，内联结可以达到同样的效果：SELECT id FROM ta INNER JOIN tb ON ta.vid = tb.vid。ANSI SQL规范首选INNER JOIN语法。</li>
 <li>自联结，如果需要多次使用同一个表，可以用表别名和自联结来实现：SELCT p1.proc_id, p1.proc_name FROM products AS p1, product AS p2 WHERE p1.vend_id = p2.vend_id AND p2.proc_id = “DTNTR”</li>
 <li>外部联结，外部联结可以查询到没有关联在一起的行，使用OUTER JOIN时，必须使用RIGHT或LEFT关键字指定包括其所有行的表，RIGHT指出是OUTER JOIN右边的表，LEFT指出是OUTER JOIN左边的表。</li>
 </ol>
-<p>#UNION#</p>
-<ol>
+<h1 id="UNION"><a href="#UNION" class="headerlink" title="UNION"></a>UNION</h1><ol>
 <li>UNION由两条或两条以上的SELECT语句组成，语句之间用UNION隔开</li>
 <li>UNION中的每个查询必须包含相同的列、表达式或聚集函数（不需要以相同的次序列出）</li>
 <li>列数据必须兼容，类型不必完全相同，但必须可以隐式转换</li>
 </ol>
 <p>UNION从结果集中自动去除了重复的行，如果需要返回所有的匹配行，可以使用UNION ALL。ORDER BY子句必须出现在最后一条SELECT语句之后，并且只能有一个ORDER BY子句，对返回的所有结果进行排序。</p>
-<p>#视图#<br>视图可以极大地简化复杂SQL语句、保护基础数据，视图是虚拟的表，可以通过临时表算法或者MERGE SQL算法实现。视图有以下限制：</p>
+<h1 id="视图"><a href="#视图" class="headerlink" title="视图"></a>视图</h1><p>视图可以极大地简化复杂SQL语句、保护基础数据，视图是虚拟的表，可以通过临时表算法或者MERGE SQL算法实现。视图有以下限制：</p>
 <ol>
 <li>创建视图时，视图名不能与表名以及其它视图名相同</li>
 <li>视图不能索引，也不能有关联的触发器</li>
@@ -392,7 +435,7 @@
 <li>聚集函数（MIN(), COUNT(), SUM()等)</li>
 <li>DISTINCT</li>
 </ul>
-<p>#存储过程#<br>存储过程可视为批处理程序，就是为以后的使用而保存的一条或多条MySQL语句的集合。通过使用存储过程有以下好处：</p>
+<h1 id="存储过程"><a href="#存储过程" class="headerlink" title="存储过程"></a>存储过程</h1><p>存储过程可视为批处理程序，就是为以后的使用而保存的一条或多条MySQL语句的集合。通过使用存储过程有以下好处：</p>
 <ol>
 <li>可以把处理封装在容易使用的单元中简化复杂的操作并保证数据的一致性和完整性</li>
 <li>如果表名、列名或业务逻辑有变化，只需要修改存储过程的代码</li>
@@ -400,11 +443,11 @@
 </ol>
 <p>定义存储过程：<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">CREATE</span> <span class="keyword">PROCEDURE</span> productpricing(</div><div class="line">    <span class="keyword">OUT</span> pl <span class="built_in">DECIMAL</span>(<span class="number">8</span>, <span class="number">2</span>),</div><div class="line">    <span class="keyword">OUT</span> ph <span class="built_in">DECIMAL</span>(<span class="number">8</span>, <span class="number">2</span>),</div><div class="line">    <span class="keyword">OUT</span> pa <span class="built_in">DECIMAL</span>(<span class="number">8</span>, <span class="number">2</span>)</div><div class="line">)</div><div class="line"><span class="keyword">BEGIN</span></div><div class="line">    <span class="keyword">SELECT</span> <span class="keyword">Min</span>(prod_price)</div><div class="line">    <span class="keyword">INTO</span> pl</div><div class="line">    <span class="keyword">FROM</span> products;</div><div class="line">    <span class="keyword">SELECT</span> <span class="keyword">Max</span>(prod_price)</div><div class="line">    <span class="keyword">INTO</span> ph</div><div class="line">    <span class="keyword">FROM</span> products;</div><div class="line">    <span class="keyword">SELECT</span> <span class="keyword">Avg</span>(prod_price)</div><div class="line">    <span class="keyword">INTO</span> pa</div><div class="line">    <span class="keyword">FROM</span> products;</div><div class="line"><span class="keyword">END</span>;</div></pre></td></tr></table></figure></p>
 <p>调用存储过程：<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">CALL</span> productpricing(@pricelow,</div><div class="line">                    @pricehigh,</div><div class="line">                    @priceaverage);</div><div class="line"><span class="keyword">SELECT</span> @priceaverage;</div></pre></td></tr></table></figure></p>
-<p>#触发器#<br>触发器是MySQL响应DELETE、INSERT和UPDATE而自动执行的一条MySQL语句，或者位于BEGIN和END语句之间的一组语句。每个表每个事件只允许定义一个触发器，所以每个表最多支持6个触发器（每条INSERT、UPDATE和DELETE的之前和之后）。触发器不能更新或覆盖，要修改一个触发器，必须先删除它然后再创建它。<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">CREATE</span> <span class="keyword">TRIGGER</span> newproduct <span class="keyword">AFTER</span> <span class="keyword">INSERT</span> <span class="keyword">ON</span> products <span class="keyword">FOR</span> <span class="keyword">EACH</span> <span class="keyword">ROW</span> <span class="keyword">SELECT</span> <span class="string">'product added'</span></div></pre></td></tr></table></figure></p>
-<p>#事务管理#<br>ROOLBACK可以撤销MySQL语句，使用ROOLBACK后，MySQL语句不会对表中的数据进行修改：<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">START</span> <span class="keyword">TRANSACTION</span>;</div><div class="line"><span class="keyword">DELETE</span> <span class="keyword">FROM</span> <span class="keyword">order</span>;</div><div class="line">ROOLBACK;</div></pre></td></tr></table></figure></p>
+<h1 id="触发器"><a href="#触发器" class="headerlink" title="触发器"></a>触发器</h1><p>触发器是MySQL响应DELETE、INSERT和UPDATE而自动执行的一条MySQL语句，或者位于BEGIN和END语句之间的一组语句。每个表每个事件只允许定义一个触发器，所以每个表最多支持6个触发器（每条INSERT、UPDATE和DELETE的之前和之后）。触发器不能更新或覆盖，要修改一个触发器，必须先删除它然后再创建它。<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">CREATE</span> <span class="keyword">TRIGGER</span> newproduct <span class="keyword">AFTER</span> <span class="keyword">INSERT</span> <span class="keyword">ON</span> products <span class="keyword">FOR</span> <span class="keyword">EACH</span> <span class="keyword">ROW</span> <span class="keyword">SELECT</span> <span class="string">'product added'</span></div></pre></td></tr></table></figure></p>
+<h1 id="事务管理"><a href="#事务管理" class="headerlink" title="事务管理"></a>事务管理</h1><p>ROOLBACK可以撤销MySQL语句，使用ROOLBACK后，MySQL语句不会对表中的数据进行修改：<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">START</span> <span class="keyword">TRANSACTION</span>;</div><div class="line"><span class="keyword">DELETE</span> <span class="keyword">FROM</span> <span class="keyword">order</span>;</div><div class="line">ROOLBACK;</div></pre></td></tr></table></figure></p>
 <p>COMMIT用于在事务处理中提交所做的更改，MySQL默认自动提交所有更改并立即生效，可以通过<code>SET autocommit=0</code>取消自动提交。在事务处理块中，必须使用COMMIT显示提交事务，当COMMIT或ROLLBACK语句执行后，事务会自动关闭。<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">START</span> <span class="keyword">TRANSACTION</span>;</div><div class="line"><span class="keyword">DELETE</span> <span class="keyword">FROM</span> orders;</div><div class="line"><span class="keyword">COMMIT</span>;</div></pre></td></tr></table></figure></p>
 <p>可以指定保留点（SAVEPOINT）指定要回退的点：<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">SAVEPOINT</span> <span class="keyword">delete</span>;</div><div class="line">ROOLBACK TO <span class="keyword">delete</span>;</div></pre></td></tr></table></figure></p>
-<p>#参考资料#<br>《MySQL必知必会》</p>
+<h1 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h1><p>《MySQL必知必会》</p>
 
       
     </div>
@@ -496,8 +539,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel sidebar-panel-active">
+      <section class="site-overview sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/images/avatar.png"
@@ -553,6 +605,22 @@
 
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#LIMIT"><span class="nav-number">1.</span> <span class="nav-text">LIMIT</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#LIKE"><span class="nav-number">2.</span> <span class="nav-text">LIKE</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#SELECT子句及其顺序"><span class="nav-number">3.</span> <span class="nav-text">SELECT子句及其顺序</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#联结"><span class="nav-number">4.</span> <span class="nav-text">联结</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#UNION"><span class="nav-number">5.</span> <span class="nav-text">UNION</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#视图"><span class="nav-number">6.</span> <span class="nav-text">视图</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#存储过程"><span class="nav-number">7.</span> <span class="nav-text">存储过程</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#触发器"><span class="nav-number">8.</span> <span class="nav-text">触发器</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#事务管理"><span class="nav-number">9.</span> <span class="nav-text">事务管理</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考资料"><span class="nav-number">10.</span> <span class="nav-text">参考资料</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
     </div>

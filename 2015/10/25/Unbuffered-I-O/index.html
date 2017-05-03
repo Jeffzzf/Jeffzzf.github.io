@@ -84,17 +84,17 @@
 
 
 
-<meta name="description" content="The term unbuffered means that each read or write invokes a system call in the kernel. These unbuffered I/O functions are not part of ISO C, but are part of POSIX.1. #File descriptors#To the kernel, a">
+<meta name="description" content="The term unbuffered means that each read or write invokes a system call in the kernel. These unbuffered I/O functions are not part of ISO C, but are part of POSIX.1. File descriptorsTo the kernel, all">
 <meta name="keywords" content="Linux">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Buffered I/O">
 <meta property="og:url" content="http://jeffzzf.github.io/2015/10/25/Unbuffered-I-O/index.html">
 <meta property="og:site_name" content="Noob">
-<meta property="og:description" content="The term unbuffered means that each read or write invokes a system call in the kernel. These unbuffered I/O functions are not part of ISO C, but are part of POSIX.1. #File descriptors#To the kernel, a">
-<meta property="og:updated_time" content="2016-04-20T11:22:04.000Z">
+<meta property="og:description" content="The term unbuffered means that each read or write invokes a system call in the kernel. These unbuffered I/O functions are not part of ISO C, but are part of POSIX.1. File descriptorsTo the kernel, all">
+<meta property="og:updated_time" content="2017-05-03T12:51:22.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Buffered I/O">
-<meta name="twitter:description" content="The term unbuffered means that each read or write invokes a system call in the kernel. These unbuffered I/O functions are not part of ISO C, but are part of POSIX.1. #File descriptors#To the kernel, a">
+<meta name="twitter:description" content="The term unbuffered means that each read or write invokes a system call in the kernel. These unbuffered I/O functions are not part of ISO C, but are part of POSIX.1. File descriptorsTo the kernel, all">
 
 
 
@@ -360,10 +360,10 @@
 
       
         <p>The term unbuffered means that each read or write invokes a system call in the kernel. These unbuffered I/O functions are not part of ISO C, but are part of POSIX.1.</p>
-<p>#File descriptors#<br>To the kernel, all open files are refered to by file descriptors. A file descriptor is a non-negative integer. When we open an existing file or create a new file, the kernel returns a file descriptor to the process. When we want to read or write a file, we identify the file with the file descriptor that was returned by the open or create as an argument.</p>
+<h1 id="File-descriptors"><a href="#File-descriptors" class="headerlink" title="File descriptors"></a>File descriptors</h1><p>To the kernel, all open files are refered to by file descriptors. A file descriptor is a non-negative integer. When we open an existing file or create a new file, the kernel returns a file descriptor to the process. When we want to read or write a file, we identify the file with the file descriptor that was returned by the open or create as an argument.</p>
 <p>By convention, Unix shells associate file descriptor 0 with standard input of a process, file descriptor 1 with the standard output, and file descriptor 2 with the standard error.</p>
 <p>The file descriptors returned by open and openat is guaranteed to be the lowest-numbered unused descriptor.</p>
-<p>#File sharing#<br>The Unix supports the sharing of open files among different processes. The kernel uses three data structures to present an open file, and the relationships among them determine the effect one process has on another with regard to file sharing.</p>
+<h1 id="File-sharing"><a href="#File-sharing" class="headerlink" title="File sharing"></a>File sharing</h1><p>The Unix supports the sharing of open files among different processes. The kernel uses three data structures to present an open file, and the relationships among them determine the effect one process has on another with regard to file sharing.</p>
 <ol>
 <li>Every process has an entry in the process table. Within each process table entry is a table of open file descriptors, which we can think of as a vector, with one entry per descriptor. Associated with each file descriptor are:</li>
 </ol>
@@ -382,9 +382,9 @@
 <ol>
 <li>Each open file(or device) has a v-node structure that contains information about the type of file and pointers to functions that operate on the file. For most file, the v-node also contains the i-node for the file. This information is read from disk when the file is opened, so that all the pertinent information about the file is readily available. For information, the i-node contains the owner of the file, the size of the file, pointers to where the actural data blocks for the file are located on disk, and so on.</li>
 </ol>
-<p>##File descriptor flags VS File status flags##<br>File descriptor flags apply only to a single descriptor in a single process, whereas File status flags apply to all descriptors in any process that point to the given file table entry.</p>
-<p>#Atomic Operations#<br>When a file is shared among mutiple processes, each process has its own file table entry with its own current file offset.  Unexpected results can arise when mutiple processes write to the same file. Unix provides atomic operation to solve these probloms. Atomic operation refers to an operation that might be composed of mutiple steps. If the operation is performed atomically, either all the steps are performed(on success) or none are performed(on failure). It must not be possible for only a subset of the steps to be performed.</p>
-<p>#Reference#<br><em>Adcanced Programming in the Unix Environment(Third Edition)</em></p>
+<h1 id="File-descriptor-flags-VS-File-status-flags"><a href="#File-descriptor-flags-VS-File-status-flags" class="headerlink" title="# File descriptor flags VS File status flags"></a># File descriptor flags VS File status flags</h1><p>File descriptor flags apply only to a single descriptor in a single process, whereas File status flags apply to all descriptors in any process that point to the given file table entry.</p>
+<h1 id="Atomic-Operations"><a href="#Atomic-Operations" class="headerlink" title="Atomic Operations"></a>Atomic Operations</h1><p>When a file is shared among mutiple processes, each process has its own file table entry with its own current file offset.  Unexpected results can arise when mutiple processes write to the same file. Unix provides atomic operation to solve these probloms. Atomic operation refers to an operation that might be composed of mutiple steps. If the operation is performed atomically, either all the steps are performed(on success) or none are performed(on failure). It must not be possible for only a subset of the steps to be performed.</p>
+<h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><p><em>Adcanced Programming in the Unix Environment(Third Edition)</em></p>
 
       
     </div>
@@ -476,8 +476,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel sidebar-panel-active">
+      <section class="site-overview sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/images/avatar.png"
@@ -533,6 +542,22 @@
 
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#File-descriptors"><span class="nav-number">1.</span> <span class="nav-text">File descriptors</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#File-sharing"><span class="nav-number">2.</span> <span class="nav-text">File sharing</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#File-descriptor-flags-VS-File-status-flags"><span class="nav-number">3.</span> <span class="nav-text"># File descriptor flags VS File status flags</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Atomic-Operations"><span class="nav-number">4.</span> <span class="nav-text">Atomic Operations</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Reference"><span class="nav-number">5.</span> <span class="nav-text">Reference</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
     </div>

@@ -84,17 +84,17 @@
 
 
 
-<meta name="description" content="#最大公约数#思路：使用欧几里得算法（辗转相除法），循环取除数和余数，直到余数为零。123456789int gcd(int a, int b) &amp;#123;    int tmp = 0;    while(b != 0 ) &amp;#123;        tmp = a % b;        a = b;        b = tmp;    &amp;#125;    return a;&amp;#125;">
+<meta name="description" content="最大公约数思路：使用欧几里得算法（辗转相除法），循环取除数和余数，直到余数为零。123456789int gcd(int a, int b) &amp;#123;    int tmp = 0;    while(b != 0 ) &amp;#123;        tmp = a % b;        a = b;        b = tmp;    &amp;#125;    return a;&amp;#125; 最小">
 <meta name="keywords" content="最大公约数,最小公倍数">
 <meta property="og:type" content="article">
 <meta property="og:title" content="最大公约数与最小公倍数">
 <meta property="og:url" content="http://jeffzzf.github.io/2015/06/08/最大公约数与最小公倍数/index.html">
 <meta property="og:site_name" content="Noob">
-<meta property="og:description" content="#最大公约数#思路：使用欧几里得算法（辗转相除法），循环取除数和余数，直到余数为零。123456789int gcd(int a, int b) &amp;#123;    int tmp = 0;    while(b != 0 ) &amp;#123;        tmp = a % b;        a = b;        b = tmp;    &amp;#125;    return a;&amp;#125;">
-<meta property="og:updated_time" content="2016-04-20T11:22:04.000Z">
+<meta property="og:description" content="最大公约数思路：使用欧几里得算法（辗转相除法），循环取除数和余数，直到余数为零。123456789int gcd(int a, int b) &amp;#123;    int tmp = 0;    while(b != 0 ) &amp;#123;        tmp = a % b;        a = b;        b = tmp;    &amp;#125;    return a;&amp;#125; 最小">
+<meta property="og:updated_time" content="2017-05-03T12:51:29.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="最大公约数与最小公倍数">
-<meta name="twitter:description" content="#最大公约数#思路：使用欧几里得算法（辗转相除法），循环取除数和余数，直到余数为零。123456789int gcd(int a, int b) &amp;#123;    int tmp = 0;    while(b != 0 ) &amp;#123;        tmp = a % b;        a = b;        b = tmp;    &amp;#125;    return a;&amp;#125;">
+<meta name="twitter:description" content="最大公约数思路：使用欧几里得算法（辗转相除法），循环取除数和余数，直到余数为零。123456789int gcd(int a, int b) &amp;#123;    int tmp = 0;    while(b != 0 ) &amp;#123;        tmp = a % b;        a = b;        b = tmp;    &amp;#125;    return a;&amp;#125; 最小">
 
 
 
@@ -359,8 +359,8 @@
       
 
       
-        <p>#最大公约数#<br>思路：使用欧几里得算法（辗转相除法），循环取除数和余数，直到余数为零。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">gcd</span><span class="params">(<span class="keyword">int</span> a, <span class="keyword">int</span> b)</span> </span>&#123;</div><div class="line">    <span class="keyword">int</span> tmp = <span class="number">0</span>;</div><div class="line">    <span class="keyword">while</span>(b != <span class="number">0</span> ) &#123;</div><div class="line">        tmp = a % b;</div><div class="line">        a = b;</div><div class="line">        b = tmp;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> a;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>#最小公倍数#<br>思路： 两数的最小公倍数等于两数的积与两数的最大公约数的商<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">lcd</span><span class="params">(<span class="keyword">int</span> a, <span class="keyword">int</span> b)</span> </span>&#123;</div><div class="line">    <span class="keyword">return</span> (a * b) / gcd(a, b);</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+        <h1 id="最大公约数"><a href="#最大公约数" class="headerlink" title="最大公约数"></a>最大公约数</h1><p>思路：使用欧几里得算法（辗转相除法），循环取除数和余数，直到余数为零。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">gcd</span><span class="params">(<span class="keyword">int</span> a, <span class="keyword">int</span> b)</span> </span>&#123;</div><div class="line">    <span class="keyword">int</span> tmp = <span class="number">0</span>;</div><div class="line">    <span class="keyword">while</span>(b != <span class="number">0</span> ) &#123;</div><div class="line">        tmp = a % b;</div><div class="line">        a = b;</div><div class="line">        b = tmp;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> a;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h1 id="最小公倍数"><a href="#最小公倍数" class="headerlink" title="最小公倍数"></a>最小公倍数</h1><p>思路： 两数的最小公倍数等于两数的积与两数的最大公约数的商<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">lcd</span><span class="params">(<span class="keyword">int</span> a, <span class="keyword">int</span> b)</span> </span>&#123;</div><div class="line">    <span class="keyword">return</span> (a * b) / gcd(a, b);</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
 
       
     </div>
@@ -454,8 +454,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel sidebar-panel-active">
+      <section class="site-overview sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/images/avatar.png"
@@ -511,6 +520,22 @@
 
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#最大公约数"><span class="nav-number">1.</span> <span class="nav-text">最大公约数</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#最小公倍数"><span class="nav-number">2.</span> <span class="nav-text">最小公倍数</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
     </div>

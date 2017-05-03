@@ -363,8 +363,8 @@
 
       
         
-          <p>#综述#<br>Spring框架的基本思想就是，通过XML配置来驱动Java代码，这样就可以把原来由Java代码管理的耦合关系，提取到XML配置文件中管理。通过这种方式实现系统中各组件的解耦，有利于系统的维护和升级。</p>
-<p>#依赖注入#<br>Spring提供了两种注入方式：构造注入和设值注入，构造注入通过<code>&lt;constructor-arg.../&gt;</code>调用对应含参构造器；设值注入通过<code>&lt;property.../&gt;</code>调用对应的setter方法。Bean注入的成员变量可以分为四种。</p>
+          <h1 id="综述"><a href="#综述" class="headerlink" title="综述"></a>综述</h1><p>Spring框架的基本思想就是，通过XML配置来驱动Java代码，这样就可以把原来由Java代码管理的耦合关系，提取到XML配置文件中管理。通过这种方式实现系统中各组件的解耦，有利于系统的维护和升级。</p>
+<h1 id="依赖注入"><a href="#依赖注入" class="headerlink" title="依赖注入"></a>依赖注入</h1><p>Spring提供了两种注入方式：构造注入和设值注入，构造注入通过<code>&lt;constructor-arg.../&gt;</code>调用对应含参构造器；设值注入通过<code>&lt;property.../&gt;</code>调用对应的setter方法。Bean注入的成员变量可以分为四种。</p>
 <ul>
 <li>普通成员变量。 通过指定property的value属性实现。<code>&lt;property name=&quot;intField&quot; value=&quot;1&quot;/&gt;</code>,<code>&lt;property name=&quot;double&quot; value=&quot;2.3&quot;/&gt;</code></li>
 <li>引用成员变量。通过指定property的ref属性实现<code>&lt;property name=&quot;axe&quot; ref=&quot;steelAxe&quot;/&gt;</code>。也可以通过配置autowrite属性让Spring自动装配Bean的引用成员变量，但在大型应用中自动装配会降低依赖关系的清晰度和透明度。如果被引用的Bean不需要被Spring容器访问，可以考虑使用嵌套Bean。</li>
@@ -527,10 +527,9 @@
       
         
           
-          #拓扑排序#拓扑排序（Topological Order）：将一个有向无环图（Directed Acyclic Graph, DAG）进行排序以得到一个有序线性序列，使得如果图中存在一条从A到B的路径，那么该序列中A出现在B的前面。
-#基于BFS的拓扑排序（入度）#
-
-在构建图的过程中统计每个节点的
+          拓扑排序拓扑排序（Topological Order）：将一个有向无环图（Directed Acyclic Graph, DAG）进行排序以得到一个有序线性序列，使得如果图中存在一条从A到B的路径，那么该序列中A出现在B的前面。
+基于BFS的拓扑排序（入度）
+在构建图的过程中统计每个节点的入度，维护
           ...
           <!--noindex-->
           <div class="post-button text-center">
@@ -850,7 +849,7 @@ To set the default to UTF-8, you want to add the following to my.cnf
 
       
         
-          <p>#Hibernate综述#<br> Hibernate框架用于实现对数据库的操作，为应用程序构建一个持久层。Hibernate是对JDBC的封装，通过JDBC的DataBaseMetaData类和ResultSetMetaData类获取数据库表的字段名、类型、大小等相关信息。再结合Java的反射机制建立Java类与数据库表以Java对象与数据表中记录之间的关系。</p>
+          <h1 id="Hibernate综述"><a href="#Hibernate综述" class="headerlink" title="Hibernate综述"></a>Hibernate综述</h1><p> Hibernate框架用于实现对数据库的操作，为应用程序构建一个持久层。Hibernate是对JDBC的封装，通过JDBC的DataBaseMetaData类和ResultSetMetaData类获取数据库表的字段名、类型、大小等相关信息。再结合Java的反射机制建立Java类与数据库表以Java对象与数据表中记录之间的关系。</p>
 <p> Hibernate定义了以下对象状态（参考<a href="http://wiki.jikexueyuan.com/project/ssh-noob-learning/three-states.html）。">http://wiki.jikexueyuan.com/project/ssh-noob-learning/three-states.html）。</a></p>
 <blockquote>
 <ul>
@@ -1016,7 +1015,7 @@ To set the default to UTF-8, you want to add the following to my.cnf
       
         
           
-          #方法1：结合快排和二分的思想#123456789101112131415161718192021222324public int findKthLargest(int[] nums, int k) &#123;    if(nums == null || k &lt; 1 || k &gt; nu
+          方法1：结合快排和二分的思想123456789101112131415161718192021222324public int findKthLargest(int[] nums, int k) &#123;    if(nums == null || k &lt; 1 || k &gt; nums
           ...
           <!--noindex-->
           <div class="post-button text-center">
@@ -1174,10 +1173,9 @@ To set the default to UTF-8, you want to add the following to my.cnf
       
         
           
-          #Android#
-
+          Android
 References to resources are always scoped by the resource type (such as id or string), so using the same name does not cause collisions.
-Se
+Setti
           ...
           <!--noindex-->
           <div class="post-button text-center">
@@ -1334,7 +1332,7 @@ Se
 
       
         
-          <p>#求最长公共子序列#<br>使用DP算法，i, j分别表示,s1和s2的下标，转移方程为:</p>
+          <h1 id="求最长公共子序列"><a href="#求最长公共子序列" class="headerlink" title="求最长公共子序列"></a>求最长公共子序列</h1><p>使用DP算法，i, j分别表示,s1和s2的下标，转移方程为:</p>
 <ul>
 <li>dp[i][j] = 0;   if(i == 0 || j == 0)</li>
 <li>dp[i][j] = dp[i - 1][j - 1] + 1; if(s1[i] == s2[j])</li>
@@ -1497,8 +1495,8 @@ Se
       
         
           
-          #字符串匹配（简版）#https://leetcode.com/problems/wildcard-matching/“?”代表一个任意的字符，”*“ 代表0个或多个字符
-##有限状态机（DFA）##记录下不匹配的位置，然后依次回溯1234567891011121314151617181920212
+          字符串匹配（简版）https://leetcode.com/problems/wildcard-matching/“?”代表一个任意的字符，”*“ 代表0个或多个字符
+# 有限状态机（DFA）记录下不匹配的位置，然后依次回溯12345678910111213141516171819202122232
           ...
           <!--noindex-->
           <div class="post-button text-center">
@@ -1656,7 +1654,7 @@ Se
       
         
           
-          #最大公约数#思路：使用欧几里得算法（辗转相除法），循环取除数和余数，直到余数为零。123456789int gcd(int a, int b) &#123;    int tmp = 0;    while(b != 0 ) &#123;        tmp = a % b;        a 
+          最大公约数思路：使用欧几里得算法（辗转相除法），循环取除数和余数，直到余数为零。123456789int gcd(int a, int b) &#123;    int tmp = 0;    while(b != 0 ) &#123;        tmp = a % b;        a = 
           ...
           <!--noindex-->
           <div class="post-button text-center">
@@ -1814,7 +1812,7 @@ Se
       
         
           
-          #Brute Force#暴力方法依次遍历原字符串，每次从当前位置开始与待查找字符串比较，如果对应字符串不相等，那么原字符串向后移动一位继续与待查找字符串比较。如果待查找字符串一直到结尾都相等，那么返回原字符串开始比较的位置即可。最坏情况下，每次待查找字符串都便利到最后一个字符时失配，这种情况下时间
+          Brute Force暴力方法依次遍历原字符串，每次从当前位置开始与待查找字符串比较，如果对应字符串不相等，那么原字符串向后移动一位继续与待查找字符串比较。如果待查找字符串一直到结尾都相等，那么返回原字符串开始比较的位置即可。最坏情况下，每次待查找字符串都便利到最后一个字符时失配，这种情况下时间复杂
           ...
           <!--noindex-->
           <div class="post-button text-center">

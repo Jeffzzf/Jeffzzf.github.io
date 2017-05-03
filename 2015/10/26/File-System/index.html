@@ -84,17 +84,17 @@
 
 
 
-<meta name="description" content="#File Types#  Regular file. There is no distinction to the Unix kernel whether this data is text or binary. Any interpretation of the contents of a regular fiel is left to the application processing t">
+<meta name="description" content="File Types Regular file. There is no distinction to the Unix kernel whether this data is text or binary. Any interpretation of the contents of a regular fiel is left to the application processing the">
 <meta name="keywords" content="Linux">
 <meta property="og:type" content="article">
 <meta property="og:title" content="File System">
 <meta property="og:url" content="http://jeffzzf.github.io/2015/10/26/File-System/index.html">
 <meta property="og:site_name" content="Noob">
-<meta property="og:description" content="#File Types#  Regular file. There is no distinction to the Unix kernel whether this data is text or binary. Any interpretation of the contents of a regular fiel is left to the application processing t">
-<meta property="og:updated_time" content="2016-04-20T11:22:04.000Z">
+<meta property="og:description" content="File Types Regular file. There is no distinction to the Unix kernel whether this data is text or binary. Any interpretation of the contents of a regular fiel is left to the application processing the">
+<meta property="og:updated_time" content="2017-05-03T12:51:36.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="File System">
-<meta name="twitter:description" content="#File Types#  Regular file. There is no distinction to the Unix kernel whether this data is text or binary. Any interpretation of the contents of a regular fiel is left to the application processing t">
+<meta name="twitter:description" content="File Types Regular file. There is no distinction to the Unix kernel whether this data is text or binary. Any interpretation of the contents of a regular fiel is left to the application processing the">
 
 
 
@@ -359,8 +359,7 @@
       
 
       
-        <p>#File Types#</p>
-<ol>
+        <h1 id="File-Types"><a href="#File-Types" class="headerlink" title="File Types"></a>File Types</h1><ol>
 <li>Regular file. There is no distinction to the Unix kernel whether this data is text or binary. Any interpretation of the contents of a regular fiel is left to the application processing the file.<blockquote>
 <p>To execute a program, the kernel must understand its format. All binary executable files conform to a format that allows the kernel to identify where to load a program’s text and data.</p>
 </blockquote>
@@ -372,7 +371,7 @@
 <li>Socket. A type of file used for network commucation between processes. A socket can also be used for non-network communication between processes on a single host.</li>
 <li>Symbolic link. A type of file that points to another file.</li>
 </ol>
-<p>#File Access#<br>The file access tests that the kernel perform each time a process opens, creates or deletes a file. The tests depend on the owners of the file and the effective IDs of the process. The tests performed by the kernel are as follows:</p>
+<h1 id="File-Access"><a href="#File-Access" class="headerlink" title="File Access"></a>File Access</h1><p>The file access tests that the kernel perform each time a process opens, creates or deletes a file. The tests depend on the owners of the file and the effective IDs of the process. The tests performed by the kernel are as follows:</p>
 <ol>
 <li>If the effective Id of the process is 0(the superuser), access is allowed.</li>
 <li>If the effective user ID of the process equals the owner ID of the file, access is allowed if the appropriate access permission bit is set. Otherwise, permission is denied.</li>
@@ -380,7 +379,7 @@
 <li>If the appropriate other access permission bit is set, access is allowed. Otherwise, permission is denied.</li>
 </ol>
 <p>These four steps are tried in sequence. For example, if the process owns the file, access is granted or denied based only on the user access permission; the froup permission are never looked at.</p>
-<p>#Reference#<br>Adcanced Programming in the Unix Environment(Third Edition)</p>
+<h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><p>Adcanced Programming in the Unix Environment(Third Edition)</p>
 
       
     </div>
@@ -472,8 +471,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel sidebar-panel-active">
+      <section class="site-overview sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/images/avatar.png"
@@ -529,6 +537,22 @@
 
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#File-Types"><span class="nav-number">1.</span> <span class="nav-text">File Types</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#File-Access"><span class="nav-number">2.</span> <span class="nav-text">File Access</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Reference"><span class="nav-number">3.</span> <span class="nav-text">Reference</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
     </div>
