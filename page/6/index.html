@@ -13,8 +13,14 @@
 
 
 
+
+
+
 <meta http-equiv="Cache-Control" content="no-transform" />
 <meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
 
 
 
@@ -65,7 +71,7 @@
 
 <link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
 
-<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
 
 
   <meta name="keywords" content="Hexo, NexT" />
@@ -77,7 +83,7 @@
 
 
 
-  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1" />
 
 
 
@@ -101,7 +107,7 @@
   var CONFIG = {
     root: '/',
     scheme: 'Pisces',
-    sidebar: {"position":"left","display":"post"},
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
     fancybox: true,
     motion: true,
     duoshuo: {
@@ -126,7 +132,7 @@
 
 
 
-  <title> Noob </title>
+  <title>Noob</title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -142,38 +148,44 @@
 
 
 
+
+
+
+
   
   
     
   
 
-  <div class="container one-collumn sidebar-position-left 
+  <div class="container sidebar-position-left 
    page-home 
  ">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
-      <div class="header-inner"><div class="site-meta ">
-  
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
 
-  <div class="custom-logo-site-title">
-    <a href="/"  class="brand" rel="start">
-      <span class="logo-line-before"><i></i></span>
-      <span class="site-title">Noob</span>
-      <span class="logo-line-after"><i></i></span>
-    </a>
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Noob</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
   </div>
-    
-      <p class="site-subtitle"></p>
-    
-</div>
 
-<div class="site-nav-toggle">
-  <button>
-    <span class="btn-bar"></span>
-    <span class="btn-bar"></span>
-    <span class="btn-bar"></span>
-  </button>
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
 </div>
 
 <nav class="site-nav">
@@ -251,20 +263,17 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://jeffzzf.github.io/2015/07/08/Word-Break/">
+    <link itemprop="mainEntityOfPage" href="http://jeffzzf.github.io/2015/07/09/Wildcard-Matching/">
 
-  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
-    <meta itemprop="name" content="Jeffzzf">
-    <meta itemprop="description" content="">
-    <meta itemprop="image" content="/images/avatar.png">
-  </span>
-
-  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-    <meta itemprop="name" content="Noob">
-    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
-      <img style="display:none;" itemprop="url image" alt="Noob" src="">
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Jeffzzf">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
     </span>
-  </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Noob">
+    </span>
 
     
       <header class="post-header">
@@ -272,16 +281,8 @@
         
         
           <h1 class="post-title" itemprop="name headline">
-            
-            
-              
                 
-                <a class="post-title-link" href="/2015/07/08/Word-Break/" itemprop="url">
-                  Word Break
-                </a>
-              
-            
-          </h1>
+                <a class="post-title-link" href="/2015/07/09/Wildcard-Matching/" itemprop="url">Wildcard Matching</a></h1>
         
 
         <div class="post-meta">
@@ -293,7 +294,312 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2015-07-08T10:37:00+08:00">
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2015-07-09T21:54:05+08:00">
+                2015-07-09
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/算法/" itemprop="url" rel="index">
+                    <span itemprop="name">算法</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/算法/DP/" itemprop="url" rel="index">
+                    <span itemprop="name">DP</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+          Wildcard MatchingImplement wildcard pattern matching with support for ‘?’ and ‘*’.
+‘?’ Matches any single character.‘*’ Matches any sequence of charac
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2015/07/09/Wildcard-Matching/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://jeffzzf.github.io/2015/07/09/常见Hash函数与BloomFilter/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Jeffzzf">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Noob">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2015/07/09/常见Hash函数与BloomFilter/" itemprop="url">常见Hash函数与BloomFilter</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2015-07-09T15:16:06+08:00">
+                2015-07-09
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/网络/" itemprop="url" rel="index">
+                    <span itemprop="name">网络</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/网络/爬虫/" itemprop="url" rel="index">
+                    <span itemprop="name">爬虫</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+          哈希函数哈希函数（散列函数，Hash Function）是一种从任何数据中创建数字指纹的方法，如果两个散列值是不相同的（根据同一函数），那么这两个散列值的原始输入也是不相同的。这个特性是散列函数具有确定性的结果，具有这种性质的散列函数称为单向散列函数。
+常用构造方法
+直接定址法：hash(key) 
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2015/07/09/常见Hash函数与BloomFilter/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://jeffzzf.github.io/2015/07/08/Word-Break/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Jeffzzf">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Noob">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2015/07/08/Word-Break/" itemprop="url">Word Break</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2015-07-08T10:37:00+08:00">
                 2015-07-08
               </time>
             
@@ -343,8 +649,8 @@
           
 
           
-
           
+
           
 
           
@@ -354,7 +660,6 @@
         </div>
       </header>
     
-
 
     <div class="post-body" itemprop="articleBody">
 
@@ -386,8 +691,13 @@ Return all such p
       
     </div>
 
+    <div>
+      
+    </div>
 
     <footer class="post-footer">
+      
+
       
 
       
@@ -410,20 +720,17 @@ Return all such p
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://jeffzzf.github.io/2015/07/07/Unique-Paths/">
+    <link itemprop="mainEntityOfPage" href="http://jeffzzf.github.io/2015/07/07/Unique-Paths/">
 
-  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
-    <meta itemprop="name" content="Jeffzzf">
-    <meta itemprop="description" content="">
-    <meta itemprop="image" content="/images/avatar.png">
-  </span>
-
-  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-    <meta itemprop="name" content="Noob">
-    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
-      <img style="display:none;" itemprop="url image" alt="Noob" src="">
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Jeffzzf">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
     </span>
-  </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Noob">
+    </span>
 
     
       <header class="post-header">
@@ -431,16 +738,8 @@ Return all such p
         
         
           <h1 class="post-title" itemprop="name headline">
-            
-            
-              
                 
-                <a class="post-title-link" href="/2015/07/07/Unique-Paths/" itemprop="url">
-                  Unique Paths
-                </a>
-              
-            
-          </h1>
+                <a class="post-title-link" href="/2015/07/07/Unique-Paths/" itemprop="url">Unique Paths</a></h1>
         
 
         <div class="post-meta">
@@ -452,7 +751,7 @@ Return all such p
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2015-07-07T10:50:39+08:00">
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2015-07-07T10:50:39+08:00">
                 2015-07-07
               </time>
             
@@ -502,8 +801,8 @@ Return all such p
           
 
           
-
           
+
           
 
           
@@ -513,7 +812,6 @@ Return all such p
         </div>
       </header>
     
-
 
     <div class="post-body" itemprop="articleBody">
 
@@ -546,8 +844,13 @@ An obstacle and empty space
       
     </div>
 
+    <div>
+      
+    </div>
 
     <footer class="post-footer">
+      
+
       
 
       
@@ -570,20 +873,17 @@ An obstacle and empty space
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://jeffzzf.github.io/2015/07/04/Java并发面试题整理/">
+    <link itemprop="mainEntityOfPage" href="http://jeffzzf.github.io/2015/07/04/Java并发面试题整理/">
 
-  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
-    <meta itemprop="name" content="Jeffzzf">
-    <meta itemprop="description" content="">
-    <meta itemprop="image" content="/images/avatar.png">
-  </span>
-
-  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-    <meta itemprop="name" content="Noob">
-    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
-      <img style="display:none;" itemprop="url image" alt="Noob" src="">
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Jeffzzf">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
     </span>
-  </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Noob">
+    </span>
 
     
       <header class="post-header">
@@ -591,16 +891,8 @@ An obstacle and empty space
         
         
           <h1 class="post-title" itemprop="name headline">
-            
-            
-              
                 
-                <a class="post-title-link" href="/2015/07/04/Java并发面试题整理/" itemprop="url">
-                  Java并发面试题整理
-                </a>
-              
-            
-          </h1>
+                <a class="post-title-link" href="/2015/07/04/Java并发面试题整理/" itemprop="url">Java并发面试题整理</a></h1>
         
 
         <div class="post-meta">
@@ -612,7 +904,7 @@ An obstacle and empty space
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2015-07-04T19:57:44+08:00">
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2015-07-04T19:57:44+08:00">
                 2015-07-04
               </time>
             
@@ -662,8 +954,8 @@ An obstacle and empty space
           
 
           
-
           
+
           
 
           
@@ -673,7 +965,6 @@ An obstacle and empty space
         </div>
       </header>
     
-
 
     <div class="post-body" itemprop="articleBody">
 
@@ -713,8 +1004,13 @@ An obstacle and empty space
       
     </div>
 
+    <div>
+      
+    </div>
 
     <footer class="post-footer">
+      
+
       
 
       
@@ -737,20 +1033,17 @@ An obstacle and empty space
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://jeffzzf.github.io/2015/07/03/Trie树的实现及应用/">
+    <link itemprop="mainEntityOfPage" href="http://jeffzzf.github.io/2015/07/03/Trie树的实现及应用/">
 
-  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
-    <meta itemprop="name" content="Jeffzzf">
-    <meta itemprop="description" content="">
-    <meta itemprop="image" content="/images/avatar.png">
-  </span>
-
-  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-    <meta itemprop="name" content="Noob">
-    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
-      <img style="display:none;" itemprop="url image" alt="Noob" src="">
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Jeffzzf">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
     </span>
-  </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Noob">
+    </span>
 
     
       <header class="post-header">
@@ -758,16 +1051,8 @@ An obstacle and empty space
         
         
           <h1 class="post-title" itemprop="name headline">
-            
-            
-              
                 
-                <a class="post-title-link" href="/2015/07/03/Trie树的实现及应用/" itemprop="url">
-                  Trie树的实现及应用
-                </a>
-              
-            
-          </h1>
+                <a class="post-title-link" href="/2015/07/03/Trie树的实现及应用/" itemprop="url">Trie树的实现及应用</a></h1>
         
 
         <div class="post-meta">
@@ -779,7 +1064,7 @@ An obstacle and empty space
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2015-07-03T13:04:39+08:00">
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2015-07-03T13:04:39+08:00">
                 2015-07-03
               </time>
             
@@ -829,8 +1114,8 @@ An obstacle and empty space
           
 
           
-
           
+
           
 
           
@@ -840,7 +1125,6 @@ An obstacle and empty space
         </div>
       </header>
     
-
 
     <div class="post-body" itemprop="articleBody">
 
@@ -871,8 +1155,13 @@ An obstacle and empty space
       
     </div>
 
+    <div>
+      
+    </div>
 
     <footer class="post-footer">
+      
+
       
 
       
@@ -895,20 +1184,17 @@ An obstacle and empty space
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://jeffzzf.github.io/2015/07/01/Merge-Intervals/">
+    <link itemprop="mainEntityOfPage" href="http://jeffzzf.github.io/2015/07/01/Merge-Intervals/">
 
-  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
-    <meta itemprop="name" content="Jeffzzf">
-    <meta itemprop="description" content="">
-    <meta itemprop="image" content="/images/avatar.png">
-  </span>
-
-  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-    <meta itemprop="name" content="Noob">
-    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
-      <img style="display:none;" itemprop="url image" alt="Noob" src="">
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Jeffzzf">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
     </span>
-  </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Noob">
+    </span>
 
     
       <header class="post-header">
@@ -916,16 +1202,8 @@ An obstacle and empty space
         
         
           <h1 class="post-title" itemprop="name headline">
-            
-            
-              
                 
-                <a class="post-title-link" href="/2015/07/01/Merge-Intervals/" itemprop="url">
-                  Merge Intervals
-                </a>
-              
-            
-          </h1>
+                <a class="post-title-link" href="/2015/07/01/Merge-Intervals/" itemprop="url">Merge Intervals</a></h1>
         
 
         <div class="post-meta">
@@ -937,7 +1215,7 @@ An obstacle and empty space
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2015-07-01T11:33:05+08:00">
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2015-07-01T11:33:05+08:00">
                 2015-07-01
               </time>
             
@@ -987,8 +1265,8 @@ An obstacle and empty space
           
 
           
-
           
+
           
 
           
@@ -998,7 +1276,6 @@ An obstacle and empty space
         </div>
       </header>
     
-
 
     <div class="post-body" itemprop="articleBody">
 
@@ -1030,8 +1307,13 @@ For example,Given [1,3],[2,6],[8,10],[15,18],return [1,6],[8,10],[15,18].https:/
       
     </div>
 
+    <div>
+      
+    </div>
 
     <footer class="post-footer">
+      
+
       
 
       
@@ -1054,20 +1336,17 @@ For example,Given [1,3],[2,6],[8,10],[15,18],return [1,6],[8,10],[15,18].https:/
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://jeffzzf.github.io/2015/07/01/Sort-colors/">
+    <link itemprop="mainEntityOfPage" href="http://jeffzzf.github.io/2015/07/01/Sort-colors/">
 
-  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
-    <meta itemprop="name" content="Jeffzzf">
-    <meta itemprop="description" content="">
-    <meta itemprop="image" content="/images/avatar.png">
-  </span>
-
-  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-    <meta itemprop="name" content="Noob">
-    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
-      <img style="display:none;" itemprop="url image" alt="Noob" src="">
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Jeffzzf">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
     </span>
-  </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Noob">
+    </span>
 
     
       <header class="post-header">
@@ -1075,16 +1354,8 @@ For example,Given [1,3],[2,6],[8,10],[15,18],return [1,6],[8,10],[15,18].https:/
         
         
           <h1 class="post-title" itemprop="name headline">
-            
-            
-              
                 
-                <a class="post-title-link" href="/2015/07/01/Sort-colors/" itemprop="url">
-                  Sort colors
-                </a>
-              
-            
-          </h1>
+                <a class="post-title-link" href="/2015/07/01/Sort-colors/" itemprop="url">Sort colors</a></h1>
         
 
         <div class="post-meta">
@@ -1096,7 +1367,7 @@ For example,Given [1,3],[2,6],[8,10],[15,18],return [1,6],[8,10],[15,18].https:/
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2015-07-01T10:46:38+08:00">
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2015-07-01T10:46:38+08:00">
                 2015-07-01
               </time>
             
@@ -1146,8 +1417,8 @@ For example,Given [1,3],[2,6],[8,10],[15,18],return [1,6],[8,10],[15,18].https:/
           
 
           
-
           
+
           
 
           
@@ -1157,7 +1428,6 @@ For example,Given [1,3],[2,6],[8,10],[15,18],return [1,6],[8,10],[15,18].https:/
         </div>
       </header>
     
-
 
     <div class="post-body" itemprop="articleBody">
 
@@ -1191,8 +1461,13 @@ For example,Given [1,3],[2,6],[8,10],[15,18],return [1,6],[8,10],[15,18].https:/
       
     </div>
 
+    <div>
+      
+    </div>
 
     <footer class="post-footer">
+      
+
       
 
       
@@ -1215,20 +1490,17 @@ For example,Given [1,3],[2,6],[8,10],[15,18],return [1,6],[8,10],[15,18].https:/
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://jeffzzf.github.io/2015/06/30/Basic-Concepts-in-Java-Concurrent/">
+    <link itemprop="mainEntityOfPage" href="http://jeffzzf.github.io/2015/06/30/Basic-Concepts-in-Java-Concurrent/">
 
-  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
-    <meta itemprop="name" content="Jeffzzf">
-    <meta itemprop="description" content="">
-    <meta itemprop="image" content="/images/avatar.png">
-  </span>
-
-  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-    <meta itemprop="name" content="Noob">
-    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
-      <img style="display:none;" itemprop="url image" alt="Noob" src="">
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Jeffzzf">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
     </span>
-  </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Noob">
+    </span>
 
     
       <header class="post-header">
@@ -1236,16 +1508,8 @@ For example,Given [1,3],[2,6],[8,10],[15,18],return [1,6],[8,10],[15,18].https:/
         
         
           <h1 class="post-title" itemprop="name headline">
-            
-            
-              
                 
-                <a class="post-title-link" href="/2015/06/30/Basic-Concepts-in-Java-Concurrent/" itemprop="url">
-                  Basic Concepts in Java Concurrent
-                </a>
-              
-            
-          </h1>
+                <a class="post-title-link" href="/2015/06/30/Basic-Concepts-in-Java-Concurrent/" itemprop="url">Basic Concepts in Java Concurrent</a></h1>
         
 
         <div class="post-meta">
@@ -1257,7 +1521,7 @@ For example,Given [1,3],[2,6],[8,10],[15,18],return [1,6],[8,10],[15,18].https:/
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2015-06-30T16:02:45+08:00">
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2015-06-30T16:02:45+08:00">
                 2015-06-30
               </time>
             
@@ -1307,8 +1571,8 @@ For example,Given [1,3],[2,6],[8,10],[15,18],return [1,6],[8,10],[15,18].https:/
           
 
           
-
           
+
           
 
           
@@ -1318,7 +1582,6 @@ For example,Given [1,3],[2,6],[8,10],[15,18],return [1,6],[8,10],[15,18].https:/
         </div>
       </header>
     
-
 
     <div class="post-body" itemprop="articleBody">
 
@@ -1347,8 +1610,13 @@ For example,Given [1,3],[2,6],[8,10],[15,18],return [1,6],[8,10],[15,18].https:/
       
     </div>
 
+    <div>
+      
+    </div>
 
     <footer class="post-footer">
+      
+
       
 
       
@@ -1371,20 +1639,17 @@ For example,Given [1,3],[2,6],[8,10],[15,18],return [1,6],[8,10],[15,18].https:/
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://jeffzzf.github.io/2015/06/30/排序算法总结/">
+    <link itemprop="mainEntityOfPage" href="http://jeffzzf.github.io/2015/06/30/排序算法总结/">
 
-  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
-    <meta itemprop="name" content="Jeffzzf">
-    <meta itemprop="description" content="">
-    <meta itemprop="image" content="/images/avatar.png">
-  </span>
-
-  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-    <meta itemprop="name" content="Noob">
-    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
-      <img style="display:none;" itemprop="url image" alt="Noob" src="">
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Jeffzzf">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
     </span>
-  </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Noob">
+    </span>
 
     
       <header class="post-header">
@@ -1392,16 +1657,8 @@ For example,Given [1,3],[2,6],[8,10],[15,18],return [1,6],[8,10],[15,18].https:/
         
         
           <h1 class="post-title" itemprop="name headline">
-            
-            
-              
                 
-                <a class="post-title-link" href="/2015/06/30/排序算法总结/" itemprop="url">
-                  排序算法总结
-                </a>
-              
-            
-          </h1>
+                <a class="post-title-link" href="/2015/06/30/排序算法总结/" itemprop="url">排序算法总结</a></h1>
         
 
         <div class="post-meta">
@@ -1413,7 +1670,7 @@ For example,Given [1,3],[2,6],[8,10],[15,18],return [1,6],[8,10],[15,18].https:/
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2015-06-30T13:26:52+08:00">
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2015-06-30T13:26:52+08:00">
                 2015-06-30
               </time>
             
@@ -1463,8 +1720,8 @@ For example,Given [1,3],[2,6],[8,10],[15,18],return [1,6],[8,10],[15,18].https:/
           
 
           
-
           
+
           
 
           
@@ -1474,7 +1731,6 @@ For example,Given [1,3],[2,6],[8,10],[15,18],return [1,6],[8,10],[15,18].https:/
         </div>
       </header>
     
-
 
     <div class="post-body" itemprop="articleBody">
 
@@ -1503,324 +1759,13 @@ For example,Given [1,3],[2,6],[8,10],[15,18],return [1,6],[8,10],[15,18].https:/
       
     </div>
 
+    <div>
+      
+    </div>
 
     <footer class="post-footer">
       
 
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://jeffzzf.github.io/2015/06/28/我真的努力吗/">
-
-  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
-    <meta itemprop="name" content="Jeffzzf">
-    <meta itemprop="description" content="">
-    <meta itemprop="image" content="/images/avatar.png">
-  </span>
-
-  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-    <meta itemprop="name" content="Noob">
-    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
-      <img style="display:none;" itemprop="url image" alt="Noob" src="">
-    </span>
-  </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2015/06/28/我真的努力吗/" itemprop="url">
-                  我真的努力吗
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2015-06-28T13:57:04+08:00">
-                2015-06-28
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/自我提升/" itemprop="url" rel="index">
-                    <span itemprop="name">自我提升</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/自我提升/努力/" itemprop="url" rel="index">
-                    <span itemprop="name">努力</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-
-          
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>今天中午听<a href="http://fm.xinli001.com/#5236408">《心理FM》</a>，有一篇关于努力的文章让我倍受震撼，我不由得反思自己的一些问题。<br>几乎可以确切的说，我是“努力”的，花费在“学习”、“创业”这些正能量方面的时间不可谓不多。我没有时间经常性的运动，无论是我怕喜欢的篮球、乒乓球还是感兴趣想要提高的游泳，我都没能抽出足够的时间去做；无论是吉他、还是唱歌、画画，我都没有时间去玩，更不要说旅游、打游戏……</p>
-<p>但是，我真的“努力”吗，还是像这篇文章指出的一样只是“有的人因为自身无能，所以要折腾出很多的事情让自己去忙碌，用来增加自己那可怜的自我价值感，同时得以忘记和逃避自己的无能！”</p>
-<p>从学习和创业取得的成果来看，答案不言而喻。现在把这篇文章贴在这里自我反思。不断调整自我心态，努力到点子上！</p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2015/06/28/我真的努力吗/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://jeffzzf.github.io/2015/06/25/Best-Time-to-Buy-and-Sell-Stocks/">
-
-  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
-    <meta itemprop="name" content="Jeffzzf">
-    <meta itemprop="description" content="">
-    <meta itemprop="image" content="/images/avatar.png">
-  </span>
-
-  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-    <meta itemprop="name" content="Noob">
-    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
-      <img style="display:none;" itemprop="url image" alt="Noob" src="">
-    </span>
-  </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2015/06/25/Best-Time-to-Buy-and-Sell-Stocks/" itemprop="url">
-                  Best Time to Buy and Sell Stocks
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2015-06-25T16:29:16+08:00">
-                2015-06-25
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/算法/" itemprop="url" rel="index">
-                    <span itemprop="name">算法</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/算法/DP/" itemprop="url" rel="index">
-                    <span itemprop="name">DP</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-
-          
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-          Best Time to Buy and Sell stock (Simple DP)Giving an array of values, say the ith value is the price of stock of the ith day. If you can perform at mo
-          ...
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2015/06/25/Best-Time-to-Buy-and-Sell-Stocks/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-
-    <footer class="post-footer">
       
 
       
@@ -1838,11 +1783,11 @@ For example,Given [1,3],[2,6],[8,10],[15,18],return [1,6],[8,10],[15,18].https:/
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/5/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><span class="page-number current">6</span><a class="page-number" href="/page/7/">7</a><a class="page-number" href="/page/8/">8</a><a class="extend next" rel="next" href="/page/7/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" href="/page/5/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><span class="page-number current">6</span><a class="page-number" href="/page/7/">7</a><span class="space">&hellip;</span><a class="page-number" href="/page/9/">9</a><a class="extend next" rel="next" href="/page/7/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
-          
+
           </div>
           
 
@@ -1874,32 +1819,38 @@ For example,Given [1,3],[2,6],[8,10],[15,18],return [1,6],[8,10],[15,18].https:/
                src="/images/avatar.png"
                alt="Jeffzzf" />
           <p class="site-author-name" itemprop="name">Jeffzzf</p>
-          <p class="site-description motion-element" itemprop="description">Do one thing at a time, and do well.</p>
+           
+              <p class="site-description motion-element" itemprop="description">Do one thing at a time, and do well.</p>
+          
         </div>
         <nav class="site-state motion-element">
-        
+
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">79</span>
+                <span class="site-state-item-count">81</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
           
 
           
+            
+            
             <div class="site-state-item site-state-categories">
-              <a href="/categories">
-                <span class="site-state-item-count">42</span>
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">43</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
           
 
           
+            
+            
             <div class="site-state-item site-state-tags">
-              <a href="/tags">
-                <span class="site-state-item-count">81</span>
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">84</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -1923,6 +1874,8 @@ For example,Given [1,3],[2,6],[8,10],[15,18],return [1,6],[8,10],[15,18].https:/
 
 
       </section>
+
+      
 
       
 
@@ -1965,9 +1918,13 @@ For example,Given [1,3],[2,6],[8,10],[15,18],return [1,6],[8,10],[15,18].https:/
       </div>
     </footer>
 
-    <div class="back-to-top">
-      <i class="fa fa-arrow-up"></i>
-    </div>
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
   </div>
 
   
@@ -1987,6 +1944,14 @@ For example,Given [1,3],[2,6],[8,10],[15,18],return [1,6],[8,10],[15,18].https:/
 
 
   
+
+
+
+
+
+
+
+
 
 
 
@@ -2013,33 +1978,32 @@ For example,Given [1,3],[2,6],[8,10],[15,18],return [1,6],[8,10],[15,18].https:/
   
 
 
-  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
 
-  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
-
-
-
-  
-  
-
-
-  <script type="text/javascript" src="/js/src/affix.js?v=5.1.0"></script>
-
-  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.0"></script>
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
 
 
 
   
-
   
 
 
-  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.1"></script>
 
 
 
   
 
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
 
 
   
@@ -2061,13 +2025,22 @@ For example,Given [1,3],[2,6],[8,10],[15,18],return [1,6],[8,10],[15,18].https:/
 
   
 
-  
 
 
 
 
   
+
+
+
+
+
+
   
+
+
+
+
 
   
 
@@ -2077,6 +2050,7 @@ For example,Given [1,3],[2,6],[8,10],[15,18],return [1,6],[8,10],[15,18].https:/
 
   
 
+  
 
 </body>
 </html>
