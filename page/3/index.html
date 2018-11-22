@@ -1,15 +1,31 @@
-<!doctype html>
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
 
 
 
   
 
 
-<html class="theme-next pisces use-motion" lang="zh-Hans">
+<html class="theme-next muse use-motion" lang="zh-Hans">
 <head>
   <meta charset="UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
 
 
 
@@ -33,36 +49,7 @@
 
 
 
-  
-  
-  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
 
-
-
-
-  
-  
-  
-  
-
-  
-    
-    
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-    
-    
-    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
-  
 
 
 
@@ -71,34 +58,25 @@
 
 <link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
 
-<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
+<link href="/css/main.css?v=6.5.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.5.0">
 
 
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=6.5.0">
 
 
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=6.5.0">
 
 
-
-
-  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1" />
-
-
-
+  <link rel="mask-icon" href="/images/logo.svg?v=6.5.0" color="#222">
 
 
 
-<meta name="description" content="Do one thing at a time, and do well.">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Noob">
-<meta property="og:url" content="http://jeffzzf.github.io/page/3/index.html">
-<meta property="og:site_name" content="Noob">
-<meta property="og:description" content="Do one thing at a time, and do well.">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Noob">
-<meta name="twitter:description" content="Do one thing at a time, and do well.">
+
+
+
 
 
 
@@ -106,14 +84,14 @@
   var NexT = window.NexT || {};
   var CONFIG = {
     root: '/',
-    scheme: 'Pisces',
-    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
-    fancybox: true,
-    motion: true,
-    duoshuo: {
-      userId: '0',
-      author: '博主'
-    },
+    scheme: 'Muse',
+    version: '6.5.0',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
     algolia: {
       applicationID: '',
       apiKey: '',
@@ -125,18 +103,37 @@
 </script>
 
 
+  
+
+
+
+
+  <meta name="description" content="Do one thing at a time, and do well.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Noob">
+<meta property="og:url" content="http://jeffzzf.github.io/page/3/index.html">
+<meta property="og:site_name" content="Noob">
+<meta property="og:description" content="Do one thing at a time, and do well.">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Noob">
+<meta name="twitter:description" content="Do one thing at a time, and do well.">
+
+
+
+
+
 
   <link rel="canonical" href="http://jeffzzf.github.io/page/3/"/>
 
 
 
-
+<script type="text/javascript" id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
 
   <title>Noob</title>
-</head>
-
-<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
-
   
 
 
@@ -149,8 +146,36 @@
 
 
 
+  <noscript>
+  <style type="text/css">
+    .use-motion .motion-element,
+    .use-motion .brand,
+    .use-motion .menu-item,
+    .sidebar-inner,
+    .use-motion .post-block,
+    .use-motion .pagination,
+    .use-motion .comments,
+    .use-motion .post-header,
+    .use-motion .post-body,
+    .use-motion .collection-title { opacity: initial; }
 
+    .use-motion .logo,
+    .use-motion .site-title,
+    .use-motion .site-subtitle {
+      opacity: initial;
+      top: initial;
+    }
 
+    .use-motion {
+      .logo-line-before i { left: initial; }
+      .logo-line-after i { right: initial; }
+    }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
 
   
   
@@ -158,8 +183,7 @@
   
 
   <div class="container sidebar-position-left 
-   page-home 
- ">
+  page-home">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -168,19 +192,17 @@
     
 
     <div class="custom-logo-site-title">
-      <a href="/"  class="brand" rel="start">
+      <a href="/" class="brand" rel="start">
         <span class="logo-line-before"><i></i></span>
         <span class="site-title">Noob</span>
         <span class="logo-line-after"><i></i></span>
       </a>
     </div>
-      
-        <p class="site-subtitle"></p>
-      
+    
   </div>
 
   <div class="site-nav-toggle">
-    <button>
+    <button aria-label="Toggle navigation bar">
       <span class="btn-bar"></span>
       <span class="btn-bar"></span>
       <span class="btn-bar"></span>
@@ -188,55 +210,55 @@
   </div>
 </div>
 
-<nav class="site-nav">
-  
 
+
+<nav class="site-nav">
   
     <ul id="menu" class="menu">
       
         
-        <li class="menu-item menu-item-home">
-          <a href="/" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
-            
-            首页
-          </a>
-        </li>
-      
         
-        <li class="menu-item menu-item-categories">
-          <a href="/categories" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
-            
-            分类
-          </a>
-        </li>
-      
         
-        <li class="menu-item menu-item-tags">
-          <a href="/tags" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
-            
-            标签
-          </a>
-        </li>
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
       
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br />Startseite</a>
+
+  </li>
         
-        <li class="menu-item menu-item-archives">
-          <a href="/archives" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
-            
-            归档
-          </a>
-        </li>
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
       
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br />Archiv</a>
+
+  </li>
 
       
+      
     </ul>
+  
+
+  
+    
+
   
 
   
@@ -244,12 +266,20 @@
 
 
 
- </div>
+  
+
+
+
+</div>
     </header>
+
+    
+
 
     <main id="main" class="main">
       <div class="main-inner">
         <div class="content-wrap">
+          
           <div id="content" class="content">
             
   <section id="posts" class="posts-expand">
@@ -262,13 +292,207 @@
   
   
 
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://jeffzzf.github.io/2015/09/27/Nested-Classes/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Jeffzzf">
+      <meta itemprop="description" content="Do one thing at a time, and do well.">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Noob">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2015/09/27/Nested-Classes/" class="post-title-link" itemprop="http://jeffzzf.github.io/page/3/index.html">Nested Classes</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Veröffentlicht am</span>
+              
+
+              
+                
+              
+
+              <time title="Post created: 2015-09-27 14:35:58" itemprop="dateCreated datePublished" datetime="2015-09-27T14:35:58+08:00">2015-09-27</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Updated at: 2017-05-03 20:51:17" itemprop="dateModified" datetime="2017-05-03T20:51:17+08:00">2017-05-03</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">in</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Java/" itemprop="url" rel="index"><span itemprop="name">Java</span></a></span>
+
+                
+                
+                  . 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Java/Basic/" itemprop="url" rel="index"><span itemprop="name">Basic</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>Terminology: Nested classes are divided into two categories: static and non-static. Nested classes that are declared static are called static nested classes. Non-static nested classes are called inner classes.</p>
+<p>A nested class is a member of its enclosing class. Non-static nested classes (inner classes) have access to other members of the enclosing class, even if they are declared private. Static nested classes do not have access to other members of the enclosing class. As a member of the OuterClass, a nested class can be declared private, public, protected, or package private. (Recall that outer classes can only be declared public or package private.)</p>
+<h1 id="Static-nested-class"><a href="#Static-nested-class" class="headerlink" title="Static nested class"></a>Static nested class</h1><p>As with class methods and variables, a static nested class is associated with its outer class. And like static class methods, a static nested class cannot refer directly to instance variables or methods defined in its enclosing class: it can use them only through an object reference.</p>
+<p>A static nested class interacts with the instance members of its outer class (and other classes) just like any other top-level class. In effect, a static nested class is behaviorally a top-level class that has been nested in another top-level class for packaging convenience.<br>Static nested classes are accessed using the enclosing class name: <code>OuterClass.StaticNestedClass</code><br>For example, to create an object for the static nested class, use this syntax:<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">OuterClass.StaticNestedClass nestedObject =</div><div class="line">     <span class="keyword">new</span> OuterClass.StaticNestedClass();</div></pre></td></tr></table></figure></p>
+<h1 id="Inner-Classes"><a href="#Inner-Classes" class="headerlink" title="Inner Classes"></a>Inner Classes</h1><p>As with instance methods and variables, an inner class is associated with an instance of its enclosing class and has direct access to that object’s methods and fields. Also, because an inner class is associated with an instance, it cannot define any static members itself.</p>
+<p>Objects that are instances of an inner class exist within an instance of the outer class. Consider the following classes:<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">OuterClass</span> </span>&#123;</div><div class="line">    ...</div><div class="line">    <span class="class"><span class="keyword">class</span> <span class="title">InnerClass</span> </span>&#123;</div><div class="line">        ...</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>An instance of InnerClass can exist only within an instance of OuterClass and has direct access to the methods and fields of its enclosing instance.</p>
+<p>To instantiate an inner class, you must first instantiate the outer class. Then, create the inner object within the outer object with this syntax:</p>
+<p>OuterClass.InnerClass innerObject = outerObject.new InnerClass();<br>There are two special kinds of inner classes: local classes and anonymous classes.</p>
+<h1 id="References"><a href="#References" class="headerlink" title="References"></a>References</h1><p><a href="https://docs.oracle.com/javase/tutorial/java/javaOO/nested.html" target="_blank" rel="external">Nested Classes</a></p>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+       
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://jeffzzf.github.io/2015/09/26/Creational-Patterns/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Jeffzzf">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="description" content="Do one thing at a time, and do well.">
+      <meta itemprop="image" content="/images/avatar.gif">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -282,25 +506,51 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2015/09/26/Creational-Patterns/" itemprop="url">Creational Patterns</a></h1>
+                
+                <a href="/2015/09/26/Creational-Patterns/" class="post-title-link" itemprop="http://jeffzzf.github.io/page/3/index.html">Creational Patterns</a>
+              
+            
+          </h1>
         
 
         <div class="post-meta">
           <span class="post-time">
+
+            
+            
+            
+
             
               <span class="post-meta-item-icon">
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">发表于</span>
+                <span class="post-meta-item-text">Veröffentlicht am</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2015-09-26T19:48:14+08:00">
-                2015-09-26
-              </time>
+
+              
+                
+              
+
+              <time title="Post created: 2015-09-26 19:48:14" itemprop="dateCreated datePublished" datetime="2015-09-26T19:48:14+08:00">2015-09-26</time>
             
 
             
+              
 
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Updated at: 2017-05-03 20:53:10" itemprop="dateModified" datetime="2017-05-03T20:53:10+08:00">2017-05-03</time>
+              
             
           </span>
 
@@ -313,14 +563,10 @@
                 <i class="fa fa-folder-o"></i>
               </span>
               
-                <span class="post-meta-item-text">分类于</span>
+                <span class="post-meta-item-text">in</span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Design-Patterns/" itemprop="url" rel="index">
-                    <span itemprop="name">Design Patterns</span>
-                  </a>
-                </span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Design-Patterns/" itemprop="url" rel="index"><span itemprop="name">Design Patterns</span></a></span>
 
                 
                 
@@ -345,6 +591,9 @@
       </header>
     
 
+    
+    
+    
     <div class="post-body" itemprop="articleBody">
 
       
@@ -353,30 +602,54 @@
       
         
           
-          Creational patterns provide a way to create objects while hiding the creation logic, rather than instantiating objects directly using new operator. Th
-          ...
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2015/09/26/Creational-Patterns/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
+            <p>Creational patterns provide a way to create objects while hiding the creation logic, rather than instantiating objects directly using new operator. This gives program more flexibility in deciding which objects need to be created for a given use case.</p>
+<h1 id="Factory-Method-Pattern"><a href="#Factory-Method-Pattern" class="headerlink" title="Factory Method Pattern"></a>Factory Method Pattern</h1><p>With factory pattern, objects are created without exposing the creation logic to the client. It refers to the factory method that encapsulates the creation of objects such that factory method can be override in a subclass.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MazeGame</span> </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="title">MazeGame</span><span class="params">()</span> </span>&#123;</div><div class="line">        Room room1 = makeRoom();</div><div class="line">        Room room2 = makeRoom();</div><div class="line">        room1.connect(room2);</div><div class="line">        <span class="keyword">this</span>.addRoom(room1);</div><div class="line">        <span class="keyword">this</span>.addRoom(room2);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">protected</span> Room <span class="title">makeRoom</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> <span class="keyword">new</span> OrdinaryRoom();</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MagicMazeGame</span> <span class="keyword">extends</span> <span class="title">MazeGame</span> </span>&#123;</div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">protected</span> Room <span class="title">makeRoom</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> <span class="keyword">new</span> MagicRoom(); </div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h1 id="Abstract-Factory-Pattern"><a href="#Abstract-Factory-Pattern" class="headerlink" title="Abstract Factory Pattern"></a>Abstract Factory Pattern</h1><p>Abstract factory pattern works around a super factory which creates other factories. This factory is also called the factory of factories.</p>
+<p><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/9d/Abstract_factory_UML.svg/677px-Abstract_factory_UML.svg.png" alt="此处输入图片的描述"></p>
+<p>  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/Abstract_factory.svg/517px-Abstract_factory.svg.png" alt="此处输入图片的描述"></p>
+<p>The method createButton on the GuiFactory interface returns objects of type Button. What implementation of Button is returned depends on which implementation of GuiFactory is handling the method call.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">interface</span> <span class="title">Button</span> </span>&#123;</div><div class="line">	<span class="function"><span class="keyword">void</span> <span class="title">paint</span><span class="params">()</span></span>;</div><div class="line">&#125;</div><div class="line"><span class="comment">//Abstract Product</span></div><div class="line"><span class="class"><span class="keyword">interface</span> <span class="title">Label</span> </span>&#123;</div><div class="line">	<span class="function"><span class="keyword">void</span> <span class="title">paint</span><span class="params">()</span></span>;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">//Abstract Factory</span></div><div class="line"><span class="class"><span class="keyword">interface</span> <span class="title">GUIFactory</span> </span>&#123;</div><div class="line">	<span class="function">Button <span class="title">createButton</span><span class="params">()</span></span>;</div><div class="line">	<span class="function">Label <span class="title">createLabel</span><span class="params">()</span></span>;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">//Concrete Factory</span></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">WinFactory</span> <span class="keyword">implements</span> <span class="title">GUIFactory</span> </span>&#123;</div><div class="line">	<span class="function"><span class="keyword">public</span> Button <span class="title">createButton</span><span class="params">()</span> </span>&#123;</div><div class="line">		<span class="keyword">return</span> <span class="keyword">new</span> WinButton();</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="function"><span class="keyword">public</span> Label <span class="title">createLabel</span><span class="params">()</span> </span>&#123;</div><div class="line">		<span class="keyword">return</span> <span class="keyword">new</span> WinLabel();</div><div class="line">	&#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">//Concrete Factory</span></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">OSXFactory</span> <span class="keyword">implements</span> <span class="title">GUIFactory</span> </span>&#123;</div><div class="line">	<span class="function"><span class="keyword">public</span> Button <span class="title">createButton</span><span class="params">()</span> </span>&#123;</div><div class="line">		<span class="keyword">return</span> <span class="keyword">new</span> OSXButton();</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="function"><span class="keyword">public</span> Label <span class="title">createLabel</span><span class="params">()</span> </span>&#123;</div><div class="line">		<span class="keyword">return</span> <span class="keyword">new</span> OSXLabel();</div><div class="line">	&#125;</div><div class="line"></div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">//Concrete Product</span></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">OSXButton</span> <span class="keyword">implements</span> <span class="title">Button</span> </span>&#123;</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">paint</span><span class="params">()</span> </span>&#123;</div><div class="line">		System.out.println(<span class="string">"I'm an OSXButton"</span>);</div><div class="line">	&#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">//Concrete Product</span></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">WinButton</span> <span class="keyword">implements</span> <span class="title">Button</span> </span>&#123;</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">paint</span><span class="params">()</span> </span>&#123;</div><div class="line">		System.out.println(<span class="string">"I'm a WinButton"</span>);</div><div class="line">	&#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">//Concrete Product</span></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">OSXLabel</span> <span class="keyword">implements</span> <span class="title">Label</span> </span>&#123;</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">paint</span><span class="params">()</span> </span>&#123;</div><div class="line">		System.out.println(<span class="string">"I'm an OSXLabel"</span>);</div><div class="line">	&#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">//Concrete Product</span></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">WinLabel</span> <span class="keyword">implements</span> <span class="title">Label</span> </span>&#123;</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">paint</span><span class="params">()</span> </span>&#123;</div><div class="line">		System.out.println(<span class="string">"I'm a WinLabel"</span>);</div><div class="line">	&#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">//Client application is not aware about the how the product is created. Its only responsible to give a name of </span></div><div class="line"><span class="comment">//concrete factory</span></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Application</span> </span>&#123;</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="title">Application</span><span class="params">(GUIFactory factory)</span> </span>&#123;</div><div class="line">		Button button = factory.createButton();</div><div class="line">		Label label = factory.createLabel();</div><div class="line">		button.paint();</div><div class="line">		label.paint();</div><div class="line">	&#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ApplicationRunner</span> </span>&#123;</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</div><div class="line">		<span class="keyword">new</span> Application(createOsSpecificFactory());</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> GUIFactory <span class="title">createOsSpecificFactory</span><span class="params">()</span> </span>&#123;</div><div class="line">		String osname = System.getProperty(<span class="string">"os.name"</span>).toLowerCase();</div><div class="line">		<span class="keyword">if</span>(osname != <span class="keyword">null</span> &amp;&amp; osname.contains(<span class="string">"windows"</span>))</div><div class="line">			<span class="keyword">return</span> <span class="keyword">new</span> WinFactory();</div><div class="line">		<span class="keyword">else</span></div><div class="line">			<span class="keyword">return</span> <span class="keyword">new</span> OSXFactory();</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h1 id="Singleton-Pattern"><a href="#Singleton-Pattern" class="headerlink" title="Singleton Pattern"></a>Singleton Pattern</h1><p>Singleton pattern is a design pattern that restricts the instantiation of a class to one object. This is useful when exactly one object is needed to coordinate actions across the system.</p>
+<ul>
+<li>The Abstract Factory, Builder, and Prototype patterns can use Singletons in their implementation.</li>
+<li>Facade objects are often singletons because only one Facade object is required.</li>
+<li>State objects are often singletons.</li>
+<li>Singletons are often preferred to global variables because:<ul>
+<li>They do not pollute the global namespace (or, in languages with namespaces, their containing namespace) with unnecessary variables.</li>
+<li>They permit lazy allocation and initialization, whereas global variables in many languages will always consume resources.<h1 id="Eager-Initialization"><a href="#Eager-Initialization" class="headerlink" title="Eager Initialization"></a>Eager Initialization</h1><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Singleton</span> </span>&#123;</div><div class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> Singleton instance = <span class="keyword">new</span> Singleton();</div><div class="line">    <span class="function"><span class="keyword">private</span> <span class="title">Singleton</span><span class="params">()</span> </span>&#123;&#125;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Singleton <span class="title">getInstance</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> instance;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+</ul>
+<h1 id="Lazy-Initialization"><a href="#Lazy-Initialization" class="headerlink" title="Lazy Initialization"></a>Lazy Initialization</h1><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Singleton</span> </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">private</span> <span class="title">Singleton</span><span class="params">()</span> </span>&#123;&#125;</div><div class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">Holder</span> </span>&#123;</div><div class="line">        <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> Singleton instance = <span class="keyword">new</span> Singleton();</div><div class="line">    &#125;</div><div class="line">    <span class="function"><span class="keyword">public</span> Singleton <span class="title">getInstance</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> Holder.instance;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h1 id="Prototype-Pattern"><a href="#Prototype-Pattern" class="headerlink" title="Prototype Pattern"></a>Prototype Pattern</h1><p>Prototype pattern is used when creation of object directly is costly. For example, an object is to be created after a costly database operation. We can cache the object, returns its clone on next request and update the database when needed thus reducing database calls.</p>
+<p>The mitotic division of a cell — resulting in two identical cells — is an example of a prototype that plays an active role in copying itself and thus, demonstrates the Prototype pattern. When a cell splits, two cells of identical genotype result. In other words, the cell clones itself.</p>
+<p><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/14/Prototype_UML.svg/600px-Prototype_UML.svg.png" alt="此处输入图片的描述"><br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="class"><span class="keyword">class</span> <span class="title">Prototype</span> </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">abstract</span> Prototype <span class="title">clone</span><span class="params">()</span></span>;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ConcretePrototype1</span> <span class="keyword">extends</span> <span class="title">Prototype</span> </span>&#123;</div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> Prototype <span class="title">clone</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> <span class="keyword">super</span>.clone();</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ConcretePrototype2</span> <span class="keyword">extends</span> <span class="title">Prototype</span> </span>&#123;</div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> Prototype <span class="title">clone</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> <span class="keyword">super</span>.clone();</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h1 id="Builder-Pattern"><a href="#Builder-Pattern" class="headerlink" title="Builder Pattern"></a>Builder Pattern</h1><p> Instead of using numerous constructors, the builder pattern uses another object, a builder, that receives each initialization parameter step by step and then returns the resulting constructed object at once.</p>
+<p> Builder often builds a composition object. Often, designs start out using Factory Method (less complicated, more customizable, subclasses proliferate) and evolve toward Abstract Factory, Prototype, or Builder (more flexible, more complex) as the designer discovers where more flexibility is needed. Sometimes creational patterns are complementary: Builder can use one of the other patterns to implement which components are built. </p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div></pre></td><td class="code"><pre><div class="line"> <span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">StreetMap</span> </span>&#123;</div><div class="line">	<span class="keyword">private</span> <span class="keyword">final</span> Point origin;</div><div class="line">	<span class="keyword">private</span> <span class="keyword">final</span> Point destination;</div><div class="line"></div><div class="line">	<span class="keyword">private</span> <span class="keyword">final</span> Color waterColor;</div><div class="line">	<span class="keyword">private</span> <span class="keyword">final</span> Color landColor;</div><div class="line">	<span class="keyword">private</span> <span class="keyword">final</span> Color highTrafficColor;</div><div class="line">	<span class="keyword">private</span> <span class="keyword">final</span> Color mediumTrafficColor;</div><div class="line">	<span class="keyword">private</span> <span class="keyword">final</span> Color lowTrafficColor;</div><div class="line"></div><div class="line">	<span class="keyword">public</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">Builder</span> </span>&#123;</div><div class="line">		<span class="comment">// Required parameters</span></div><div class="line">		<span class="keyword">private</span> <span class="keyword">final</span> Point origin;</div><div class="line">		<span class="keyword">private</span> <span class="keyword">final</span> Point destination;</div><div class="line"></div><div class="line">		<span class="comment">// Optional parameters - initialize with default values</span></div><div class="line">		<span class="keyword">private</span> Color waterColor         = Color.BLUE;</div><div class="line">		<span class="keyword">private</span> Color landColor          = <span class="keyword">new</span> Color(<span class="number">30</span>, <span class="number">30</span>, <span class="number">30</span>);</div><div class="line">		<span class="keyword">private</span> Color highTrafficColor   = Color.RED;</div><div class="line">		<span class="keyword">private</span> Color mediumTrafficColor = Color.YELLOW;</div><div class="line">		<span class="keyword">private</span> Color lowTrafficColor    = Color.GREEN;</div><div class="line"></div><div class="line">		<span class="function"><span class="keyword">public</span> <span class="title">Builder</span><span class="params">(Point origin, Point destination)</span> </span>&#123;</div><div class="line">			<span class="keyword">this</span>.origin      = origin;</div><div class="line">			<span class="keyword">this</span>.destination = destination;</div><div class="line">		&#125;</div><div class="line"></div><div class="line">		<span class="function"><span class="keyword">public</span> Builder <span class="title">waterColor</span><span class="params">(Color color)</span> </span>&#123;</div><div class="line">			waterColor = color;</div><div class="line">			<span class="keyword">return</span> <span class="keyword">this</span>;</div><div class="line">		&#125;</div><div class="line"></div><div class="line">		<span class="function"><span class="keyword">public</span> Builder <span class="title">landColor</span><span class="params">(Color color)</span> </span>&#123;</div><div class="line">			landColor = color;</div><div class="line">			<span class="keyword">return</span> <span class="keyword">this</span>;</div><div class="line">		&#125;</div><div class="line"></div><div class="line">		<span class="function"><span class="keyword">public</span> Builder <span class="title">highTrafficColor</span><span class="params">(Color color)</span> </span>&#123;</div><div class="line">			highTrafficColor = color;</div><div class="line">			<span class="keyword">return</span> <span class="keyword">this</span>;</div><div class="line">		&#125;</div><div class="line"></div><div class="line">		<span class="function"><span class="keyword">public</span> Builder <span class="title">mediumTrafficColor</span><span class="params">(Color color)</span> </span>&#123;</div><div class="line">			mediumTrafficColor = color;</div><div class="line">			<span class="keyword">return</span> <span class="keyword">this</span>;</div><div class="line">		&#125;</div><div class="line"></div><div class="line">		<span class="function"><span class="keyword">public</span> Builder <span class="title">lowTrafficColor</span><span class="params">(Color color)</span> </span>&#123;</div><div class="line">			lowTrafficColor = color;</div><div class="line">			<span class="keyword">return</span> <span class="keyword">this</span>;</div><div class="line">		&#125;</div><div class="line"></div><div class="line">		<span class="function"><span class="keyword">public</span> StreetMap <span class="title">build</span><span class="params">()</span> </span>&#123;</div><div class="line">			<span class="keyword">return</span> <span class="keyword">new</span> StreetMap(<span class="keyword">this</span>);</div><div class="line">		&#125;</div><div class="line"></div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="function"><span class="keyword">private</span> <span class="title">StreetMap</span><span class="params">(Builder builder)</span> </span>&#123;</div><div class="line">		<span class="comment">// Required parameters</span></div><div class="line">		origin      = builder.origin;</div><div class="line">		destination = builder.destination;</div><div class="line"></div><div class="line">		<span class="comment">// Optional parameters</span></div><div class="line">		waterColor         = builder.waterColor;</div><div class="line">		landColor          = builder.landColor;</div><div class="line">		highTrafficColor   = builder.highTrafficColor;</div><div class="line">		mediumTrafficColor = builder.mediumTrafficColor;</div><div class="line">		lowTrafficColor    = builder.lowTrafficColor;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String args[])</span> </span>&#123;</div><div class="line">		StreetMap map = <span class="keyword">new</span> StreetMap.Builder(<span class="keyword">new</span> Point(<span class="number">50</span>, <span class="number">50</span>), <span class="keyword">new</span> Point(<span class="number">100</span>,</div><div class="line">				<span class="number">100</span>)).landColor(Color.GRAY).waterColor(Color.BLUE.brighter())</div><div class="line">				.build();</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h1 id="References"><a href="#References" class="headerlink" title="References"></a>References</h1><p><a href="https://en.wikipedia.org/wiki/Abstract_factory_pattern" target="_blank" rel="external">Abstract factory pattern</a><br><a href="https://en.wikipedia.org/wiki/Factory_method_pattern" target="_blank" rel="external">Factory Method Pattern</a></p>
+
+          
         
       
     </div>
 
-    <div>
-      
-    </div>
+    
 
-    <div>
-      
-    </div>
+    
+    
+    
 
-    <div>
-      
-    </div>
+    
+
+    
+       
+    
+    
+
+    
 
     <footer class="post-footer">
       
@@ -390,6 +663,10 @@
         <div class="post-eof"></div>
       
     </footer>
+  </div>
+  
+  
+  
   </article>
 
 
@@ -402,13 +679,19 @@
   
   
 
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://jeffzzf.github.io/2015/09/26/二分快速幂与斐波拉契矩阵快速幂/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Jeffzzf">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="description" content="Do one thing at a time, and do well.">
+      <meta itemprop="image" content="/images/avatar.gif">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -422,25 +705,51 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2015/09/26/二分快速幂与斐波拉契矩阵快速幂/" itemprop="url">二分快速幂与斐波拉契矩阵快速幂</a></h1>
+                
+                <a href="/2015/09/26/二分快速幂与斐波拉契矩阵快速幂/" class="post-title-link" itemprop="http://jeffzzf.github.io/page/3/index.html">二分快速幂与斐波拉契矩阵快速幂</a>
+              
+            
+          </h1>
         
 
         <div class="post-meta">
           <span class="post-time">
+
+            
+            
+            
+
             
               <span class="post-meta-item-icon">
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">发表于</span>
+                <span class="post-meta-item-text">Veröffentlicht am</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2015-09-26T19:14:56+08:00">
-                2015-09-26
-              </time>
+
+              
+                
+              
+
+              <time title="Post created: 2015-09-26 19:14:56" itemprop="dateCreated datePublished" datetime="2015-09-26T19:14:56+08:00">2015-09-26</time>
             
 
             
+              
 
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Updated at: 2016-04-20 19:22:04" itemprop="dateModified" datetime="2016-04-20T19:22:04+08:00">2016-04-20</time>
+              
             
           </span>
 
@@ -453,25 +762,17 @@
                 <i class="fa fa-folder-o"></i>
               </span>
               
-                <span class="post-meta-item-text">分类于</span>
+                <span class="post-meta-item-text">in</span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/算法/" itemprop="url" rel="index">
-                    <span itemprop="name">算法</span>
-                  </a>
-                </span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/算法/" itemprop="url" rel="index"><span itemprop="name">算法</span></a></span>
 
                 
                 
-                  ， 
+                  . 
                 
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/算法/二分/" itemprop="url" rel="index">
-                    <span itemprop="name">二分</span>
-                  </a>
-                </span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/算法/二分/" itemprop="url" rel="index"><span itemprop="name">二分</span></a></span>
 
                 
                 
@@ -496,6 +797,9 @@
       </header>
     
 
+    
+    
+    
     <div class="post-body" itemprop="articleBody">
 
       
@@ -504,30 +808,30 @@
       
         
           
-          1234567891011int pow(int a, int n) &#123;    if(n == 0) return 1;    boolean positive = n &lt; 0 ? true : false;    int res = 1;    while(n &gt; 0) &#
-          ...
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2015/09/26/二分快速幂与斐波拉契矩阵快速幂/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
+            <figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">pow</span><span class="params">(<span class="keyword">int</span> a, <span class="keyword">int</span> n)</span> </span>&#123;</div><div class="line">    <span class="keyword">if</span>(n == <span class="number">0</span>) <span class="keyword">return</span> <span class="number">1</span>;</div><div class="line">    <span class="keyword">boolean</span> positive = n &lt; <span class="number">0</span> ? <span class="keyword">true</span> : <span class="keyword">false</span>;</div><div class="line">    <span class="keyword">int</span> res = <span class="number">1</span>;</div><div class="line">    <span class="keyword">while</span>(n &gt; <span class="number">0</span>) &#123;</div><div class="line">        <span class="keyword">if</span>(n % <span class="number">2</span> != <span class="number">0</span>)</div><div class="line">            res *= a;</div><div class="line">        a *= a;</div><div class="line">        n &gt;&gt;= <span class="number">1</span>;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">muti</span><span class="params">(<span class="keyword">int</span>[][] a, <span class="keyword">int</span>[][] b, <span class="keyword">int</span>[][] c, <span class="keyword">int</span> m)</span> </span>&#123;</div><div class="line">    <span class="keyword">int</span> t00 = (a[<span class="number">0</span>][<span class="number">0</span>]*b[<span class="number">0</span>][<span class="number">0</span>] + a[<span class="number">0</span>][<span class="number">1</span>]*b[<span class="number">1</span>][<span class="number">0</span>]) % m;</div><div class="line">    <span class="keyword">int</span> t01 = (a[<span class="number">0</span>][<span class="number">0</span>]*b[<span class="number">0</span>][<span class="number">1</span>] + a[<span class="number">0</span>][<span class="number">1</span>]*b[<span class="number">1</span>][<span class="number">1</span>]) % m;</div><div class="line">    <span class="keyword">int</span> t10 = (a[<span class="number">1</span>][<span class="number">0</span>]*b[<span class="number">0</span>][<span class="number">0</span>] + a[<span class="number">1</span>][<span class="number">1</span>]*b[<span class="number">1</span>][<span class="number">0</span>]) % m;</div><div class="line">    <span class="keyword">int</span> t11 = (a[<span class="number">1</span>][<span class="number">0</span>]*b[<span class="number">0</span>][<span class="number">1</span>] + a[<span class="number">1</span>][<span class="number">1</span>]*b[<span class="number">1</span>][<span class="number">1</span>]) % m;</div><div class="line">    c[<span class="number">0</span>][<span class="number">0</span>] = t00;</div><div class="line">    c[<span class="number">0</span>][<span class="number">1</span>] = t01;</div><div class="line">    c[<span class="number">1</span>][<span class="number">0</span>] = t10;</div><div class="line">    c[<span class="number">1</span>][<span class="number">1</span>] = t11;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">int</span> <span class="title">fib</span><span class="params">(<span class="keyword">int</span> n, <span class="keyword">int</span> m)</span> </span>&#123;</div><div class="line">    <span class="keyword">if</span>(n == <span class="number">0</span>) <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">    <span class="keyword">else</span> <span class="keyword">if</span>(n &lt;= <span class="number">2</span>) <span class="keyword">return</span> <span class="number">1</span>;</div><div class="line">    <span class="keyword">int</span>[][] b = &#123;&#123;<span class="number">1</span>,<span class="number">1</span>&#125;,&#123;<span class="number">1</span>,<span class="number">0</span>&#125;&#125;, res = &#123;&#123;<span class="number">1</span>,<span class="number">0</span>&#125;,&#123;<span class="number">0</span>,<span class="number">1</span>&#125;&#125;;</div><div class="line">    n -= <span class="number">2</span>;</div><div class="line">    <span class="keyword">while</span>(n &gt; <span class="number">0</span>) &#123;</div><div class="line">        <span class="keyword">if</span>(n % <span class="number">2</span> != <span class="number">0</span>)</div><div class="line">            muti(b,res,res,m);</div><div class="line">        muti(b,b,b,m);</div><div class="line">        n /= <span class="number">2</span>;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> (res[<span class="number">0</span>][<span class="number">0</span>] + res[<span class="number">0</span>][<span class="number">1</span>]) % m;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>参考资料<br><a href="http://www.jb51.net/article/37286.htm" target="_blank" rel="external">求斐波那契(Fibonacci)数列通项的七种实现方法</a></p>
+
+          
         
       
     </div>
 
-    <div>
-      
-    </div>
+    
 
-    <div>
-      
-    </div>
+    
+    
+    
 
-    <div>
-      
-    </div>
+    
+
+    
+       
+    
+    
+
+    
 
     <footer class="post-footer">
       
@@ -541,6 +845,10 @@
         <div class="post-eof"></div>
       
     </footer>
+  </div>
+  
+  
+  
   </article>
 
 
@@ -553,13 +861,19 @@
   
   
 
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://jeffzzf.github.io/2015/09/26/Design-Patterns-and-Principles-of-Object-Oriented-design/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Jeffzzf">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="description" content="Do one thing at a time, and do well.">
+      <meta itemprop="image" content="/images/avatar.gif">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -573,25 +887,51 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2015/09/26/Design-Patterns-and-Principles-of-Object-Oriented-design/" itemprop="url">Design Patterns and Principles of Object-Oriented design</a></h1>
+                
+                <a href="/2015/09/26/Design-Patterns-and-Principles-of-Object-Oriented-design/" class="post-title-link" itemprop="http://jeffzzf.github.io/page/3/index.html">Design Patterns and Principles of Object-Oriented design</a>
+              
+            
+          </h1>
         
 
         <div class="post-meta">
           <span class="post-time">
+
+            
+            
+            
+
             
               <span class="post-meta-item-icon">
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">发表于</span>
+                <span class="post-meta-item-text">Veröffentlicht am</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2015-09-26T17:18:07+08:00">
-                2015-09-26
-              </time>
+
+              
+                
+              
+
+              <time title="Post created: 2015-09-26 17:18:07" itemprop="dateCreated datePublished" datetime="2015-09-26T17:18:07+08:00">2015-09-26</time>
             
 
             
+              
 
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Updated at: 2017-05-03 20:51:35" itemprop="dateModified" datetime="2017-05-03T20:51:35+08:00">2017-05-03</time>
+              
             
           </span>
 
@@ -604,14 +944,10 @@
                 <i class="fa fa-folder-o"></i>
               </span>
               
-                <span class="post-meta-item-text">分类于</span>
+                <span class="post-meta-item-text">in</span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Design-Patterns/" itemprop="url" rel="index">
-                    <span itemprop="name">Design Patterns</span>
-                  </a>
-                </span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Design-Patterns/" itemprop="url" rel="index"><span itemprop="name">Design Patterns</span></a></span>
 
                 
                 
@@ -636,6 +972,9 @@
       </header>
     
 
+    
+    
+    
     <div class="post-body" itemprop="articleBody">
 
       
@@ -644,30 +983,50 @@
       
         
           
-          What are design patternsDesign patterns represent the best practices used by experienced object-oriented software developers. Design patterns are solu
-          ...
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2015/09/26/Design-Patterns-and-Principles-of-Object-Oriented-design/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
+            <h1 id="What-are-design-patterns"><a href="#What-are-design-patterns" class="headerlink" title="What are design patterns"></a>What are design patterns</h1><p>Design patterns represent the best practices used by experienced object-oriented software developers. Design patterns are solutions to general probloms that software developer faced during software development.</p>
+<p>As <em>Design pattern - Elements of reusable Object-Oriented Software</em>, there are 23 design patterns which can be classified in three categories: Creational, Structural and Behavioral patterns.</p>
+<h1 id="Principles-of-object-oriented-design-SOLID"><a href="#Principles-of-object-oriented-design-SOLID" class="headerlink" title="Principles of object-oriented design(SOLID)"></a>Principles of object-oriented design(SOLID)</h1><p>S.O.L.I.D is an acronym for the first five object-oriented design(OOD) principles by Robert C. Martin, popularly known as Uncle Bob.</p>
+<p>These principles, when combined together, make it easy for a programmer to develop software that are easy to maintain and extend. </p>
+<ol>
+<li>Single-responsibility Principle(S.R.P for short – this principle states that: A class should have one and only one reason to change, meaning that a class should have only one job.</li>
+<li>Open-closed Principle: Objects or entities should be open for extension, but closed for modification. This simply means that a class should be easily extendable without modifying the class itself. </li>
+<li>Liskov substitution principle: if S is a subtype of T, then objects of type T may be replaced with objects of type S without altering any of the desirable properties of that program (correctness, task performed, etc.). </li>
+<li>Interface segregation principle: Clients should not be forced to implement interfaces they don’t use. Many client specific interfaces are better than one general purpose interface.</li>
+<li>Dependency Inversion principle: Entities must depend on abstractions not on concretions. It states that the high level module must not depend on the low level module, but they should depend on abstractions.</li>
+</ol>
+<h1 id="Orther-principles"><a href="#Orther-principles" class="headerlink" title="Orther principles"></a>Orther principles</h1><ul>
+<li>Program to Interface Not Implementation. </li>
+<li>Don’t Repeat Yourself.</li>
+<li>Encapsulate What Varies. </li>
+<li>Depend on Abstractions, Not Concrete</li>
+<li>classes. Least Knowledge Principle. </li>
+<li>Favor Composition over</li>
+<li>Inheritance. Hollywood Principle. </li>
+<li>Apply Design Pattern wherever possible. </li>
+<li>Strive for Loosely Coupled System. </li>
+<li>Keep it Simple and Sweet / Stupid.</li>
+</ul>
+<h1 id="References"><a href="#References" class="headerlink" title="References"></a>References</h1><p><a href="https://en.wikipedia.org/wiki/Liskov_substitution_principle" target="_blank" rel="external">Liskov substitution principle</a><br><a href="http://www.codeproject.com/Articles/567768/Object-Oriented-Design-Principles" target="_blank" rel="external">Object Oriented Design Principles</a><br><a href="http://www.tutorialspoint.com/design_pattern/design_pattern_overview.htm" target="_blank" rel="external">Design Pattern - Overview</a></p>
+
+          
         
       
     </div>
 
-    <div>
-      
-    </div>
+    
 
-    <div>
-      
-    </div>
+    
+    
+    
 
-    <div>
-      
-    </div>
+    
+
+    
+       
+    
+    
+
+    
 
     <footer class="post-footer">
       
@@ -681,6 +1040,10 @@
         <div class="post-eof"></div>
       
     </footer>
+  </div>
+  
+  
+  
   </article>
 
 
@@ -693,13 +1056,19 @@
   
   
 
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://jeffzzf.github.io/2015/09/24/Divide-two-integers/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Jeffzzf">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="description" content="Do one thing at a time, and do well.">
+      <meta itemprop="image" content="/images/avatar.gif">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -713,25 +1082,51 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2015/09/24/Divide-two-integers/" itemprop="url">Divide two integers</a></h1>
+                
+                <a href="/2015/09/24/Divide-two-integers/" class="post-title-link" itemprop="http://jeffzzf.github.io/page/3/index.html">Divide two integers</a>
+              
+            
+          </h1>
         
 
         <div class="post-meta">
           <span class="post-time">
+
+            
+            
+            
+
             
               <span class="post-meta-item-icon">
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">发表于</span>
+                <span class="post-meta-item-text">Veröffentlicht am</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2015-09-24T10:06:29+08:00">
-                2015-09-24
-              </time>
+
+              
+                
+              
+
+              <time title="Post created: 2015-09-24 10:06:29" itemprop="dateCreated datePublished" datetime="2015-09-24T10:06:29+08:00">2015-09-24</time>
             
 
             
+              
 
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Updated at: 2016-04-20 19:22:04" itemprop="dateModified" datetime="2016-04-20T19:22:04+08:00">2016-04-20</time>
+              
             
           </span>
 
@@ -744,25 +1139,17 @@
                 <i class="fa fa-folder-o"></i>
               </span>
               
-                <span class="post-meta-item-text">分类于</span>
+                <span class="post-meta-item-text">in</span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/算法/" itemprop="url" rel="index">
-                    <span itemprop="name">算法</span>
-                  </a>
-                </span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/算法/" itemprop="url" rel="index"><span itemprop="name">算法</span></a></span>
 
                 
                 
-                  ， 
+                  . 
                 
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/算法/数论/" itemprop="url" rel="index">
-                    <span itemprop="name">数论</span>
-                  </a>
-                </span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/算法/数论/" itemprop="url" rel="index"><span itemprop="name">数论</span></a></span>
 
                 
                 
@@ -787,6 +1174,9 @@
       </header>
     
 
+    
+    
+    
     <div class="post-body" itemprop="articleBody">
 
       
@@ -795,31 +1185,36 @@
       
         
           
-          Divide two integers without using multiplication, division and mod operator.
-If it is overflow, return MAX_INT.https://leetcode.com/problems/divide-tw
-          ...
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2015/09/24/Divide-two-integers/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
+            <p>Divide two integers without using multiplication, division and mod operator.</p>
+<p>If it is overflow, return MAX_INT.<br><a href="https://leetcode.com/problems/divide-two-integers/" target="_blank" rel="external">https://leetcode.com/problems/divide-two-integers/</a></p>
+<p>需要注意的点：</p>
+<ol>
+<li>除数为零的情况</li>
+<li>被除数为Integer.MIN_VALUE，除数为-1时会超出Integer的表示范围，可以把被除数和除数都转换成long</li>
+<li>被除数和除数的符号问题：先计算结果的符号（如果被除数和除数异号，那么结果为负），然后把被除数和除数取绝对值</li>
+<li>被除数减除数的过程可以通过除数左移来加速</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">divide</span><span class="params">(<span class="keyword">int</span> dividend, <span class="keyword">int</span> divisor)</span> </span>&#123;</div><div class="line">    <span class="keyword">if</span>(divisor == <span class="number">0</span>) <span class="keyword">return</span> Integer.MAX_VALUE;</div><div class="line">    <span class="keyword">long</span> a = dividend, b = divisor;</div><div class="line">    <span class="keyword">boolean</span> positive = <span class="keyword">true</span>;</div><div class="line">    <span class="keyword">if</span>(a &lt; <span class="number">0</span> &amp;&amp; b &gt; <span class="number">0</span> || a &gt; <span class="number">0</span> &amp;&amp; b &lt; <span class="number">0</span>) positive = <span class="keyword">false</span>;</div><div class="line">    a = Math.abs(a);</div><div class="line">    b = Math.abs(b);</div><div class="line">    <span class="keyword">long</span> res = <span class="number">0</span>;</div><div class="line">    <span class="keyword">while</span>(a &gt;= b) &#123;</div><div class="line">        <span class="keyword">long</span> bt = b, rt = <span class="number">1</span>;</div><div class="line">        <span class="keyword">while</span>((bt &lt;&lt; <span class="number">1</span>) &lt;= a) &#123;</div><div class="line">            bt = bt &lt;&lt; <span class="number">1</span>;</div><div class="line">            rt = rt &lt;&lt; <span class="number">1</span>;</div><div class="line">        &#125;</div><div class="line">        a -= bt;</div><div class="line">        res += rt;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">if</span>(positive &amp;&amp; res &gt; Integer.MAX_VALUE) <span class="keyword">return</span> Integer.MAX_VALUE;</div><div class="line">    <span class="keyword">return</span> positive ? (<span class="keyword">int</span>)res : -(<span class="keyword">int</span>)res;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+
+          
         
       
     </div>
 
-    <div>
-      
-    </div>
+    
 
-    <div>
-      
-    </div>
+    
+    
+    
 
-    <div>
-      
-    </div>
+    
+
+    
+       
+    
+    
+
+    
 
     <footer class="post-footer">
       
@@ -833,6 +1228,10 @@ If it is overflow, return MAX_INT.https://leetcode.com/problems/divide-tw
         <div class="post-eof"></div>
       
     </footer>
+  </div>
+  
+  
+  
   </article>
 
 
@@ -845,13 +1244,19 @@ If it is overflow, return MAX_INT.https://leetcode.com/problems/divide-tw
   
   
 
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://jeffzzf.github.io/2015/09/09/Container-with-most-water/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Jeffzzf">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="description" content="Do one thing at a time, and do well.">
+      <meta itemprop="image" content="/images/avatar.gif">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -865,25 +1270,51 @@ If it is overflow, return MAX_INT.https://leetcode.com/problems/divide-tw
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2015/09/09/Container-with-most-water/" itemprop="url">Container with most water</a></h1>
+                
+                <a href="/2015/09/09/Container-with-most-water/" class="post-title-link" itemprop="http://jeffzzf.github.io/page/3/index.html">Container with most water</a>
+              
+            
+          </h1>
         
 
         <div class="post-meta">
           <span class="post-time">
+
+            
+            
+            
+
             
               <span class="post-meta-item-icon">
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">发表于</span>
+                <span class="post-meta-item-text">Veröffentlicht am</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2015-09-09T15:18:12+08:00">
-                2015-09-09
-              </time>
+
+              
+                
+              
+
+              <time title="Post created: 2015-09-09 15:18:12" itemprop="dateCreated datePublished" datetime="2015-09-09T15:18:12+08:00">2015-09-09</time>
             
 
             
+              
 
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Updated at: 2017-05-03 20:51:33" itemprop="dateModified" datetime="2017-05-03T20:51:33+08:00">2017-05-03</time>
+              
             
           </span>
 
@@ -896,25 +1327,17 @@ If it is overflow, return MAX_INT.https://leetcode.com/problems/divide-tw
                 <i class="fa fa-folder-o"></i>
               </span>
               
-                <span class="post-meta-item-text">分类于</span>
+                <span class="post-meta-item-text">in</span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/算法/" itemprop="url" rel="index">
-                    <span itemprop="name">算法</span>
-                  </a>
-                </span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/算法/" itemprop="url" rel="index"><span itemprop="name">算法</span></a></span>
 
                 
                 
-                  ， 
+                  . 
                 
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/算法/数组/" itemprop="url" rel="index">
-                    <span itemprop="name">数组</span>
-                  </a>
-                </span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/算法/数组/" itemprop="url" rel="index"><span itemprop="name">数组</span></a></span>
 
                 
                 
@@ -939,6 +1362,9 @@ If it is overflow, return MAX_INT.https://leetcode.com/problems/divide-tw
       </header>
     
 
+    
+    
+    
     <div class="post-body" itemprop="articleBody">
 
       
@@ -947,30 +1373,29 @@ If it is overflow, return MAX_INT.https://leetcode.com/problems/divide-tw
       
         
           
-          Container With Most WaterGiven n non-negative integers a1, a2, …, an, where each represents a point at coordinate (i, ai). n vertical lines are drawn 
-          ...
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2015/09/09/Container-with-most-water/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
+            <h1 id="Container-With-Most-Water"><a href="#Container-With-Most-Water" class="headerlink" title="Container With Most Water"></a>Container With Most Water</h1><p>Given n non-negative integers a1, a2, …, an, where each represents a point at coordinate (i, ai). n vertical lines are drawn such that the two endpoints of line i is at (i, ai) and (i, 0). Find two lines, which together with x-axis forms a container, such that the container contains the most water.</p>
+<p>Note: You may not slant the container.<br><a href="https://leetcode.com/problems/container-with-most-water/" target="_blank" rel="external">https://leetcode.com/problems/container-with-most-water/</a></p>
+<p>使用首尾两个指针，每次收缩高度较小的那个。因为如果收缩高度大的那端，无论收缩后高度变高还是变低，收缩后面积一定变小（因为收缩后宽度减1，高度不会大于高度小的那端）。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">maxArea</span><span class="params">(<span class="keyword">int</span>[] height)</span> </span>&#123;</div><div class="line">    <span class="keyword">if</span>(height == <span class="keyword">null</span> || height.length &lt;= <span class="number">1</span>) <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">    <span class="keyword">int</span> left = <span class="number">0</span>, right = height.length - <span class="number">1</span>, max = <span class="number">0</span>;</div><div class="line">    <span class="keyword">while</span>(left &lt; right) &#123;</div><div class="line">        max = Math.max(max, (right - left) * Math.min(height[left], height[right]));</div><div class="line">        <span class="keyword">if</span>(height[left] &lt; height[right])</div><div class="line">            ++left;</div><div class="line">        <span class="keyword">else</span></div><div class="line">            --right;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> max;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+
+          
         
       
     </div>
 
-    <div>
-      
-    </div>
+    
 
-    <div>
-      
-    </div>
+    
+    
+    
 
-    <div>
-      
-    </div>
+    
+
+    
+       
+    
+    
+
+    
 
     <footer class="post-footer">
       
@@ -984,6 +1409,10 @@ If it is overflow, return MAX_INT.https://leetcode.com/problems/divide-tw
         <div class="post-eof"></div>
       
     </footer>
+  </div>
+  
+  
+  
   </article>
 
 
@@ -996,13 +1425,19 @@ If it is overflow, return MAX_INT.https://leetcode.com/problems/divide-tw
   
   
 
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://jeffzzf.github.io/2015/09/07/MySQL要点拾遗/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Jeffzzf">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="description" content="Do one thing at a time, and do well.">
+      <meta itemprop="image" content="/images/avatar.gif">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -1016,25 +1451,51 @@ If it is overflow, return MAX_INT.https://leetcode.com/problems/divide-tw
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2015/09/07/MySQL要点拾遗/" itemprop="url">MySQL要点拾遗</a></h1>
+                
+                <a href="/2015/09/07/MySQL要点拾遗/" class="post-title-link" itemprop="http://jeffzzf.github.io/page/3/index.html">MySQL要点拾遗</a>
+              
+            
+          </h1>
         
 
         <div class="post-meta">
           <span class="post-time">
+
+            
+            
+            
+
             
               <span class="post-meta-item-icon">
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">发表于</span>
+                <span class="post-meta-item-text">Veröffentlicht am</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2015-09-07T09:06:22+08:00">
-                2015-09-07
-              </time>
+
+              
+                
+              
+
+              <time title="Post created: 2015-09-07 09:06:22" itemprop="dateCreated datePublished" datetime="2015-09-07T09:06:22+08:00">2015-09-07</time>
             
 
             
+              
 
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Updated at: 2017-05-03 20:51:15" itemprop="dateModified" datetime="2017-05-03T20:51:15+08:00">2017-05-03</time>
+              
             
           </span>
 
@@ -1047,25 +1508,17 @@ If it is overflow, return MAX_INT.https://leetcode.com/problems/divide-tw
                 <i class="fa fa-folder-o"></i>
               </span>
               
-                <span class="post-meta-item-text">分类于</span>
+                <span class="post-meta-item-text">in</span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/数据库/" itemprop="url" rel="index">
-                    <span itemprop="name">数据库</span>
-                  </a>
-                </span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/数据库/" itemprop="url" rel="index"><span itemprop="name">数据库</span></a></span>
 
                 
                 
-                  ， 
+                  . 
                 
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/数据库/MySQL/" itemprop="url" rel="index">
-                    <span itemprop="name">MySQL</span>
-                  </a>
-                </span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/数据库/MySQL/" itemprop="url" rel="index"><span itemprop="name">MySQL</span></a></span>
 
                 
                 
@@ -1090,6 +1543,9 @@ If it is overflow, return MAX_INT.https://leetcode.com/problems/divide-tw
       </header>
     
 
+    
+    
+    
     <div class="post-body" itemprop="articleBody">
 
       
@@ -1098,32 +1554,115 @@ If it is overflow, return MAX_INT.https://leetcode.com/problems/divide-tw
       
         
           
-          LIMITLIMIT 5 表示返回不多于5行的结果，带一个值的LIMIT总是从第一行开始，返回指定的行数LIMIT 5, 5表示返回从第5行开始的5行，第一个数为开始位置，第二个数为要检索的行数
+            <h1 id="LIMIT"><a href="#LIMIT" class="headerlink" title="LIMIT"></a>LIMIT</h1><p>LIMIT 5 表示返回不多于5行的结果，带一个值的LIMIT总是从第一行开始，返回指定的行数<br>LIMIT 5, 5表示返回从第5行开始的5行，第一个数为开始位置，第二个数为要检索的行数</p>
+<blockquote>
+<p>检索出来的第一行为行0而不是行1，因此，LIMIT 1，1将检索出第二行而不是第一行。LIMIT 3，4表示从第三行开始4行，LIMIT 4 OFFSET3表示同样意思</p>
+</blockquote>
+<h1 id="LIKE"><a href="#LIKE" class="headerlink" title="LIKE"></a>LIKE</h1><p>LIKE用于过滤部分匹配的情况，可以使用通配符表示若干字符，其中%表示任何字符出现任何次数（包括0次），但是%不能匹配NULL。下划线_可以匹配单个字符。</p>
+<h1 id="SELECT子句及其顺序"><a href="#SELECT子句及其顺序" class="headerlink" title="SELECT子句及其顺序"></a>SELECT子句及其顺序</h1><table>
+<thead>
+<tr>
+<th>子句</th>
+<th>说明</th>
+<th>是否必须</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>SELECT</td>
+<td>返回列或表达式</td>
+<td>是</td>
+</tr>
+<tr>
+<td>FROM</td>
+<td>指定要检索的表</td>
+<td>仅在从表选择数据时使用</td>
+</tr>
+<tr>
+<td>WHERE</td>
+<td>过滤行</td>
+<td>否</td>
+</tr>
+<tr>
+<td>GROUP BY</td>
+<td>分组</td>
+<td>仅在按组计算聚集时使用</td>
+</tr>
+<tr>
+<td>HAVING</td>
+<td>组级过滤</td>
+<td>否</td>
+</tr>
+<tr>
+<td>ORDER BY</td>
+<td>输出排序顺序</td>
+<td>否</td>
+</tr>
+<tr>
+<td>LIMIT</td>
+<td>限制结果数</td>
+<td>否</td>
+</tr>
+</tbody>
+</table>
+<h1 id="联结"><a href="#联结" class="headerlink" title="联结"></a>联结</h1><ol>
+<li>等值联结（内部联结），等值联结是在WHERE子句中指定两表中联结的字段：SELECT id FROM ta, tb WHERE ta.vid = tb.vid，内联结可以达到同样的效果：SELECT id FROM ta INNER JOIN tb ON ta.vid = tb.vid。ANSI SQL规范首选INNER JOIN语法。</li>
+<li>自联结，如果需要多次使用同一个表，可以用表别名和自联结来实现：SELCT p1.proc_id, p1.proc_name FROM products AS p1, product AS p2 WHERE p1.vend_id = p2.vend_id AND p2.proc_id = “DTNTR”</li>
+<li>外部联结，外部联结可以查询到没有关联在一起的行，使用OUTER JOIN时，必须使用RIGHT或LEFT关键字指定包括其所有行的表，RIGHT指出是OUTER JOIN右边的表，LEFT指出是OUTER JOIN左边的表。</li>
+</ol>
+<h1 id="UNION"><a href="#UNION" class="headerlink" title="UNION"></a>UNION</h1><ol>
+<li>UNION由两条或两条以上的SELECT语句组成，语句之间用UNION隔开</li>
+<li>UNION中的每个查询必须包含相同的列、表达式或聚集函数（不需要以相同的次序列出）</li>
+<li>列数据必须兼容，类型不必完全相同，但必须可以隐式转换</li>
+</ol>
+<p>UNION从结果集中自动去除了重复的行，如果需要返回所有的匹配行，可以使用UNION ALL。ORDER BY子句必须出现在最后一条SELECT语句之后，并且只能有一个ORDER BY子句，对返回的所有结果进行排序。</p>
+<h1 id="视图"><a href="#视图" class="headerlink" title="视图"></a>视图</h1><p>视图可以极大地简化复杂SQL语句、保护基础数据，视图是虚拟的表，可以通过临时表算法或者MERGE SQL算法实现。视图有以下限制：</p>
+<ol>
+<li>创建视图时，视图名不能与表名以及其它视图名相同</li>
+<li>视图不能索引，也不能有关联的触发器</li>
+</ol>
+<p>视图主要用于检索，不过也可以进行更新（UPDATE、INSERT和DELETE），如果视图定义了以下操作，则不能对视图进行更新：</p>
+<ul>
+<li>分组（GROUP BY和HAVING）</li>
+<li>联结</li>
+<li>子查询</li>
+<li>并</li>
+<li>聚集函数（MIN(), COUNT(), SUM()等)</li>
+<li>DISTINCT</li>
+</ul>
+<h1 id="存储过程"><a href="#存储过程" class="headerlink" title="存储过程"></a>存储过程</h1><p>存储过程可视为批处理程序，就是为以后的使用而保存的一条或多条MySQL语句的集合。通过使用存储过程有以下好处：</p>
+<ol>
+<li>可以把处理封装在容易使用的单元中简化复杂的操作并保证数据的一致性和完整性</li>
+<li>如果表名、列名或业务逻辑有变化，只需要修改存储过程的代码</li>
+<li>提高性能，使用存储过程比使用多条单独的SQL语句要快</li>
+</ol>
+<p>定义存储过程：<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">CREATE</span> <span class="keyword">PROCEDURE</span> productpricing(</div><div class="line">    <span class="keyword">OUT</span> pl <span class="built_in">DECIMAL</span>(<span class="number">8</span>, <span class="number">2</span>),</div><div class="line">    <span class="keyword">OUT</span> ph <span class="built_in">DECIMAL</span>(<span class="number">8</span>, <span class="number">2</span>),</div><div class="line">    <span class="keyword">OUT</span> pa <span class="built_in">DECIMAL</span>(<span class="number">8</span>, <span class="number">2</span>)</div><div class="line">)</div><div class="line"><span class="keyword">BEGIN</span></div><div class="line">    <span class="keyword">SELECT</span> <span class="keyword">Min</span>(prod_price)</div><div class="line">    <span class="keyword">INTO</span> pl</div><div class="line">    <span class="keyword">FROM</span> products;</div><div class="line">    <span class="keyword">SELECT</span> <span class="keyword">Max</span>(prod_price)</div><div class="line">    <span class="keyword">INTO</span> ph</div><div class="line">    <span class="keyword">FROM</span> products;</div><div class="line">    <span class="keyword">SELECT</span> <span class="keyword">Avg</span>(prod_price)</div><div class="line">    <span class="keyword">INTO</span> pa</div><div class="line">    <span class="keyword">FROM</span> products;</div><div class="line"><span class="keyword">END</span>;</div></pre></td></tr></table></figure></p>
+<p>调用存储过程：<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">CALL</span> productpricing(@pricelow,</div><div class="line">                    @pricehigh,</div><div class="line">                    @priceaverage);</div><div class="line"><span class="keyword">SELECT</span> @priceaverage;</div></pre></td></tr></table></figure></p>
+<h1 id="触发器"><a href="#触发器" class="headerlink" title="触发器"></a>触发器</h1><p>触发器是MySQL响应DELETE、INSERT和UPDATE而自动执行的一条MySQL语句，或者位于BEGIN和END语句之间的一组语句。每个表每个事件只允许定义一个触发器，所以每个表最多支持6个触发器（每条INSERT、UPDATE和DELETE的之前和之后）。触发器不能更新或覆盖，要修改一个触发器，必须先删除它然后再创建它。<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">CREATE</span> <span class="keyword">TRIGGER</span> newproduct <span class="keyword">AFTER</span> <span class="keyword">INSERT</span> <span class="keyword">ON</span> products <span class="keyword">FOR</span> <span class="keyword">EACH</span> <span class="keyword">ROW</span> <span class="keyword">SELECT</span> <span class="string">'product added'</span></div></pre></td></tr></table></figure></p>
+<h1 id="事务管理"><a href="#事务管理" class="headerlink" title="事务管理"></a>事务管理</h1><p>ROOLBACK可以撤销MySQL语句，使用ROOLBACK后，MySQL语句不会对表中的数据进行修改：<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">START</span> <span class="keyword">TRANSACTION</span>;</div><div class="line"><span class="keyword">DELETE</span> <span class="keyword">FROM</span> <span class="keyword">order</span>;</div><div class="line">ROOLBACK;</div></pre></td></tr></table></figure></p>
+<p>COMMIT用于在事务处理中提交所做的更改，MySQL默认自动提交所有更改并立即生效，可以通过<code>SET autocommit=0</code>取消自动提交。在事务处理块中，必须使用COMMIT显示提交事务，当COMMIT或ROLLBACK语句执行后，事务会自动关闭。<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">START</span> <span class="keyword">TRANSACTION</span>;</div><div class="line"><span class="keyword">DELETE</span> <span class="keyword">FROM</span> orders;</div><div class="line"><span class="keyword">COMMIT</span>;</div></pre></td></tr></table></figure></p>
+<p>可以指定保留点（SAVEPOINT）指定要回退的点：<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">SAVEPOINT</span> <span class="keyword">delete</span>;</div><div class="line">ROOLBACK TO <span class="keyword">delete</span>;</div></pre></td></tr></table></figure></p>
+<h1 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h1><p>《MySQL必知必会》</p>
 
-检索出来的第一行为行0而不是行1，因此，LIMIT 1，1将检索出第二行而不是第一行。LIMIT 3，
-          ...
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2015/09/07/MySQL要点拾遗/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
+          
         
       
     </div>
 
-    <div>
-      
-    </div>
+    
 
-    <div>
-      
-    </div>
+    
+    
+    
 
-    <div>
-      
-    </div>
+    
+
+    
+       
+    
+    
+
+    
 
     <footer class="post-footer">
       
@@ -1137,6 +1676,10 @@ If it is overflow, return MAX_INT.https://leetcode.com/problems/divide-tw
         <div class="post-eof"></div>
       
     </footer>
+  </div>
+  
+  
+  
   </article>
 
 
@@ -1149,13 +1692,19 @@ If it is overflow, return MAX_INT.https://leetcode.com/problems/divide-tw
   
   
 
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://jeffzzf.github.io/2015/08/31/TCP总结/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Jeffzzf">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="description" content="Do one thing at a time, and do well.">
+      <meta itemprop="image" content="/images/avatar.gif">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -1169,25 +1718,51 @@ If it is overflow, return MAX_INT.https://leetcode.com/problems/divide-tw
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2015/08/31/TCP总结/" itemprop="url">TCP总结</a></h1>
+                
+                <a href="/2015/08/31/TCP总结/" class="post-title-link" itemprop="http://jeffzzf.github.io/page/3/index.html">TCP总结</a>
+              
+            
+          </h1>
         
 
         <div class="post-meta">
           <span class="post-time">
+
+            
+            
+            
+
             
               <span class="post-meta-item-icon">
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">发表于</span>
+                <span class="post-meta-item-text">Veröffentlicht am</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2015-08-31T21:16:43+08:00">
-                2015-08-31
-              </time>
+
+              
+                
+              
+
+              <time title="Post created: 2015-08-31 21:16:43" itemprop="dateCreated datePublished" datetime="2015-08-31T21:16:43+08:00">2015-08-31</time>
             
 
             
+              
 
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Updated at: 2017-05-03 20:53:10" itemprop="dateModified" datetime="2017-05-03T20:53:10+08:00">2017-05-03</time>
+              
             
           </span>
 
@@ -1200,25 +1775,17 @@ If it is overflow, return MAX_INT.https://leetcode.com/problems/divide-tw
                 <i class="fa fa-folder-o"></i>
               </span>
               
-                <span class="post-meta-item-text">分类于</span>
+                <span class="post-meta-item-text">in</span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/网络/" itemprop="url" rel="index">
-                    <span itemprop="name">网络</span>
-                  </a>
-                </span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/网络/" itemprop="url" rel="index"><span itemprop="name">网络</span></a></span>
 
                 
                 
-                  ， 
+                  . 
                 
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/网络/TCP/" itemprop="url" rel="index">
-                    <span itemprop="name">TCP</span>
-                  </a>
-                </span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/网络/TCP/" itemprop="url" rel="index"><span itemprop="name">TCP</span></a></span>
 
                 
                 
@@ -1243,6 +1810,9 @@ If it is overflow, return MAX_INT.https://leetcode.com/problems/divide-tw
       </header>
     
 
+    
+    
+    
     <div class="post-body" itemprop="articleBody">
 
       
@@ -1251,31 +1821,57 @@ If it is overflow, return MAX_INT.https://leetcode.com/problems/divide-tw
       
         
           
-          TCP（传输控制协议）在两个端点之间提供可靠的、面向连接的、双向字节流通信信道。
-确认、重传和超时当一个TCP报文无错地到达目的地时，接受TCP会发送一个确认报文给发送端，该报文的确认序号字段被设置为接收方期望接收的下一个报文的逻辑序号。如果报文存在错误，那么这个报文会被丢弃，确认信息也不会被发送。
-          ...
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2015/08/31/TCP总结/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
+            <p>TCP（传输控制协议）在两个端点之间提供可靠的、面向连接的、双向字节流通信信道。</p>
+<h1 id="确认、重传和超时"><a href="#确认、重传和超时" class="headerlink" title="确认、重传和超时"></a>确认、重传和超时</h1><p>当一个TCP报文无错地到达目的地时，接受TCP会发送一个确认报文给发送端，该报文的确认序号字段被设置为接收方期望接收的下一个报文的逻辑序号。如果报文存在错误，那么这个报文会被丢弃，确认信息也不会被发送。发送方在发送报文后一段时间没有收到确认，就会重传报文。</p>
+<h1 id="流量控制（滑动窗口机制）"><a href="#流量控制（滑动窗口机制）" class="headerlink" title="流量控制（滑动窗口机制）"></a>流量控制（滑动窗口机制）</h1><p>为了防止发送方发送速度过快而导致接收方来不及接收，在三次握手建立TCP连接的过程中就会告知对方接收缓冲区大小。从发送方接收数据到缓冲区时，空闲缓冲区大小减小；当上层应用从缓冲区读取数据时，空闲缓冲区大小增大。每次确认时，会告诉对方空闲缓冲区大小。如果缓冲区被填满，发送方暂停传输数据。</p>
+<h1 id="TCP连接的建立"><a href="#TCP连接的建立" class="headerlink" title="TCP连接的建立"></a>TCP连接的建立</h1><p>在套接字API层，两个流式套接字通过以下步骤建立连接：</p>
+<ol>
+<li>服务器调用listen()在套接字上执行被动打开，然后调用accept()阻塞服务器进程直到连接建立完成。</li>
+<li>客户端调用connect()在套接字上执行主动打开，以此来同服务器端的被动打开套接字之间建立连接。</li>
+</ol>
+<h1 id="三次握手"><a href="#三次握手" class="headerlink" title="三次握手"></a>三次握手</h1><p>建立一个TCP连接，需要传送3个报文，步骤如下：</p>
+<ol>
+<li>connect()调用导致客户端TCP节点发送一个SYN报文到服务器端TCP节点，告知服务器客户端TCP节点的序列号（SYN=1，seq=x）。</li>
+<li>服务器TCP节点收到客户端发来的TCP报文后，返回一个设置SYN和ACK控制位的报文（SYN=1，ACK=x+1，seq=y）</li>
+<li>客户端TCP节点发送一个ACK报文来确认服务器端TCP节点的SYN报文（ACK=y+1）</li>
+</ol>
+<h1 id="TCP连接的终止"><a href="#TCP连接的终止" class="headerlink" title="TCP连接的终止"></a>TCP连接的终止</h1><p>关闭一个TCP连接的过程：</p>
+<ol>
+<li>TCP连接的一段执行close()系统调用，主动关闭TCP连接</li>
+<li>稍后另一端也执行一个close()系统调用被动关闭</li>
+</ol>
+<h1 id="四次挥手"><a href="#四次挥手" class="headerlink" title="四次挥手"></a>四次挥手</h1><p>假设由客户端发起主动关闭，TCP连接的终止过程需要传送四个报文：</p>
+<ol>
+<li>客户端TCP节点发送一个FIN报文给服务器（FIN=1，seq=x）</li>
+<li>服务器端TCP节点接收到FIN报文后，发出ACK报文作为响应。之后，服务器端的read()都会返回0(ACK=x+1)</li>
+<li>当服务器端完成数据传输时，服务器端TCP节点发送FIN报文到客户端（FIN=1，seq=y）</li>
+<li>客户端TCP节点发送ACK报文并进入TIME_WAIT状态，如果服务器端没有收到客户端传来的ACK报文，则可以重传FIN报文。客户端等待2个MSL（最大报文段生存时间）</li>
+</ol>
+<h1 id="TIME-WAIT状态的作用"><a href="#TIME-WAIT状态的作用" class="headerlink" title="TIME_WAIT状态的作用"></a>TIME_WAIT状态的作用</h1><ol>
+<li>确保能可靠地终止连接，如果执行主动关闭的一方发出的最后一个ACK报文丢失，那么执行TCP被动关闭的一方会重传FIN报文。让执行主动关闭的一方在TIME_WAIT状态保持2个最大报文生存时间，可以确保收到执行被动关闭的一方重传的FIN报文，并发送ACK确认报文。如果执行主动关闭的一方已经不存在了，那么TCP协议将针对重发的FIN发送一个RST（重置）给执行被动关闭的一方，这个RST会被解释成一个错误。</li>
+<li>确保老的重复报文在网络中过期失效TCP节点处于TIEM_WAIT状态时无法通过该节点创建新的连接。TCP重传的报文有可能在连接终止后才到达。假设通信双方使用相同的IP和端口重新建立TCP连接，如果没有TIME_WAIT状态使老的报文失效，这新老的报文有可能被当做新的合法报文。</li>
+</ol>
+<h1 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h1><p>《Linux编程手册（下）》<br><a href="http://www.nowcoder.com/discuss/1937" target="_blank" rel="external">计算机网络之面试常考</a><br><a href="https://github.com/skyline75489/what-happens-when-zh_CN" target="_blank" rel="external">在浏览器中输入 google.com 并且按下回车之后发生了什么？</a><br><a href="http://www.cyberciti.biz/faq/key-differences-between-tcp-and-udp-protocols/" target="_blank" rel="external">What is the difference between UDP and TCP internet protocols?</a></p>
+
+          
         
       
     </div>
 
-    <div>
-      
-    </div>
+    
 
-    <div>
-      
-    </div>
+    
+    
+    
 
-    <div>
-      
-    </div>
+    
+
+    
+       
+    
+    
+
+    
 
     <footer class="post-footer">
       
@@ -1289,6 +1885,10 @@ If it is overflow, return MAX_INT.https://leetcode.com/problems/divide-tw
         <div class="post-eof"></div>
       
     </footer>
+  </div>
+  
+  
+  
   </article>
 
 
@@ -1301,13 +1901,19 @@ If it is overflow, return MAX_INT.https://leetcode.com/problems/divide-tw
   
   
 
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://jeffzzf.github.io/2015/08/30/Shell基础/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Jeffzzf">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="description" content="Do one thing at a time, and do well.">
+      <meta itemprop="image" content="/images/avatar.gif">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -1321,25 +1927,51 @@ If it is overflow, return MAX_INT.https://leetcode.com/problems/divide-tw
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2015/08/30/Shell基础/" itemprop="url">Shell基础</a></h1>
+                
+                <a href="/2015/08/30/Shell基础/" class="post-title-link" itemprop="http://jeffzzf.github.io/page/3/index.html">Shell基础</a>
+              
+            
+          </h1>
         
 
         <div class="post-meta">
           <span class="post-time">
+
+            
+            
+            
+
             
               <span class="post-meta-item-icon">
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">发表于</span>
+                <span class="post-meta-item-text">Veröffentlicht am</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2015-08-30T18:10:47+08:00">
-                2015-08-30
-              </time>
+
+              
+                
+              
+
+              <time title="Post created: 2015-08-30 18:10:47" itemprop="dateCreated datePublished" datetime="2015-08-30T18:10:47+08:00">2015-08-30</time>
             
 
             
+              
 
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Updated at: 2016-04-20 19:22:04" itemprop="dateModified" datetime="2016-04-20T19:22:04+08:00">2016-04-20</time>
+              
             
           </span>
 
@@ -1362,6 +1994,9 @@ If it is overflow, return MAX_INT.https://leetcode.com/problems/divide-tw
       </header>
     
 
+    
+    
+    
     <div class="post-body" itemprop="articleBody">
 
       
@@ -1370,30 +2005,26 @@ If it is overflow, return MAX_INT.https://leetcode.com/problems/divide-tw
       
         
           
+            
           
-          
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2015/08/30/Shell基础/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
         
       
     </div>
 
-    <div>
-      
-    </div>
+    
 
-    <div>
-      
-    </div>
+    
+    
+    
 
-    <div>
-      
-    </div>
+    
+
+    
+       
+    
+    
+
+    
 
     <footer class="post-footer">
       
@@ -1407,6 +2038,10 @@ If it is overflow, return MAX_INT.https://leetcode.com/problems/divide-tw
         <div class="post-eof"></div>
       
     </footer>
+  </div>
+  
+  
+  
   </article>
 
 
@@ -1419,13 +2054,19 @@ If it is overflow, return MAX_INT.https://leetcode.com/problems/divide-tw
   
   
 
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://jeffzzf.github.io/2015/08/30/进程间通信/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Jeffzzf">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="description" content="Do one thing at a time, and do well.">
+      <meta itemprop="image" content="/images/avatar.gif">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -1439,25 +2080,51 @@ If it is overflow, return MAX_INT.https://leetcode.com/problems/divide-tw
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2015/08/30/进程间通信/" itemprop="url">进程间通信</a></h1>
+                
+                <a href="/2015/08/30/进程间通信/" class="post-title-link" itemprop="http://jeffzzf.github.io/page/3/index.html">进程间通信</a>
+              
+            
+          </h1>
         
 
         <div class="post-meta">
           <span class="post-time">
+
+            
+            
+            
+
             
               <span class="post-meta-item-icon">
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">发表于</span>
+                <span class="post-meta-item-text">Veröffentlicht am</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2015-08-30T14:32:38+08:00">
-                2015-08-30
-              </time>
+
+              
+                
+              
+
+              <time title="Post created: 2015-08-30 14:32:38" itemprop="dateCreated datePublished" datetime="2015-08-30T14:32:38+08:00">2015-08-30</time>
             
 
             
+              
 
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Updated at: 2017-05-03 20:51:31" itemprop="dateModified" datetime="2017-05-03T20:51:31+08:00">2017-05-03</time>
+              
             
           </span>
 
@@ -1470,25 +2137,17 @@ If it is overflow, return MAX_INT.https://leetcode.com/problems/divide-tw
                 <i class="fa fa-folder-o"></i>
               </span>
               
-                <span class="post-meta-item-text">分类于</span>
+                <span class="post-meta-item-text">in</span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Linux/" itemprop="url" rel="index">
-                    <span itemprop="name">Linux</span>
-                  </a>
-                </span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Linux/" itemprop="url" rel="index"><span itemprop="name">Linux</span></a></span>
 
                 
                 
-                  ， 
+                  . 
                 
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Linux/进程管理/" itemprop="url" rel="index">
-                    <span itemprop="name">进程管理</span>
-                  </a>
-                </span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Linux/进程管理/" itemprop="url" rel="index"><span itemprop="name">进程管理</span></a></span>
 
                 
                 
@@ -1513,6 +2172,9 @@ If it is overflow, return MAX_INT.https://leetcode.com/problems/divide-tw
       </header>
     
 
+    
+    
+    
     <div class="post-body" itemprop="articleBody">
 
       
@@ -1521,30 +2183,47 @@ If it is overflow, return MAX_INT.https://leetcode.com/problems/divide-tw
       
         
           
-          每个进程各自有不同的用户地址空间，任何一个进程的全局变量在另一个进程中都是看不到的，所以进程间要交换数据必须通过内核，在内核中开辟一个缓冲区，进程1把数据从用户空间拷到内核缓冲区，进程2再从内核缓冲区把数据读走，内核提供的这种机制称为进程间通信（IPC， InterProcess Communica
-          ...
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2015/08/30/进程间通信/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
+            <p>每个进程各自有不同的用户地址空间，任何一个进程的全局变量在另一个进程中都是看不到的，所以进程间要交换数据必须通过内核，在内核中开辟一个缓冲区，进程1把数据从用户空间拷到内核缓冲区，进程2再从内核缓冲区把数据读走，内核提供的这种机制称为进程间通信（IPC， InterProcess Communication）。</p>
+<h1 id="管道"><a href="#管道" class="headerlink" title="管道"></a>管道</h1><p>管道是一种最基本的IPC机制，由pipe函数创建, pipe函数在内核中开辟一块缓冲区（称为管道）用于通信，它有一个读端和一个写端。<br><figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="meta"># <span class="meta-keyword">include</span><span class="meta-string">&lt;unistd.h&gt;</span></span></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">pipe</span><span class="params">(<span class="keyword">int</span> fd[<span class="number">2</span>])</span></span>;</div></pre></td></tr></table></figure></p>
+<p>fd[0]指向管道的读端，fd[1]指向管道的写端。管道在用户程序看来就像一个打开的文件，通过read(fd[0])或者write(fd[1])向这个文件读写数据其实是在读写内核缓冲区。pipe函数调用成功返回0，调用失败返回-1.</p>
+<h1 id="FIFO"><a href="#FIFO" class="headerlink" title="FIFO"></a>FIFO</h1><p>FIFO有时候被称为命名管道，未命名的pipe只能在两个相关的进程间通信，FIFO可以用在不相关的进程间通信。FIFO有如下两种用途：</p>
+<ol>
+<li>Shell命令使用FIFO将数据从一条管道传递到另一条时，无需创建中间临时文件</li>
+<li>客户端-服务器进程应用中，FIFO用作汇聚点，在客户进程和服务器进程之间传递数据</li>
+</ol>
+<p>进程之间传递信息的途径总结如下：</p>
+<ul>
+<li>父进程通过fork将打开的文件描述符传递给子进程</li>
+<li>子进程结束时，父进程调用wait可以得到子进程的终止信息</li>
+<li>几个进程可以在文件系统中读写某个共享文件，也可以通过给文件加锁来实现进程间同步</li>
+<li>进程之间互发信号，一般使用SIGUSR1和SIGUSR2实现用户自定义功能</li>
+<li>管道</li>
+<li>FIFO</li>
+<li>通过mmap函数，几个进程可以映射同一内存区</li>
+<li>SYS V IPC，包括消息队列、信号量和共享内存，现在已经基本废弃</li>
+<li>UNIX Domain Socket，目前最广泛使用的IPC机制</li>
+</ul>
+<h1 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h1><p>《Linux C编程一站式学习》<br>《Unix环境高级编程》</p>
+
+          
         
       
     </div>
 
-    <div>
-      
-    </div>
+    
 
-    <div>
-      
-    </div>
+    
+    
+    
 
-    <div>
-      
-    </div>
+    
+
+    
+       
+    
+    
+
+    
 
     <footer class="post-footer">
       
@@ -1558,157 +2237,10 @@ If it is overflow, return MAX_INT.https://leetcode.com/problems/divide-tw
         <div class="post-eof"></div>
       
     </footer>
-  </article>
-
-
-    
-      
-
-  
-
+  </div>
   
   
   
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://jeffzzf.github.io/2015/08/30/Process-control/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Jeffzzf">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Noob">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2015/08/30/Process-control/" itemprop="url">Process control</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2015-08-30T12:18:10+08:00">
-                2015-08-30
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Linux/" itemprop="url" rel="index">
-                    <span itemprop="name">Linux</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Linux/进程管理/" itemprop="url" rel="index">
-                    <span itemprop="name">进程管理</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-          Process IdentifiersEvery process has a unique ID, a non-negative integer. Process ID 0 is usually the scheduler process and is often known as the swap
-          ...
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2015/08/30/Process-control/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
   </article>
 
 
@@ -1717,15 +2249,12 @@ If it is overflow, return MAX_INT.https://leetcode.com/problems/divide-tw
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/2/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><span class="space">&hellip;</span><a class="page-number" href="/page/9/">9</a><a class="extend next" rel="next" href="/page/4/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" href="/page/2/"><i class="fa fa-angle-left" aria-label="Previous page"></i></a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><span class="space">&hellip;</span><a class="page-number" href="/page/9/">9</a><a class="extend next" rel="next" href="/page/4/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
   </nav>
 
 
 
           </div>
-          
-
-
           
 
         </div>
@@ -1741,72 +2270,333 @@ If it is overflow, return MAX_INT.https://leetcode.com/problems/divide-tw
   </div>
 
   <aside id="sidebar" class="sidebar">
+    
     <div class="sidebar-inner">
 
       
 
       
 
-      <section class="site-overview sidebar-panel sidebar-panel-active">
-        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-          <img class="site-author-image" itemprop="image"
-               src="/images/avatar.png"
-               alt="Jeffzzf" />
-          <p class="site-author-name" itemprop="name">Jeffzzf</p>
-           
+      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Jeffzzf</p>
               <p class="site-description motion-element" itemprop="description">Do one thing at a time, and do well.</p>
+          </div>
+
           
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">82</span>
+                    <span class="site-state-item-name">Artikel</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  <a href="/categories/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">43</span>
+                    <span class="site-state-item-name">Kategorien</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  <a href="/tags/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">85</span>
+                    <span class="site-state-item-name">Tags</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+
+          
+
+          
+          
+
+          
+            
+          
+          
+
         </div>
-        <nav class="site-state motion-element">
-
-          
-            <div class="site-state-item site-state-posts">
-              <a href="/archives">
-                <span class="site-state-item-count">81</span>
-                <span class="site-state-item-name">日志</span>
-              </a>
-            </div>
-          
-
-          
-            
-            
-            <div class="site-state-item site-state-categories">
-              <a href="/categories/index.html">
-                <span class="site-state-item-count">43</span>
-                <span class="site-state-item-name">分类</span>
-              </a>
-            </div>
-          
-
-          
-            
-            
-            <div class="site-state-item site-state-tags">
-              <a href="/tags/index.html">
-                <span class="site-state-item-count">84</span>
-                <span class="site-state-item-name">标签</span>
-              </a>
-            </div>
-          
-
-        </nav>
-
-        
-
-        <div class="links-of-author motion-element">
-          
-        </div>
-
-        
-        
-
-        
-        
-
-        
-
-
       </section>
 
       
@@ -1823,30 +2613,39 @@ If it is overflow, return MAX_INT.https://leetcode.com/problems/divide-tw
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright" >
-  
-  &copy;  2015 - 
-  <span itemprop="copyrightYear">2017</span>
-  <span class="with-love">
-    <i class="fa fa-heart"></i>
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
   </span>
   <span class="author" itemprop="copyrightHolder">Jeffzzf</span>
+
+  
+
+  
 </div>
 
 
-<div class="powered-by">
-  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
-</div>
+  <div class="powered-by">Erstellt mit  <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> v3.3.1</div>
 
-<div class="theme-info">
-  主题 -
-  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
-    NexT.Pisces
-  </a>
-</div>
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> v6.5.0</div>
+
+
 
 
         
+
+
+
+
+
+
+
 
         
       </div>
@@ -1859,6 +2658,11 @@ If it is overflow, return MAX_INT.https://leetcode.com/problems/divide-tw
       </div>
     
 
+    
+	
+    
+
+    
   </div>
 
   
@@ -1877,7 +2681,6 @@ If it is overflow, return MAX_INT.https://leetcode.com/problems/divide-tw
 
 
 
-  
 
 
 
@@ -1890,68 +2693,58 @@ If it is overflow, return MAX_INT.https://leetcode.com/problems/divide-tw
 
 
 
-  
-  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
-
-  
-  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
-
-  
-  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
-
-  
-  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
-
-  
-  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
-
-  
-  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
-
-
-  
-
-
-  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
-
-  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
-
-
-
-  
-  
-
-
-  <script type="text/javascript" src="/js/src/affix.js?v=5.1.1"></script>
-
-  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.1"></script>
-
-
-
-  
-
-  
-
-
-  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
-
-
-
-  
-
-
-  
-
-
-
-
-	
 
 
 
 
 
   
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=6.5.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=6.5.0"></script>
+
+
+
+  
+  
+
+  
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.5.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+
 
 
 
@@ -1965,16 +2758,18 @@ If it is overflow, return MAX_INT.https://leetcode.com/problems/divide-tw
 
   
 
-
-
-
-
+  
 
   
 
+  
 
+  
 
+  
+  
 
+  
 
   
 
