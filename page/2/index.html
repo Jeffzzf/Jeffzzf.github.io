@@ -233,11 +233,14 @@
 <li>将 AQS 组合在自定义同步组件的实现中，并调用其它模板方法，这些模板方法会调用使用者重写的方法</li>
 </ol>
 <p>AQS 使用模板方法模式，自定义同步器时重写以下几个 AQS 提供的模板方法：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">isHeldExclusively(); <span class="comment">// 线程是否在独占资源，用到 condition 时才需要实现</span></span><br><span class="line">tryAcquire(<span class="keyword">int</span>);<span class="comment">// 独占方式，尝试获取资源，成功则返回 true，失败则返回 false</span></span><br><span class="line">tryRelease(<span class="keyword">int</span>);<span class="comment">// 独占方式，尝试释放资源，成功则返回 true，失败则返回 false</span></span><br><span class="line">tryAcquireShared(<span class="keyword">int</span>);<span class="comment">// 共享方式，尝试获取资源，负数表示失败；0 表示成功，但没有剩余可获取资源；正数表示成功，并且有可用资源</span></span><br><span class="line">tryReleaseShared(<span class="keyword">int</span>);<span class="comment">// 共享方式，尝试释放资源成功返回 true，失败返回 false</span></span><br></pre></td></tr></table></figure>
-
-<p>默认情况下，每个方法都抛出<code>UnsupportedOperationException</code>，这些方法的实现必须是线程安全，并且应该简短而不阻塞。AQS 中的其它方法都是 final的，无法被其它类使用。</p>
-<h3 id="CyclicBarrier-和-CountDownLatch-的区别"><a href="#CyclicBarrier-和-CountDownLatch-的区别" class="headerlink" title="CyclicBarrier 和 CountDownLatch 的区别"></a>CyclicBarrier 和 CountDownLatch 的区别</h3><p>CountDownlatch 是计数器，只能使用一次，计数为 0 时释放所有等待线程；CyclicBarrier 的计数器提供 reset 功能，可以使用多次。</p>
-
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2019/10/12/AQS%20%E6%95%B4%E7%90%86/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
@@ -330,11 +333,14 @@
 <h2 id="Lock-Condition实现"><a href="#Lock-Condition实现" class="headerlink" title="Lock/Condition实现"></a>Lock/Condition实现</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testProducerConsumer</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        List&lt;String&gt; list = Lists.newArrayList();</span><br><span class="line">        ReentrantLock lock = <span class="keyword">new</span> ReentrantLock();</span><br><span class="line">        Condition full = lock.newCondition();</span><br><span class="line">        Condition empty = lock.newCondition();</span><br><span class="line"></span><br><span class="line">        ExecutorService executor = <span class="keyword">new</span> ThreadPoolExecutor(<span class="number">8</span>, <span class="number">8</span>, <span class="number">30</span>, TimeUnit.MILLISECONDS,</span><br><span class="line">                <span class="keyword">new</span> ArrayBlockingQueue&lt;Runnable&gt;(<span class="number">1</span>), <span class="keyword">new</span> ThreadPoolExecutor.DiscardPolicy());</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">4</span>; ++i) &#123;</span><br><span class="line">            executor.submit(<span class="keyword">new</span> Producer(list, <span class="number">100</span>, lock, full, empty));</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">4</span>; ++i) &#123;</span><br><span class="line">            executor.submit(<span class="keyword">new</span> Consumer(list, lock, full, empty));</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">while</span> (!executor.isTerminated()) &#123;</span><br><span class="line">            ;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">Consumer</span> <span class="keyword">implements</span> <span class="title">Runnable</span> </span>&#123;</span><br><span class="line">        <span class="keyword">private</span> List&lt;String&gt; list;</span><br><span class="line">        <span class="keyword">private</span> Lock lock;</span><br><span class="line">        <span class="keyword">private</span> Condition full;</span><br><span class="line">        <span class="keyword">private</span> Condition empty;</span><br><span class="line"></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="title">Consumer</span><span class="params">(List&lt;String&gt; list, Lock lock, Condition full, Condition empty)</span> </span>&#123;</span><br><span class="line">            <span class="keyword">this</span>.list = list;</span><br><span class="line">            <span class="keyword">this</span>.lock = lock;</span><br><span class="line">            <span class="keyword">this</span>.full = full;</span><br><span class="line">            <span class="keyword">this</span>.empty = empty;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="meta">@Override</span></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">            <span class="keyword">while</span> (<span class="keyword">true</span>) &#123;</span><br><span class="line">                <span class="keyword">try</span> &#123;</span><br><span class="line">                    lock.lock();</span><br><span class="line">                    <span class="keyword">while</span> (list.isEmpty()) &#123;</span><br><span class="line">                        empty.await();</span><br><span class="line">                    &#125;</span><br><span class="line">                    String element = list.remove(<span class="number">0</span>);</span><br><span class="line">                    System.out.println(element);</span><br><span class="line">                    full.signalAll();</span><br><span class="line">                &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</span><br><span class="line">                    e.printStackTrace();</span><br><span class="line">                &#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">                    lock.unlock();</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">Producer</span> <span class="keyword">implements</span> <span class="title">Runnable</span> </span>&#123;</span><br><span class="line">        <span class="keyword">private</span> List&lt;String&gt; list;</span><br><span class="line">        <span class="keyword">private</span> Integer maxLength;</span><br><span class="line">        <span class="keyword">private</span> Random random;</span><br><span class="line">        <span class="keyword">private</span> Lock lock;</span><br><span class="line">        <span class="keyword">private</span> Condition full;</span><br><span class="line">        <span class="keyword">private</span> Condition empty;</span><br><span class="line"></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="title">Producer</span><span class="params">(List&lt;String&gt; list, <span class="keyword">int</span> maxLength, Lock lock, Condition full, Condition empty)</span> </span>&#123;</span><br><span class="line">            <span class="keyword">this</span>.list = list;</span><br><span class="line">            <span class="keyword">this</span>.lock = lock;</span><br><span class="line">            <span class="keyword">this</span>.maxLength = maxLength;</span><br><span class="line">            <span class="keyword">this</span>.random = <span class="keyword">new</span> Random(System.currentTimeMillis());</span><br><span class="line">            <span class="keyword">this</span>.full = full;</span><br><span class="line">            <span class="keyword">this</span>.empty = empty;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="meta">@Override</span></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">            <span class="keyword">while</span> (<span class="keyword">true</span>) &#123;</span><br><span class="line">                <span class="keyword">try</span> &#123;</span><br><span class="line">                    lock.lock();</span><br><span class="line">                    <span class="keyword">while</span> (list.size() &gt;= maxLength) &#123;</span><br><span class="line">                        full.await();</span><br><span class="line">                    &#125;</span><br><span class="line">                    <span class="keyword">double</span> d = random.nextGaussian();</span><br><span class="line">                    list.add(Thread.currentThread().getName() + <span class="string">" "</span> + d);</span><br><span class="line">                    empty.signalAll();</span><br><span class="line">                &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</span><br><span class="line">                    e.printStackTrace();</span><br><span class="line">                &#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">                    lock.unlock();</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
 
 <h2 id="BlockingQueue"><a href="#BlockingQueue" class="headerlink" title="BlockingQueue"></a>BlockingQueue</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Test</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testProducerConsumer</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        BlockingQueue&lt;String&gt; queue = <span class="keyword">new</span> ArrayBlockingQueue&lt;String&gt;(<span class="number">100</span>);</span><br><span class="line">        ExecutorService executor = <span class="keyword">new</span> ThreadPoolExecutor(<span class="number">8</span>, <span class="number">8</span>, <span class="number">300</span>, TimeUnit.MILLISECONDS,</span><br><span class="line">                <span class="keyword">new</span> ArrayBlockingQueue&lt;Runnable&gt;(<span class="number">10</span>), <span class="keyword">new</span> ThreadPoolExecutor.AbortPolicy());</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">4</span>; ++i) &#123;</span><br><span class="line">            executor.submit(<span class="keyword">new</span> Producer(queue));</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">4</span>; ++i) &#123;</span><br><span class="line">            executor.submit(<span class="keyword">new</span> Consumer(queue));</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">while</span> (!executor.isTerminated()) &#123;</span><br><span class="line">            ;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">Producer</span> <span class="keyword">implements</span> <span class="title">Runnable</span> </span>&#123;</span><br><span class="line">        <span class="keyword">private</span> BlockingQueue&lt;String&gt; queue;</span><br><span class="line"></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="title">Producer</span><span class="params">(BlockingQueue&lt;String&gt; queue)</span> </span>&#123;</span><br><span class="line">            <span class="keyword">this</span>.queue = queue;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="meta">@Override</span></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">            <span class="keyword">while</span> (<span class="keyword">true</span>) &#123;</span><br><span class="line">                queue.offer(Thread.currentThread().getName());</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">Consumer</span> <span class="keyword">implements</span> <span class="title">Runnable</span> </span>&#123;</span><br><span class="line">        <span class="keyword">private</span> BlockingQueue&lt;String&gt; queue;</span><br><span class="line"></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="title">Consumer</span><span class="params">(BlockingQueue&lt;String&gt; queue)</span> </span>&#123;</span><br><span class="line">            <span class="keyword">this</span>.queue = queue;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="meta">@Override</span></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">            <span class="keyword">while</span> (<span class="keyword">true</span>) &#123;</span><br><span class="line">                String s = queue.poll();</span><br><span class="line">                System.out.println(s);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
-
-
-
-<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><p><a href="https://juejin.im/post/5aeec675f265da0b7c072c56#heading-0" target="_blank" rel="noopener">一篇文章，让你彻底弄懂生产者–消费者问题</a></p>
-
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2019/09/24/%E7%94%9F%E4%BA%A7%E8%80%85%E6%B6%88%E8%B4%B9%E8%80%85%E9%97%AE%E9%A2%98/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
@@ -408,6 +414,14 @@
           <p>跳跃表是链表的一种变形，具有二分查找的功能。跳跃表的每一层都是一条有序的链表，查找次数近似于层数，时间复杂度为O(logn)，插入、删除也为O(logn)。最底层的链表包含所有元素，它是一种随机化的数据结构（通过抛硬币来决定层数），空间复杂度为 O(n)</p>
 <p>红黑树插入、删除节点时，通过调整结构来保持红黑树的平衡，比起跳跃表直接通过一个随机数来决定跨越几层，在时间复杂度的花销高于跳跃表。</p>
 
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2019/09/18/Skiplist/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
@@ -465,6 +479,14 @@
 
       
           <h2 id="排队金刚位"><a href="#排队金刚位" class="headerlink" title="排队金刚位"></a>排队金刚位</h2>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2019/09/17/%E6%99%8B%E5%8D%87%E5%A4%A7%E7%BA%B2/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
@@ -547,146 +569,14 @@
 <p>Redis支持的数据结构可以与Java中对应的类来理解，String对应Object类，因为任意对象都可以以string的形式来存储。List数据结构对应java.util.List接口的实现类LinkedList，Set数据结构对应HashSet类，SortedSet对应SortedSet接口，Hash数据结构对应HashMap类。</p>
 <p><strong>string</strong>：最基础的数据类型，Redis中String类型的value最多可容纳数据长度为512M。适用于value较小、模型简单的value。</p>
 <p><strong>List</strong>：按插入顺序排序的字符串链表。可以在头部（left）和尾部（right）添加新元素。头尾添加元素效率很高，中间插入效率较低。适用于新闻列表、评论列表等列表类型数据存储。</p>
-<p><strong>Set</strong>：无序字符串集合，不允许出现重复元素，多次添加相同元素，Set只保存一份数据。适用于存放唯一性数据，如统计访问IP</p>
-<p><strong>SortedSet</strong>：与Set相似，都是不重复字符串集合。SortedSet中每个成员都有一个分数（score）与之关联，Redis根据分数为集合中的元素进行从小到大的排序。尽管SortedSet中的成员必须是唯一的，但分数却可以重复。在SortedSet中添加、删除或更新元素的事件复杂度为O(logn)。适用于积分排行榜等需要排序的场景，SortedSet中元素个数不要超过1w。</p>
-<p><strong>Hash</strong>：用于存储值对象数据，如User对象的Username、Password、Age等属性，可以部分更新、获取，提高效率。</p>
-<p><strong>HyperLogLog</strong>：用于基数统计，可以使用少量固定大小的内存统计集合中唯一元素的数量（每个HyperLogLog占用12KB内存，可统计$2^{64}$个不同元素。HyperLogLog得到的基数统计不是精确值，而是一个带有0.81%标准差（standard error）的近似值。适用于统计精确度要求不高的场景，如网站的uv。</p>
-<h2 id="Redis和memcached的区别"><a href="#Redis和memcached的区别" class="headerlink" title="Redis和memcached的区别"></a>Redis和memcached的区别</h2><h3 id="数据类型"><a href="#数据类型" class="headerlink" title="数据类型"></a>数据类型</h3><p>memcached仅支持字符串类型，redis支持五种常见数据结构</p>
-<h3 id="数据持久化"><a href="#数据持久化" class="headerlink" title="数据持久化"></a>数据持久化</h3><p>redis支持两种持久化策略：RDB快照和AOF日志，memcached不支持持久化</p>
-<h3 id="分布式"><a href="#分布式" class="headerlink" title="分布式"></a>分布式</h3><p>memcached不支持分布式，只能通过在客户端使用一致性hash来实现分布式存储，这种方式在存储和查询时都需要先在客户端计算一次数据所在的节点</p>
-<p>redis cluster实现了分布式的支持</p>
-<h3 id="内存管理机制"><a href="#内存管理机制" class="headerlink" title="内存管理机制"></a>内存管理机制</h3><p>redis中并不是所有数据都一直存储在内存中，可以将一些很久没用的value交换到磁盘，memcached的数据会一直在内存中</p>
-<p>memcached将内存分割成特定长度的块来存储数据，以完全解决内存碎片的问题。这种方式会导致内存利用率不高</p>
-<h3 id="性能"><a href="#性能" class="headerlink" title="性能"></a>性能</h3><p>redis只使用单核，memcached可以使用多核，平均每个核上存储小数据时redis比memcached性能更好，在100k以上的数据中，memecached性能高于redis。</p>
-<h2 id="持久化机制"><a href="#持久化机制" class="headerlink" title="持久化机制"></a>持久化机制</h2><p>Redis支持两种数据持久化方式：RDB快照和AOF日志。两种持久化方式可以单独使用，但通常会将两者结合起来。 </p>
-<h3 id="RDB持久化"><a href="#RDB持久化" class="headerlink" title="RDB持久化"></a>RDB持久化</h3><p>将Redis在内存的数据库记录定时dump到磁盘上的RDB的持久化。指定的时间间隔内将内存中的数据集快照写入磁盘，实际操作过程是fork一个子进程，先将数据集写入临时文件，写入成功后，再替换之前的文件，用二进制压缩存储。</p>
-<h3 id="AOF（append-only-file）持久化"><a href="#AOF（append-only-file）持久化" class="headerlink" title="AOF（append only file）持久化"></a>AOF（append only file）持久化</h3><p>将redis的操作日志以追加的方式写入文件，以日志的形式记录服务器所处理的每一个写、删除操作，查询操作不会记录，以文本方式记录，可以打开文件看到详细的操作记录。</p>
-<h2 id="过期时间"><a href="#过期时间" class="headerlink" title="过期时间"></a>过期时间</h2><p>设置过期时间后，redis通过两种手段对过期key进行删除：定期删除和惰性删除</p>
-<p><strong>定期删除</strong>：redis默认每隔100ms就随机抽取一些设置了过期时间的key，检查其是否过期，如果过期就删除。</p>
-<p><strong>惰性删除</strong>：定期删除可能导致很多过期key到了时间并没有被删除掉，所以就有了惰性删除。惰性删除是在查询时检查key是否已过期，如果过期才删除。</p>
-<h2 id="淘汰机制"><a href="#淘汰机制" class="headerlink" title="淘汰机制"></a>淘汰机制</h2><p>由于过期时间的定期删除和惰性删除并不能保证删除所有过期数据，如果大量过期key堆积在内存中，会导致内存很快耗尽，这时需要redis的淘汰机制。</p>
-<p>redis提供了6种淘汰策略：</p>
-<p><strong>volatile-lru</strong>：从已设置过期时间的数据集（server.db[i].expires）中挑选最近最少使用的数据淘汰</p>
-<p><strong>volatile-ttl</strong>：从已设置过期时间的数据集（server.db[i].expires）中挑选要过期的数据淘汰</p>
-<p><strong>volatile-random</strong>：从已设置过期时间的数据集（server.db[i].expires）中任意选择数据淘汰</p>
-<p><strong>allkeys-lru</strong>：当内存不足以容纳新写入数据时，在键空间中，移除最近最少使用的key（最常用）</p>
-<p><strong>allkeys-random</strong>：从数据集（server.db[i].dict）中任意选择数据淘汰</p>
-<p><strong>no-eviction</strong>：禁止驱逐数据，当内存不足以容纳新写入数据时，新写入操作会报错</p>
-<p>4.0版本后增加以下两种：</p>
-<p><strong>volatile-lfu</strong>：从已设置过期时间的数据集（server.db[i].expires）中挑选最不经常使用的数据淘汰</p>
-<p><strong>allkeys-lfu</strong>：当内存不足以容纳新写入数据时，在键空间中，移除最不经常使用的key</p>
-<h2 id="缓存问题解决"><a href="#缓存问题解决" class="headerlink" title="缓存问题解决"></a>缓存问题解决</h2><h3 id="缓存雪崩"><a href="#缓存雪崩" class="headerlink" title="缓存雪崩"></a>缓存雪崩</h3><p>缓存同一时间大面积失效或部分redis机器宕机，导致所有请求都去查数据库，进而导致数据库CPU和内存负载过高，甚至宕机。为了解决缓存雪崩的问题，可以采取以下几种方法：</p>
-<ol>
-<li><h4 id="采用高可用缓存"><a href="#采用高可用缓存" class="headerlink" title="采用高可用缓存"></a>采用高可用缓存</h4><p>缓存层设计成高可用，防止缓存大面积故障。即使个别节点、个别机器甚至机房宕掉，依然可以提供服务。例如Redis Sentinel和Redis Cluster都实现了高可用。</p>
-</li>
-<li><h4 id="缓存降级"><a href="#缓存降级" class="headerlink" title="缓存降级"></a>缓存降级</h4><p>使用ehcache等本地缓存存放部分数据，或对源服务进行限流、熔断、降级等，保证系统核心服务可用</p>
-</li>
-<li><h3 id="备份和预热"><a href="#备份和预热" class="headerlink" title="备份和预热"></a>备份和预热</h3><p>redis数据备份和恢复，快速预热缓存，设置随机过期时间</p>
-</li>
-</ol>
-<h3 id="缓存穿透"><a href="#缓存穿透" class="headerlink" title="缓存穿透"></a>缓存穿透</h3><p>查询一个不存在的数据，如redis没有命中，需要从mysql数据库查询，查不到数据则不写入缓存，将导致这个不存在的数据每次请求都到数据库去查，造成缓存穿透。为了解决缓存穿透，可以设置一个默认值到缓存，第二次从缓存中查询数据就有值了，不用访问数据库。设置一个过期时间或者有值的时候将缓存中的值替换掉即可。另外可以在查询前过滤不符合规则的查询。</p>
-<h3 id="数据一致性"><a href="#数据一致性" class="headerlink" title="数据一致性"></a>数据一致性</h3><p>只读缓存一般没有什么问题，一旦涉及数据更新，就可能出现缓存和数据库间的数据一致性问题。</p>
-<ol>
-<li><p>可以通过设置过期时间保证最终一致性。所有写操作以数据库为准，只要达到缓存过期时间，后面的读请求会从数据库中读取然后写入缓存。</p>
-</li>
-<li><p>使用binlog同步的方式，先将全部数据一次性写入redis，然后mysql发生增删改时通过binlog对redis中的数据进行更新</p>
-</li>
-</ol>
-<h2 id="线程模型"><a href="#线程模型" class="headerlink" title="线程模型"></a>线程模型</h2><p>redis是纯内存操作，CPU不是redis的瓶颈，它的瓶颈最可能是机器内存的大小或网络带宽。既然单线程容易实现并且CPU不会成为瓶颈，就顺理成章地采用单线程方案了。</p>
-<p>采用单线程的好处</p>
-<ol>
-<li>不需要各种锁的性能开销，在单线程场景下，不用考虑加锁释放锁的操作，也不用考虑可能出现死锁导致的性能消耗</li>
-<li>采用单线程避免了不必要的上下文切换和竞争条件，也不存在多进程或多线程导致的切换而消耗CPU。需要发挥多核CPU性能时可以通过在单机开多个Redis实例。</li>
-</ol>
-<p>redis内部使用文件事件处理器file event handler，这个事件处理器是单线程的，所以redis才叫做单线程的模型。它采用IO多路复用机制，同时监听多个socket，将产生的socket压入内存队列中，事件分派器根据socket上的事件类型来选择对应的事件处理器进行处理。文件事件处理器包含4个部分：</p>
-<ul>
-<li>多个socket</li>
-<li>IO多路复用程序</li>
-<li>文件事件分派器</li>
-<li>事件处理器（连接应答处理器、命令请求处理器、命令回复处理器）</li>
-</ul>
-<p>多个socket可能会并发产生不同的操作，每个操作对应不同的文件事件，但IO多路复用程序会监听多个socket，将产生事件的scoket放入队列中排队，事件分派处理器每次从队列中取出一个socket，根据socket的事件类型交给对应的事件处理器进行处理。</p>
-<h2 id="redis-高可用"><a href="#redis-高可用" class="headerlink" title="redis 高可用"></a>redis 高可用</h2><p>Redis 中实现高可用的手段包括持久化、复制、哨兵和集群。</p>
-<p><strong>持久化</strong>：持久化是最简单的高可用方法，它的作用是数据备份，即将数据存在硬盘上，保证数据不会因为进程退出而丢失</p>
-<p><strong>复制</strong>：复制是高可用 Redis 的基础，哨兵和集群都是在复制的基础上实现高可用的。复制主要实现了数据的多机备份以及对读操作的负载均衡和简单的故障恢复。缺陷是故障恢复无法自动化、写操作无法负载均衡、存储能力受到单机限制</p>
-<p><strong>哨兵</strong>：在复制基础上，哨兵实现了自动化的故障恢复，缺陷是写操作无法负载均衡，存储能力受到单机限制</p>
-<p><strong>集群</strong>：通过集群，Redis 解决了写操作无法负载均衡以及存储能力受到单机限制的问题，实现了较为完善的高可用方案</p>
-<p>Redis Sentinel 是 Redis 高可用的实现方案，Sentinel 是一个管理多个 redis 实例的工具，可以实现对 Redis 的监控、通知、自动故障转移。Redis Sentinel 的基本概念如下：</p>
-<p>基本名词说明：</p>
-<table>
-<thead>
-<tr>
-<th align="left">基本名词</th>
-<th align="left">逻辑结构</th>
-<th align="left">物理结构</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="left">Redis数据节点</td>
-<td align="left">主节点和从节点</td>
-<td align="left">主节点和从节点的进程</td>
-</tr>
-<tr>
-<td align="left">主节点(master)</td>
-<td align="left">Redis主数据库</td>
-<td align="left">一个独立的Redis进程</td>
-</tr>
-<tr>
-<td align="left">从节点(slave)</td>
-<td align="left">Redis从数据库</td>
-<td align="left">一个独立的Redis进程</td>
-</tr>
-<tr>
-<td align="left">Sentinel节点</td>
-<td align="left">监控Redis数据节点</td>
-<td align="left">一个独立的Sentinel进程</td>
-</tr>
-<tr>
-<td align="left">Sentinel节点集合</td>
-<td align="left">若干Sentinel节点的抽象组合</td>
-<td align="left">若干Sentinel节点进程</td>
-</tr>
-<tr>
-<td align="left">Redis Sentinel</td>
-<td align="left">Redis高可用实现方案</td>
-<td align="left">Sentinel节点集合和Redis数据节点进程</td>
-</tr>
-<tr>
-<td align="left">应用客户端</td>
-<td align="left">泛指一个或多个客户端</td>
-<td align="left">一个或者多个客户端进程或者线程</td>
-</tr>
-</tbody></table>
-<p>Redis Sentinel主要功能</p>
-<p>Sentinel 的主要功能包括主节点存活检测、主从运行情况检测、自动故障转移（failover）、主从切换，sentinel 最小配置为一主一从。sentinel 系统可以管理多个 Redis 服务器并执行以下任务：</p>
-<p><strong>监控</strong>：不断检查主服务器和从服务器是否正常运行</p>
-<p><strong>通知</strong>：当被监控的某个 Redis 服务器出现问题时，sentinel 通过 API 脚本向管理员或其它应用程序发送通知</p>
-<p><strong>故障自动转移</strong>：当从节点不能正常工作时，sentinel 会开始一次自动的故障转移操作，将与主节点是主从关系的其中一个从节点升级为新的主节点，并将其它从节点指向新的主节点</p>
-<p><strong>配置提供者</strong>：Redis sentinel 模式下，客户端应用在初始化时连接的是 sentinel 节点集合，从中获取主节点信息</p>
-<h3 id="主观下线和客观下线"><a href="#主观下线和客观下线" class="headerlink" title="主观下线和客观下线"></a>主观下线和客观下线</h3><p>默认情况下，每个 sentinel 节点以每秒一次的频率对 redis 节点和其它 sentinel 节点发送 ping 命令，并通过节点的回复来判断节点是否在线</p>
-<h4 id="主观下线"><a href="#主观下线" class="headerlink" title="主观下线"></a>主观下线</h4><p>主观下线适用于所有的主节点和从节点，如果在 down-after-milliseconds 毫秒内，sentinel 没有收到目标节点的有效回复，会判定该节点为主观下线</p>
-<h4 id="客观下线"><a href="#客观下线" class="headerlink" title="客观下线"></a>客观下线</h4><p>客观下线只适用于主节点，如果主节点出现故障，sentinel 节点会通过 sentinel is-master-down-by-addr 命令，向其它 sentinel 节点询问对该节点的状态判断。如果超过<quorum>个数的节点判定主节点不可达，则该 sentinel 节点会判断主节点为客观下线。</p>
-<h2 id="常见问题"><a href="#常见问题" class="headerlink" title="常见问题"></a>常见问题</h2><h3 id="1-热点-Key"><a href="#1-热点-Key" class="headerlink" title="1. 热点 Key"></a>1. 热点 Key</h3><p>Redis 缓存中可能存在一些访问量非常大的数据，流量超过数据所在主机的网卡上限，导致缓存分片服务被打垮。再有请求参数时，会打到 DB 上将 DB 压垮。</p>
-<p>热点数据发现：</p>
-<ol>
-<li>对一个周期内数据访问进行统计，将达到一定请求量级的数据当做热点数据。</li>
-<li>根据业务场景，如大促商品数据为热点数据</li>
-<li>Redis自带命令查询：Redis4.0.4版本提供了<code>redis-cli –hotkeys</code>就能找出热点Key</li>
-</ol>
-<blockquote>
-<p>如果要用Redis自带命令查询时，要注意需要先把内存逐出策略设置为allkeys-lfu或者volatile-lfu，否则会返回错误。进入Redis中使用<code>config set maxmemory-policy allkeys-lfu</code>即可。</p>
-</blockquote>
-<p>解决方案：</p>
-<ol>
-<li>将热点数据缓存到服务端内存中（可采用 redis 事件监听机制保证一致性）</li>
-<li>将热点 key + 随机数，均匀分配到Redis 其它主机上</li>
-</ol>
-<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><ol>
-<li><a href="https://juejin.im/post/5b7d226a6fb9a01a1e01ff64" target="_blank" rel="noopener">Redis哨兵模式与高可用集群</a></li>
-<li><a href="https://mp.weixin.qq.com/s/jWac1e2yomTHLFICi0ZmuA" target="_blank" rel="noopener">深度掌握Redis</a></li>
-<li><a href="https://juejin.im/post/5d259544f265da1bd522f689" target="_blank" rel="noopener">关于Redis热点key的一些思考</a></li>
-</ol>
-
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2019/09/11/Redis%E7%9F%A5%E8%AF%86%E7%82%B9%E6%95%B4%E7%90%86/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
@@ -786,54 +676,14 @@
 <li>当线程池里面存活的线程数已经等于corePoolSize了, 并且任务队列workQueue也满，判断线程数是否达到maximumPoolSize，即最大线程数是否已满，如果没到达，创建一个非核心线程执行提交的任务。</li>
 <li>如果当前的线程数达到了maximumPoolSize，还有新的任务过来的话，直接采用拒绝策略处理。</li>
 </ul>
-<h3 id="拒绝策略"><a href="#拒绝策略" class="headerlink" title="拒绝策略"></a>拒绝策略</h3><ul>
-<li>AbortPolicy(抛出一个异常，默认的)</li>
-<li>DiscardPolicy(直接丢弃任务)</li>
-<li>DiscardOldestPolicy（丢弃队列里最老的任务，将当前这个任务继续提交给线程池）</li>
-<li>CallerRunsPolicy（交给线程池调用所在的线程进行处理)</li>
-</ul>
-<h3 id="异常处理"><a href="#异常处理" class="headerlink" title="异常处理"></a>异常处理</h3><ol>
-<li>Runnable 或 Callable 中使用 try/catch 捕获并处理异常</li>
-<li>submit 提交任务, Feature.get() 处理异常</li>
-<li>Executors实例化时传入自己的ThreadFactory设置Thread.setUncaughtExceptionHandler处理异常</li>
-<li>重写 ThreadPoolExecutor.afterExecute() 方法, 处理传递的 Throwable.</li>
-</ol>
-<h3 id="工作队列"><a href="#工作队列" class="headerlink" title="工作队列"></a>工作队列</h3><ul>
-<li><strong>ArrayBlockingQueue</strong>(有界队列): 用一个数组实现的有界阻塞队列, FIFO 排序</li>
-<li><strong>LinkedBlockingQueue</strong>(可设置容量的队列):基于链表的阻塞队列, FIFO 排序，容量可设置，否则是无边界队列，最大长度 Integer.MAX_VALUE，Executors.newFixedThreadPool线程池使用了这个队列。</li>
-<li><strong>DelayQueue</strong>：延迟队列，任务定时周期的延迟执行队列，根据定时的执行时间从小到大排序，否则根据插入到队列的先后排序。newScheduledThreadPool线程池使用了这个队列</li>
-<li><strong>PriorityBlockingQueue</strong>：优先级队列，具有优先级的无界阻塞队列</li>
-<li><strong>SynchronousQueue</strong>：同步队列，不存储元素的阻塞队列，每个插入操作必须等另一个线程调用移除操作，否则插入操作一直处于阻塞状态，newCachedThreadPool使用了这个队列</li>
-</ul>
-<h3 id="线程池状态"><a href="#线程池状态" class="headerlink" title="线程池状态"></a>线程池状态</h3><ul>
-<li><p>RUNNING</p>
-<p>该状态的线程池会接受新任务，并处理阻塞队列中的任务</p>
-<p>调用线程池的 shutdown()方法，可以切换到 SHUTDOWN 状态</p>
-<p>调用线程池的 shutdownNow() 方法，可以切换到 STOP 状态</p>
-</li>
-<li><p>SHUTDOWN</p>
-<p>该状态的线程池不会接受新任务，但会处理阻塞队列中的任务</p>
-<p>队列为空，并且线程池中执行的任务也为空，进入 TIDYING 状态</p>
-</li>
-<li><p>STOP</p>
-<p>该状态线程不会接收新任务，也不会处理阻塞队列中的任务，并且会中断正在运行的任务</p>
-<p>返回阻塞队列中正在执行的任务，进入 TIDYING 状态</p>
-</li>
-<li><p>TIDYING</p>
-<p>该状态表明所有的任务已经运行终止，记录的任务数量为 0</p>
-<p>terminated()执行完毕，进入 TERMINATED 状态</p>
-</li>
-<li><p>TERMINATED</p>
-<p>该状态表示线程池彻底终止</p>
-</li>
-</ul>
-<h3 id="线程池配置"><a href="#线程池配置" class="headerlink" title="线程池配置"></a>线程池配置</h3><p>对于计算密集型任务，一个有 N 个处理器的系统通过使用 N+1 个线程的线程池来获得最优的利用率（计算密集型任务巧合在某时刻因为发生一个页错误或因为其他原因暂停，刚好有一个额外的线程，可以确保这种情况下 CPU 周期不会中断工作）。</p>
-<p>对于包含了 I/O 和其他阻塞操作的任务，不是所有的线程都会在所有的时间被调度，为了正确设置线程池长度，需要估算任务花在等待的时间与用来计算的时间的比率；最优池大小为：CPU 数目 * 目标 CPU 使用率 * （1 + 等待时间/计算时间）</p>
-<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><ol>
-<li><a href="https://mp.weixin.qq.com/s/1v-HJikfmEUoaERpTAq3VQ" target="_blank" rel="noopener">Java线程池解析</a></li>
-<li><a href="https://juejin.im/post/5b3cf259e51d45194e0b7204" target="_blank" rel="noopener">线程池专题</a></li>
-</ol>
-
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2019/09/04/Java%E5%B9%B6%E5%8F%91%E7%9F%A5%E8%AF%86%E7%82%B9/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
@@ -920,27 +770,14 @@
 <h2 id="代理模式"><a href="#代理模式" class="headerlink" title="代理模式"></a>代理模式</h2><p>AOP（Aspect Oriented Programming，面向切面编程）将那些与业务无关的、被业务模块共同调用的逻辑（事务处理、日志管理、权限控制等）封装起来，便于减少系统的重复代码，降低模块间的耦合度，有利于未来的可扩展性和可维护性。</p>
 <p>Spring AOP基于动态代理，如果要代理的对象实现了某个接口，Spring AOP会使用JDK Proxy创建代理对象，对于没有实现接口的对象，无法使用JDK Proxy进行代理，Spring AOP会使用Cglib生成被代理对象的子类来作为代理。</p>
 <p>也可以使用AspectJ在编译时做静态代理，这种代理方式基于字节码操作（Bytecode Manipulation）。</p>
-<h2 id="模版模式"><a href="#模版模式" class="headerlink" title="模版模式"></a>模版模式</h2><p>模版模式是一种行为设计模式，它定义一个操作中的算法框架，将一些步骤延迟到子类中。模版模式使得子类在不改变算法结构的情况下定义该算法的某些特定步骤的实现方式。</p>
-<p>Spring中jdbcTemplate、hibernateTemplate等以Template结尾的对数据库操作的类就使用了模版模式。</p>
-<h2 id="观察者模式"><a href="#观察者模式" class="headerlink" title="观察者模式"></a>观察者模式</h2><p>观察者模式是一种对象行为型模式，表示一种对象与对象之间具有依赖关系，当一个对象发生改变时，这个对象所依赖的对象也会做出反应。spring观察者模式流程如下：</p>
-<ol>
-<li>定义一个事件：实现一个继承自<code>ApplicationEvent</code>，并且写相应的构造函数</li>
-<li>定义一个事件监听者：实现<code>ApplicationListener</code>接口，重写<code>onApplicationEvent()</code>方法</li>
-<li>使用事件发布消息：通过<code>ApplicationEventPublisher</code>的<code>publishEvent()</code>方法发布消息</li>
-</ol>
-<h2 id="适配器模式"><a href="#适配器模式" class="headerlink" title="适配器模式"></a>适配器模式</h2><p>适配器模式（Adapter Pattern）将一个接口转换成客户希望的另一个接口，适配器模式使接口不兼容的类一起工作。</p>
-<h3 id="Spring-AOP中的适配器模式"><a href="#Spring-AOP中的适配器模式" class="headerlink" title="Spring AOP中的适配器模式"></a>Spring AOP中的适配器模式</h3><p>Spring AOP的增强或通知（Advice）使用了适配器模式，接口是AdvisorAdapter。Advice常用类型有BeforeAdvice（目标方法前，前置通知）、AfterAdvice（目标方法调用后，后置通知）、AfterReturningAdvice（目标方法执行结束后，return之前）等。每个类型Advice（通知）都有对应的拦截器： <code>MethodBeforeAdviceInterceptor</code>、<code>AfterReturningAdviceAdapter</code>、<code>AfterReturningAdviceInterceptor</code>。Spring预定义的通知要通过对应的适配器，适配成 <code>MethodInterceptor</code>接口(方法拦截器)类型的对象（如：<code>MethodBeforeAdviceInterceptor</code> 负责适配 <code>MethodBeforeAdvice</code>）。</p>
-<h3 id="Spring-MVC中的设计模式"><a href="#Spring-MVC中的设计模式" class="headerlink" title="Spring MVC中的设计模式"></a>Spring MVC中的设计模式</h3><p>在Spring MVC中，<code>DispatcherServlet</code> 根据请求信息调用 <code>HandlerMapping</code>，解析请求对应的 <code>Handler</code>。解析到对应的 <code>Handler</code>（也就是我们平常说的 <code>Controller</code> 控制器）后，开始由<code>HandlerAdapter</code> 适配器处理。<code>HandlerAdapter</code> 作为期望接口，具体的适配器实现类用于对目标类进行适配，<code>Controller</code> 作为需要适配的类。</p>
-<p><strong>为什么要在 Spring MVC 中使用适配器模式？</strong> Spring MVC 中的 <code>Controller</code> 种类众多，不同类型的 <code>Controller</code> 通过不同的方法来对请求进行处理。如果不利用适配器模式的话，<code>DispatcherServlet</code>直接获取对应类型的 <code>Controller</code>，需要的自行来判断，像下面这段代码一样：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span>(mappedHandler.getHandler() <span class="keyword">instanceof</span> MultiActionController)&#123;  </span><br><span class="line"> ((MultiActionController)mappedHandler.getHandler()).xxx  </span><br><span class="line">&#125;<span class="keyword">else</span> <span class="keyword">if</span>(mappedHandler.getHandler() <span class="keyword">instanceof</span> XXX)&#123;  </span><br><span class="line">    ...  </span><br><span class="line">&#125;<span class="keyword">else</span> <span class="keyword">if</span>(...)&#123;  </span><br><span class="line">   ...  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>假如我们再增加一个 <code>Controller</code>类型就要在上面代码中再加入一行 判断语句，这种形式就使得程序难以维护，也违反了设计模式中的开闭原则 – 对扩展开放，对修改关闭。</p>
-<h2 id="装饰器模式"><a href="#装饰器模式" class="headerlink" title="装饰器模式"></a>装饰器模式</h2><p>相比于使用继承，装饰者模式更加灵活。简单点儿说就是当我们需要修改原有的功能，但我们又不愿直接去修改原有的代码时，设计一个Decorator套在原有代码外面。其实在 JDK 中就有很多地方用到了装饰者模式，比如 <code>InputStream</code>家族，<code>InputStream</code> 类下有 <code>FileInputStream</code> (读取文件)、<code>BufferedInputStream</code> (增加缓存,使读取文件速度大大提升)等子类都在不修改<code>InputStream</code> 代码的情况下扩展了它的功能。</p>
-<p>Spring 中配置 DataSource 的时候，DataSource 可能是不同的数据库和数据源。我们能否根据客户的需求在少修改原有类的代码下动态切换不同的数据源？这个时候就要用到装饰者模式(这一点我自己还没太理解具体原理)。Spring 中用到的包装器模式在类名上含有 <code>Wrapper</code>或者 <code>Decorator</code>。这些类基本上都是动态地给一个对象添加一些额外的职责。</p>
-<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><ol>
-<li><a href="https://snailclimb.top/JavaGuide/#/system-design/framework/spring/Spring-Design-Patterns" target="_blank" rel="noopener">Spring中的设计模式</a></li>
-</ol>
-
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2019/09/02/Spring%E4%B8%AD%E7%9A%84%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
@@ -1023,9 +860,17 @@
 <p>创建Bean容器</p>
 <p>初始化Bean</p>
 <ul>
-<li><input disabled="" type="checkbox"> factoryBean</li>
+<li><input disabled type="checkbox"> factoryBean</li>
 </ul>
 
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2019/08/31/Spring%E6%BA%90%E7%A0%81/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
@@ -1120,36 +965,14 @@
 <ol start="2">
 <li>初始化</li>
 </ol>
-<p>初始化的目的是使Servlet能读取持久化配置数据，初始化一些代价高的资源（如JDBC连接）或执行一些一次性动作。容器调用Servlet实例的init方法完成初始化。</p>
-<ol start="3">
-<li>请求处理</li>
-</ol>
-<p>完成初始化后，Servlet就可以开始处理客户端请求了，Request和Response（HTTP场景下对应HttpServletRequest和HttpServletResponse）由容器通过参数传递到Servlet的service方法。</p>
-<ol start="4">
-<li>终止服务（End of service）</li>
-</ol>
-<p>当Servlet容器确定servlet应该从服务中移除时，将调用Servlet接口的destory方法释放它使用的任何资源和保存任何持久化状态。容器调用destory方法之前，必须让正在执行的service方法执行完或者超过服务器定义的时间限制。destory方法完成后，容器释放servlet实例以便被垃圾回收。</p>
-<h3 id="Spring-MVC"><a href="#Spring-MVC" class="headerlink" title="Spring MVC"></a>Spring MVC</h3><p>Spring-mvc支持Spring容器与MVC容器共存，Spring容器即根容器，mvc容器将根容器视为父容器。Spring容器以下列形式进行配置（web.xml).</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">listener</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">listener-class</span>&gt;</span>org.springframework.web.context.ContextLoaderListener<span class="tag">&lt;/<span class="name">listener-class</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">listener</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<p>根据Servlet规范，组件加载顺序为listener-&gt;filter-&gt;servlet。如果spring根容器存在，它被保存在ServletContext中，key为<code>WebApplicationContext.class.getName()+&quot;.ROOT&quot;</code>。</p>
-<p>Spring MVC处理请求流程：</p>
-<ol>
-<li>客户端发送请求，容器将请求转发给DispatchServlet（web.xml中配置，DispatchServlet.initStrategies()中初始化）</li>
-<li>DispatchServlet根据请求信息调用Handlemapping，解析请求到对应的处理执行链（HandlerExecutionChain）</li>
-<li>按照interceptor.preHandle() -&gt; handler(由handlerAdapter适配器处理，适配器模式) -&gt; interceptor.postHandle() 的顺序执行</li>
-<li>完成执行链后，返回ModelAndView对象，Model是返回的数据对象，View是逻辑上的View</li>
-<li>ViewResolver根据逻辑View查找实际的View</li>
-<li>DispaterServlet把返回的Model传给View（视图渲染）</li>
-<li>把View返回给客户端</li>
-</ol>
-<h2 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h2><ol>
-<li><a href="http://zhanjindong.com/assets/pdf/Servlet3.1-Specification.pdf" target="_blank" rel="noopener">Servlet 3.1规范</a></li>
-<li><a href="https://github.com/seaswalker/spring-analysis/blob/master/note/spring-mvc.md" target="_blank" rel="noopener">Spring MVC源码</a></li>
-<li><a href="https://blog.csdn.net/jianyuerensheng/article/details/51258942" target="_blank" rel="noopener">Spring MVC原理及配置详解</a></li>
-<li><a href="https://snailclimb.top/JavaGuide/#/system-design/framework/spring/SpringMVC-Principle" target="_blank" rel="noopener">Spring MVC原理</a></li>
-</ol>
-
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2019/08/29/SpringMVC%E5%8E%9F%E7%90%86/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
@@ -1224,6 +1047,14 @@
 <li><a href="https://tech.meituan.com/2018/06/07/searchads-dnn.html" target="_blank" rel="noopener">深度学习在美团搜索广告排序的应用实践</a></li>
 </ol>
 
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2019/08/25/tensorflow/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 

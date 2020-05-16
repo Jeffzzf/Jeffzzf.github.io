@@ -227,20 +227,14 @@
 <p>最新的AIO(Async I/O)里面会更进一步：不但等待就绪是非阻塞的，就连数据从网卡到内存的过程也是异步的。</p>
 <p>换句话说，BIO里用户最关心“我要读”，NIO里用户最关心”我可以读了”，在AIO模型里用户更需要关注的是“读完了”。</p>
 <p>NIO一个重要的特点是：socket主要的读、写、注册和接收函数，在等待就绪阶段都是非阻塞的，真正的I/O操作是同步阻塞的（消耗CPU但性能非常高）。</p>
-<h2 id="BIO（Blocking-I-O）"><a href="#BIO（Blocking-I-O）" class="headerlink" title="BIO（Blocking I/O）"></a>BIO（Blocking I/O）</h2><p>同步阻塞IO，数据的读入和写出阻塞在一个线程内。服务端一般通过在while(true)循环中调用accept()方法等待接受客户端连接请求，一旦接收到一个连接请求，就可以建立通信套接字并在套接字上进行读写操作，单线程情况下不能再接收其它请求，只能等当前连接的客户端操作执行完，不过可以通过多线程来支持多个客户端的连接。当连接数达到十万甚至百万是，BIO模型无能为力，需要更加高效的IO模型。</p>
-<h2 id="NIO（Non-BlockingIO）"><a href="#NIO（Non-BlockingIO）" class="headerlink" title="NIO（Non-BlockingIO）"></a>NIO（Non-BlockingIO）</h2><p>面向缓冲的，基于通道IO的同步非阻塞IO模型，提供了SocketChannel和ServerSocketChannel两种套接字分别与BIO模型的Socket和ServerSocket对应。这两种套接字都支持阻塞和非阻塞两种模式。对于低负载、低并发的应用，可以使用同步阻塞IO来提升开发效率并提高可维护性；对于高负载、高并发的应用，应采用NIO非阻塞模式开发。</p>
-<p>BIO是面向流（Stream oriented），而NIO是面向缓冲区的（Buffer oriented）。Stream中以Buffer开头的扩展类，只是流的包装类，要从流读到缓冲区，而NIO是直接读到缓冲区进行读写操作。最常用的缓冲区是ByteBuffer，它提供了一组用于操作byte数组的功能。每一种Java基本类型（除了Boolean）都对应一种缓冲区。</p>
-<p>NIO包含Channel（通道）、Buffer（缓冲区）和Selector（选择器）这三个核心组件，通道只和Buffer交互，因为Buffer，通道可以异步进行读写。选择器用于使用单个线程处理多个通道，减少了线程之间切换带来的开销，可以提高系统效率。</p>
-<p>NIO 主要事件有：读就绪、写就绪、有新连接到来</p>
-<p>NIO 有原来的阻塞读写变成单线程轮询写事件，除了事件的轮询是阻塞的（没有可干的事情必须阻塞），其它 I/O 操作都是纯 CPU 操作，没有必要开启多线程。并且由于多线程处理阻塞 IO （BIO）导致的线程切换问题也得到了解决，为处理海量连接提供了可能。</p>
-<p>select是阻塞的，无论是通过操作系统的通知（epoll）还是不停的轮询(select，poll)，这个函数是阻塞的。所以你可以放心大胆地在一个while(true)里面调用这个函数而不用担心CPU空转</p>
-<h2 id="AIO（Asynchronous-IO）"><a href="#AIO（Asynchronous-IO）" class="headerlink" title="AIO（Asynchronous IO）"></a>AIO（Asynchronous IO）</h2><p>即NIO 2，java 7开始引进，是NIO的改进版，是异步非阻塞IO模型。异步IO基于事件和回调机制实现，应用执行IO操作后直接返回，不会阻塞。当后台处理完成后，操作系统会通知相应线程进行后续操作。</p>
-<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><ol>
-<li><a href="https://tech.meituan.com/2016/11/04/nio.html" target="_blank" rel="noopener">Java NIO浅析</a></li>
-<li><a href="http://www.jasongj.com/java/nio_reactor/" target="_blank" rel="noopener">Java进阶（五）Java I/O模型从BIO到NIO和Reactor模式</a></li>
-</ol>
-<p><a href="https://zhuanlan.zhihu.com/p/23488863" target="_blank" rel="noopener">https://zhuanlan.zhihu.com/p/23488863</a></p>
-
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2019/07/29/Java%20IO/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
@@ -313,48 +307,15 @@
 <p>分布式事务可以看作由多个分布式操作组成的序列，每个操作称为子事务。在高并发的互联网应用中，如果实现要实现严格满足ACID特性的分布式事务，会出现可用性与一致性之间的冲突。</p>
 <h3 id="CAP理论"><a href="#CAP理论" class="headerlink" title="CAP理论"></a>CAP理论</h3><p>一个分布式系统不可能同时满足一致性（Consistency）、可用性（Availability）和分区容错性（Partitiontolerance）这三个特性，最多只能同时满足其中的两项。由于分区容错性是分布式系统最基本的需求，所以往往需要把精力花在如何根据业务特点在一致性和可用性之间需求平衡。</p>
 <h4 id="一致性"><a href="#一致性" class="headerlink" title="一致性"></a>一致性</h4><p>分布式环境中，一致性是指数据在多个副本之间是否能保持一致的特性。如果能够做到针对一个数据项的更新操作执行成功后，所有的用户都可以读取到最新的值，即可认为该系统具有强一致性。</p>
-<h4 id="可用性"><a href="#可用性" class="headerlink" title="可用性"></a>可用性</h4><p>可用性是指系统提供的服务必须一致处于可用的状态，对于用户的每一次请求都能在响应时间内返回结果。</p>
-<h4 id="分区容错性"><a href="#分区容错性" class="headerlink" title="分区容错性"></a>分区容错性</h4><p>分布式系统在遇到任何网络分区故障时，仍然需要保证对外提供满足一致性和可用性的服务，除非整个网络环境都发生故障。</p>
-<h3 id="BASE理论"><a href="#BASE理论" class="headerlink" title="BASE理论"></a>BASE理论</h3><p>BASE是Basically Available（基本可用）、Soft state（软状态）和Eventually consistent（最终一致性）三个短语的简写。BASE是对CAP中一致性和可用性权衡的结果，来源于对大规模互联网系统分布式实践的总结，是基于CAP定理逐步演化而来的，其核心思想是即使无法做到强一致性（Strong consistency），但每个应用可以根据自身业务特点，采用适当的方式来使系统达到最终一致性（Eventual consistency）。</p>
-<h4 id="基本可用"><a href="#基本可用" class="headerlink" title="基本可用"></a>基本可用</h4><p>基本可用是指分布式系统在出现不可预知故障时，允许损失部分可用性。如响应时间增加、不重要功能降级等。</p>
-<h4 id="软状态"><a href="#软状态" class="headerlink" title="软状态"></a>软状态</h4><p>和硬状态相比，软状态允许系统中的数据存在中间状态，并认为该中间状态的存在不会影响系统的整体可用性，即允许系统在不同节点的数据副本之间进行数据同步过程存在延时</p>
-<h4 id="最终一致性"><a href="#最终一致性" class="headerlink" title="最终一致性"></a>最终一致性</h4><p>最终一致性是系统所有数据副本在经过一段时间的同步后，最终能够达到一个一致的状态，而不需要实时保证系统数据的一致性。工程实践中，最终一致性存在以下五类：</p>
-<h5 id="因果一致性（Causal-consistency）"><a href="#因果一致性（Causal-consistency）" class="headerlink" title="因果一致性（Causal consistency）"></a>因果一致性（Causal consistency）</h5><p>如果进程A在更新完某个数据项后通知了进程B，那么进程B之后对该数据项的访问都应该能够获取的进程A更新后的最新值，并且如果进程B要对该数据进行更新，必须基于进程A更新后的最新值，即不能发生丢失更新的情况。与此同时，与进程A无因果关系的进程C的数据访问则没有这样的限制。</p>
-<h5 id="读己之所写（Read-your-writes）"><a href="#读己之所写（Read-your-writes）" class="headerlink" title="读己之所写（Read your writes）"></a>读己之所写（Read your writes）</h5><p>进程A更新一个数据项后，它自己总是能够访问到更新过的最新值，而不会看到旧值，可以看作一种特殊的因果一致性</p>
-<h5 id="会话一致性（Session-consistency）"><a href="#会话一致性（Session-consistency）" class="headerlink" title="会话一致性（Session consistency）"></a>会话一致性（Session consistency）</h5><p>系统保证在同一个会话中实现读己之所写的一致性，用户端能够在同一个会话中始终读取到数据项的最新值</p>
-<h5 id="单调读一致性（Monotonic-read-consistency）"><a href="#单调读一致性（Monotonic-read-consistency）" class="headerlink" title="单调读一致性（Monotonic read consistency）"></a>单调读一致性（Monotonic read consistency）</h5><p>如果一个进程从系统中读取一个数据项的某个值后，系统对该进程后续的任何数据访问都不应该返回更旧的值</p>
-<h5 id="单调写一致性（Monotonic-write-consistency）"><a href="#单调写一致性（Monotonic-write-consistency）" class="headerlink" title="单调写一致性（Monotonic write consistency）"></a>单调写一致性（Monotonic write consistency）</h5><p>保证来自同一个进程的写操作被顺序地执行</p>
-<p>BASE理论面向的是大型高可用高扩展的分布式系统，不同于ACID的强一致性模型，它采用牺牲强一致性来获得可用性，并允许数据在一段时间内不一致，但最终能达到一致状态。在实际分布式场景中，不同业务单元和组件对数据一致性的要求是不同的，ACID特性与BASE理论往往会结合在一起使用。</p>
-<h2 id="Paxos"><a href="#Paxos" class="headerlink" title="Paxos"></a>Paxos</h2><p>用于达成共识性问题，即对多个节点产生的值，该算法能保证只选出唯一一个值。</p>
-<p>主要有三类节点：</p>
-<ul>
-<li>提议者（Proposer）：提议一个值；</li>
-<li>接受者（Acceptor）：对每个提议进行投票；</li>
-<li>告知者（Learner）：被告知投票的结果，不参与投票过程。</li>
-</ul>
-<p>算法过程：</p>
-<ol>
-<li><p>prepare阶段：</p>
-<ol>
-<li>proposer选择一个提案编号n并将prepare请求发送给acceptors中的一个多数派；</li>
-<li>acceptor收到prepare消息后，如果提案的编号大于它已经回复的所有prepare消息(回复消息表示接受accept)，则acceptor将自己上次接受的提案回复给proposer，并承诺不再回复小于n的提案；</li>
-</ol>
-</li>
-<li><p>批准阶段：</p>
-<ol>
-<li>当一个proposer收到了多数acceptors对prepare的回复后，就进入批准阶段。它要向回复prepare请求的acceptors发送accept请求，包括编号n和根据P2c决定的value（如果根据P2c没有已经接受的value，那么它可以自由决定value）。</li>
-<li>在不违背自己向其他proposer的承诺的前提下，acceptor收到accept请求后即批准这个请求。</li>
-</ol>
-</li>
-<li><p>发布阶段</p>
-<p>acceptors需要将accept消息发送给learners的一个子集，然后由这些learners去通知所有learners</p>
-</li>
-</ol>
-<h2 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h2><ol>
-<li><a href="https://zh.wikipedia.org/wiki/Paxos%E7%AE%97%E6%B3%95" target="_blank" rel="noopener">Paxos算法</a></li>
-<li><a href="https://cyc2018.github.io/CS-Notes/#/notes/%E5%88%86%E5%B8%83%E5%BC%8F?id=_2-accept-%E9%98%B6%E6%AE%B5" target="_blank" rel="noopener">Cs notes</a></li>
-</ol>
-
+<h4 id="可用性"><a href="#可用性" class="headerlink" title="可用性"></a>可用性</h4>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2019/07/22/%E5%88%86%E5%B8%83%E5%BC%8F%E7%B3%BB%E7%BB%9F%E7%90%86%E8%AE%BA/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
@@ -442,6 +403,14 @@
 <li><a href="https://www.cnblogs.com/CarpenterLee/p/5488070.html" target="_blank" rel="noopener">用PriorityQueue实现最大最小堆</a></li>
 </ol>
 
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2019/07/19/Java%E9%9B%86%E5%90%88%E6%80%BB%E7%BB%93/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
@@ -655,15 +624,14 @@
 <p>此外，集群内 node 都可以执行任何请求，负责将请求转发给对应的 node 进行处理。当 node.master 和 node.data 都是 false 时，这个节点可以作为一个类似 proxy 的节点，接受请求并进行转发、结果聚合等。</p>
 <h3 id="Es-选主"><a href="#Es-选主" class="headerlink" title="Es 选主"></a>Es 选主</h3><p>ZenDiscovery是ES自己实现的一套用于节点发现和选主等功能的模块，没有依赖Zookeeper等工具</p>
 <p>在本节点到每个hosts中的节点建立一条边，当整个集群所有的node形成一个联通图时，所有节点都可以知道集群中有哪些节点，不会形成孤岛。</p>
-<p>为了避免产生脑裂，ES采用了常见的分布式系统思路，保证选举出的master被多数派(quorum)的master-eligible node认可，以此来保证只有一个master。这个quorum通过以下配置进行配置：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">conf&#x2F;elasticsearch.yml:</span><br><span class="line">    discovery.zen.minimum_master_nodes: 2</span><br></pre></td></tr></table></figure>
-
-<p>这个配置对于整个集群非常重要。</p>
-<h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2><ol>
-<li><a href="https://zhuanlan.zhihu.com/p/34858035" target="_blank" rel="noopener">Elasticsearch分布式一致性原理剖析(一)-节点篇</a></li>
-<li><a href="https://www.elastic.co/guide/cn/elasticsearch/guide/current/translog.html" target="_blank" rel="noopener">https://www.elastic.co/guide/cn/elasticsearch/guide/current/translog.html</a></li>
-</ol>
-
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2019/07/10/Es%20%E9%9B%86%E7%BE%A4%E5%8E%9F%E7%90%86/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
@@ -752,18 +720,15 @@
 <p>新的文档首先被添加到内存索引缓存中，然后写入到一个基于磁盘的段。当一个查询被触发，所有已知的段按顺序被查询。词项统计会对所有段的结果进行聚合，以保证每个词和每个文档的管理都被准确计算。</p>
 <p>每个提交点会包含一个.del 文件，文件中会列出这些被删除文档的段信息。当一个文档被删除时，它实际只是在.del文件中被标记删除。一个被标记删除的文档仍然可以被查询匹配到，但它会在最终结果被返回前从结果集中移除。</p>
 <p>文档更新时，旧版本文档被标记删除，文档的新版本被索引到一个新的段中。可能两个版本的文档都会被一个查询匹配到，但被删除的旧版本文档在结果集返回前被移除了。</p>
-<h2 id="段合并"><a href="#段合并" class="headerlink" title="段合并"></a>段合并</h2><p>由于自动刷新流程每秒创建一个新的段，会导致段时间内段数量快速增长，每个段都会消耗文件句柄、内存和CPU运行周期，并且每个搜索请求都必须轮流检查每个段，所以段越多，搜索就越慢。</p>
-<p>es通过段合并解决这个问题，小的段被合并到大的段，大的段被合并成更大的段。段合并时会将那些旧的已删除文档从文件系统中清除，被删除文档或被更新文档的旧版本不会被拷贝到新的大段中。合并结束后，老的段被删除。</p>
-<h2 id="提高搜索性能"><a href="#提高搜索性能" class="headerlink" title="提高搜索性能"></a>提高搜索性能</h2><p>内存缓冲区中的文档会被写入到一个新的段中，新段会被先写入到文件系统缓存（代价小），稍后被刷新到磁盘（代价高）。不过只要文件已经在缓存中，就可以像其它文件一样被打开和读取了，这种方式比进行一次提交代价小得多。</p>
-<p>es中写入和打开一个新段的过程叫做refresh，默认情况下，每个分片每秒自动刷新一次，文档的变化在刷新后才能被搜索到。刷新的时间间隔通过refresh_interval配置。</p>
-<h2 id="事务日志"><a href="#事务日志" class="headerlink" title="事务日志"></a>事务日志</h2><p>es中的事务日志（translog）记录了所有还没被刷到磁盘的操作，当es启动时，会从磁盘中使用最后一个提交点去恢复已知的段，并且会重放translog中所有在最后一次提交发生的变更操作。</p>
-<p>默认translog每5秒被fsync刷新到磁盘，或者在每次写请求完成之后执行（index、delete、update、bulk），这个过程在主分片和复制分片上都会发生，在写请求被fsync到主分片和复制分片的translog之前，客户端不会得到200 ok的响应</p>
-<p>执行一次提交并截断translog的行为在es中被称作一次flush，分片每30分钟被自动刷新（flush），或者translog太大时也会刷新，可以通过配置更改这些参数。</p>
-<h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2><ol>
-<li><a href="https://www.elastic.co/guide/cn/elasticsearch/guide/current/dynamic-indices.html" target="_blank" rel="noopener">https://www.elastic.co/guide/cn/elasticsearch/guide/current/dynamic-indices.html</a></li>
-<li><a href="https://www.elastic.co/guide/cn/elasticsearch/guide/current/translog.html" target="_blank" rel="noopener">https://www.elastic.co/guide/cn/elasticsearch/guide/current/translog.html</a></li>
-</ol>
-
+<h2 id="段合并"><a href="#段合并" class="headerlink" title="段合并"></a>段合并</h2>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2019/07/10/Es%E7%B4%A2%E5%BC%95%E5%8E%9F%E7%90%86/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
@@ -883,19 +848,14 @@
 </tbody></table>
 <p>索引模版只在创建索引时生效，修改模版不会对已创建的索引生效。使用创建索引API创建索引时，API指定的同名字段优先于模版定义的字段。</p>
 <p>Lucene不理解内部对象，Lucene文档是由一组键值对列表组成的，为了能让es有效地索引内部类，它把文档转化成类似如下结构的文档</p>
-<p>{</p>
-<p>​    “tweet”:            [elasticsearch, flexible, very],</p>
-<p>​    “user.id”:          [@johnsmith],</p>
-<p>​    “user.gender”:      [male],</p>
-<p>​    “user.age”:         [26],</p>
-<p>​    “user.name.full”:   [john, smith],</p>
-<p>​    “user.name.first”:  [john],</p>
-<p>​    “user.name.last”:   [smith]</p>
-<p>}</p>
-<h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2><ol>
-<li><a href="https://www.elastic.co/guide/en/elasticsearch/reference/6.4/dynamic-mapping.html" target="_blank" rel="noopener">https://www.elastic.co/guide/en/elasticsearch/reference/6.4/dynamic-mapping.html</a></li>
-</ol>
-
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2019/07/10/Es%E5%9F%BA%E6%9C%AC%E7%94%A8%E6%B3%95/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
@@ -996,29 +956,15 @@
 <p>在查询时，数据可能分布在 index 的所有 Shard 中，所以需要查询所有 Shard，同一个 Shard 的 Primary 和 Replica 选择一个就可以，查询请求分发给所有 Shard，每个 Shard 中都是一个独立的查询引擎，如果需要返回 TopN 的结果，每个 Shard 都会查询返回 TopN，然后在 Client Node 中通过优先队列二次排序，找出 top N 结果返回给用户。</p>
 <p>一般搜索系统都是两阶段查询，第一阶段查询到匹配的 DocId，第二阶段再查询 DocId 对应的完整文档，这种在 Es 称为 query_then_fetch，还有一种是一阶段查询返回完整 Doc，es 称为 query_and_fetch，一般第二种适用于只需要查询一个 Shard 的请求。</p>
 <p>除了一阶段，两阶段外，还有一种三阶段查询的情况。搜索里面有一种算分逻辑是根据TF（Term Frequency）和DF（Document Frequency）计算基础分，但是Elasticsearch中查询的时候，是在每个Shard中独立查询的，每个Shard中的TF和DF也是独立的，虽然在写入的时候通过_routing保证Doc分布均匀，但是没法保证TF和DF均匀，那么就有会导致局部的TF和DF不准的情况出现，这个时候基于TF、DF的算分就不准。为了解决这个问题，Elasticsearch中引入了DFS查询，比如DFS_query_then_fetch，会先收集所有Shard中的TF和DF值，然后将这些值带入请求中，再次执行query_then_fetch，这样算分的时候TF和DF就是准确的，类似的有DFS_query_and_fetch。这种查询的优势是算分更加精准，但是效率会变差。另一种选择是用BM25代替TF/DF模型。</p>
-<h4 id="查询阶段"><a href="#查询阶段" class="headerlink" title="查询阶段"></a>查询阶段</h4><p>在查询阶段，查询会广播到索引中的每一个分片（主分片或副本分片），每个分片在本地执行搜索并构建一个匹配文档的<strong>优先队列</strong>。一个优先队列是一个保存top-n匹配文档的有序列表，列表大小取决于分页参数from和size。</p>
-<p>当一个查询请求被发送到某个节点时，这个节点即成为协调节点，它的任务是广播查询请求到所有相关分片并将它们的响应整合成全局排序后的结果集合，再将这个结果集合返回给客户端。查询请求可以被主分片或副本分片处理，协调节点在之后的查询中轮询所有分片分摊负载，所有更多的副本能够增加搜索吞吐率。分片返回一个轻量级的结果列表到协调节点，它仅包含文档id集合以及任何排序需要用到的值，如_score.</p>
-<h4 id="取回阶段"><a href="#取回阶段" class="headerlink" title="取回阶段"></a>取回阶段</h4><p>查询阶段仅仅标识哪些文档满足搜索请求，获取详细文档的过程在取回阶段实现。具体步骤如下：</p>
-<ol>
-<li>协调节点计算出哪些文档需要被取回并向相关分片提交多个GET（multi-get request）请求</li>
-<li>每个分片加载并丰富文档，并返回文档给协调节点</li>
-<li>一旦所有文档都被取回了，协调节点返回结果给客户端</li>
-</ol>
-<h4 id="Scroll"><a href="#Scroll" class="headerlink" title="Scroll"></a>Scroll</h4><p>scroll查询可以用于查询大批量文档而不用付出深度分页的巨大代价，游标查询会取某个时间点的快照数据，时间点（查询初始化）之后的所有变化都会被忽略。它通过保存旧的数据文件来实现这个特性，就像保留初始化时的索引视图一样。</p>
-<p>游标查询用<code>_doc_</code>字段来排序，这个指令让es仅从还有结果的分片返回下一批结果，可以为游标查询设置过期时间，es可以在空闲时间自动释放过期的游标查询占用的资源。scroll查询包含一个<code>_scroll_id_</code>字段，它是一个base64编码的长字符串，可以通过传递前一次查询返回的<code>_scroll_id_</code>查询下一批结果。查询时size作用于单分片，每个批次实际返回的文档数量最大为size * number_of_primary_shards.</p>
-<h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2><ol>
-<li><p><a href="https://www.shenyanchao.cn/blog/2018/12/04/lucene-fst/" target="_blank" rel="noopener">关于Lucene的词典FST深入剖析</a></p>
-</li>
-<li><p><a href="https://zhuanlan.zhihu.com/p/94915597" target="_blank" rel="noopener">深入理解Elasticsearch写入过程</a></p>
-</li>
-<li><p><a href="https://zhuanlan.zhihu.com/p/34674517" target="_blank" rel="noopener">Elasticsearch内核解析 - 查询篇</a></p>
-</li>
-<li><p><a href="https://www.elastic.co/guide/cn/elasticsearch/guide/current/_query_phase.html" target="_blank" rel="noopener">https://www.elastic.co/guide/cn/elasticsearch/guide/current/_query_phase.html</a></p>
-</li>
-<li><p><a href="https://www.elastic.co/guide/cn/elasticsearch/guide/current/scroll.html" target="_blank" rel="noopener">https://www.elastic.co/guide/cn/elasticsearch/guide/current/scroll.html</a></p>
-</li>
-</ol>
-
+<h4 id="查询阶段"><a href="#查询阶段" class="headerlink" title="查询阶段"></a>查询阶段</h4>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2019/07/10/Es%E6%90%9C%E7%B4%A2%E8%BF%87%E7%A8%8B/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
@@ -1102,11 +1048,14 @@
 <h3 id="1-分布式应用和服务"><a href="#1-分布式应用和服务" class="headerlink" title="1. 分布式应用和服务"></a>1. 分布式应用和服务</h3><p>将应用和服务进行分层或分割，并进行分布式部署。这样不仅可以突破单机性能瓶颈，提高并发访问能力，还能复用分布式部署的模块，使业务易于扩展。</p>
 <h3 id="2-分布式静态资源"><a href="#2-分布式静态资源" class="headerlink" title="2. 分布式静态资源"></a>2. 分布式静态资源</h3><p>对JS、CSS、图片等资源进行分布式部署可以减轻服务器的压力，提高访问速度</p>
 <h3 id="3-分布式数据和存储"><a href="#3-分布式数据和存储" class="headerlink" title="3. 分布式数据和存储"></a>3. 分布式数据和存储</h3><p>随着互联网应用需要存储越来越多的数据，单台机器往往无法提供足够的存储空间，需要对这些数据进行分布式存储。</p>
-<h3 id="4-分布式计算"><a href="#4-分布式计算" class="headerlink" title="4. 分布式计算"></a>4. 分布式计算</h3><p>对于需要非常巨大的计算能力才能完成的任务，分布式计算将应用分解成许多小的部分，分配给多台计算机进行处理。这样可以节约计算时间，提高计算效率。</p>
-<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><ol>
-<li><a href="初识分布式系统">http://www.hollischuang.com/archives/655</a></li>
-</ol>
-
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2018/12/22/%E5%88%86%E5%B8%83%E5%BC%8F%E7%B3%BB%E7%BB%9F/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
