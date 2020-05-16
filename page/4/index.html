@@ -1,61 +1,24 @@
 <!DOCTYPE html>
-
-
-
-
-
-<html class="theme-next muse use-motion" lang="zh-CN">
+<html lang="zh-CN">
 <head>
   <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8">
-<meta name="generator" content="Hexo 3.9.0">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.3.0">
-  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.3.0">
-  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.3.0">
-  <link rel="mask-icon" href="/images/logo.svg?v=7.3.0" color="#222">
+<meta name="generator" content="Hexo 4.2.1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
 
-<link rel="stylesheet" href="/css/main.css?v=7.3.0">
-
-
-<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
+<link rel="stylesheet" href="/css/main.css">
 
 
-<script id="hexo.configurations">
-  var NexT = window.NexT || {};
-  var CONFIG = {
-    root: '/',
-    scheme: 'Muse',
-    version: '7.3.0',
-    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false},
-    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
-    copycode: {"enable":false,"show_result":false,"style":null},
-    fancybox: false,
-    mediumzoom: false,
-    lazyload: false,
-    pangu: false,
-    algolia: {
-      applicationID: '',
-      apiKey: '',
-      indexName: '',
-      hits: {"per_page":10},
-      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
-    },
-    localsearch: {"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
-    search: {
-      root: '/',
-      path: ''
-    },
-    tabs: true,
-    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
-    translation: {
-      copy_button: '复制',
-      copy_success: '复制成功',
-      copy_failure: '复制失败'
-    }
-  };
-</script>
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"jeffzzf.github.io","root":"/","scheme":"Muse","version":"8.0.0-rc.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
 
   <meta name="description" content="Do one thing at a time, and do well.">
 <meta property="og:type" content="website">
@@ -63,16 +26,20 @@
 <meta property="og:url" content="http://jeffzzf.github.io/page/4/index.html">
 <meta property="og:site_name" content="Noob">
 <meta property="og:description" content="Do one thing at a time, and do well.">
-<meta property="og:locale" content="zh-CN">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:author" content="Jeffzzf">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Noob">
-<meta name="twitter:description" content="Do one thing at a time, and do well.">
-  <link rel="canonical" href="http://jeffzzf.github.io/page/4/">
+
+<link rel="canonical" href="http://jeffzzf.github.io/page/4/">
 
 
-<script id="page.configurations">
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
   CONFIG.page = {
     sidebar: "",
+    isHome : true,
+    isPost : false,
+    lang   : 'zh-CN'
   };
 </script>
 
@@ -84,11 +51,8 @@
 
 
 
-
-
   <noscript>
   <style>
-  .use-motion .motion-element,
   .use-motion .brand,
   .use-motion .menu-item,
   .sidebar-inner,
@@ -97,9 +61,8 @@
   .use-motion .comments,
   .use-motion .post-header,
   .use-motion .post-body,
-  .use-motion .collection-title { opacity: initial; }
+  .use-motion .collection-header { opacity: initial; }
 
-  .use-motion .logo,
   .use-motion .site-title,
   .use-motion .site-subtitle {
     opacity: initial;
@@ -113,160 +76,139 @@
 
 </head>
 
-<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
-
-  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-left page-home">
+<body itemscope itemtype="http://schema.org/WebPage">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container use-motion">
     <div class="headband"></div>
 
-    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
-      <div class="header-inner"><div class="site-brand-wrapper">
-  <div class="site-meta">
-
-    <div class="custom-logo-site-title">
-      <a href="/" class="brand" rel="start">
-        <span class="logo-line-before"><i></i></span>
-        <span class="site-title">Noob</span>
-        <span class="logo-line-after"><i></i></span>
-      </a>
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+        <span class="toggle-line toggle-line-first"></span>
+        <span class="toggle-line toggle-line-middle"></span>
+        <span class="toggle-line toggle-line-last"></span>
     </div>
   </div>
 
-  <div class="site-nav-toggle">
-    <button aria-label="切换导航栏">
-      <span class="btn-bar"></span>
-      <span class="btn-bar"></span>
-      <span class="btn-bar"></span>
-    </button>
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Noob</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
   </div>
 </div>
 
 
 
 <nav class="site-nav">
-    <ul id="menu" class="menu">
-        
-        
-        
-          
-          <li class="menu-item menu-item-home">
-      
-    
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
 
-    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
 
   </li>
-        
-        
-        
-          
-          <li class="menu-item menu-item-archives">
-      
-    
+        <li class="menu-item menu-item-tags">
 
-    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
 
   </li>
-    </ul>
-    
+        <li class="menu-item menu-item-categories">
 
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+  </ul>
 </nav>
+
+
+
 
 </div>
     </header>
 
     
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
 
 
-    <main id="main" class="main">
+    <main class="main">
       <div class="main-inner">
         <div class="content-wrap">
-          <div id="content" class="content">
-            
-  <section id="posts" class="posts-expand">
-      
+          
 
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+          <div class="content index posts-expand">
+            
+      
   
   
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://jeffzzf.github.io/2019/07/19/Java集合总结/">
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://jeffzzf.github.io/2019/07/29/Java%20IO/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
       <meta itemprop="name" content="Jeffzzf">
       <meta itemprop="description" content="Do one thing at a time, and do well.">
-      <meta itemprop="image" content="/images/avatar.gif">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
       <meta itemprop="name" content="Noob">
     </span>
       <header class="post-header">
-
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2019/07/19/Java集合总结/" class="post-title-link" itemprop="url">Java集合总结</a>
-              
-            
-          </h1>
-        
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/07/29/Java%20IO/" class="post-title-link" itemprop="url">Java IO</a>
+        </h2>
 
         <div class="post-meta">
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
+                <i class="far fa-calendar"></i>
               </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
+              <span class="post-meta-item-text">发表于</span>
 
-              
-                
-              
-
-              <time title="创建时间：2019-07-19 08:44:00" itemprop="dateCreated datePublished" datetime="2019-07-19T08:44:00+08:00">2019-07-19</time>
+              <time title="创建时间：2019-07-29 15:42:39" itemprop="dateCreated datePublished" datetime="2019-07-29T15:42:39+08:00">2019-07-29</time>
             </span>
-          
-            
-
-            
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
+                  <i class="far fa-calendar-check"></i>
                 </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
-                <time title="修改时间：2019-08-28 20:23:34" itemprop="dateModified" datetime="2019-08-28T20:23:34+08:00">2019-08-28</time>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2019-12-23 11:12:09" itemprop="dateModified" datetime="2019-12-23T11:12:09+08:00">2019-12-23</time>
               </span>
-            
-          
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
+                <i class="far fa-folder"></i>
               </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Java/" itemprop="url" rel="index"><span itemprop="name">Java</span></a></span>
-
-                
-                
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Java/" itemprop="url" rel="index"><span itemprop="name">Java</span></a>
+                </span>
                   ，
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Java/Collections/" itemprop="url" rel="index"><span itemprop="name">Collections</span></a></span>
-
-                
-                
-              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Java/Basic/" itemprop="url" rel="index"><span itemprop="name">Basic</span></a>
+                </span>
             </span>
-          
 
-          <br>
+          
 
         </div>
       </header>
@@ -277,8 +219,219 @@
     <div class="post-body" itemprop="articleBody">
 
       
+          <h3 id="同步与异步"><a href="#同步与异步" class="headerlink" title="同步与异步"></a>同步与异步</h3><p>同步是发起一个调用后，被调用者未处理完请求前，调用不返回，调用者不继续执行</p>
+<p>异步是发起一个调用后，可以马上收到被调用者已接到请求的回应，但并没有立即返回结果。调用者可以继续执行其它操作，被调用者通过事件、回调等机制通知调用者返回结果</p>
+<h3 id="阻塞与非阻塞"><a href="#阻塞与非阻塞" class="headerlink" title="阻塞与非阻塞"></a>阻塞与非阻塞</h3><p>操作系统I/O分为两个阶段：等待就绪和操作。读函数分为等待系统可读和真正的读；写函数分为等待网卡可写和真正的写。等待就绪的阻塞不使用 CPU，是在“空等”；真正的读写操作的阻塞是在使用 CPU，真正在“干活”，这个memory copy 的过程很快（如宽带 1GB/s）。</p>
+<p>传统的BIO里面socket.read()，如果TCP RecvBuffer里没有数据，函数会一直阻塞，直到收到数据，返回读到的数据。</p>
+<p>对于NIO，如果TCP RecvBuffer有数据，就把数据从网卡读到内存，并且返回给用户；反之则直接返回0，永远不会阻塞。</p>
+<p>最新的AIO(Async I/O)里面会更进一步：不但等待就绪是非阻塞的，就连数据从网卡到内存的过程也是异步的。</p>
+<p>换句话说，BIO里用户最关心“我要读”，NIO里用户最关心”我可以读了”，在AIO模型里用户更需要关注的是“读完了”。</p>
+<p>NIO一个重要的特点是：socket主要的读、写、注册和接收函数，在等待就绪阶段都是非阻塞的，真正的I/O操作是同步阻塞的（消耗CPU但性能非常高）。</p>
+<h2 id="BIO（Blocking-I-O）"><a href="#BIO（Blocking-I-O）" class="headerlink" title="BIO（Blocking I/O）"></a>BIO（Blocking I/O）</h2><p>同步阻塞IO，数据的读入和写出阻塞在一个线程内。服务端一般通过在while(true)循环中调用accept()方法等待接受客户端连接请求，一旦接收到一个连接请求，就可以建立通信套接字并在套接字上进行读写操作，单线程情况下不能再接收其它请求，只能等当前连接的客户端操作执行完，不过可以通过多线程来支持多个客户端的连接。当连接数达到十万甚至百万是，BIO模型无能为力，需要更加高效的IO模型。</p>
+<h2 id="NIO（Non-BlockingIO）"><a href="#NIO（Non-BlockingIO）" class="headerlink" title="NIO（Non-BlockingIO）"></a>NIO（Non-BlockingIO）</h2><p>面向缓冲的，基于通道IO的同步非阻塞IO模型，提供了SocketChannel和ServerSocketChannel两种套接字分别与BIO模型的Socket和ServerSocket对应。这两种套接字都支持阻塞和非阻塞两种模式。对于低负载、低并发的应用，可以使用同步阻塞IO来提升开发效率并提高可维护性；对于高负载、高并发的应用，应采用NIO非阻塞模式开发。</p>
+<p>BIO是面向流（Stream oriented），而NIO是面向缓冲区的（Buffer oriented）。Stream中以Buffer开头的扩展类，只是流的包装类，要从流读到缓冲区，而NIO是直接读到缓冲区进行读写操作。最常用的缓冲区是ByteBuffer，它提供了一组用于操作byte数组的功能。每一种Java基本类型（除了Boolean）都对应一种缓冲区。</p>
+<p>NIO包含Channel（通道）、Buffer（缓冲区）和Selector（选择器）这三个核心组件，通道只和Buffer交互，因为Buffer，通道可以异步进行读写。选择器用于使用单个线程处理多个通道，减少了线程之间切换带来的开销，可以提高系统效率。</p>
+<p>NIO 主要事件有：读就绪、写就绪、有新连接到来</p>
+<p>NIO 有原来的阻塞读写变成单线程轮询写事件，除了事件的轮询是阻塞的（没有可干的事情必须阻塞），其它 I/O 操作都是纯 CPU 操作，没有必要开启多线程。并且由于多线程处理阻塞 IO （BIO）导致的线程切换问题也得到了解决，为处理海量连接提供了可能。</p>
+<p>select是阻塞的，无论是通过操作系统的通知（epoll）还是不停的轮询(select，poll)，这个函数是阻塞的。所以你可以放心大胆地在一个while(true)里面调用这个函数而不用担心CPU空转</p>
+<h2 id="AIO（Asynchronous-IO）"><a href="#AIO（Asynchronous-IO）" class="headerlink" title="AIO（Asynchronous IO）"></a>AIO（Asynchronous IO）</h2><p>即NIO 2，java 7开始引进，是NIO的改进版，是异步非阻塞IO模型。异步IO基于事件和回调机制实现，应用执行IO操作后直接返回，不会阻塞。当后台处理完成后，操作系统会通知相应线程进行后续操作。</p>
+<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><ol>
+<li><a href="https://tech.meituan.com/2016/11/04/nio.html" target="_blank" rel="noopener">Java NIO浅析</a></li>
+<li><a href="http://www.jasongj.com/java/nio_reactor/" target="_blank" rel="noopener">Java进阶（五）Java I/O模型从BIO到NIO和Reactor模式</a></li>
+</ol>
+<p><a href="https://zhuanlan.zhihu.com/p/23488863" target="_blank" rel="noopener">https://zhuanlan.zhihu.com/p/23488863</a></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://jeffzzf.github.io/2019/07/22/%E5%88%86%E5%B8%83%E5%BC%8F%E7%B3%BB%E7%BB%9F%E7%90%86%E8%AE%BA/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Jeffzzf">
+      <meta itemprop="description" content="Do one thing at a time, and do well.">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Noob">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
           
-            <h2 id="PriorityQueue"><a href="#PriorityQueue" class="headerlink" title="PriorityQueue"></a>PriorityQueue</h2><p>PriqorityQueue（优先队列）基于二叉小顶堆实现，可以用一颗完全二叉树来表示，底层采用数组来实现</p>
+            <a href="/2019/07/22/%E5%88%86%E5%B8%83%E5%BC%8F%E7%B3%BB%E7%BB%9F%E7%90%86%E8%AE%BA/" class="post-title-link" itemprop="url">分布式系统理论</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2019-07-22 22:17:55" itemprop="dateCreated datePublished" datetime="2019-07-22T22:17:55+08:00">2019-07-22</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2019-08-28 20:43:14" itemprop="dateModified" datetime="2019-08-28T20:43:14+08:00">2019-08-28</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <ul>
+<li>分布式系统</li>
+<li>理论</li>
+</ul>
+<hr>
+<h2 id="从ACID到CAP-BASE"><a href="#从ACID到CAP-BASE" class="headerlink" title="从ACID到CAP/BASE"></a>从ACID到CAP/BASE</h2><p>事务（Transaction）是由一系列对系统中数据进行访问和更新的操作所组成的一个程序执行逻辑单元（Unit），狭义上的事务指数据库事务。事务需要满足ACID特性，即原子性（Atomicity）、一致性（Consistency）、隔离性（Isolation）和持久性（Durability）。</p>
+<p>分布式事务可以看作由多个分布式操作组成的序列，每个操作称为子事务。在高并发的互联网应用中，如果实现要实现严格满足ACID特性的分布式事务，会出现可用性与一致性之间的冲突。</p>
+<h3 id="CAP理论"><a href="#CAP理论" class="headerlink" title="CAP理论"></a>CAP理论</h3><p>一个分布式系统不可能同时满足一致性（Consistency）、可用性（Availability）和分区容错性（Partitiontolerance）这三个特性，最多只能同时满足其中的两项。由于分区容错性是分布式系统最基本的需求，所以往往需要把精力花在如何根据业务特点在一致性和可用性之间需求平衡。</p>
+<h4 id="一致性"><a href="#一致性" class="headerlink" title="一致性"></a>一致性</h4><p>分布式环境中，一致性是指数据在多个副本之间是否能保持一致的特性。如果能够做到针对一个数据项的更新操作执行成功后，所有的用户都可以读取到最新的值，即可认为该系统具有强一致性。</p>
+<h4 id="可用性"><a href="#可用性" class="headerlink" title="可用性"></a>可用性</h4><p>可用性是指系统提供的服务必须一致处于可用的状态，对于用户的每一次请求都能在响应时间内返回结果。</p>
+<h4 id="分区容错性"><a href="#分区容错性" class="headerlink" title="分区容错性"></a>分区容错性</h4><p>分布式系统在遇到任何网络分区故障时，仍然需要保证对外提供满足一致性和可用性的服务，除非整个网络环境都发生故障。</p>
+<h3 id="BASE理论"><a href="#BASE理论" class="headerlink" title="BASE理论"></a>BASE理论</h3><p>BASE是Basically Available（基本可用）、Soft state（软状态）和Eventually consistent（最终一致性）三个短语的简写。BASE是对CAP中一致性和可用性权衡的结果，来源于对大规模互联网系统分布式实践的总结，是基于CAP定理逐步演化而来的，其核心思想是即使无法做到强一致性（Strong consistency），但每个应用可以根据自身业务特点，采用适当的方式来使系统达到最终一致性（Eventual consistency）。</p>
+<h4 id="基本可用"><a href="#基本可用" class="headerlink" title="基本可用"></a>基本可用</h4><p>基本可用是指分布式系统在出现不可预知故障时，允许损失部分可用性。如响应时间增加、不重要功能降级等。</p>
+<h4 id="软状态"><a href="#软状态" class="headerlink" title="软状态"></a>软状态</h4><p>和硬状态相比，软状态允许系统中的数据存在中间状态，并认为该中间状态的存在不会影响系统的整体可用性，即允许系统在不同节点的数据副本之间进行数据同步过程存在延时</p>
+<h4 id="最终一致性"><a href="#最终一致性" class="headerlink" title="最终一致性"></a>最终一致性</h4><p>最终一致性是系统所有数据副本在经过一段时间的同步后，最终能够达到一个一致的状态，而不需要实时保证系统数据的一致性。工程实践中，最终一致性存在以下五类：</p>
+<h5 id="因果一致性（Causal-consistency）"><a href="#因果一致性（Causal-consistency）" class="headerlink" title="因果一致性（Causal consistency）"></a>因果一致性（Causal consistency）</h5><p>如果进程A在更新完某个数据项后通知了进程B，那么进程B之后对该数据项的访问都应该能够获取的进程A更新后的最新值，并且如果进程B要对该数据进行更新，必须基于进程A更新后的最新值，即不能发生丢失更新的情况。与此同时，与进程A无因果关系的进程C的数据访问则没有这样的限制。</p>
+<h5 id="读己之所写（Read-your-writes）"><a href="#读己之所写（Read-your-writes）" class="headerlink" title="读己之所写（Read your writes）"></a>读己之所写（Read your writes）</h5><p>进程A更新一个数据项后，它自己总是能够访问到更新过的最新值，而不会看到旧值，可以看作一种特殊的因果一致性</p>
+<h5 id="会话一致性（Session-consistency）"><a href="#会话一致性（Session-consistency）" class="headerlink" title="会话一致性（Session consistency）"></a>会话一致性（Session consistency）</h5><p>系统保证在同一个会话中实现读己之所写的一致性，用户端能够在同一个会话中始终读取到数据项的最新值</p>
+<h5 id="单调读一致性（Monotonic-read-consistency）"><a href="#单调读一致性（Monotonic-read-consistency）" class="headerlink" title="单调读一致性（Monotonic read consistency）"></a>单调读一致性（Monotonic read consistency）</h5><p>如果一个进程从系统中读取一个数据项的某个值后，系统对该进程后续的任何数据访问都不应该返回更旧的值</p>
+<h5 id="单调写一致性（Monotonic-write-consistency）"><a href="#单调写一致性（Monotonic-write-consistency）" class="headerlink" title="单调写一致性（Monotonic write consistency）"></a>单调写一致性（Monotonic write consistency）</h5><p>保证来自同一个进程的写操作被顺序地执行</p>
+<p>BASE理论面向的是大型高可用高扩展的分布式系统，不同于ACID的强一致性模型，它采用牺牲强一致性来获得可用性，并允许数据在一段时间内不一致，但最终能达到一致状态。在实际分布式场景中，不同业务单元和组件对数据一致性的要求是不同的，ACID特性与BASE理论往往会结合在一起使用。</p>
+<h2 id="Paxos"><a href="#Paxos" class="headerlink" title="Paxos"></a>Paxos</h2><p>用于达成共识性问题，即对多个节点产生的值，该算法能保证只选出唯一一个值。</p>
+<p>主要有三类节点：</p>
+<ul>
+<li>提议者（Proposer）：提议一个值；</li>
+<li>接受者（Acceptor）：对每个提议进行投票；</li>
+<li>告知者（Learner）：被告知投票的结果，不参与投票过程。</li>
+</ul>
+<p>算法过程：</p>
+<ol>
+<li><p>prepare阶段：</p>
+<ol>
+<li>proposer选择一个提案编号n并将prepare请求发送给acceptors中的一个多数派；</li>
+<li>acceptor收到prepare消息后，如果提案的编号大于它已经回复的所有prepare消息(回复消息表示接受accept)，则acceptor将自己上次接受的提案回复给proposer，并承诺不再回复小于n的提案；</li>
+</ol>
+</li>
+<li><p>批准阶段：</p>
+<ol>
+<li>当一个proposer收到了多数acceptors对prepare的回复后，就进入批准阶段。它要向回复prepare请求的acceptors发送accept请求，包括编号n和根据P2c决定的value（如果根据P2c没有已经接受的value，那么它可以自由决定value）。</li>
+<li>在不违背自己向其他proposer的承诺的前提下，acceptor收到accept请求后即批准这个请求。</li>
+</ol>
+</li>
+<li><p>发布阶段</p>
+<p>acceptors需要将accept消息发送给learners的一个子集，然后由这些learners去通知所有learners</p>
+</li>
+</ol>
+<h2 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h2><ol>
+<li><a href="https://zh.wikipedia.org/wiki/Paxos%E7%AE%97%E6%B3%95" target="_blank" rel="noopener">Paxos算法</a></li>
+<li><a href="https://cyc2018.github.io/CS-Notes/#/notes/%E5%88%86%E5%B8%83%E5%BC%8F?id=_2-accept-%E9%98%B6%E6%AE%B5" target="_blank" rel="noopener">Cs notes</a></li>
+</ol>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://jeffzzf.github.io/2019/07/19/Java%E9%9B%86%E5%90%88%E6%80%BB%E7%BB%93/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Jeffzzf">
+      <meta itemprop="description" content="Do one thing at a time, and do well.">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Noob">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/07/19/Java%E9%9B%86%E5%90%88%E6%80%BB%E7%BB%93/" class="post-title-link" itemprop="url">Java集合总结</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2019-07-19 08:44:00" itemprop="dateCreated datePublished" datetime="2019-07-19T08:44:00+08:00">2019-07-19</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2019-08-28 20:23:34" itemprop="dateModified" datetime="2019-08-28T20:23:34+08:00">2019-08-28</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Java/" itemprop="url" rel="index"><span itemprop="name">Java</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Java/Collections/" itemprop="url" rel="index"><span itemprop="name">Collections</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="PriorityQueue"><a href="#PriorityQueue" class="headerlink" title="PriorityQueue"></a>PriorityQueue</h2><p>PriqorityQueue（优先队列）基于二叉小顶堆实现，可以用一颗完全二叉树来表示，底层采用数组来实现</p>
 <p>假设树中父节点和左右子节点在数组中的下标分别为<code>parent</code>、<code>left</code>、<code>right</code>，树中任一节点对应数组下标为<code>node</code>，则有：</p>
 <p><code>left=parent * 2 + 1</code></p>
 <p><code>right=parent * 2 + 2</code></p>
@@ -289,87 +442,59 @@
 <li><a href="https://www.cnblogs.com/CarpenterLee/p/5488070.html" target="_blank" rel="noopener">用PriorityQueue实现最大最小堆</a></li>
 </ol>
 
-          
-        
       
     </div>
 
     
     
     
-
-    <footer class="post-footer">
+      <footer class="post-footer">
         <div class="post-eof"></div>
-    </footer>
-  </div>
-  
-  
-  
+      </footer>
   </article>
+  
+  
+  
 
-    
       
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
   
   
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://jeffzzf.github.io/2019/07/11/Lucene原理/">
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://jeffzzf.github.io/2019/07/11/Lucene%E5%8E%9F%E7%90%86/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
       <meta itemprop="name" content="Jeffzzf">
       <meta itemprop="description" content="Do one thing at a time, and do well.">
-      <meta itemprop="image" content="/images/avatar.gif">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
       <meta itemprop="name" content="Noob">
     </span>
       <header class="post-header">
-
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2019/07/11/Lucene原理/" class="post-title-link" itemprop="url">Lucene查询原理</a>
-              
-            
-          </h1>
-        
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/07/11/Lucene%E5%8E%9F%E7%90%86/" class="post-title-link" itemprop="url">Lucene查询原理</a>
+        </h2>
 
         <div class="post-meta">
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
+                <i class="far fa-calendar"></i>
               </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
+              <span class="post-meta-item-text">发表于</span>
 
               <time title="创建时间：2019-07-11 15:29:16" itemprop="dateCreated datePublished" datetime="2019-07-11T15:29:16+08:00">2019-07-11</time>
             </span>
-          
-            
-
-            
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
+                  <i class="far fa-calendar-check"></i>
                 </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
+                <span class="post-meta-item-text">更新于</span>
                 <time title="修改时间：2019-08-28 20:23:34" itemprop="dateModified" datetime="2019-08-28T20:23:34+08:00">2019-08-28</time>
               </span>
-            
-          
 
-          <br>
+          
 
         </div>
       </header>
@@ -381,88 +506,59 @@
 
       
           
-            
-          
-        
       
     </div>
 
     
     
     
-
-    <footer class="post-footer">
+      <footer class="post-footer">
         <div class="post-eof"></div>
-    </footer>
-  </div>
-  
-  
-  
+      </footer>
   </article>
+  
+  
+  
 
-    
       
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
   
   
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://jeffzzf.github.io/2019/07/11/Es分布式原理/">
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://jeffzzf.github.io/2019/07/11/Es%E5%88%86%E5%B8%83%E5%BC%8F%E5%8E%9F%E7%90%86/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
       <meta itemprop="name" content="Jeffzzf">
       <meta itemprop="description" content="Do one thing at a time, and do well.">
-      <meta itemprop="image" content="/images/avatar.gif">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
       <meta itemprop="name" content="Noob">
     </span>
       <header class="post-header">
-
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2019/07/11/Es分布式原理/" class="post-title-link" itemprop="url">Es分布式原理</a>
-              
-            
-          </h1>
-        
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/07/11/Es%E5%88%86%E5%B8%83%E5%BC%8F%E5%8E%9F%E7%90%86/" class="post-title-link" itemprop="url">Es分布式原理</a>
+        </h2>
 
         <div class="post-meta">
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
+                <i class="far fa-calendar"></i>
               </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
+              <span class="post-meta-item-text">发表于</span>
 
               <time title="创建时间：2019-07-11 15:28:09" itemprop="dateCreated datePublished" datetime="2019-07-11T15:28:09+08:00">2019-07-11</time>
             </span>
-          
-            
-
-            
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
+                  <i class="far fa-calendar-check"></i>
                 </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
+                <span class="post-meta-item-text">更新于</span>
                 <time title="修改时间：2019-08-28 20:23:34" itemprop="dateModified" datetime="2019-08-28T20:23:34+08:00">2019-08-28</time>
               </span>
-            
-          
 
-          <br>
+          
 
         </div>
       </header>
@@ -474,110 +570,72 @@
 
       
           
-            
-          
-        
       
     </div>
 
     
     
     
-
-    <footer class="post-footer">
+      <footer class="post-footer">
         <div class="post-eof"></div>
-    </footer>
-  </div>
-  
-  
-  
+      </footer>
   </article>
+  
+  
+  
 
-    
       
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
   
   
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://jeffzzf.github.io/2019/07/10/Es 集群原理/">
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://jeffzzf.github.io/2019/07/10/Es%20%E9%9B%86%E7%BE%A4%E5%8E%9F%E7%90%86/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
       <meta itemprop="name" content="Jeffzzf">
       <meta itemprop="description" content="Do one thing at a time, and do well.">
-      <meta itemprop="image" content="/images/avatar.gif">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
       <meta itemprop="name" content="Noob">
     </span>
       <header class="post-header">
-
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2019/07/10/Es 集群原理/" class="post-title-link" itemprop="url">Es索引原理</a>
-              
-            
-          </h1>
-        
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/07/10/Es%20%E9%9B%86%E7%BE%A4%E5%8E%9F%E7%90%86/" class="post-title-link" itemprop="url">Es索引原理</a>
+        </h2>
 
         <div class="post-meta">
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
+                <i class="far fa-calendar"></i>
               </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
+              <span class="post-meta-item-text">发表于</span>
 
               <time title="创建时间：2019-07-10 19:51:56" itemprop="dateCreated datePublished" datetime="2019-07-10T19:51:56+08:00">2019-07-10</time>
             </span>
-          
-            
-
-            
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
+                  <i class="far fa-calendar-check"></i>
                 </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
+                <span class="post-meta-item-text">更新于</span>
                 <time title="修改时间：2020-01-06 14:58:23" itemprop="dateModified" datetime="2020-01-06T14:58:23+08:00">2020-01-06</time>
               </span>
-            
-          
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
+                <i class="far fa-folder"></i>
               </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/存储/" itemprop="url" rel="index"><span itemprop="name">存储</span></a></span>
-
-                
-                
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%AD%98%E5%82%A8/" itemprop="url" rel="index"><span itemprop="name">存储</span></a>
+                </span>
                   ，
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/存储/es/" itemprop="url" rel="index"><span itemprop="name">es</span></a></span>
-
-                
-                
-              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%AD%98%E5%82%A8/es/" itemprop="url" rel="index"><span itemprop="name">es</span></a>
+                </span>
             </span>
-          
 
-          <br>
+          
 
         </div>
       </header>
@@ -588,9 +646,8 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          
-            <h2 id="Es-集群构成"><a href="#Es-集群构成" class="headerlink" title="Es 集群构成"></a>Es 集群构成</h2><p>Es 集群由多个节点（Node）构成，Node可以有不同的类型，通过以下配置可以产生四种不同类型的 Node：</p>
-<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">conf/elasticsearch.yml:</span></span><br><span class="line">    <span class="string">node.master:</span> <span class="literal">true</span><span class="string">/false</span></span><br><span class="line">    <span class="string">node.data:</span> <span class="literal">true</span><span class="string">/false</span></span><br></pre></td></tr></table></figure>
+          <h2 id="Es-集群构成"><a href="#Es-集群构成" class="headerlink" title="Es 集群构成"></a>Es 集群构成</h2><p>Es 集群由多个节点（Node）构成，Node可以有不同的类型，通过以下配置可以产生四种不同类型的 Node：</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">conf/elasticsearch.yml:</span></span><br><span class="line">    <span class="attr">node.master:</span> <span class="literal">true</span><span class="string">/false</span></span><br><span class="line">    <span class="attr">node.data:</span> <span class="literal">true</span><span class="string">/false</span></span><br></pre></td></tr></table></figure>
 
 <p>四种不同类型的Node是一个node.master和node.data的true/false的两两组合。当然还有其他类型的Node，比如IngestNode(用于数据预处理等)，不在本文讨论范围内。</p>
 <p>当node.master 为 true 时，表示这个 node 是一个 master 的候选节点，可以参与选举，类似于 MasterCandidate。Es 正常工作时只能有一个 master（leader），多于 1 个时发生脑裂。</p>
@@ -599,7 +656,7 @@
 <h3 id="Es-选主"><a href="#Es-选主" class="headerlink" title="Es 选主"></a>Es 选主</h3><p>ZenDiscovery是ES自己实现的一套用于节点发现和选主等功能的模块，没有依赖Zookeeper等工具</p>
 <p>在本节点到每个hosts中的节点建立一条边，当整个集群所有的node形成一个联通图时，所有节点都可以知道集群中有哪些节点，不会形成孤岛。</p>
 <p>为了避免产生脑裂，ES采用了常见的分布式系统思路，保证选举出的master被多数派(quorum)的master-eligible node认可，以此来保证只有一个master。这个quorum通过以下配置进行配置：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">conf/elasticsearch.yml:</span><br><span class="line">    discovery.zen.minimum_master_nodes: 2</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">conf&#x2F;elasticsearch.yml:</span><br><span class="line">    discovery.zen.minimum_master_nodes: 2</span><br></pre></td></tr></table></figure>
 
 <p>这个配置对于整个集群非常重要。</p>
 <h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2><ol>
@@ -607,109 +664,72 @@
 <li><a href="https://www.elastic.co/guide/cn/elasticsearch/guide/current/translog.html" target="_blank" rel="noopener">https://www.elastic.co/guide/cn/elasticsearch/guide/current/translog.html</a></li>
 </ol>
 
-          
-        
       
     </div>
 
     
     
     
-
-    <footer class="post-footer">
+      <footer class="post-footer">
         <div class="post-eof"></div>
-    </footer>
-  </div>
-  
-  
-  
+      </footer>
   </article>
+  
+  
+  
 
-    
       
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
   
   
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://jeffzzf.github.io/2019/07/10/Es索引原理/">
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://jeffzzf.github.io/2019/07/10/Es%E7%B4%A2%E5%BC%95%E5%8E%9F%E7%90%86/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
       <meta itemprop="name" content="Jeffzzf">
       <meta itemprop="description" content="Do one thing at a time, and do well.">
-      <meta itemprop="image" content="/images/avatar.gif">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
       <meta itemprop="name" content="Noob">
     </span>
       <header class="post-header">
-
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2019/07/10/Es索引原理/" class="post-title-link" itemprop="url">Es索引原理</a>
-              
-            
-          </h1>
-        
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/07/10/Es%E7%B4%A2%E5%BC%95%E5%8E%9F%E7%90%86/" class="post-title-link" itemprop="url">Es索引原理</a>
+        </h2>
 
         <div class="post-meta">
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
+                <i class="far fa-calendar"></i>
               </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
+              <span class="post-meta-item-text">发表于</span>
 
               <time title="创建时间：2019-07-10 19:51:56" itemprop="dateCreated datePublished" datetime="2019-07-10T19:51:56+08:00">2019-07-10</time>
             </span>
-          
-            
-
-            
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
+                  <i class="far fa-calendar-check"></i>
                 </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
+                <span class="post-meta-item-text">更新于</span>
                 <time title="修改时间：2019-08-28 20:23:34" itemprop="dateModified" datetime="2019-08-28T20:23:34+08:00">2019-08-28</time>
               </span>
-            
-          
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
+                <i class="far fa-folder"></i>
               </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/存储/" itemprop="url" rel="index"><span itemprop="name">存储</span></a></span>
-
-                
-                
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%AD%98%E5%82%A8/" itemprop="url" rel="index"><span itemprop="name">存储</span></a>
+                </span>
                   ，
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/存储/es/" itemprop="url" rel="index"><span itemprop="name">es</span></a></span>
-
-                
-                
-              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%AD%98%E5%82%A8/es/" itemprop="url" rel="index"><span itemprop="name">es</span></a>
+                </span>
             </span>
-          
 
-          <br>
+          
 
         </div>
       </header>
@@ -720,8 +740,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          
-            <h2 id="倒排序索引的不变性"><a href="#倒排序索引的不变性" class="headerlink" title="倒排序索引的不变性"></a>倒排序索引的不变性</h2><p>es的json文档中，每个被索引的字段都有自己的倒排索引，倒排索引会保存每个词项出现过的文档总数，在对应文档中一个具体词项出现的总次数，词项在文档中的顺序，每个文档的长度，所有文档的平均长度等。这些统计信息用于计算哪些词比其它词更重要，哪些文档比其它文档更重要。</p>
+          <h2 id="倒排序索引的不变性"><a href="#倒排序索引的不变性" class="headerlink" title="倒排序索引的不变性"></a>倒排序索引的不变性</h2><p>es的json文档中，每个被索引的字段都有自己的倒排索引，倒排索引会保存每个词项出现过的文档总数，在对应文档中一个具体词项出现的总次数，词项在文档中的顺序，每个文档的长度，所有文档的平均长度等。这些统计信息用于计算哪些词比其它词更重要，哪些文档比其它文档更重要。</p>
 <p>倒排序索引被写入磁盘后是不可变的，不可变性可以带来以下好处：</p>
 <ul>
 <li>不需要锁，不用担心多进程同时修改数据的问题</li>
@@ -745,109 +764,72 @@
 <li><a href="https://www.elastic.co/guide/cn/elasticsearch/guide/current/translog.html" target="_blank" rel="noopener">https://www.elastic.co/guide/cn/elasticsearch/guide/current/translog.html</a></li>
 </ol>
 
-          
-        
       
     </div>
 
     
     
     
-
-    <footer class="post-footer">
+      <footer class="post-footer">
         <div class="post-eof"></div>
-    </footer>
-  </div>
-  
-  
-  
+      </footer>
   </article>
+  
+  
+  
 
-    
       
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
   
   
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://jeffzzf.github.io/2019/07/10/Es基本用法/">
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://jeffzzf.github.io/2019/07/10/Es%E5%9F%BA%E6%9C%AC%E7%94%A8%E6%B3%95/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
       <meta itemprop="name" content="Jeffzzf">
       <meta itemprop="description" content="Do one thing at a time, and do well.">
-      <meta itemprop="image" content="/images/avatar.gif">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
       <meta itemprop="name" content="Noob">
     </span>
       <header class="post-header">
-
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2019/07/10/Es基本用法/" class="post-title-link" itemprop="url">Es基本用法</a>
-              
-            
-          </h1>
-        
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/07/10/Es%E5%9F%BA%E6%9C%AC%E7%94%A8%E6%B3%95/" class="post-title-link" itemprop="url">Es基本用法</a>
+        </h2>
 
         <div class="post-meta">
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
+                <i class="far fa-calendar"></i>
               </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
+              <span class="post-meta-item-text">发表于</span>
 
               <time title="创建时间：2019-07-10 17:09:25" itemprop="dateCreated datePublished" datetime="2019-07-10T17:09:25+08:00">2019-07-10</time>
             </span>
-          
-            
-
-            
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
+                  <i class="far fa-calendar-check"></i>
                 </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
+                <span class="post-meta-item-text">更新于</span>
                 <time title="修改时间：2019-08-28 20:23:34" itemprop="dateModified" datetime="2019-08-28T20:23:34+08:00">2019-08-28</time>
               </span>
-            
-          
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
+                <i class="far fa-folder"></i>
               </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/存储/" itemprop="url" rel="index"><span itemprop="name">存储</span></a></span>
-
-                
-                
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%AD%98%E5%82%A8/" itemprop="url" rel="index"><span itemprop="name">存储</span></a>
+                </span>
                   ，
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/存储/es/" itemprop="url" rel="index"><span itemprop="name">es</span></a></span>
-
-                
-                
-              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%AD%98%E5%82%A8/es/" itemprop="url" rel="index"><span itemprop="name">es</span></a>
+                </span>
             </span>
-          
 
-          <br>
+          
 
         </div>
       </header>
@@ -858,8 +840,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          
-            <h2 id="字段类型"><a href="#字段类型" class="headerlink" title="字段类型"></a>字段类型</h2><p>简单字段类型：text、keyword、date、long、double、boolean、ip</p>
+          <h2 id="字段类型"><a href="#字段类型" class="headerlink" title="字段类型"></a>字段类型</h2><p>简单字段类型：text、keyword、date、long、double、boolean、ip</p>
 <p>嵌套类型：object、nested</p>
 <p>特殊类型：geo_point，geo_shape 或 completion</p>
 <h2 id="动态映射"><a href="#动态映射" class="headerlink" title="动态映射"></a>动态映射</h2><p>包括动态字段映射、动态模版和索引模版</p>
@@ -915,109 +896,72 @@
 <li><a href="https://www.elastic.co/guide/en/elasticsearch/reference/6.4/dynamic-mapping.html" target="_blank" rel="noopener">https://www.elastic.co/guide/en/elasticsearch/reference/6.4/dynamic-mapping.html</a></li>
 </ol>
 
-          
-        
       
     </div>
 
     
     
     
-
-    <footer class="post-footer">
+      <footer class="post-footer">
         <div class="post-eof"></div>
-    </footer>
-  </div>
-  
-  
-  
+      </footer>
   </article>
+  
+  
+  
 
-    
       
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
   
   
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://jeffzzf.github.io/2019/07/10/Es搜索过程/">
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://jeffzzf.github.io/2019/07/10/Es%E6%90%9C%E7%B4%A2%E8%BF%87%E7%A8%8B/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
       <meta itemprop="name" content="Jeffzzf">
       <meta itemprop="description" content="Do one thing at a time, and do well.">
-      <meta itemprop="image" content="/images/avatar.gif">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
       <meta itemprop="name" content="Noob">
     </span>
       <header class="post-header">
-
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2019/07/10/Es搜索过程/" class="post-title-link" itemprop="url">Es搜索过程</a>
-              
-            
-          </h1>
-        
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/07/10/Es%E6%90%9C%E7%B4%A2%E8%BF%87%E7%A8%8B/" class="post-title-link" itemprop="url">Es搜索过程</a>
+        </h2>
 
         <div class="post-meta">
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
+                <i class="far fa-calendar"></i>
               </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
+              <span class="post-meta-item-text">发表于</span>
 
               <time title="创建时间：2019-07-10 14:44:35" itemprop="dateCreated datePublished" datetime="2019-07-10T14:44:35+08:00">2019-07-10</time>
             </span>
-          
-            
-
-            
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
+                  <i class="far fa-calendar-check"></i>
                 </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
+                <span class="post-meta-item-text">更新于</span>
                 <time title="修改时间：2020-01-06 14:36:39" itemprop="dateModified" datetime="2020-01-06T14:36:39+08:00">2020-01-06</time>
               </span>
-            
-          
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
+                <i class="far fa-folder"></i>
               </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/存储/" itemprop="url" rel="index"><span itemprop="name">存储</span></a></span>
-
-                
-                
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%AD%98%E5%82%A8/" itemprop="url" rel="index"><span itemprop="name">存储</span></a>
+                </span>
                   ，
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/存储/es/" itemprop="url" rel="index"><span itemprop="name">es</span></a></span>
-
-                
-                
-              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%AD%98%E5%82%A8/es/" itemprop="url" rel="index"><span itemprop="name">es</span></a>
+                </span>
             </span>
-          
 
-          <br>
+          
 
         </div>
       </header>
@@ -1028,8 +972,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          
-            <h2 id="查询原理"><a href="#查询原理" class="headerlink" title="查询原理"></a>查询原理</h2><ol>
+          <h2 id="查询原理"><a href="#查询原理" class="headerlink" title="查询原理"></a>查询原理</h2><ol>
 <li><h3 id="Term-查询"><a href="#Term-查询" class="headerlink" title="Term 查询"></a>Term 查询</h3><p> FST(Finite State Transducer)</p>
 <p> 从 Lucene4 开始，为了实现 rangequery 或前缀、后缀等复杂的查询语句，Lucene 使用 FST 数据结构来存储 term 字典。</p>
 </li>
@@ -1076,109 +1019,72 @@
 </li>
 </ol>
 
-          
-        
       
     </div>
 
     
     
     
-
-    <footer class="post-footer">
+      <footer class="post-footer">
         <div class="post-eof"></div>
-    </footer>
-  </div>
-  
-  
-  
+      </footer>
   </article>
+  
+  
+  
 
-    
       
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
   
   
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://jeffzzf.github.io/2018/12/22/分布式系统/">
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://jeffzzf.github.io/2018/12/22/%E5%88%86%E5%B8%83%E5%BC%8F%E7%B3%BB%E7%BB%9F/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
       <meta itemprop="name" content="Jeffzzf">
       <meta itemprop="description" content="Do one thing at a time, and do well.">
-      <meta itemprop="image" content="/images/avatar.gif">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
       <meta itemprop="name" content="Noob">
     </span>
       <header class="post-header">
-
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2018/12/22/分布式系统/" class="post-title-link" itemprop="url">分布式系统</a>
-              
-            
-          </h1>
-        
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2018/12/22/%E5%88%86%E5%B8%83%E5%BC%8F%E7%B3%BB%E7%BB%9F/" class="post-title-link" itemprop="url">分布式系统</a>
+        </h2>
 
         <div class="post-meta">
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
+                <i class="far fa-calendar"></i>
               </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
+              <span class="post-meta-item-text">发表于</span>
 
               <time title="创建时间：2018-12-22 10:38:24" itemprop="dateCreated datePublished" datetime="2018-12-22T10:38:24+08:00">2018-12-22</time>
             </span>
-          
-            
-
-            
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
+                  <i class="far fa-calendar-check"></i>
                 </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
+                <span class="post-meta-item-text">更新于</span>
                 <time title="修改时间：2019-08-28 20:23:34" itemprop="dateModified" datetime="2019-08-28T20:23:34+08:00">2019-08-28</time>
               </span>
-            
-          
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
+                <i class="far fa-folder"></i>
               </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/分布式系统/" itemprop="url" rel="index"><span itemprop="name">分布式系统</span></a></span>
-
-                
-                
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%88%86%E5%B8%83%E5%BC%8F%E7%B3%BB%E7%BB%9F/" itemprop="url" rel="index"><span itemprop="name">分布式系统</span></a>
+                </span>
                   ，
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/分布式系统/概述/" itemprop="url" rel="index"><span itemprop="name">概述</span></a></span>
-
-                
-                
-              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%88%86%E5%B8%83%E5%BC%8F%E7%B3%BB%E7%BB%9F/%E6%A6%82%E8%BF%B0/" itemprop="url" rel="index"><span itemprop="name">概述</span></a>
+                </span>
             </span>
-          
 
-          <br>
+          
 
         </div>
       </header>
@@ -1189,8 +1095,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          
-            <p>分布式系统是一个硬件或软件组成分布在不同的网络计算机上，彼此之间仅仅通过消息传递进行通信和协调的系统。</p>
+          <p>分布式系统是一个硬件或软件组成分布在不同的网络计算机上，彼此之间仅仅通过消息传递进行通信和协调的系统。</p>
 <p>分布式系统是一群独立计算机集合共同对外提供服务，对于系统的用户来说，像一台计算机在提供服务一样。分布式意味着可以采用更多的普通计算机（相对于昂贵的大型机）组成分布式集群对外提供服务。计算机越多，CPU、内存、存储资源等也就越多，能够处理的并发访问量也就越大。</p>
 <p>分布式系统的各个主机之间通信和协调主要通过网络进行，计算机在空间上几乎没有任何限制，这些计算机可能被放在不同的机柜上，也可能被部署在不同的机房中，还可能在不同的城市中，对于大型的网站甚至可能分布在不同的国家和地区。</p>
 <p>常用的分布式方案：</p>
@@ -1202,260 +1107,20 @@
 <li><a href="初识分布式系统">http://www.hollischuang.com/archives/655</a></li>
 </ol>
 
-          
-        
       
     </div>
 
     
     
     
-
-    <footer class="post-footer">
+      <footer class="post-footer">
         <div class="post-eof"></div>
-    </footer>
-  </div>
-  
-  
-  
+      </footer>
   </article>
-
-    
-      
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
   
   
   
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://jeffzzf.github.io/2017/05/24/Linux进程管理/">
 
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Jeffzzf">
-      <meta itemprop="description" content="Do one thing at a time, and do well.">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Noob">
-    </span>
-      <header class="post-header">
-
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2017/05/24/Linux进程管理/" class="post-title-link" itemprop="url">Linux进程管理</a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2017-05-24 14:11:56" itemprop="dateCreated datePublished" datetime="2017-05-24T14:11:56+08:00">2017-05-24</time>
-            </span>
-          
-            
-
-            
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
-                <time title="修改时间：2019-08-28 20:23:34" itemprop="dateModified" datetime="2019-08-28T20:23:34+08:00">2019-08-28</time>
-              </span>
-            
-          
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Linux/" itemprop="url" rel="index"><span itemprop="name">Linux</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          <br>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          
-            <blockquote>
-<p>我们拥有操作系统就是为了运行用户程序，因此，进程管理是操作系统的心脏，Linux也不例外。</p>
-</blockquote>
-<h1 id="进程"><a href="#进程" class="headerlink" title="进程"></a>进程</h1><p>进程就是处于执行期的程序（目标代码存放在某种介质上）。但进程并不仅仅局限于一段可执行代码（Unix称其为代码段，text section），通常进程还包含其它资源，例如打开的文件、挂起的信号、内核内部的数据、处理器状态、一个或多个具有内存映射的内存地址空间及一个或多个执行线程（Thread of execution）等。实际上，进程是处于执行期程序以及相关资源的总称。可能存在两个或多个不同进程执行的是同一个程序。并且多个并存的进程还可以共享许多诸如打开的文件、地址空间之类的资源。<br>进程从创建它的时刻开始存活，在Linux系统中，通常通过fork()系统调用实现，该系统调用通过复制一个现有的进程来创建一个全新的进程。调用fork()的进程称为父进程，新产生的进程称为子进程。系统调用结束后，在返回点这个相同的位置，父进程恢复执行，子进程开始执行。fork()系统调用从内核返回两次，一次回到父进程，另一次回到新产生的子进程。</p>
-<h1 id="线程"><a href="#线程" class="headerlink" title="线程"></a>线程</h1><p>执行线程，简称线程（Thread），是在进程中活动的对象。每个线程都有一个独立的程序计数器、进程栈和一组进程计数器。<strong>内核调度的对象是线程而不是进程</strong>。在传统的Unix系统中，一个进程只包含一个线程，但是对于现代操作系统来说，一个进程包含多个线程是非常常见的。Linux对进程和线程并不特别区分，线程只不过是一种特殊的进程。</p>
-<p>在现代操作系统中，进程提供两种虚拟机制：<strong>虚拟处理器</strong>和<strong>虚拟内存</strong>。虽然实际上可能是许多进程正在分享一个处理器，但虚拟处理器给进程一种假象，让这些进程觉得自己在独享处理器。而虚拟内存让进程在分配和管理内存时觉得自己拥有整个系统的所有内存资源。同一进程的线程之间可以共享虚拟内存，但每个都拥有各自独立的虚拟处理器。</p>
-<h1 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h1><p>《Linux内核设计与实现（第三版）》</p>
-
-          
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-    
-      
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://jeffzzf.github.io/2017/05/05/我为什么要写心理相关的文章？/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Jeffzzf">
-      <meta itemprop="description" content="Do one thing at a time, and do well.">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Noob">
-    </span>
-      <header class="post-header">
-
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2017/05/05/我为什么要写心理相关的文章？/" class="post-title-link" itemprop="url">我为什么要写心理相关的文章？</a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2017-05-05 15:25:11" itemprop="dateCreated datePublished" datetime="2017-05-05T15:25:11+08:00">2017-05-05</time>
-            </span>
-          
-            
-
-            
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
-                <time title="修改时间：2019-08-28 20:23:34" itemprop="dateModified" datetime="2019-08-28T20:23:34+08:00">2019-08-28</time>
-              </span>
-            
-          
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/心理/" itemprop="url" rel="index"><span itemprop="name">心理</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          <br>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          
-            <p>可能是因为自己心理经常经历痛苦、挣扎、抑郁，我一直对心理学保持关注。还记得大一那会儿，我一直担心自己得了抑郁症，从百度百科上面吧抑郁症词条以及和它相关的所有内容都打印出来，二三十页的A4打印纸打印了好几本。人处于痛苦中时，会本能地寻求解脱之道，心理学从那时起就是我的解药。一开始我只会去了解与自身密切相关的心理学知识，例如抑郁症的起因、症状、治疗方法等。但是慢慢的，我发现心理这件事越来越有意思了。人们的一言一行，一举一动，或喜极而泣，或怒不可遏……都是先在内心产生一定的化学反应，然后才有意或无意地表达出来的。至于一个人给其他人留下的或讨人欢喜或令人憎恶的深刻印象，则是长久以来某种心理活动频繁发生后形成的固化模式的自然表现，很多模式甚至可以追溯到童年和婴儿时期。</p>
-<p>后来，我陆陆续续地从大学的心理学选修课、心理学讲座、TED等渠道零星地获取心理学的知识。先后读了《苏菲的世界》、《自卑与超越》、《走出抑郁症-一个抑郁症患者的成功自救》、《当下的力量》、《人性的优点》、《人性的弱点》。虽然不能算专业系统地学习，不过也从对心理学一无所知到现在乐在其中，从把心理学当做救命稻草到现在把心理学当做一种兴趣，在好奇心、求知欲的驱动下去去探索心理这个丰富多彩的世界，如果在旅程中刚好能解决自己的困惑和问题，就再好不过了。</p>
-<p>机缘巧合，我在13年左右发现<a href="http://fm.xinli001.com/" target="_blank" rel="noopener">心理FM</a>，这个平台上有很多对心理感兴趣的小伙伴。好听的主播们会不定期地发布一些心理相关的节目，有名家名篇、有美文共赏、有答疑解惑。每当我情绪低落、痛苦迷茫，我都会打开心理FM。听到“世界和我爱着你”悲伤就治愈了一半。</p>
-<p>回顾完我和心理学、心理FM的渊源，并没有正面回答为什么我想写一些心理相关的文章。</p>
-<p>因为最近我越发觉得，“眼过千遍不如手过一遍”是非常有道理的。我是一个思维很发散的人，有时候甚至任由思绪信马由缰，脑海里经常有千头万绪、万马奔腾。有时候冒出一个Idea觉得前途远大，“卧槽，太牛X了，我怎么这么聪明”，有时候又觉得一件事困难重重，万难实现。但是如果减慢节奏，把大脑里的想法理一理，与现实结合起来。在纸上写写画画，或者用xmind画一幅脑图，就会发现大脑中的东西夹杂了太多个人的主观情绪和意愿。当现实的光线照进来，原来的东西会面目全非。</p>
-<p>脱离现实太远的东西经常是病态的，写下来、画出来是想法联系现实的一种非常有效的方法。能在现实场中理清楚、说明白的就一定不会太过于臆想。</p>
-<p>还有一种情况，在看书、看文章的时候，经常会觉得某个观点或某句话很有启发性，但是如果不记录下来，反复揣摩，并应用到生活和工作中，这些好东西也就仅限于给人带来启发性的感觉而已，并没有变成自己的东西。有一张图说明了人通过不同的渠道处理信息能够留存多少。<br><img src="http://qiniudns.zhhju.com/90a98144c7ba399f19f5aece2838327c_b.png" alt="信息留存图"></p>
-<p>慢一点，把接触到的有触动、有启发的东西梳理一下，记录下来，并在实际生活工作中实践才能真正变成自己的东西。研究生毕业找工作的时候，身边很多人（包括我）看完《Thinking in Java》、《深入理解java虚拟机》、《Java并发编程实践》就以为掌握了其中的知识点，但在面试的时候面试官随便抽一个点出来问，都答不上来、讲不清楚。感觉自己看到过，但也只是看过，并没有真正吸收其中的精华，变成自己的东西。我们实验室一个小伙伴收割了无数Offer，几乎是手到擒来。后来告诉我诀窍：他看《Java并发编程实战》的时候，每看完一个知识点就就用自己的话重新表述一遍写下来。面试官问到的时候他因为自己揣摩过，能用自己的话把同样的意思表达清楚，自然就对答如流了。</p>
-<p>总而言之，写心理相关的文章，首先是因为我确实认为心理学有意思、有价值；其次，通过写文章减慢大脑的运行节奏，让大脑中的想法与现实结合起来，不至于变成臆想；最后，只有能把想法表达出来、有条理地将给其他人听才算真正理解了，只有在现实中实践了才能真正发挥作用。</p>
-<p>写这些文章（包括其它技术文章）的目的只是为了帮助自己更好地把握节奏，更好地理解和实践有价值的东西。可能有些内容只是别人内容的另一种表达甚至是同一种表达（当然我会尽量把参考资料列在文章的结尾），有些内容可能只是我自己的碎碎念。不过这不重要，在写下这些文章的过程中，我已经收获得足够多了。</p>
-<p>##参考文档##<br><a href="https://www.zhihu.com/question/37757196" target="_blank" rel="noopener">工作五年以上的程序员，应该干些什么？</a></p>
-
-          
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-    
-  </section>
 
   
   <nav class="pagination">
@@ -1463,409 +1128,89 @@
   </nav>
 
 
+
           </div>
           
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
 
         </div>
           
   
-  <div class="sidebar-toggle">
-    <div class="sidebar-toggle-line-wrap">
-      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
-      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
-      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
-    </div>
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
   </div>
 
-  <aside id="sidebar" class="sidebar">
+  <aside class="sidebar">
     <div class="sidebar-inner">
 
-      <div class="site-overview-wrap sidebar-panel sidebar-panel-active">
-        <div class="site-overview">
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
 
-          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
   <p class="site-author-name" itemprop="name">Jeffzzf</p>
-  <div class="site-description motion-element" itemprop="description">Do one thing at a time, and do well.</div>
+  <div class="site-description" itemprop="description">Do one thing at a time, and do well.</div>
 </div>
-  <nav class="site-state motion-element">
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
       <div class="site-state-item site-state-posts">
-        
           <a href="/archives/">
         
-          <span class="site-state-item-count">121</span>
+          <span class="site-state-item-count">123</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
-    
-      
-      
       <div class="site-state-item site-state-categories">
-        
-          
             <a href="/categories/">
           
-        
-        
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
         <span class="site-state-item-count">60</span>
-        <span class="site-state-item-name">分类</span>
-        </a>
+        <span class="site-state-item-name">分类</span></a>
       </div>
-    
-      
-      
       <div class="site-state-item site-state-tags">
-        
-          
             <a href="/tags/">
           
-        
-        
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-        <span class="site-state-item-count">107</span>
-        <span class="site-state-item-name">标签</span>
-        </a>
+        <span class="site-state-item-count">108</span>
+        <span class="site-state-item-name">标签</span></a>
       </div>
-    
   </nav>
+</div>
 
 
 
-        </div>
       </div>
 
     </div>
@@ -1876,17 +1221,23 @@
       </div>
     </main>
 
-    <footer id="footer" class="footer">
+    <footer class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
-  <span class="with-love" id="animate">
-    <i class="fa fa-user"></i>
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
   </span>
   <span class="author" itemprop="copyrightHolder">Jeffzzf</span>
 </div>
-  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.9.0</div>
-  <span class="post-meta-divider">|</span>
-  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> v7.3.0</div>
+  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
 
         
 
@@ -1897,117 +1248,47 @@
 
 
 
-        
       </div>
     </footer>
-      <div class="back-to-top">
-        <i class="fa fa-arrow-up"></i>
-      </div>
-
-    
-
   </div>
 
   
-  <script src="/lib/jquery/index.js?v=3.4.1"></script>
-  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
-  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
 
-  <script src="/js/utils.js?v=7.3.0"></script>
-  <script src="/js/motion.js?v=7.3.0"></script>
+<script src="/js/utils.js"></script>
 
-  
-  <script src="/js/schemes/muse.js?v=7.3.0"></script>
+<script src="/js/motion.js"></script>
 
 
-  
+<script src="/js/schemes/muse.js"></script>
 
-  <script src="/js/next-boot.js?v=7.3.0"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
-<script type="text/x-mathjax-config">
-  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
-</script>
 
-<script type="text/x-mathjax-config">
-  MathJax.Hub.Queue(function() {
-    var all = MathJax.Hub.getAllJax(), i;
-    for(i=0; i < all.length; i += 1) {
-      all[i].SourceElement().parentNode.className += ' has-jax';
-    }
-  });
-</script>
+<script src="/js/next-boot.js"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
 
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js">
-</script>
-<!-- End: Injected MathJax -->
-<!-- hexo-inject:end -->
 
-  
-
-  
-
-  
 
 
   
+
+
+
+
+
+
+
+
+
+
 
 
 
 
 
   
-    
-      
-    
-      
-    
-      
-    
-      
-    
-      
-    
-      
-    
-      
-    
-      
-    
-      
-    
-      
-    
+
   
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 </body>
 </html>

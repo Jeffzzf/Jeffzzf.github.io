@@ -1,61 +1,24 @@
 <!DOCTYPE html>
-
-
-
-
-
-<html class="theme-next muse use-motion" lang="zh-CN">
+<html lang="zh-CN">
 <head>
   <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8">
-<meta name="generator" content="Hexo 3.9.0">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.3.0">
-  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.3.0">
-  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.3.0">
-  <link rel="mask-icon" href="/images/logo.svg?v=7.3.0" color="#222">
+<meta name="generator" content="Hexo 4.2.1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
 
-<link rel="stylesheet" href="/css/main.css?v=7.3.0">
-
-
-<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
+<link rel="stylesheet" href="/css/main.css">
 
 
-<script id="hexo.configurations">
-  var NexT = window.NexT || {};
-  var CONFIG = {
-    root: '/',
-    scheme: 'Muse',
-    version: '7.3.0',
-    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false},
-    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
-    copycode: {"enable":false,"show_result":false,"style":null},
-    fancybox: false,
-    mediumzoom: false,
-    lazyload: false,
-    pangu: false,
-    algolia: {
-      applicationID: '',
-      apiKey: '',
-      indexName: '',
-      hits: {"per_page":10},
-      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
-    },
-    localsearch: {"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
-    search: {
-      root: '/',
-      path: ''
-    },
-    tabs: true,
-    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
-    translation: {
-      copy_button: '复制',
-      copy_success: '复制成功',
-      copy_failure: '复制失败'
-    }
-  };
-</script>
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"jeffzzf.github.io","root":"/","scheme":"Muse","version":"8.0.0-rc.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
 
   <meta name="description" content="Do one thing at a time, and do well.">
 <meta property="og:type" content="website">
@@ -63,16 +26,20 @@
 <meta property="og:url" content="http://jeffzzf.github.io/page/3/index.html">
 <meta property="og:site_name" content="Noob">
 <meta property="og:description" content="Do one thing at a time, and do well.">
-<meta property="og:locale" content="zh-CN">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:author" content="Jeffzzf">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Noob">
-<meta name="twitter:description" content="Do one thing at a time, and do well.">
-  <link rel="canonical" href="http://jeffzzf.github.io/page/3/">
+
+<link rel="canonical" href="http://jeffzzf.github.io/page/3/">
 
 
-<script id="page.configurations">
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
   CONFIG.page = {
     sidebar: "",
+    isHome : true,
+    isPost : false,
+    lang   : 'zh-CN'
   };
 </script>
 
@@ -84,11 +51,8 @@
 
 
 
-
-
   <noscript>
   <style>
-  .use-motion .motion-element,
   .use-motion .brand,
   .use-motion .menu-item,
   .sidebar-inner,
@@ -97,9 +61,8 @@
   .use-motion .comments,
   .use-motion .post-header,
   .use-motion .post-body,
-  .use-motion .collection-title { opacity: initial; }
+  .use-motion .collection-header { opacity: initial; }
 
-  .use-motion .logo,
   .use-motion .site-title,
   .use-motion .site-subtitle {
     opacity: initial;
@@ -113,160 +76,135 @@
 
 </head>
 
-<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
-
-  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-left page-home">
+<body itemscope itemtype="http://schema.org/WebPage">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container use-motion">
     <div class="headband"></div>
 
-    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
-      <div class="header-inner"><div class="site-brand-wrapper">
-  <div class="site-meta">
-
-    <div class="custom-logo-site-title">
-      <a href="/" class="brand" rel="start">
-        <span class="logo-line-before"><i></i></span>
-        <span class="site-title">Noob</span>
-        <span class="logo-line-after"><i></i></span>
-      </a>
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+        <span class="toggle-line toggle-line-first"></span>
+        <span class="toggle-line toggle-line-middle"></span>
+        <span class="toggle-line toggle-line-last"></span>
     </div>
   </div>
 
-  <div class="site-nav-toggle">
-    <button aria-label="切换导航栏">
-      <span class="btn-bar"></span>
-      <span class="btn-bar"></span>
-      <span class="btn-bar"></span>
-    </button>
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Noob</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
   </div>
 </div>
 
 
 
 <nav class="site-nav">
-    <ul id="menu" class="menu">
-        
-        
-        
-          
-          <li class="menu-item menu-item-home">
-      
-    
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
 
-    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
 
   </li>
-        
-        
-        
-          
-          <li class="menu-item menu-item-archives">
-      
-    
+        <li class="menu-item menu-item-tags">
 
-    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
 
   </li>
-    </ul>
-    
+        <li class="menu-item menu-item-categories">
 
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+  </ul>
 </nav>
+
+
+
 
 </div>
     </header>
 
     
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
 
 
-    <main id="main" class="main">
+    <main class="main">
       <div class="main-inner">
         <div class="content-wrap">
-          <div id="content" class="content">
-            
-  <section id="posts" class="posts-expand">
-      
+          
 
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+          <div class="content index posts-expand">
+            
+      
   
   
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://jeffzzf.github.io/2019/08/17/消息队列/">
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://jeffzzf.github.io/2019/08/20/%E9%9D%A2%E8%AF%95%E9%A2%98/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
       <meta itemprop="name" content="Jeffzzf">
       <meta itemprop="description" content="Do one thing at a time, and do well.">
-      <meta itemprop="image" content="/images/avatar.gif">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
       <meta itemprop="name" content="Noob">
     </span>
       <header class="post-header">
-
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2019/08/17/消息队列/" class="post-title-link" itemprop="url">消息队列</a>
-              
-            
-          </h1>
-        
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/08/20/%E9%9D%A2%E8%AF%95%E9%A2%98/" class="post-title-link" itemprop="url">面试题</a>
+        </h2>
 
         <div class="post-meta">
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
+                <i class="far fa-calendar"></i>
               </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
+              <span class="post-meta-item-text">发表于</span>
 
-              
-                
-              
-
-              <time title="创建时间：2019-08-17 10:44:38" itemprop="dateCreated datePublished" datetime="2019-08-17T10:44:38+08:00">2019-08-17</time>
+              <time title="创建时间：2019-08-20 15:36:45" itemprop="dateCreated datePublished" datetime="2019-08-20T15:36:45+08:00">2019-08-20</time>
             </span>
-          
-            
-
-            
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
+                  <i class="far fa-calendar-check"></i>
                 </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
+                <span class="post-meta-item-text">更新于</span>
                 <time title="修改时间：2019-08-29 11:23:45" itemprop="dateModified" datetime="2019-08-29T11:23:45+08:00">2019-08-29</time>
               </span>
-            
-          
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
+                <i class="far fa-folder"></i>
               </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/分布式/" itemprop="url" rel="index"><span itemprop="name">分布式</span></a></span>
-
-                
-                
-                  ，
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/分布式/mq/" itemprop="url" rel="index"><span itemprop="name">mq</span></a></span>
-
-                
-                
-              
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E9%9D%A2%E8%AF%95/" itemprop="url" rel="index"><span itemprop="name">面试</span></a>
+                </span>
             </span>
-          
 
-          <br>
+          
 
         </div>
       </header>
@@ -277,8 +215,325 @@
     <div class="post-body" itemprop="articleBody">
 
       
+          <h2 id="编程语言"><a href="#编程语言" class="headerlink" title="编程语言"></a>编程语言</h2><h3 id="Java"><a href="#Java" class="headerlink" title="Java"></a>Java</h3><h4 id="基础"><a href="#基础" class="headerlink" title="基础"></a>基础</h4><ol>
+<li>Object有哪些方法</li>
+<li>Java内存模型（Happends before）</li>
+<li>JVM运行时数据区</li>
+<li>垃圾收集算法，垃圾收集器</li>
+<li>类加载机制</li>
+</ol>
+<h4 id="集合"><a href="#集合" class="headerlink" title="集合"></a>集合</h4><ol>
+<li>HashMap底层实现，1.8之前之后有什么区别</li>
+</ol>
+<h4 id="并发"><a href="#并发" class="headerlink" title="并发"></a>并发</h4><ol>
+<li>synchronized和ReenterLock的区别</li>
+<li>有哪几种线程池，各自的使用场景是什么，如何创建一个线程池</li>
+<li>volatile原理，使用场景</li>
+</ol>
+<h3 id="Python"><a href="#Python" class="headerlink" title="Python"></a>Python</h3><ol>
+<li>Python有哪些内置的数据结构</li>
+<li>如何管理内存</li>
+<li>垃圾回收机制</li>
+<li>django执行http请求的流程</li>
+<li>django内建缓存机制</li>
+</ol>
+<h2 id="网络"><a href="#网络" class="headerlink" title="网络"></a>网络</h2><ol>
+<li>TCP和UDP的区别</li>
+<li>TCP三次握手，四次挥手</li>
+<li>TCP可靠性原理</li>
+<li>HTTP常见状态码和含义</li>
+<li>HTTP常见的Header和功能</li>
+<li>HTTP和HTTPS的区别</li>
+<li>Cookie和Session分别是什么，有什么区别</li>
+<li>转发（Forward）和重定向（Redirect）的区别</li>
+<li>描述浏览器输入url到显示页面的整个过程</li>
+</ol>
+<h2 id="操作系统"><a href="#操作系统" class="headerlink" title="操作系统"></a>操作系统</h2><ol>
+<li>进程和线程的区别</li>
+<li>并行和并发的区别</li>
+<li>进程间通信</li>
+<li>生产者消费者模型</li>
+<li>什么是协程</li>
+<li>死锁产生的条件和解决死锁的办法</li>
+</ol>
+<h3 id="Linux"><a href="#Linux" class="headerlink" title="Linux"></a>Linux</h3><ol>
+<li>哪些命令和开发工具</li>
+</ol>
+<h2 id="数据库"><a href="#数据库" class="headerlink" title="数据库"></a>数据库</h2><ol>
+<li>什么是事务，隔离级别</li>
+<li>数据库设计三范式</li>
+</ol>
+<h3 id="MySQL"><a href="#MySQL" class="headerlink" title="MySQL"></a>MySQL</h3><ol>
+<li>MySQL有哪几种数据类型，char、varchar、text有什么区别</li>
+<li>InnoDB和MyIsam区别</li>
+<li>MySQL主从复制原理</li>
+<li>InnoDB有哪几种锁，如何实现乐观锁</li>
+<li>有哪几种索引，哪几种场景会命中索引</li>
+</ol>
+<h3 id="Redis"><a href="#Redis" class="headerlink" title="Redis"></a>Redis</h3><ol>
+<li>Redis有哪几种数据结构，如何使用的</li>
+<li>Redis有哪些优点和缺点</li>
+<li>Redis线程模型</li>
+<li>Redis内存淘汰机制</li>
+<li>Redis如何做持久化</li>
+<li>缓存雪崩和缓存穿透分别是什么，有什么解决方案</li>
+<li>如何保证缓存与数据库双写时的数据一致性</li>
+<li>Redis和memchached的区别</li>
+</ol>
+<h2 id="设计模式"><a href="#设计模式" class="headerlink" title="设计模式"></a>设计模式</h2><ol>
+<li>用过或知道哪些设计模式</li>
+</ol>
+<h2 id="中间件"><a href="#中间件" class="headerlink" title="中间件"></a>中间件</h2><h3 id="Spring"><a href="#Spring" class="headerlink" title="Spring"></a>Spring</h3><ol>
+<li>Ioc、AOP原理</li>
+<li>SpringMVC原理</li>
+</ol>
+<h3 id="MQ"><a href="#MQ" class="headerlink" title="MQ"></a>MQ</h3><ol>
+<li>使用消息队列好处和坏处，具体使用场景</li>
+<li>常见的消息队列有哪些，如何选型</li>
+</ol>
+<h4 id="Kafka"><a href="#Kafka" class="headerlink" title="Kafka"></a>Kafka</h4><h2 id="大数据"><a href="#大数据" class="headerlink" title="大数据"></a>大数据</h2><h3 id="HDFS"><a href="#HDFS" class="headerlink" title="HDFS"></a>HDFS</h3><ol>
+<li>HDFS块</li>
+<li>架构，如何保证高可用</li>
+<li>读写流程</li>
+</ol>
+<h3 id="MapReduce"><a href="#MapReduce" class="headerlink" title="MapReduce"></a>MapReduce</h3><ol>
+<li>有哪几个进程</li>
+<li>shuffle过程</li>
+<li>例子</li>
+<li>如何处理数据倾斜问题</li>
+<li>map数量和reduce数量如何确定</li>
+</ol>
+<h3 id="Hive"><a href="#Hive" class="headerlink" title="Hive"></a>Hive</h3><ol>
+<li>Hive原理</li>
+</ol>
+<h3 id="Hbase"><a href="#Hbase" class="headerlink" title="Hbase"></a>Hbase</h3><ol>
+<li>Hbase的rowKey和列族如何设计</li>
+<li>Hbase和Redis使用场景</li>
+</ol>
+<h3 id="Spark"><a href="#Spark" class="headerlink" title="Spark"></a>Spark</h3><ol>
+<li>spark程序编写步骤</li>
+<li>spark算子</li>
+<li>spark rdd过程</li>
+<li>shuffle过程</li>
+<li>数据倾斜问题</li>
+</ol>
+<h2 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h2><ol>
+<li><a href="https://juejin.im/post/5b5ac91051882519a62f72e5" target="_blank" rel="noopener">一套高级大数据开发面试题（刷起来！！！）</a></li>
+<li><a href="https://blog.csdn.net/qq_16633405/article/details/78947969" target="_blank" rel="noopener">大数据面试题总结（附答案）</a></li>
+<li><a href="https://blog.csdn.net/WYpersist/article/details/80102757" target="_blank" rel="noopener">Hive面试题收集</a></li>
+<li><a href="https://zhuanlan.zhihu.com/p/35628199" target="_blank" rel="noopener">Python面试中90%的面试题！附带最好的回答！面试宝典</a></li>
+</ol>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://jeffzzf.github.io/2019/08/19/Kafka/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Jeffzzf">
+      <meta itemprop="description" content="Do one thing at a time, and do well.">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Noob">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
           
-            <p><img src="/source/images/image-20190815175530399.png" alt="image-20190815175530399"></p>
+            <a href="/2019/08/19/Kafka/" class="post-title-link" itemprop="url">Kafka</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2019-08-19 15:36:48" itemprop="dateCreated datePublished" datetime="2019-08-19T15:36:48+08:00">2019-08-19</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2019-08-29 11:23:45" itemprop="dateModified" datetime="2019-08-29T11:23:45+08:00">2019-08-29</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%88%86%E5%B8%83%E5%BC%8F/" itemprop="url" rel="index"><span itemprop="name">分布式</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%88%86%E5%B8%83%E5%BC%8F/mq/" itemprop="url" rel="index"><span itemprop="name">mq</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="术语"><a href="#术语" class="headerlink" title="术语"></a>术语</h2><p><strong>Topic</strong></p>
+<p>主题，承载消息的逻辑容器，在实际使用中用于区分业务类型。</p>
+<p><strong>Record</strong></p>
+<p>消息，Kafka处理的主要对象</p>
+<p><strong>Partition</strong></p>
+<p>分区，每个topic包含一个或多个partition，是一个有序的消息序列。物理上，每个partition对应一个文件夹，该文件夹下存储该partition的数据和索引文件。每条消息被发送到broker之前，会根据分区规则选择存储到哪个分区。</p>
+<p><strong>Offset</strong></p>
+<p>消息位移，表示分区中每条消息的位置信息，是一个单调递增且不变的值。offset是消息在分区中的唯一标识，kafka通过offset来保证消息在分区中的顺序性，kafka保证的是分区有序而不是主题有序。</p>
+<p><img src="/images/image-20190819170404800.png" alt="image-20190819170404800"></p>
+<p>几种重要的offset：</p>
+<ul>
+<li>LogStartOffset，第一条消息的offset，等于0</li>
+<li>HW（High Watermark），高水位，标识特定的offset，消费者只能拉取这个offset之前的消息</li>
+<li>LEO（Log End Offset）标识当前日志文件下一条待写入消息的offset，等于当前日志分区最后一条消息offset加1</li>
+</ul>
+<p>分区ISR集合中的每个副本都会维护自身的LEO，ISR集合中最小的LEO即为分区的HW。Kafka的复制机制既不是同步复制也不是异步复制，这种ISR的方式有效权衡了数据可靠性和性能之间的关系。</p>
+<p><strong>Replica</strong></p>
+<p>副本，同一条消息被拷贝到多个地方以提供数据冗余，副本分为leader replica（领导者副本）和follower replica（追随者副本）。副本是在分区层级下的，即每个分区可以配置多个副本实现高可用。生产者和消费者只和leader副本交互，follower副本只负责消息同步。副本处于不同的broker中，当leader副本出现故障时，从follower副本中重新选举新的leader副本对外提供服务。</p>
+<p>分区中的所有副本统称为AR(AssignedReplicas)。所有与leader副本保持一定程度同步的副本(包括leader副本在内〕组成ISROn-SyncReplicas),ISR集合是AR集合中的一个子集。消息会先发送到lead巳r副本，然后follower副本才能从leader副本中拉取消息进行同步，同步期间内follower副本相对于leader副本而言会有一定程度的滞后。“一定程度的同步”是指可忍受的滞后范围，这个范围可以通过参数进行配置。与leader副本同步滞后过多的副本(不包括leader副本)组成OSR(Out-of-SyncReplicas)，由此可见，AR=ISR+OSR。在正常情况下，所有的follower副本都应该与leader副本保持一定程度的同步，即AR=ISR,OSR集合为空。</p>
+<p>leader副本负责维护和跟踪ISR集合中所有follower副本的滞后状态，当follower副本落后太多或失效时，leader副本会把它从ISR集合中剔除。如果OSR集合中有follower副本“追上”了leader副本，那么leader副本会把它从OSR集合转移至ISR集合。默认情况下，当leader副本发生故障时，只有在ISR集合中的副本才有资格被选举为新的leader，而在OSR集合中的副本则没有任何机会(不过这个原则也可以通过修改相应的参数配置来改变)。</p>
+<p><strong>Producer</strong></p>
+<p>生产者，向主题发布新消息的应用程序</p>
+<p><strong>Consumer</strong></p>
+<p>消费者，从主题订阅新消息的应用程序。kafka consumer使用拉（pull）模式从服务端拉取消息，并保存消费的具体位置。消费者宕机恢复后可根据之前保存的消费位置重新拉取需要的消息进行消费以避免消息丢失。</p>
+<p><strong>Consumer Offset</strong></p>
+<p>消费者消费进度，每个消费者都有自己的消费者位移</p>
+<p><strong>Consumer Group</strong></p>
+<p>多个消费者实例组成一个组，同时消费多个分区以实现高吞吐</p>
+<p><strong>Rebalance</strong></p>
+<p>重平衡，消费者组内某个消费者实例挂掉后，其它消费者实例自动重新分配订阅主题分区的过程，是Kafka消费端实现高可用的重要手段</p>
+<p><strong>Broker</strong></p>
+<p>服务代理节点，大多数情况下，broker可以看作一台kafka服务器，前提是这台服务器上只部署了一个kafka实例</p>
+<h2 id="架构"><a href="#架构" class="headerlink" title="架构"></a>架构</h2><p>Kafka通过ZooKeeper对元数据进行管理，包括集群、broker、主题、分区等内容。</p>
+<p><img src="/images/KafkaArchitecture.png" alt="kafka architecture æ¶æ"></p>
+<h3 id="生产者"><a href="#生产者" class="headerlink" title="生产者"></a>生产者</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">Properties props = <span class="keyword">new</span> Properties();</span><br><span class="line">props.put(<span class="string">"bootstrap.servers"</span>, <span class="string">"localhost:9092"</span>);</span><br><span class="line">props.put(<span class="string">"acks"</span>, <span class="string">"all"</span>);</span><br><span class="line">props.put(<span class="string">"key.serializer"</span>, <span class="string">"org.apache.kafka.common.serialization.StringSerializer"</span>);</span><br><span class="line">props.put(<span class="string">"value.serializer"</span>, <span class="string">"org.apache.kafka.common.serialization.StringSerializer"</span>);</span><br><span class="line"></span><br><span class="line">Producer&lt;String, String&gt; producer = <span class="keyword">new</span> KafkaProducer&lt;&gt;(props);</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">100</span>; i++)</span><br><span class="line">    producer.send(<span class="keyword">new</span> ProducerRecord&lt;String, String&gt;(<span class="string">"my-topic"</span>, Integer.toString(i), Integer.toString(i)));</span><br><span class="line"></span><br><span class="line">producer.close();</span><br></pre></td></tr></table></figure>
+
+<p>KafkaProducer是线程安全的，在多个线程中使用同一个producer会有更高的性能。</p>
+<p>send本身就是异步的，有两个重载的方法，返回的Future对象可以使调用方稍后获得发送的结果。发送消息一般可能发生两种异常：可重试异常和不可重试异常。常见的可重试异常有NetworkException、LeaderNotAvailableException、UnkonwnTopicOrPartitionException、NotEnoughRepicaException。常见的不可重试异常如RecordTooLargeException。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">Future&lt;RecordMetadata&gt; <span class="title">send</span><span class="params">(ProducerRecord&lt;K, V&gt; record)</span></span>;</span><br><span class="line"><span class="function">Future&lt;RecordMetadata&gt; <span class="title">send</span><span class="params">(ProducerRecord&lt;K, V&gt; record, Callback callback)</span></span>;</span><br></pre></td></tr></table></figure>
+
+<p>对于可重试异常，如果配置了retries参数，只要在规定重试次数内自行恢复就不会抛出异常。默认值是0，配置方式如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">props.put(ProducerConfg.RETRIES_CONFIG, <span class="number">3</span> ) ;</span><br></pre></td></tr></table></figure>
+
+<p>send方法将消息发送给broker时，有可能经过拦截器（Interceptor）、序列化器（Serializer）和分区器（Partitioner）后才真正发往broker。</p>
+<p><img src="/images/image-20190819220846252.png" alt="image-20190819220846252"></p>
+<h4 id="拦截器"><a href="#拦截器" class="headerlink" title="拦截器"></a>拦截器</h4><p>生产者拦截器可以用来在消息发送前做一些准备工作，如按照某个规则过滤不符合要求的消息、修改消息内容等，也可以做一些定制化的需求，如统计类工作。KafkaProducer不仅可以指定一个拦截器，还可以指定多个拦截器组成拦截链。拦截链中，如果某个拦截器执行失败，下一个拦截器会接着从上一个执行成功的拦截器继续执行。</p>
+<h4 id="序列化器"><a href="#序列化器" class="headerlink" title="序列化器"></a>序列化器</h4><p>生产者发送数据时需要通过序列化把对象转换成字节数组，消费者消费消息时要使用与生产者序列化器兼容的反序列化器将字节数组转化为对象。如果Kafka客户端提供的几种序列化器都无法满足需求，可以选择使用Avro、JSON、Thrift、ProtoBuf等通用的序列化工具来实现，或者使用自定义的序列化器实现。</p>
+<h4 id="分区器"><a href="#分区器" class="headerlink" title="分区器"></a>分区器</h4><p>分区器的作用是为消息分配分区，如果消息ProducerRecord中没有指定partition字段，producer将根据key来计算partition的值。如果key不为null，默认的分区器对key进行hash（采用MurmurHash2算法），相同key对应的消息会被写入同一个分区。如果key为null，消息将会以轮询的方式发往主题内各个可用分区。</p>
+<h4 id="消息收集器"><a href="#消息收集器" class="headerlink" title="消息收集器"></a>消息收集器</h4><p>生产者客户端由两个线程协调运行：主线程和Sender线程。在主线程中创建消息、通过可能的拦截器、序列化器和分区器后缓存到消息累加器（RecordAccumulator，也称作消息收集器）中。Sender线程从RecordAccumulator中获取消息并将其发送到Kafka中。</p>
+<p>RecordAccumulator主要用来缓存消息以便于Sender线程可以批量发送，进而减少网络传输资源的消耗以提升性能。缓存大小可以通过生产者客户端参数buffer.memory配置，默认值为32MB。如果生产者发送消息的速度超过发送到服务器的速度，会导致生产者空间不足，send()方法要么被阻塞要么抛出异常。该特性由参数max.block.ms配置，默认值为60s。</p>
+<p>RecordAccumulator内部为每个分区都维护了一个双端队列，消息写入缓存时，追加到双端队列的尾部；sender读取消息时，从双端队列的头部读取。InFlightRequests会缓存已经发出去但还没收到响应的请求，并通过还未确认的请求计算负载最小的Node（leastLoadedNode）。</p>
+<h4 id="元数据更新"><a href="#元数据更新" class="headerlink" title="元数据更新"></a>元数据更新</h4><p>元数据具体记录了集群中有哪些主题，这些主题有哪些分区，每个分区的lead巳r副本分配在哪个节点上，follower副本分配在哪些节点上，哪些副本在AR、ISR等集合中，集群中有哪些节点，控制器节点又是哪一个等信息。</p>
+<p>当客户端中没有需要使用的元数据，如没有指定主题信息或超过metadata.max.age.ms（默认5分钟）时间没有更新元数据都会引起元数据的更新操作。元数据更新操作在客户端内部进行，对客户端外部使用者不可见。更新元数据时，先挑选出leastLoadedNode，向这个Node发送MetadataRequest请求获取元数据信息。这个请求由Sender线程发起，主线程也需要读取这些信息，它们之间通过synchronized和final关键字来保证。</p>
+<h3 id="消费者"><a href="#消费者" class="headerlink" title="消费者"></a>消费者</h3><p>每个消费者（Consumer）对应一个消费组（Consumer Group），可以通过增加/减少消费者个数来提高/降低整体消费能力。当消费者个数大于分区个数时，会有消费者分配不到任何分区。</p>
+<p>消息中间件一般有两种消息投递模式：点对点模式（P2P，Point-to-Point）模式和发布/订阅（Pub/Sub）模式。发布/订阅模式在一对多广播时采用。Kafka同时支持两种消息投递模式，当消费者都属于不同的消费组时，所有消息被广播给所有消费者，每条消息都会被所有消费者处理，相当于发布订阅模式；当所有消费者都属于同一个消费组时，每个消息只会被一个消费者处理，相当于点对点模式。</p>
+<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><p>《深入理解Kafka：核心设计与实践原理》</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://jeffzzf.github.io/2019/08/17/%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Jeffzzf">
+      <meta itemprop="description" content="Do one thing at a time, and do well.">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Noob">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/08/17/%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97/" class="post-title-link" itemprop="url">消息队列</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2019-08-17 10:44:38" itemprop="dateCreated datePublished" datetime="2019-08-17T10:44:38+08:00">2019-08-17</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2019-08-29 11:23:45" itemprop="dateModified" datetime="2019-08-29T11:23:45+08:00">2019-08-29</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%88%86%E5%B8%83%E5%BC%8F/" itemprop="url" rel="index"><span itemprop="name">分布式</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%88%86%E5%B8%83%E5%BC%8F/mq/" itemprop="url" rel="index"><span itemprop="name">mq</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p><img src="/source/images/image-20190815175530399.png" alt="image-20190815175530399"></p>
 <p>关注设计思想、实现原理和实践方法论</p>
 <h2 id="消息队列的作用"><a href="#消息队列的作用" class="headerlink" title="消息队列的作用"></a>消息队列的作用</h2><h3 id="1-异步处理"><a href="#1-异步处理" class="headerlink" title="1.异步处理"></a>1.异步处理</h3><p>非必要的业务逻辑以异步方式运行，提高响应速度。多个消费者并发执行，提升系统整体性能。</p>
 <h3 id="2-流量控制"><a href="#2-流量控制" class="headerlink" title="2.流量控制"></a>2.流量控制</h3><p>下游来不及处理的流量堆积在消息队列中，起到削峰填谷、保护下游的作用。</p>
@@ -337,102 +592,68 @@
 <h3 id="消费端积压"><a href="#消费端积压" class="headerlink" title="消费端积压"></a>消费端积压</h3><p>消费端性能优化可以优化消费业务逻辑性能，也可以水平扩容，增加消费端的并发数来提升整体的消费性能。</p>
 <p>在扩容Consumer的实例数量时，必须同步扩容主题中的分区（也叫队列）数量，确保Consumer的实例数和分区数量是相等的。如果Consumer的实例数量超过分区数量，扩容实际上没有效果，因为每个分区只能支持单线程消费。</p>
 
-          
-        
       
     </div>
 
     
     
     
-
-    <footer class="post-footer">
+      <footer class="post-footer">
         <div class="post-eof"></div>
-    </footer>
-  </div>
-  
-  
-  
+      </footer>
   </article>
+  
+  
+  
 
-    
       
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
   
   
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://jeffzzf.github.io/2019/08/16/zookeeper原理/">
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://jeffzzf.github.io/2019/08/16/zookeeper%E5%8E%9F%E7%90%86/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
       <meta itemprop="name" content="Jeffzzf">
       <meta itemprop="description" content="Do one thing at a time, and do well.">
-      <meta itemprop="image" content="/images/avatar.gif">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
       <meta itemprop="name" content="Noob">
     </span>
       <header class="post-header">
-
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2019/08/16/zookeeper原理/" class="post-title-link" itemprop="url">zookeeper原理</a>
-              
-            
-          </h1>
-        
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/08/16/zookeeper%E5%8E%9F%E7%90%86/" class="post-title-link" itemprop="url">zookeeper原理</a>
+        </h2>
 
         <div class="post-meta">
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
+                <i class="far fa-calendar"></i>
               </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
+              <span class="post-meta-item-text">发表于</span>
 
               <time title="创建时间：2019-08-16 11:29:06" itemprop="dateCreated datePublished" datetime="2019-08-16T11:29:06+08:00">2019-08-16</time>
             </span>
-          
-            
-
-            
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
+                  <i class="far fa-calendar-check"></i>
                 </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
-                <time title="修改时间：2019-11-26 13:01:38" itemprop="dateModified" datetime="2019-11-26T13:01:38+08:00">2019-11-26</time>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-05-16 18:18:43" itemprop="dateModified" datetime="2020-05-16T18:18:43+08:00">2020-05-16</time>
               </span>
-            
-          
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
+                <i class="far fa-folder"></i>
               </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/分布式/" itemprop="url" rel="index"><span itemprop="name">分布式</span></a></span>
-
-                
-                
-              
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%88%86%E5%B8%83%E5%BC%8F/" itemprop="url" rel="index"><span itemprop="name">分布式</span></a>
+                </span>
             </span>
-          
 
-          <br>
+          
 
         </div>
       </header>
@@ -443,8 +664,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          
-            <p>ZooKeeper的设计目标是将那些复杂且容易出错的分布式一致性服务封装起来，构成一个高效可靠的原语集，并以一系列简单易用的接口提供给用户使用。可以基于它实现数据发布/订阅、负载均衡、命名服务、分布式协调/通知、集群管理、Master选举、分布式锁和分布式队列等功能。zk可以保证如下分布式一致性：</p>
+          <p>ZooKeeper的设计目标是将那些复杂且容易出错的分布式一致性服务封装起来，构成一个高效可靠的原语集，并以一系列简单易用的接口提供给用户使用。可以基于它实现数据发布/订阅、负载均衡、命名服务、分布式协调/通知、集群管理、Master选举、分布式锁和分布式队列等功能。zk可以保证如下分布式一致性：</p>
 <ul>
 <li><p>顺序一致性</p>
 <p>从同一个客户端发起的事务请求，最终会严格按照发起顺序被应用到zk中</p>
@@ -456,17 +676,29 @@
 <p>一旦服务端成功应用了一个事务，并完成对客户端的响应，那么该事务所引起的服务端状态变更将会被一直保留下来，除非有另一个事务对其进行了变更。</p>
 </li>
 <li><p>实时性</p>
-<p>zk保证在一定时间段内，客户端最终一定能从服务端读取到最新的数据状态</p>
+<p>zk保证在一定时间段内，客户端最终一定能从服务端读取到最新的数据状态。但由于网络延时等原因，Zookeeper不能保证两个客户端能同时得到刚更新的数据，如果需要最新数据，应该在读数据之前调用sync()接口</p>
 </li>
 </ul>
 <p>组成zk集群的每台机器都会在内存中维护当前服务器状态，每台机器之间都互相保持通信。只要集群中超过一半的机器能够正常工作，整个机器就能对外提供服务。</p>
-<h2 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h2><h3 id="集群角色"><a href="#集群角色" class="headerlink" title="集群角色"></a>集群角色</h3><p>Leader：leader服务器为客户端提供读和写服务</p>
-<p>Follower：提供读服务，参与Leader选举过程，不参与过半写成功策略</p>
+<h2 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h2><h3 id="集群角色"><a href="#集群角色" class="headerlink" title="集群角色"></a>集群角色</h3><p>Leader：leader服务器为客户端提供读和写服务，全局事务 Id（zxid）只能由 leader分配</p>
+<p>Follower：提供读服务（非事务请求），参与Leader选举过程，不参与过半写成功策略</p>
 <p>Observer：只提供读服务，不参与Leader选举和写服务</p>
+<p>Leader、Follower 和 Observer这三种角色有四种状态：leading、following、observing 和looking</p>
+<p>LOOKING：当前Server不知道leader是谁，正在搜寻。</p>
+<p>LEADING：当前Server即为选举出来的leader。</p>
+<p>FOLLOWING：leader已经选举出来，当前Server与之同步。</p>
+<p>OBSERVING：observer的行为在大多数情况下与follower完全一致，但是他们不参加选举和投票，而仅仅接受(observing)选举和投票的结果。</p>
+<h4 id="选主过程"><a href="#选主过程" class="headerlink" title="选主过程"></a>选主过程</h4><p>zk 选举有两种算法：basic paxos 和fast paxos系统默认采用fast paxos</p>
 <h3 id="会话（Session）"><a href="#会话（Session）" class="headerlink" title="会话（Session）"></a>会话（Session）</h3><h3 id="数据节点（Znode）"><a href="#数据节点（Znode）" class="headerlink" title="数据节点（Znode）"></a>数据节点（Znode）</h3><p>zk将所有数据存储在内存中，数据模型是一颗树（ZNode tree），由<code>/</code>进行分割，如：<code>/foo/bar</code>。树中的数据节点称为ZNode。</p>
 <p>ZNode可以分为持久节点和临时节点，持久节点指一旦ZNode被创建，除非主动进行ZNode的移除操作，否则这个ZNode将一直保存在zk上。临时节点的生命周期和客户端会话绑定，一旦客户端会话失效（而非TCP连接断开），客户端创建的所有临时节点都会被移除。不能基于临时节点创建子节点，即临时节点只能作为叶节点。</p>
 <h3 id="版本"><a href="#版本" class="headerlink" title="版本"></a>版本</h3><p>对每个ZNode，zk都为其维护一个<code>Stat</code>的数据结构，其中记录了这个ZNode的三个数据版本，分别是version（当前ZNode版本）、cversion（当前ZNode子节点版本）和aversion（当前ZNode的ACL版本）。</p>
-<h3 id="事件监听器（Watcher）"><a href="#事件监听器（Watcher）" class="headerlink" title="事件监听器（Watcher）"></a>事件监听器（Watcher）</h3><p>zk允许用户在指定节点上注册一些Watcher，并且在一些特定事件触发时，zk服务端将事件通知到感兴趣的客户端上去。</p>
+<h3 id="事件监听器（Watcher）"><a href="#事件监听器（Watcher）" class="headerlink" title="事件监听器（Watcher）"></a>事件监听器（Watcher）</h3><p>zk允许用户在指定节点上注册一些Watcher，并且在一些特定事件触发时，zk服务端将事件通知到感兴趣的客户端上去。监听器有三个关键点：</p>
+<ol>
+<li>一次性触发（one-time trigger）客户端设置监听 zk 的事件后，相应事件发生只会触发客户端一次，如果需要再次收到监听事件客户端需要再次设置监听</li>
+<li>发送到客户端（send to the client）zk 和客户端通过 socket 通信，并且zk 提供了顺序保证，客户端只有先看到监听事件，才会感知到监听的 znode发生了变化</li>
+<li>被设置 watch 的数据可以具有不同的改变方式</li>
+</ol>
+<p>如果客户端通过exists()设置了某个znode节点的监视，但是客户端在此znode节点被创建和删除的时间间隔内与zookeeper服务器失去了联系，该客户端即使稍后重新连接 zookeeper服务器后也得不到事件通知</p>
 <h3 id="ACL"><a href="#ACL" class="headerlink" title="ACL"></a>ACL</h3><p>zk采用ACL（Access Control Lists）策略来进行权限控制，类似于UNIX文件系统的权限控制。zk定义了五种权限：</p>
 <ul>
 <li>CREATE：创建子节点的权限</li>
@@ -477,108 +709,88 @@
 </ul>
 <h2 id="ZAB协议"><a href="#ZAB协议" class="headerlink" title="ZAB协议"></a>ZAB协议</h2><p>zk没有完全采用Paxos算法，而是使用了一种称为ZAB（ZooKeeper Atomic Broadcast，ZooKeeper原子消息广播协议）的协议作为数据一致性的核心算法。它是为zk专门设计的崩溃可恢复的原子消息广播算法，zk使用一个单一的主进程来接收并处理客户端的所有事务请求，采用ZAB原子广播协议，将服务器数据的状态变更以事务Proposal的形式广播到所有的副本进程上去。</p>
 <p>ZAB定义了那些会改变zk服务器数据状态的事务请求处理方式：所有事务请求必须由全局唯一的Leader服务器来协调处理，余下的其他服务器成为Follower服务器。Leader服务器负责将一个客户端事务请求转换成一个事务Proposal（提议），并将该Proposal分发给集群中所有的Follower服务器。之后，Leader服务器需要等待所有的Follower的反馈，一旦超过半数Follower服务器进行了正确的反馈，Leader就会再次向所有的Follower服务器分发Commit消息，要求将前一个Proposal进行提交。</p>
-<h3 id="崩溃恢复"><a href="#崩溃恢复" class="headerlink" title="崩溃恢复"></a>崩溃恢复</h3><p>整个服务框架启动过程中，或者Leader服务器出现网络中断、崩溃推出或重启等异常情况时，ZAB协议进入恢复模式并选举产生新的Leader服务器。产生新的Leader并且集群中过半机器与该Leader完成状态同步后，ZAB协议就会退出恢复模式。其中，状态同步指数据同步，保证集群中存在过半的机器能够与Leader数据状态保持一致。</p>
+<h3 id="崩溃恢复（Recovery-选主）"><a href="#崩溃恢复（Recovery-选主）" class="headerlink" title="崩溃恢复（Recovery 选主）"></a>崩溃恢复（Recovery 选主）</h3><p>整个服务框架启动过程中，或者Leader服务器出现网络中断、崩溃推出或重启等异常情况时，ZAB协议进入恢复模式并选举产生新的Leader服务器。产生新的Leader并且集群中过半机器与该Leader完成状态同步后，ZAB协议就会退出恢复模式。其中，状态同步指数据同步，保证集群中存在过半的机器能够与Leader数据状态保持一致。</p>
 <p>过半Follower完成和Leader的状态同步后，整个服务框架进入消息广播模式。当一台遵守ZAB协议的服务器启动后加入集群时，如果集群中已经存在一个Leader服务器在负责进行消息广播，那么新加入的服务器会自觉进入消息恢复模式：找到Leader所在的服务器，并与其进行数据同步，然后一起参与到消息广播流程中去。Leader接收到客户端的事务请求后，生成提案并发起一轮广播协议；如果其他服务器收到客户端事务请求，这些非Leader服务器会首先将这个事务请求转发给Leader服务器。</p>
-<h3 id="消息广播"><a href="#消息广播" class="headerlink" title="消息广播"></a>消息广播</h3><p>ZAB的原子广播协议类似于二阶段提交过程，Leader为每个Follower分配一个单独的队列，收到客户端事务请求后生成Proposal并分配一个全局单调递增的唯一ID（事务ID，ZXID），将Proposal依次放入这些队列中，并根据FIFO策略发送消息。每个Follower收到事务proposal后会首先将其以事务日志的形式写入本地磁盘中，并在成功写入后反馈给Leader一个ACK响应。当Leader收到超过半数Follower的ack后，会广播一个Commit消息给所有Follower以通知其进行事务提交，Leader自身也会完成事务提交，Follower收到commit消息后也会完成事务提交。</p>
-<h2 id="事务"><a href="#事务" class="headerlink" title="事务"></a>事务</h2><p>在zk中，事务是指能够改变zk服务器状态的操作，包括数据节点的删除和创建，数据节点内容更新和客户端会话创建与失效等操作。对每个事务请求，zk都会为其分配一个全局唯一的事务id，用zxid来表示，通常是一个64位数字。每一个zxid对应一次更新操作，从这些zxid中可以间接地识别出zk处理这些更新操作请求的全局顺序。</p>
-<p>​    </p>
-<h2 id="应用场景"><a href="#应用场景" class="headerlink" title="应用场景"></a>应用场景</h2>
-          
-        
+<h3 id="消息广播（Broadcast同步）"><a href="#消息广播（Broadcast同步）" class="headerlink" title="消息广播（Broadcast同步）"></a>消息广播（Broadcast同步）</h3><p>ZAB的原子广播协议类似于二阶段提交过程，Leader为每个Follower分配一个单独的队列，收到客户端事务请求后生成Proposal并分配一个全局单调递增的唯一ID（事务ID，ZXID），将Proposal依次放入这些队列中，并根据FIFO策略发送消息。每个Follower收到事务proposal后会首先将其以事务日志的形式写入本地磁盘中，并在成功写入后反馈给Leader一个ACK响应。当Leader收到超过半数Follower的ack后，会广播一个Commit消息给所有Follower以通知其进行事务提交，Leader自身也会完成事务提交，Follower收到commit消息后也会完成事务提交。</p>
+<h2 id="事务"><a href="#事务" class="headerlink" title="事务"></a>事务</h2><p>在zk中，事务是指能够改变zk服务器状态的操作，包括数据节点的删除和创建，数据节点内容更新和客户端会话创建与失效等操作。对每个事务请求，zk都会为其分配一个全局唯一的事务id，用zxid来表示，通常是一个64位数字。每一个zxid对应一次更新操作，从这些zxid中可以间接地识别出zk处理这些更新操作请求的全局顺序。zxid是一个64位的数字，它高32位是epoch用来标识leader关系是否改变，每次一个leader被选出来，它都会有一个新的epoch，标识当前属于那个leader的统治时期。低32位用于递增计数。</p>
+<h2 id="序列化和通信"><a href="#序列化和通信" class="headerlink" title="序列化和通信"></a>序列化和通信</h2><p>Zookeeper 采用Jute 作为序列化协议，虽然使用较少，但序列化/反序列化一直不是 zk 的瓶颈</p>
+<p>zk基于TCP 长连接完成客户端和服务器、服务器和服务器之间的通信</p>
+<h2 id="数据存储"><a href="#数据存储" class="headerlink" title="数据存储"></a>数据存储</h2><p>zk 数据存储分为内存数据存储和磁盘数据存储，DataTree是zk 内存数据存储的核心，它是一个树型数据结构，底层是一个 ConcurrentHashMap，代表了内存中的一份完整的数据。DataNode是数据存储的最小单元，保存了数据内容、ACL 列表和节点状态，并记录了父节点和子节点列表。</p>
+<p>ZKDatabase是 zk 的内存数据库，负责管理zk 的所有会话、DataTree存储和事务日志，ZKDatabase会定时向磁盘 dump快照数据，同时在zk 服务器启动的时候，通过磁盘上的事务日志和快照数据文件恢复成一个完整的内存数据库。</p>
+<h2 id="zk-实现分布式锁"><a href="#zk-实现分布式锁" class="headerlink" title="zk 实现分布式锁"></a>zk 实现分布式锁</h2><ol>
+<li>每个线程 lock() 时在锁 znode（持久节点）下创建一个临时顺序节点，这个顺序节点由 zk 内部维护一个递增的节点序号</li>
+<li>获取锁 znode 下的所有子节点并排序，如果线程创建的节点是第一个子节点，就成功获取锁；如果不是，就监听线程创建节点的前一个节点</li>
+<li>获取锁的线程释unlock 时删除它创建的节点，其它监听该节点的线程收到通知获取锁</li>
+<li>如果某个客户端创建的临时节点后宕机或者 fullgc，zk 通过 tcp 保活可以感知到那个客户端宕机，总而自动删除对应的临时顺序节点，相当于自己释放锁</li>
+</ol>
+<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><ol>
+<li><a href="https://www.cnblogs.com/leeSmall/p/9611041.html" target="_blank" rel="noopener">Zookeeper系列六：服务器角色、序列化与通信协议、数据存储、zookeeper总结</a></li>
+<li><a href="https://juejin.im/post/5c01532ef265da61362232ed" target="_blank" rel="noopener">七张图彻底讲清楚ZooKeeper分布式锁的实现原理</a></li>
+<li><a href="https://www.jianshu.com/p/7491a8b558c1" target="_blank" rel="noopener">Zookeeper基本原理</a></li>
+</ol>
+
       
     </div>
 
     
     
     
-
-    <footer class="post-footer">
+      <footer class="post-footer">
         <div class="post-eof"></div>
-    </footer>
-  </div>
-  
-  
-  
+      </footer>
   </article>
+  
+  
+  
 
-    
       
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
   
   
-  
-  <div class="post-block">
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://jeffzzf.github.io/2019/08/09/Hadoop/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
       <meta itemprop="name" content="Jeffzzf">
       <meta itemprop="description" content="Do one thing at a time, and do well.">
-      <meta itemprop="image" content="/images/avatar.gif">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
       <meta itemprop="name" content="Noob">
     </span>
       <header class="post-header">
-
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2019/08/09/Hadoop/" class="post-title-link" itemprop="url">Hadoop MapReduce</a>
-              
-            
-          </h1>
-        
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/08/09/Hadoop/" class="post-title-link" itemprop="url">Hadoop MapReduce</a>
+        </h2>
 
         <div class="post-meta">
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
+                <i class="far fa-calendar"></i>
               </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
+              <span class="post-meta-item-text">发表于</span>
 
               <time title="创建时间：2019-08-09 21:43:27" itemprop="dateCreated datePublished" datetime="2019-08-09T21:43:27+08:00">2019-08-09</time>
             </span>
-          
-            
-
-            
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
+                  <i class="far fa-calendar-check"></i>
                 </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
+                <span class="post-meta-item-text">更新于</span>
                 <time title="修改时间：2019-08-28 20:23:34" itemprop="dateModified" datetime="2019-08-28T20:23:34+08:00">2019-08-28</time>
               </span>
-            
-          
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
+                <i class="far fa-folder"></i>
               </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Hadoop/" itemprop="url" rel="index"><span itemprop="name">Hadoop</span></a></span>
-
-                
-                
-              
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Hadoop/" itemprop="url" rel="index"><span itemprop="name">Hadoop</span></a>
+                </span>
             </span>
-          
 
-          <br>
+          
 
         </div>
       </header>
@@ -589,8 +801,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          
-            <p>Hadoop提供了一个可靠、可扩展的存储和分析平台，是一个由多个项目组成的生态系统，这些项目都属于分布式计算和大规模数据处理范畴。</p>
+          <p>Hadoop提供了一个可靠、可扩展的存储和分析平台，是一个由多个项目组成的生态系统，这些项目都属于分布式计算和大规模数据处理范畴。</p>
 <p>寻址速度的提升远远跟不上传输速度的提升，寻址是将磁头移动到特定磁盘位置进行读写操作的过程，它是导致硬盘操作延迟的主要原因，而传输速度取决于硬盘的带宽。如果数据访问中包含大量硬盘寻址，那么读取大量数据集就需要花费更长时间。如果只更新少量数据，传统的基于B树的数据库更有优势，如果需要更新大量数据，B树的速度将明显落后于MapReduce，因为需要使用排序/合并来重建数据库。</p>
 <p>Hadoop尽量在计算节点上存储数据，以实现数据的本地快速访问，数据本地化（data locality）特性是Hadoop数据处理的核心。</p>
 <p>MapReduce是对大量分布式处理问题的总结和抽象，核心思想是分而治之。主要由两部分组成：编程模型和运行时环境，编程模型为用户提供了非常易用的编程接口，用户只需要像编写串行程序一样实现几个简单的函数即可实现分布式程序，其它复杂的工作，如节点间通信、节点失效、数据切分等都由MapReduce运行时环境完成。</p>
@@ -598,102 +809,68 @@
 <p>第一阶段：Map阶段，由多个可并行的Map Task构成，主要功能是将待处理数据集按照数据量大小切分成等大的数据分片，每个分片交由一个任务处理。</p>
 <p>第二阶段：Reduce阶段，由多个可并行的Reduce Task构成，主要功能是对前一阶段中各任务产生的结果进行规约，得到最终结果。                                                                </p>
 
-          
-        
       
     </div>
 
     
     
     
-
-    <footer class="post-footer">
+      <footer class="post-footer">
         <div class="post-eof"></div>
-    </footer>
-  </div>
-  
-  
-  
+      </footer>
   </article>
+  
+  
+  
 
-    
       
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
   
   
-  
-  <div class="post-block">
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://jeffzzf.github.io/2019/08/09/HDFS/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
       <meta itemprop="name" content="Jeffzzf">
       <meta itemprop="description" content="Do one thing at a time, and do well.">
-      <meta itemprop="image" content="/images/avatar.gif">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
       <meta itemprop="name" content="Noob">
     </span>
       <header class="post-header">
-
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2019/08/09/HDFS/" class="post-title-link" itemprop="url">HDFS</a>
-              
-            
-          </h1>
-        
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/08/09/HDFS/" class="post-title-link" itemprop="url">HDFS</a>
+        </h2>
 
         <div class="post-meta">
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
+                <i class="far fa-calendar"></i>
               </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
+              <span class="post-meta-item-text">发表于</span>
 
               <time title="创建时间：2019-08-09 15:04:04" itemprop="dateCreated datePublished" datetime="2019-08-09T15:04:04+08:00">2019-08-09</time>
             </span>
-          
-            
-
-            
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
+                  <i class="far fa-calendar-check"></i>
                 </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
+                <span class="post-meta-item-text">更新于</span>
                 <time title="修改时间：2019-08-28 20:23:34" itemprop="dateModified" datetime="2019-08-28T20:23:34+08:00">2019-08-28</time>
               </span>
-            
-          
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
+                <i class="far fa-folder"></i>
               </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/大数据/" itemprop="url" rel="index"><span itemprop="name">大数据</span></a></span>
-
-                
-                
-              
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%A4%A7%E6%95%B0%E6%8D%AE/" itemprop="url" rel="index"><span itemprop="name">大数据</span></a>
+                </span>
             </span>
-          
 
-          <br>
+          
 
         </div>
       </header>
@@ -704,115 +881,77 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          
-            <p>Hadoop自带一个分布式文件系统——HDFS（Hadoop Distributed Filesystem），有时也简称DFS。</p>
+          <p>Hadoop自带一个分布式文件系统——HDFS（Hadoop Distributed Filesystem），有时也简称DFS。</p>
 <h2 id="数据块"><a href="#数据块" class="headerlink" title="数据块"></a>数据块</h2><p>构建于单个磁盘的文件系统通过磁盘块来管理该文件系统的块，该文件系统块的大小可以是磁盘块的整数倍。文件系统块一般是几千字节，而磁盘块一般是512字节。HDFS的块（block）作为独立的存储单元默认是128MB，HDFS上的文件也被划分为多个分块（chunk）。与单一磁盘文件系统不同，HDFS小于一个块大小的文件不会占据整个块空间。</p>
 <h2 id="namenode和datanode"><a href="#namenode和datanode" class="headerlink" title="namenode和datanode"></a>namenode和datanode</h2><p>HDFS集群以一个管理节点（namenode）和多个工作节点（datanode）模式运行，namenode管理文件系统的命名空间，它维护着文件系统树及整颗树内所有的文件和目录。这些信息以两个文件形式永久保存在本地磁盘上：命名空间镜像文件和编辑日志文件。namenode也记录着每个文件中各个块所在数据节点信息，但它并不永久保存块的位置信息，因为这些信息会在系统启动时根据数据节点信息重建。datanode是HDFS的工作节点，用于存储和检索数据块，并定期向namenode发送所存储块的列表。</p>
 <p>客户端（client）提供一个类似POSIX（可移植操作系统界面）的文件系统接口，用户访问HDFS时无需感知namenode和datanode。</p>
 
-          
-        
       
     </div>
 
     
     
     
-
-    <footer class="post-footer">
+      <footer class="post-footer">
         <div class="post-eof"></div>
-    </footer>
-  </div>
-  
-  
-  
+      </footer>
   </article>
+  
+  
+  
 
-    
       
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
   
   
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://jeffzzf.github.io/2019/08/05/Java注解/">
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://jeffzzf.github.io/2019/08/05/Java%E6%B3%A8%E8%A7%A3/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
       <meta itemprop="name" content="Jeffzzf">
       <meta itemprop="description" content="Do one thing at a time, and do well.">
-      <meta itemprop="image" content="/images/avatar.gif">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
       <meta itemprop="name" content="Noob">
     </span>
       <header class="post-header">
-
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2019/08/05/Java注解/" class="post-title-link" itemprop="url">Java并发</a>
-              
-            
-          </h1>
-        
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/08/05/Java%E6%B3%A8%E8%A7%A3/" class="post-title-link" itemprop="url">Java并发</a>
+        </h2>
 
         <div class="post-meta">
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
+                <i class="far fa-calendar"></i>
               </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
+              <span class="post-meta-item-text">发表于</span>
 
               <time title="创建时间：2019-08-05 17:42:39" itemprop="dateCreated datePublished" datetime="2019-08-05T17:42:39+08:00">2019-08-05</time>
             </span>
-          
-            
-
-            
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
+                  <i class="far fa-calendar-check"></i>
                 </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
+                <span class="post-meta-item-text">更新于</span>
                 <time title="修改时间：2019-08-28 20:23:34" itemprop="dateModified" datetime="2019-08-28T20:23:34+08:00">2019-08-28</time>
               </span>
-            
-          
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
+                <i class="far fa-folder"></i>
               </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Java/" itemprop="url" rel="index"><span itemprop="name">Java</span></a></span>
-
-                
-                
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Java/" itemprop="url" rel="index"><span itemprop="name">Java</span></a>
+                </span>
                   ，
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Java/并发/" itemprop="url" rel="index"><span itemprop="name">并发</span></a></span>
-
-                
-                
-              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Java/%E5%B9%B6%E5%8F%91/" itemprop="url" rel="index"><span itemprop="name">并发</span></a>
+                </span>
             </span>
-          
 
-          <br>
+          
 
         </div>
       </header>
@@ -823,112 +962,74 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          
-            <h1 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h1><p>《Java编程思想》</p>
+          <h1 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h1><p>《Java编程思想》</p>
 
-          
-        
       
     </div>
 
     
     
     
-
-    <footer class="post-footer">
+      <footer class="post-footer">
         <div class="post-eof"></div>
-    </footer>
-  </div>
-  
-  
-  
+      </footer>
   </article>
+  
+  
+  
 
-    
       
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
   
   
-  
-  <div class="post-block">
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://jeffzzf.github.io/2019/08/05/Spark/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
       <meta itemprop="name" content="Jeffzzf">
       <meta itemprop="description" content="Do one thing at a time, and do well.">
-      <meta itemprop="image" content="/images/avatar.gif">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
       <meta itemprop="name" content="Noob">
     </span>
       <header class="post-header">
-
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2019/08/05/Spark/" class="post-title-link" itemprop="url">Spark</a>
-              
-            
-          </h1>
-        
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/08/05/Spark/" class="post-title-link" itemprop="url">Spark</a>
+        </h2>
 
         <div class="post-meta">
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
+                <i class="far fa-calendar"></i>
               </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
+              <span class="post-meta-item-text">发表于</span>
 
               <time title="创建时间：2019-08-05 14:49:13" itemprop="dateCreated datePublished" datetime="2019-08-05T14:49:13+08:00">2019-08-05</time>
             </span>
-          
-            
-
-            
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
+                  <i class="far fa-calendar-check"></i>
                 </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
+                <span class="post-meta-item-text">更新于</span>
                 <time title="修改时间：2020-01-14 16:59:57" itemprop="dateModified" datetime="2020-01-14T16:59:57+08:00">2020-01-14</time>
               </span>
-            
-          
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
+                <i class="far fa-folder"></i>
               </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/BigData/" itemprop="url" rel="index"><span itemprop="name">BigData</span></a></span>
-
-                
-                
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/BigData/" itemprop="url" rel="index"><span itemprop="name">BigData</span></a>
+                </span>
                   ，
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/BigData/Spark/" itemprop="url" rel="index"><span itemprop="name">Spark</span></a></span>
-
-                
-                
-              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/BigData/Spark/" itemprop="url" rel="index"><span itemprop="name">Spark</span></a>
+                </span>
             </span>
-          
 
-          <br>
+          
 
         </div>
       </header>
@@ -939,8 +1040,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          
-            <h2 id="RDD"><a href="#RDD" class="headerlink" title="RDD"></a>RDD</h2><p>RDD，弹性分布式数据集（Resilient Distributed Dataset）是spark的核心概念，它是集群中跨多个机器分区存储的一个只读对象集合，弹性指spark可以通过重新安排计算来自动重建丢失的分区。在spark程序中，一般加载一个或多个RDD作为输入，通过一系列转换得到一组目标RDD，然后将这些RDD计算出结果或者写入持久存储器。</p>
+          <h2 id="RDD"><a href="#RDD" class="headerlink" title="RDD"></a>RDD</h2><p>RDD，弹性分布式数据集（Resilient Distributed Dataset）是spark的核心概念，它是集群中跨多个机器分区存储的一个只读对象集合，弹性指spark可以通过重新安排计算来自动重建丢失的分区。在spark程序中，一般加载一个或多个RDD作为输入，通过一系列转换得到一组目标RDD，然后将这些RDD计算出结果或者写入持久存储器。</p>
 <p>加载RDD或执行转换并不会立即触发任何数据处理的操作，只是创建一个计算计划。只有对RDD执行某个动作（如foreach）时，才会触发真正的计算。通过rdd的map()方法可以对RDD的每个元素应用某个函数，filter()方法的输入是一个过滤谓词，即返回布尔值的函数。</p>
 <p>RDD 具有以下几个特点：</p>
 <ol>
@@ -992,102 +1092,68 @@
 <li><a href="https://www.jianshu.com/p/4b7d07e754fa" target="_blank" rel="noopener">Spark 默认分区数</a></li>
 </ol>
 
-          
-        
       
     </div>
 
     
     
     
-
-    <footer class="post-footer">
+      <footer class="post-footer">
         <div class="post-eof"></div>
-    </footer>
-  </div>
-  
-  
-  
+      </footer>
   </article>
+  
+  
+  
 
-    
       
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
   
   
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://jeffzzf.github.io/2019/08/03/Linux 文件/">
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://jeffzzf.github.io/2019/08/03/Linux%20%E6%96%87%E4%BB%B6/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
       <meta itemprop="name" content="Jeffzzf">
       <meta itemprop="description" content="Do one thing at a time, and do well.">
-      <meta itemprop="image" content="/images/avatar.gif">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
       <meta itemprop="name" content="Noob">
     </span>
       <header class="post-header">
-
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2019/08/03/Linux 文件/" class="post-title-link" itemprop="url">Linux 文件</a>
-              
-            
-          </h1>
-        
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/08/03/Linux%20%E6%96%87%E4%BB%B6/" class="post-title-link" itemprop="url">Linux 文件</a>
+        </h2>
 
         <div class="post-meta">
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
+                <i class="far fa-calendar"></i>
               </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
+              <span class="post-meta-item-text">发表于</span>
 
               <time title="创建时间：2019-08-03 17:11:56" itemprop="dateCreated datePublished" datetime="2019-08-03T17:11:56+08:00">2019-08-03</time>
             </span>
-          
-            
-
-            
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
+                  <i class="far fa-calendar-check"></i>
                 </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
+                <span class="post-meta-item-text">更新于</span>
                 <time title="修改时间：2019-08-28 20:23:34" itemprop="dateModified" datetime="2019-08-28T20:23:34+08:00">2019-08-28</time>
               </span>
-            
-          
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
+                <i class="far fa-folder"></i>
               </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Linux/" itemprop="url" rel="index"><span itemprop="name">Linux</span></a></span>
-
-                
-                
-              
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Linux/" itemprop="url" rel="index"><span itemprop="name">Linux</span></a>
+                </span>
             </span>
-          
 
-          <br>
+          
 
         </div>
       </header>
@@ -1098,105 +1164,70 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          
-            <p>2. </p>
+          <p>2. </p>
 
-          
-        
       
     </div>
 
     
     
     
-
-    <footer class="post-footer">
+      <footer class="post-footer">
         <div class="post-eof"></div>
-    </footer>
-  </div>
-  
-  
-  
+      </footer>
   </article>
+  
+  
+  
 
-    
       
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
   
   
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://jeffzzf.github.io/2019/08/03/Linux IO/">
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://jeffzzf.github.io/2019/08/03/Linux%20IO/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
       <meta itemprop="name" content="Jeffzzf">
       <meta itemprop="description" content="Do one thing at a time, and do well.">
-      <meta itemprop="image" content="/images/avatar.gif">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
       <meta itemprop="name" content="Noob">
     </span>
       <header class="post-header">
-
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2019/08/03/Linux IO/" class="post-title-link" itemprop="url">Linux IO</a>
-              
-            
-          </h1>
-        
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/08/03/Linux%20IO/" class="post-title-link" itemprop="url">Linux IO</a>
+        </h2>
 
         <div class="post-meta">
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
+                <i class="far fa-calendar"></i>
               </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
+              <span class="post-meta-item-text">发表于</span>
 
               <time title="创建时间：2019-08-03 14:11:56" itemprop="dateCreated datePublished" datetime="2019-08-03T14:11:56+08:00">2019-08-03</time>
             </span>
-          
-            
-
-            
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
+                  <i class="far fa-calendar-check"></i>
                 </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
+                <span class="post-meta-item-text">更新于</span>
                 <time title="修改时间：2019-08-28 20:23:34" itemprop="dateModified" datetime="2019-08-28T20:23:34+08:00">2019-08-28</time>
               </span>
-            
-          
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
+                <i class="far fa-folder"></i>
               </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Linux/" itemprop="url" rel="index"><span itemprop="name">Linux</span></a></span>
-
-                
-                
-              
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Linux/" itemprop="url" rel="index"><span itemprop="name">Linux</span></a>
+                </span>
             </span>
-          
 
-          <br>
+          
 
         </div>
       </header>
@@ -1207,8 +1238,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          
-            <p>Linux内核把所有管理的资源，如网卡、磁盘驱动器、打印机、输入输出设备、普通文件或目录都当作一个文件。对文件的读写操作会调用内核提供的命令，返回一个文件描述符。文件描述符是一个非负整数索引值，指向内核为每个进程所维护的该进程打开的文件记录表，表中的项是一个结构体（包含文件路径、数据区等属性）。套接字是通信端点的抽象，套接字描述符是一种用来访问套接字的文件描述符，很多处理文件描述符的函数（如read和write）都可以用来处理套接字描述符。</p>
+          <p>Linux内核把所有管理的资源，如网卡、磁盘驱动器、打印机、输入输出设备、普通文件或目录都当作一个文件。对文件的读写操作会调用内核提供的命令，返回一个文件描述符。文件描述符是一个非负整数索引值，指向内核为每个进程所维护的该进程打开的文件记录表，表中的项是一个结构体（包含文件路径、数据区等属性）。套接字是通信端点的抽象，套接字描述符是一种用来访问套接字的文件描述符，很多处理文件描述符的函数（如read和write）都可以用来处理套接字描述符。</p>
 <p>一次IO过程可以分为两个阶段：</p>
 <ol>
 <li>等待数据准备（数据先读到内核的缓冲区）</li>
@@ -1259,305 +1289,20 @@
 <li><a href="https://www.twblogs.net/a/5b7c13362b71770a43d930c4/zh-cn" target="_blank" rel="noopener">Socket通信网络模型 ——Epoll、IOCP模型详解以及与select、kqueue等常见模型的区别特点</a></li>
 </ol>
 
-          
-        
       
     </div>
 
     
     
     
-
-    <footer class="post-footer">
+      <footer class="post-footer">
         <div class="post-eof"></div>
-    </footer>
-  </div>
-  
-  
-  
+      </footer>
   </article>
-
-    
-      
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
   
   
   
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://jeffzzf.github.io/2019/07/29/Java IO/">
 
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Jeffzzf">
-      <meta itemprop="description" content="Do one thing at a time, and do well.">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Noob">
-    </span>
-      <header class="post-header">
-
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2019/07/29/Java IO/" class="post-title-link" itemprop="url">Java IO</a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2019-07-29 15:42:39" itemprop="dateCreated datePublished" datetime="2019-07-29T15:42:39+08:00">2019-07-29</time>
-            </span>
-          
-            
-
-            
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
-                <time title="修改时间：2019-12-23 11:12:09" itemprop="dateModified" datetime="2019-12-23T11:12:09+08:00">2019-12-23</time>
-              </span>
-            
-          
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Java/" itemprop="url" rel="index"><span itemprop="name">Java</span></a></span>
-
-                
-                
-                  ，
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Java/Basic/" itemprop="url" rel="index"><span itemprop="name">Basic</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          <br>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          
-            <h3 id="同步与异步"><a href="#同步与异步" class="headerlink" title="同步与异步"></a>同步与异步</h3><p>同步是发起一个调用后，被调用者未处理完请求前，调用不返回，调用者不继续执行</p>
-<p>异步是发起一个调用后，可以马上收到被调用者已接到请求的回应，但并没有立即返回结果。调用者可以继续执行其它操作，被调用者通过事件、回调等机制通知调用者返回结果</p>
-<h3 id="阻塞与非阻塞"><a href="#阻塞与非阻塞" class="headerlink" title="阻塞与非阻塞"></a>阻塞与非阻塞</h3><p>操作系统I/O分为两个阶段：等待就绪和操作。读函数分为等待系统可读和真正的读；写函数分为等待网卡可写和真正的写。等待就绪的阻塞不使用 CPU，是在“空等”；真正的读写操作的阻塞是在使用 CPU，真正在“干活”，这个memory copy 的过程很快（如宽带 1GB/s）。</p>
-<p>传统的BIO里面socket.read()，如果TCP RecvBuffer里没有数据，函数会一直阻塞，直到收到数据，返回读到的数据。</p>
-<p>对于NIO，如果TCP RecvBuffer有数据，就把数据从网卡读到内存，并且返回给用户；反之则直接返回0，永远不会阻塞。</p>
-<p>最新的AIO(Async I/O)里面会更进一步：不但等待就绪是非阻塞的，就连数据从网卡到内存的过程也是异步的。</p>
-<p>换句话说，BIO里用户最关心“我要读”，NIO里用户最关心”我可以读了”，在AIO模型里用户更需要关注的是“读完了”。</p>
-<p>NIO一个重要的特点是：socket主要的读、写、注册和接收函数，在等待就绪阶段都是非阻塞的，真正的I/O操作是同步阻塞的（消耗CPU但性能非常高）。</p>
-<h2 id="BIO（Blocking-I-O）"><a href="#BIO（Blocking-I-O）" class="headerlink" title="BIO（Blocking I/O）"></a>BIO（Blocking I/O）</h2><p>同步阻塞IO，数据的读入和写出阻塞在一个线程内。服务端一般通过在while(true)循环中调用accept()方法等待接受客户端连接请求，一旦接收到一个连接请求，就可以建立通信套接字并在套接字上进行读写操作，单线程情况下不能再接收其它请求，只能等当前连接的客户端操作执行完，不过可以通过多线程来支持多个客户端的连接。当连接数达到十万甚至百万是，BIO模型无能为力，需要更加高效的IO模型。</p>
-<h2 id="NIO（Non-BlockingIO）"><a href="#NIO（Non-BlockingIO）" class="headerlink" title="NIO（Non-BlockingIO）"></a>NIO（Non-BlockingIO）</h2><p>面向缓冲的，基于通道IO的同步非阻塞IO模型，提供了SocketChannel和ServerSocketChannel两种套接字分别与BIO模型的Socket和ServerSocket对应。这两种套接字都支持阻塞和非阻塞两种模式。对于低负载、低并发的应用，可以使用同步阻塞IO来提升开发效率并提高可维护性；对于高负载、高并发的应用，应采用NIO非阻塞模式开发。</p>
-<p>BIO是面向流（Stream oriented），而NIO是面向缓冲区的（Buffer oriented）。Stream中以Buffer开头的扩展类，只是流的包装类，要从流读到缓冲区，而NIO是直接读到缓冲区进行读写操作。最常用的缓冲区是ByteBuffer，它提供了一组用于操作byte数组的功能。每一种Java基本类型（除了Boolean）都对应一种缓冲区。</p>
-<p>NIO包含Channel（通道）、Buffer（缓冲区）和Selector（选择器）这三个核心组件，通道只和Buffer交互，因为Buffer，通道可以异步进行读写。选择器用于使用单个线程处理多个通道，减少了线程之间切换带来的开销，可以提高系统效率。</p>
-<p>NIO 主要事件有：读就绪、写就绪、有新连接到来</p>
-<p>NIO 有原来的阻塞读写变成单线程轮询写事件，除了事件的轮询是阻塞的（没有可干的事情必须阻塞），其它 I/O 操作都是纯 CPU 操作，没有必要开启多线程。并且由于多线程处理阻塞 IO （BIO）导致的线程切换问题也得到了解决，为处理海量连接提供了可能。</p>
-<p>select是阻塞的，无论是通过操作系统的通知（epoll）还是不停的轮询(select，poll)，这个函数是阻塞的。所以你可以放心大胆地在一个while(true)里面调用这个函数而不用担心CPU空转</p>
-<h2 id="AIO（Asynchronous-IO）"><a href="#AIO（Asynchronous-IO）" class="headerlink" title="AIO（Asynchronous IO）"></a>AIO（Asynchronous IO）</h2><p>即NIO 2，java 7开始引进，是NIO的改进版，是异步非阻塞IO模型。异步IO基于事件和回调机制实现，应用执行IO操作后直接返回，不会阻塞。当后台处理完成后，操作系统会通知相应线程进行后续操作。</p>
-<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><ol>
-<li><a href="https://tech.meituan.com/2016/11/04/nio.html" target="_blank" rel="noopener">Java NIO浅析</a></li>
-<li><a href="http://www.jasongj.com/java/nio_reactor/" target="_blank" rel="noopener">Java进阶（五）Java I/O模型从BIO到NIO和Reactor模式</a></li>
-</ol>
-<p><a href="https://zhuanlan.zhihu.com/p/23488863" target="_blank" rel="noopener">https://zhuanlan.zhihu.com/p/23488863</a></p>
-
-          
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-    
-      
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://jeffzzf.github.io/2019/07/22/分布式系统理论/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Jeffzzf">
-      <meta itemprop="description" content="Do one thing at a time, and do well.">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Noob">
-    </span>
-      <header class="post-header">
-
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2019/07/22/分布式系统理论/" class="post-title-link" itemprop="url">分布式系统理论</a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2019-07-22 22:17:55" itemprop="dateCreated datePublished" datetime="2019-07-22T22:17:55+08:00">2019-07-22</time>
-            </span>
-          
-            
-
-            
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
-                <time title="修改时间：2019-08-28 20:43:14" itemprop="dateModified" datetime="2019-08-28T20:43:14+08:00">2019-08-28</time>
-              </span>
-            
-          
-
-          <br>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          
-            <ul>
-<li>分布式系统</li>
-<li>理论</li>
-</ul>
-<hr>
-<h2 id="从ACID到CAP-BASE"><a href="#从ACID到CAP-BASE" class="headerlink" title="从ACID到CAP/BASE"></a>从ACID到CAP/BASE</h2><p>事务（Transaction）是由一系列对系统中数据进行访问和更新的操作所组成的一个程序执行逻辑单元（Unit），狭义上的事务指数据库事务。事务需要满足ACID特性，即原子性（Atomicity）、一致性（Consistency）、隔离性（Isolation）和持久性（Durability）。</p>
-<p>分布式事务可以看作由多个分布式操作组成的序列，每个操作称为子事务。在高并发的互联网应用中，如果实现要实现严格满足ACID特性的分布式事务，会出现可用性与一致性之间的冲突。</p>
-<h3 id="CAP理论"><a href="#CAP理论" class="headerlink" title="CAP理论"></a>CAP理论</h3><p>一个分布式系统不可能同时满足一致性（Consistency）、可用性（Availability）和分区容错性（Partitiontolerance）这三个特性，最多只能同时满足其中的两项。由于分区容错性是分布式系统最基本的需求，所以往往需要把精力花在如何根据业务特点在一致性和可用性之间需求平衡。</p>
-<h4 id="一致性"><a href="#一致性" class="headerlink" title="一致性"></a>一致性</h4><p>分布式环境中，一致性是指数据在多个副本之间是否能保持一致的特性。如果能够做到针对一个数据项的更新操作执行成功后，所有的用户都可以读取到最新的值，即可认为该系统具有强一致性。</p>
-<h4 id="可用性"><a href="#可用性" class="headerlink" title="可用性"></a>可用性</h4><p>可用性是指系统提供的服务必须一致处于可用的状态，对于用户的每一次请求都能在响应时间内返回结果。</p>
-<h4 id="分区容错性"><a href="#分区容错性" class="headerlink" title="分区容错性"></a>分区容错性</h4><p>分布式系统在遇到任何网络分区故障时，仍然需要保证对外提供满足一致性和可用性的服务，除非整个网络环境都发生故障。</p>
-<h3 id="BASE理论"><a href="#BASE理论" class="headerlink" title="BASE理论"></a>BASE理论</h3><p>BASE是Basically Available（基本可用）、Soft state（软状态）和Eventually consistent（最终一致性）三个短语的简写。BASE是对CAP中一致性和可用性权衡的结果，来源于对大规模互联网系统分布式实践的总结，是基于CAP定理逐步演化而来的，其核心思想是即使无法做到强一致性（Strong consistency），但每个应用可以根据自身业务特点，采用适当的方式来使系统达到最终一致性（Eventual consistency）。</p>
-<h4 id="基本可用"><a href="#基本可用" class="headerlink" title="基本可用"></a>基本可用</h4><p>基本可用是指分布式系统在出现不可预知故障时，允许损失部分可用性。如响应时间增加、不重要功能降级等。</p>
-<h4 id="软状态"><a href="#软状态" class="headerlink" title="软状态"></a>软状态</h4><p>和硬状态相比，软状态允许系统中的数据存在中间状态，并认为该中间状态的存在不会影响系统的整体可用性，即允许系统在不同节点的数据副本之间进行数据同步过程存在延时</p>
-<h4 id="最终一致性"><a href="#最终一致性" class="headerlink" title="最终一致性"></a>最终一致性</h4><p>最终一致性是系统所有数据副本在经过一段时间的同步后，最终能够达到一个一致的状态，而不需要实时保证系统数据的一致性。工程实践中，最终一致性存在以下五类：</p>
-<h5 id="因果一致性（Causal-consistency）"><a href="#因果一致性（Causal-consistency）" class="headerlink" title="因果一致性（Causal consistency）"></a>因果一致性（Causal consistency）</h5><p>如果进程A在更新完某个数据项后通知了进程B，那么进程B之后对该数据项的访问都应该能够获取的进程A更新后的最新值，并且如果进程B要对该数据进行更新，必须基于进程A更新后的最新值，即不能发生丢失更新的情况。与此同时，与进程A无因果关系的进程C的数据访问则没有这样的限制。</p>
-<h5 id="读己之所写（Read-your-writes）"><a href="#读己之所写（Read-your-writes）" class="headerlink" title="读己之所写（Read your writes）"></a>读己之所写（Read your writes）</h5><p>进程A更新一个数据项后，它自己总是能够访问到更新过的最新值，而不会看到旧值，可以看作一种特殊的因果一致性</p>
-<h5 id="会话一致性（Session-consistency）"><a href="#会话一致性（Session-consistency）" class="headerlink" title="会话一致性（Session consistency）"></a>会话一致性（Session consistency）</h5><p>系统保证在同一个会话中实现读己之所写的一致性，用户端能够在同一个会话中始终读取到数据项的最新值</p>
-<h5 id="单调读一致性（Monotonic-read-consistency）"><a href="#单调读一致性（Monotonic-read-consistency）" class="headerlink" title="单调读一致性（Monotonic read consistency）"></a>单调读一致性（Monotonic read consistency）</h5><p>如果一个进程从系统中读取一个数据项的某个值后，系统对该进程后续的任何数据访问都不应该返回更旧的值</p>
-<h5 id="单调写一致性（Monotonic-write-consistency）"><a href="#单调写一致性（Monotonic-write-consistency）" class="headerlink" title="单调写一致性（Monotonic write consistency）"></a>单调写一致性（Monotonic write consistency）</h5><p>保证来自同一个进程的写操作被顺序地执行</p>
-<p>BASE理论面向的是大型高可用高扩展的分布式系统，不同于ACID的强一致性模型，它采用牺牲强一致性来获得可用性，并允许数据在一段时间内不一致，但最终能达到一致状态。在实际分布式场景中，不同业务单元和组件对数据一致性的要求是不同的，ACID特性与BASE理论往往会结合在一起使用。</p>
-<h2 id="Paxos"><a href="#Paxos" class="headerlink" title="Paxos"></a>Paxos</h2><p>用于达成共识性问题，即对多个节点产生的值，该算法能保证只选出唯一一个值。</p>
-<p>主要有三类节点：</p>
-<ul>
-<li>提议者（Proposer）：提议一个值；</li>
-<li>接受者（Acceptor）：对每个提议进行投票；</li>
-<li>告知者（Learner）：被告知投票的结果，不参与投票过程。</li>
-</ul>
-<p>算法过程：</p>
-<ol>
-<li><p>prepare阶段：</p>
-<ol>
-<li>proposer选择一个提案编号n并将prepare请求发送给acceptors中的一个多数派；</li>
-<li>acceptor收到prepare消息后，如果提案的编号大于它已经回复的所有prepare消息(回复消息表示接受accept)，则acceptor将自己上次接受的提案回复给proposer，并承诺不再回复小于n的提案；</li>
-</ol>
-</li>
-<li><p>批准阶段：</p>
-<ol>
-<li>当一个proposer收到了多数acceptors对prepare的回复后，就进入批准阶段。它要向回复prepare请求的acceptors发送accept请求，包括编号n和根据P2c决定的value（如果根据P2c没有已经接受的value，那么它可以自由决定value）。</li>
-<li>在不违背自己向其他proposer的承诺的前提下，acceptor收到accept请求后即批准这个请求。</li>
-</ol>
-</li>
-<li><p>发布阶段</p>
-<p>acceptors需要将accept消息发送给learners的一个子集，然后由这些learners去通知所有learners</p>
-</li>
-</ol>
-<h2 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h2><ol>
-<li><a href="https://zh.wikipedia.org/wiki/Paxos%E7%AE%97%E6%B3%95" target="_blank" rel="noopener">Paxos算法</a></li>
-<li><a href="https://cyc2018.github.io/CS-Notes/#/notes/%E5%88%86%E5%B8%83%E5%BC%8F?id=_2-accept-%E9%98%B6%E6%AE%B5" target="_blank" rel="noopener">Cs notes</a></li>
-</ol>
-
-          
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-    
-  </section>
 
   
   <nav class="pagination">
@@ -1565,409 +1310,89 @@
   </nav>
 
 
+
           </div>
           
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
 
         </div>
           
   
-  <div class="sidebar-toggle">
-    <div class="sidebar-toggle-line-wrap">
-      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
-      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
-      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
-    </div>
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
   </div>
 
-  <aside id="sidebar" class="sidebar">
+  <aside class="sidebar">
     <div class="sidebar-inner">
 
-      <div class="site-overview-wrap sidebar-panel sidebar-panel-active">
-        <div class="site-overview">
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
 
-          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
   <p class="site-author-name" itemprop="name">Jeffzzf</p>
-  <div class="site-description motion-element" itemprop="description">Do one thing at a time, and do well.</div>
+  <div class="site-description" itemprop="description">Do one thing at a time, and do well.</div>
 </div>
-  <nav class="site-state motion-element">
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
       <div class="site-state-item site-state-posts">
-        
           <a href="/archives/">
         
-          <span class="site-state-item-count">121</span>
+          <span class="site-state-item-count">123</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
-    
-      
-      
       <div class="site-state-item site-state-categories">
-        
-          
             <a href="/categories/">
           
-        
-        
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
         <span class="site-state-item-count">60</span>
-        <span class="site-state-item-name">分类</span>
-        </a>
+        <span class="site-state-item-name">分类</span></a>
       </div>
-    
-      
-      
       <div class="site-state-item site-state-tags">
-        
-          
             <a href="/tags/">
           
-        
-        
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-        <span class="site-state-item-count">107</span>
-        <span class="site-state-item-name">标签</span>
-        </a>
+        <span class="site-state-item-count">108</span>
+        <span class="site-state-item-name">标签</span></a>
       </div>
-    
   </nav>
+</div>
 
 
 
-        </div>
       </div>
 
     </div>
@@ -1978,17 +1403,23 @@
       </div>
     </main>
 
-    <footer id="footer" class="footer">
+    <footer class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
-  <span class="with-love" id="animate">
-    <i class="fa fa-user"></i>
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
   </span>
   <span class="author" itemprop="copyrightHolder">Jeffzzf</span>
 </div>
-  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.9.0</div>
-  <span class="post-meta-divider">|</span>
-  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> v7.3.0</div>
+  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
 
         
 
@@ -1999,117 +1430,47 @@
 
 
 
-        
       </div>
     </footer>
-      <div class="back-to-top">
-        <i class="fa fa-arrow-up"></i>
-      </div>
-
-    
-
   </div>
 
   
-  <script src="/lib/jquery/index.js?v=3.4.1"></script>
-  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
-  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
 
-  <script src="/js/utils.js?v=7.3.0"></script>
-  <script src="/js/motion.js?v=7.3.0"></script>
+<script src="/js/utils.js"></script>
 
-  
-  <script src="/js/schemes/muse.js?v=7.3.0"></script>
+<script src="/js/motion.js"></script>
 
 
-  
+<script src="/js/schemes/muse.js"></script>
 
-  <script src="/js/next-boot.js?v=7.3.0"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
-<script type="text/x-mathjax-config">
-  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
-</script>
 
-<script type="text/x-mathjax-config">
-  MathJax.Hub.Queue(function() {
-    var all = MathJax.Hub.getAllJax(), i;
-    for(i=0; i < all.length; i += 1) {
-      all[i].SourceElement().parentNode.className += ' has-jax';
-    }
-  });
-</script>
+<script src="/js/next-boot.js"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
 
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js">
-</script>
-<!-- End: Injected MathJax -->
-<!-- hexo-inject:end -->
 
-  
-
-  
-
-  
 
 
   
+
+
+
+
+
+
+
+
+
+
 
 
 
 
 
   
-    
-      
-    
-      
-    
-      
-    
-      
-    
-      
-    
-      
-    
-      
-    
-      
-    
-      
-    
-      
-    
+
   
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 </body>
 </html>
