@@ -1,0 +1,858 @@
+<!DOCTYPE html>
+
+
+
+
+
+<html class="theme-next muse use-motion" lang="zh-CN">
+<head>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8">
+<meta name="generator" content="Hexo 3.9.0">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.3.0">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.3.0">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.3.0">
+  <link rel="mask-icon" href="/images/logo.svg?v=7.3.0" color="#222">
+
+<link rel="stylesheet" href="/css/main.css?v=7.3.0">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '7.3.0',
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    copycode: {"enable":false,"show_result":false,"style":null},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    search: {
+      root: '/',
+      path: ''
+    },
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    translation: {
+      copy_button: '复制',
+      copy_success: '复制成功',
+      copy_failure: '复制失败'
+    }
+  };
+</script>
+
+  <meta name="description" content="可能是因为自己心理经常经历痛苦、挣扎、抑郁，我一直对心理学保持关注。还记得大一那会儿，我一直担心自己得了抑郁症，从百度百科上面吧抑郁症词条以及和它相关的所有内容都打印出来，二三十页的A4打印纸打印了好几本。人处于痛苦中时，会本能地寻求解脱之道，心理学从那时起就是我的解药。一开始我只会去了解与自身密切相关的心理学知识，例如抑郁症的起因、症状、治疗方法等。但是慢慢的，我发现心理这件事越来越有意思了。人">
+<meta name="keywords" content="心理">
+<meta property="og:type" content="article">
+<meta property="og:title" content="我为什么要写心理相关的文章？">
+<meta property="og:url" content="http://jeffzzf.github.io/2017/05/05/我为什么要写心理相关的文章？/index.html">
+<meta property="og:site_name" content="Noob">
+<meta property="og:description" content="可能是因为自己心理经常经历痛苦、挣扎、抑郁，我一直对心理学保持关注。还记得大一那会儿，我一直担心自己得了抑郁症，从百度百科上面吧抑郁症词条以及和它相关的所有内容都打印出来，二三十页的A4打印纸打印了好几本。人处于痛苦中时，会本能地寻求解脱之道，心理学从那时起就是我的解药。一开始我只会去了解与自身密切相关的心理学知识，例如抑郁症的起因、症状、治疗方法等。但是慢慢的，我发现心理这件事越来越有意思了。人">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://qiniudns.zhhju.com/90a98144c7ba399f19f5aece2838327c_b.png">
+<meta property="og:updated_time" content="2019-08-28T12:23:34.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="我为什么要写心理相关的文章？">
+<meta name="twitter:description" content="可能是因为自己心理经常经历痛苦、挣扎、抑郁，我一直对心理学保持关注。还记得大一那会儿，我一直担心自己得了抑郁症，从百度百科上面吧抑郁症词条以及和它相关的所有内容都打印出来，二三十页的A4打印纸打印了好几本。人处于痛苦中时，会本能地寻求解脱之道，心理学从那时起就是我的解药。一开始我只会去了解与自身密切相关的心理学知识，例如抑郁症的起因、症状、治疗方法等。但是慢慢的，我发现心理这件事越来越有意思了。人">
+<meta name="twitter:image" content="http://qiniudns.zhhju.com/90a98144c7ba399f19f5aece2838327c_b.png">
+  <link rel="canonical" href="http://jeffzzf.github.io/2017/05/05/我为什么要写心理相关的文章？/">
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>我为什么要写心理相关的文章？ | Noob</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Noob</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+    <ul id="menu" class="menu">
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+      
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+      
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+
+  </li>
+    </ul>
+    
+
+</nav>
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://jeffzzf.github.io/2017/05/05/我为什么要写心理相关的文章？/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Jeffzzf">
+      <meta itemprop="description" content="Do one thing at a time, and do well.">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Noob">
+    </span>
+      <header class="post-header">
+
+        
+          <h1 class="post-title" itemprop="name headline">我为什么要写心理相关的文章？
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2017-05-05 15:25:11" itemprop="dateCreated datePublished" datetime="2017-05-05T15:25:11+08:00">2017-05-05</time>
+            </span>
+          
+            
+
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2019-08-28 20:23:34" itemprop="dateModified" datetime="2019-08-28T20:23:34+08:00">2019-08-28</time>
+              </span>
+            
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/心理/" itemprop="url" rel="index"><span itemprop="name">心理</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          <br>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>可能是因为自己心理经常经历痛苦、挣扎、抑郁，我一直对心理学保持关注。还记得大一那会儿，我一直担心自己得了抑郁症，从百度百科上面吧抑郁症词条以及和它相关的所有内容都打印出来，二三十页的A4打印纸打印了好几本。人处于痛苦中时，会本能地寻求解脱之道，心理学从那时起就是我的解药。一开始我只会去了解与自身密切相关的心理学知识，例如抑郁症的起因、症状、治疗方法等。但是慢慢的，我发现心理这件事越来越有意思了。人们的一言一行，一举一动，或喜极而泣，或怒不可遏……都是先在内心产生一定的化学反应，然后才有意或无意地表达出来的。至于一个人给其他人留下的或讨人欢喜或令人憎恶的深刻印象，则是长久以来某种心理活动频繁发生后形成的固化模式的自然表现，很多模式甚至可以追溯到童年和婴儿时期。</p>
+<p>后来，我陆陆续续地从大学的心理学选修课、心理学讲座、TED等渠道零星地获取心理学的知识。先后读了《苏菲的世界》、《自卑与超越》、《走出抑郁症-一个抑郁症患者的成功自救》、《当下的力量》、《人性的优点》、《人性的弱点》。虽然不能算专业系统地学习，不过也从对心理学一无所知到现在乐在其中，从把心理学当做救命稻草到现在把心理学当做一种兴趣，在好奇心、求知欲的驱动下去去探索心理这个丰富多彩的世界，如果在旅程中刚好能解决自己的困惑和问题，就再好不过了。</p>
+<p>机缘巧合，我在13年左右发现<a href="http://fm.xinli001.com/" target="_blank" rel="noopener">心理FM</a>，这个平台上有很多对心理感兴趣的小伙伴。好听的主播们会不定期地发布一些心理相关的节目，有名家名篇、有美文共赏、有答疑解惑。每当我情绪低落、痛苦迷茫，我都会打开心理FM。听到“世界和我爱着你”悲伤就治愈了一半。</p>
+<p>回顾完我和心理学、心理FM的渊源，并没有正面回答为什么我想写一些心理相关的文章。</p>
+<p>因为最近我越发觉得，“眼过千遍不如手过一遍”是非常有道理的。我是一个思维很发散的人，有时候甚至任由思绪信马由缰，脑海里经常有千头万绪、万马奔腾。有时候冒出一个Idea觉得前途远大，“卧槽，太牛X了，我怎么这么聪明”，有时候又觉得一件事困难重重，万难实现。但是如果减慢节奏，把大脑里的想法理一理，与现实结合起来。在纸上写写画画，或者用xmind画一幅脑图，就会发现大脑中的东西夹杂了太多个人的主观情绪和意愿。当现实的光线照进来，原来的东西会面目全非。</p>
+<p>脱离现实太远的东西经常是病态的，写下来、画出来是想法联系现实的一种非常有效的方法。能在现实场中理清楚、说明白的就一定不会太过于臆想。</p>
+<p>还有一种情况，在看书、看文章的时候，经常会觉得某个观点或某句话很有启发性，但是如果不记录下来，反复揣摩，并应用到生活和工作中，这些好东西也就仅限于给人带来启发性的感觉而已，并没有变成自己的东西。有一张图说明了人通过不同的渠道处理信息能够留存多少。<br><img src="http://qiniudns.zhhju.com/90a98144c7ba399f19f5aece2838327c_b.png" alt="信息留存图"></p>
+<p>慢一点，把接触到的有触动、有启发的东西梳理一下，记录下来，并在实际生活工作中实践才能真正变成自己的东西。研究生毕业找工作的时候，身边很多人（包括我）看完《Thinking in Java》、《深入理解java虚拟机》、《Java并发编程实践》就以为掌握了其中的知识点，但在面试的时候面试官随便抽一个点出来问，都答不上来、讲不清楚。感觉自己看到过，但也只是看过，并没有真正吸收其中的精华，变成自己的东西。我们实验室一个小伙伴收割了无数Offer，几乎是手到擒来。后来告诉我诀窍：他看《Java并发编程实战》的时候，每看完一个知识点就就用自己的话重新表述一遍写下来。面试官问到的时候他因为自己揣摩过，能用自己的话把同样的意思表达清楚，自然就对答如流了。</p>
+<p>总而言之，写心理相关的文章，首先是因为我确实认为心理学有意思、有价值；其次，通过写文章减慢大脑的运行节奏，让大脑中的想法与现实结合起来，不至于变成臆想；最后，只有能把想法表达出来、有条理地将给其他人听才算真正理解了，只有在现实中实践了才能真正发挥作用。</p>
+<p>写这些文章（包括其它技术文章）的目的只是为了帮助自己更好地把握节奏，更好地理解和实践有价值的东西。可能有些内容只是别人内容的另一种表达甚至是同一种表达（当然我会尽量把参考资料列在文章的结尾），有些内容可能只是我自己的碎碎念。不过这不重要，在写下这些文章的过程中，我已经收获得足够多了。</p>
+<p>##参考文档##<br><a href="https://www.zhihu.com/question/37757196" target="_blank" rel="noopener">工作五年以上的程序员，应该干些什么？</a></p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          
+        
+        <div class="post-tags">
+            <a href="/tags/心理/" rel="tag"># 心理</a>
+          
+        </div>
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+              <a href="/2017/05/05/告别内耗，目标合理，轻松生活/" rel="next" title="告别内耗，目标合理，轻松生活">
+                <i class="fa fa-chevron-left"></i> 告别内耗，目标合理，轻松生活
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+              <a href="/2017/05/24/Linux进程管理/" rel="prev" title="Linux进程管理">
+                Linux进程管理 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+  </div>
+
+
+          </div>
+          
+
+
+        </div>
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      <div class="site-overview-wrap sidebar-panel sidebar-panel-active">
+        <div class="site-overview">
+
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Jeffzzf</p>
+  <div class="site-description motion-element" itemprop="description">Do one thing at a time, and do well.</div>
+</div>
+  <nav class="site-state motion-element">
+      <div class="site-state-item site-state-posts">
+        
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">121</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+    
+      
+      
+      <div class="site-state-item site-state-categories">
+        
+          
+            <a href="/categories/">
+          
+        
+        
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+        <span class="site-state-item-count">60</span>
+        <span class="site-state-item-name">分类</span>
+        </a>
+      </div>
+    
+      
+      
+      <div class="site-state-item site-state-tags">
+        
+          
+            <a href="/tags/">
+          
+        
+        
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+        <span class="site-state-item-count">107</span>
+        <span class="site-state-item-name">标签</span>
+        </a>
+      </div>
+    
+  </nav>
+
+
+
+        </div>
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Jeffzzf</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.9.0</div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> v7.3.0</div>
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+      </div>
+
+    
+
+  </div>
+
+  
+  <script src="/lib/jquery/index.js?v=3.4.1"></script>
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  <script src="/js/utils.js?v=7.3.0"></script>
+  <script src="/js/motion.js?v=7.3.0"></script>
+
+  
+  <script src="/js/schemes/muse.js?v=7.3.0"></script>
+
+
+  
+  <script src="/js/scrollspy.js?v=7.3.0"></script>
+<script src="/js/post-details.js?v=7.3.0"></script>
+
+
+
+  <script src="/js/next-boot.js?v=7.3.0"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
+
+  
+
+  
+
+  
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

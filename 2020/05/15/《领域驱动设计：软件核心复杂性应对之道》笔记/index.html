@@ -1,0 +1,884 @@
+<!DOCTYPE html>
+
+
+
+
+
+<html class="theme-next muse use-motion" lang="zh-CN">
+<head>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8">
+<meta name="generator" content="Hexo 3.9.0">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.3.0">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.3.0">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.3.0">
+  <link rel="mask-icon" href="/images/logo.svg?v=7.3.0" color="#222">
+
+<link rel="stylesheet" href="/css/main.css?v=7.3.0">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '7.3.0',
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    copycode: {"enable":false,"show_result":false,"style":null},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    search: {
+      root: '/',
+      path: ''
+    },
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    translation: {
+      copy_button: '复制',
+      copy_success: '复制成功',
+      copy_failure: '复制失败'
+    }
+  };
+</script>
+
+  <meta name="description" content="领域驱动设计应对复杂问题的思想可以归类为：分治、抽象和知识。 分治： 把问题空间分割为规模更小且易于处理的若干子问题。分割后的问题需要足够小，而且具有边界。 抽象：对业务进行高度的归纳概括，对具体场景总结提炼，提取出关键的特征。 知识： 模型是对知识的提炼与转换，领域驱动中设计的模型本身是具备业务含义的。 通用语言通用语言是团队，包括产品、开发、测试共享的语言。由于通用语言最初来自业务方或者产品，">
+<meta property="og:type" content="article">
+<meta property="og:title" content="《领域驱动设计：软件核心复杂性应对之道》笔记">
+<meta property="og:url" content="http://jeffzzf.github.io/2020/05/15/《领域驱动设计：软件核心复杂性应对之道》笔记/index.html">
+<meta property="og:site_name" content="Noob">
+<meta property="og:description" content="领域驱动设计应对复杂问题的思想可以归类为：分治、抽象和知识。 分治： 把问题空间分割为规模更小且易于处理的若干子问题。分割后的问题需要足够小，而且具有边界。 抽象：对业务进行高度的归纳概括，对具体场景总结提炼，提取出关键的特征。 知识： 模型是对知识的提炼与转换，领域驱动中设计的模型本身是具备业务含义的。 通用语言通用语言是团队，包括产品、开发、测试共享的语言。由于通用语言最初来自业务方或者产品，">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://jeffzzf.github.io/2020/05/15/images/image-20200515131530306.png">
+<meta property="og:updated_time" content="2020-05-16T09:44:27.674Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="《领域驱动设计：软件核心复杂性应对之道》笔记">
+<meta name="twitter:description" content="领域驱动设计应对复杂问题的思想可以归类为：分治、抽象和知识。 分治： 把问题空间分割为规模更小且易于处理的若干子问题。分割后的问题需要足够小，而且具有边界。 抽象：对业务进行高度的归纳概括，对具体场景总结提炼，提取出关键的特征。 知识： 模型是对知识的提炼与转换，领域驱动中设计的模型本身是具备业务含义的。 通用语言通用语言是团队，包括产品、开发、测试共享的语言。由于通用语言最初来自业务方或者产品，">
+<meta name="twitter:image" content="http://jeffzzf.github.io/2020/05/15/images/image-20200515131530306.png">
+  <link rel="canonical" href="http://jeffzzf.github.io/2020/05/15/《领域驱动设计：软件核心复杂性应对之道》笔记/">
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>《领域驱动设计：软件核心复杂性应对之道》笔记 | Noob</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Noob</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+    <ul id="menu" class="menu">
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+      
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+      
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+
+  </li>
+    </ul>
+    
+
+</nav>
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://jeffzzf.github.io/2020/05/15/《领域驱动设计：软件核心复杂性应对之道》笔记/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Jeffzzf">
+      <meta itemprop="description" content="Do one thing at a time, and do well.">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Noob">
+    </span>
+      <header class="post-header">
+
+        
+          <h1 class="post-title" itemprop="name headline">《领域驱动设计：软件核心复杂性应对之道》笔记
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2020-05-15 13:12:00" itemprop="dateCreated datePublished" datetime="2020-05-15T13:12:00+08:00">2020-05-15</time>
+            </span>
+          
+            
+
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2020-05-16 17:44:27" itemprop="dateModified" datetime="2020-05-16T17:44:27+08:00">2020-05-16</time>
+              </span>
+            
+          
+
+          <br>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>领域驱动设计应对复杂问题的思想可以归类为：分治、抽象和知识。</p>
+<p><strong>分治：</strong> 把问题空间分割为规模更小且易于处理的若干子问题。分割后的问题需要足够小，而且具有边界。</p>
+<p><strong>抽象</strong>：对业务进行高度的归纳概括，对具体场景总结提炼，提取出关键的特征。</p>
+<p><strong>知识：</strong> 模型是对知识的提炼与转换，领域驱动中设计的模型本身是具备业务含义的。</p>
+<h3 id="通用语言"><a href="#通用语言" class="headerlink" title="通用语言"></a>通用语言</h3><p>通用语言是团队，包括产品、开发、测试共享的语言。由于通用语言最初来自业务方或者产品，在技术人员评审的过程中，产生分歧是难免的，这需要反复沟通来确认是否达成了共识。通用语言不仅仅是领域驱动设计开发的基础，也是软件开发的基础。通用语言不仅仅是词汇表，它要表达具体的业务场景，以及该场景的意图以及价值。<strong>通用语言形成是开发和产品不断的基于业务的目标和价值来挖掘业务场景，并将其准确表达出来的过程</strong>。</p>
+<h3 id="领域"><a href="#领域" class="headerlink" title="领域"></a>领域</h3><p><strong>领域</strong>具体指一种特定的<strong>范围</strong>或区域。<strong>领域是用来确定范围的，范围即边界</strong>。在研究和解决业务问题时，领域驱动设计会按照一定的规则将业务领域进行细分，当领域细分到一定的程度后，领域驱动设计会将问题范围限定在特定的边界内，在这个边界内建立领域模型，进而用代码实现该领域模型，解决相应的业务问题。一个大的领域可以先划分为子领域，我们把划分出来的多个子领域称为子域，每个子域对应一个更小的问题域或更小的业务范围。领域建模的核心思想就<strong>是将问题域逐步分解</strong>，降低业务理解和系统实现的复杂度。</p>
+<p>通过子域划分，根据不同子域对业务的不同功能属性和重要性可以区分为核心域、支撑域和通用域。对于核心域，是业务成功的主要促成因素；支撑域是相对于通用域来说的，某些领域不能通用而需要定制化，这样的领域被称为支撑域。如果一个领域能够应用于整个业务系统便是通用子域。以打车软件为例，它的核心域应该是连接距离最近的用户和司机，而软件中的地图系统则为通用域，地图系统可以使用腾讯地图提供的开放接口；而对于腾讯地图来说，地图系统则是他们的核心域。</p>
+<p><strong>限界上下文是一个显式的边界，领域模型便存在于这个边界之内</strong>。领域模型把通用语言表达成软件模型。创建边界的原因在于：每一个模型概念，包括它的属性和方法，在边界之内都具有特殊含义，而在另一个边界里面可能表达不同的含义。</p>
+<h3 id="LAYERED-ARCHITECTURE-（分层架构）"><a href="#LAYERED-ARCHITECTURE-（分层架构）" class="headerlink" title="LAYERED ARCHITECTURE （分层架构）"></a>LAYERED ARCHITECTURE （分层架构）</h3><p>给复杂的应用程序划分层次。在每一层内分别进行设计，使其具有内聚性并且只依赖于 它的下层。采用标准的架构模式，只与上层进行松散的耦合。将所有与领域模型相关的代码 放在一个层中，并把它与用户界面层、应用层以及基础设施层的代码分开。领域对象应该将 重点放在如何表达领域模型上，而不需要考虑自己的显示和存储问题，也无需管理应用任务 等内容。这使得模型的含义足够丰富，结构足够清晰，可以捕捉到基本的业务知识，并有效 地使用这些知识。 </p>
+<p>如果一个架构能够把那些与领域相关的代码隔离出来，得到一个内聚的领域 设计，同时又使领域与系统其他部分保持松散耦合 </p>
+<h3 id="ENITY（实体）"><a href="#ENITY（实体）" class="headerlink" title="ENITY（实体）"></a>ENITY（实体）</h3><p>主要由标识定义的对象，具有生命周期，在生命周期中它们的形式和内容可能发生变化，但必须保持一种内在的连续性。为了有效跟踪这些对象，必须定义它们的标识。</p>
+<h3 id="VALUE-OBJECT（值对象）"><a href="#VALUE-OBJECT（值对象）" class="headerlink" title="VALUE OBJECT（值对象）"></a>VALUE OBJECT（值对象）</h3><p>值对象只关心是什么，而不关心它是谁</p>
+<p>在领域驱动建模中，最佳实践便是将业务概念尽量建模为值对象。实体和值对象的划分并不是一成不变的，而应该根据所处的限界上下文来界定，相同一个业务名词，在一个限界上下文中可能是实体，在另外的限界上下文中可能是值对象。设计实体时，应该遵循保持实体专注于身份标识这一设计原则，让实体只承担符合它身份的业务行为，而把内聚性更强的属性分解为单独的值对象。</p>
+<h3 id="SERVICE（服务）"><a href="#SERVICE（服务）" class="headerlink" title="SERVICE（服务）"></a>SERVICE（服务）</h3><p>有一些操作从概念上讲不属于任何对象，与其把它们强制归到哪一类，不如顺其自然地在模型中引入一种新元素 service</p>
+<p>当我们勉强将一个操作放到不符合对象定义的对象中时，这个对象就会产生概 念上的混淆，而且会变得很难理解或重构。复杂的操作很容易把一个简单对象搞乱，使对象的角 色变得模糊。此外，由于这些操作常常会牵扯到很多领域对象——需要协调这些对象以便使它们 工作，而这会产生对所有这些对象的依赖，将那些本来可以单独理解的概念缠杂在一起。 </p>
+<p>SERVICE是作为接口提供的一种操作，它在模型中是独立的，它不像ENTITY和VALUE OBJECT那样具有封装的状态。SERVICE是技术框架中的一种常见模式，但它们也可以在领域层中使用。</p>
+<p>SERVICE往往是以一个活动来命名，而不是以一个ENTITY来命名，也就是 说，它是动词而不是名词。SERVICE也可以有抽象而有意义的定义，只是它使用了一种与对象不 同的定义风格。SERVICE参数和结果应该是领域对象 。</p>
+<p>好的SERVICE有以下3个特征：</p>
+<p>(1) 与领域概念相关的操作不是ENTITY或VALUE OBJECT的一个自然组成部分。</p>
+<p>(2) 接口是根据领域模型的其他元素定义的。</p>
+<p>(3) 操作是无状态的。</p>
+<p>应用层SERVICE和领域层SERVICE可能很难区分 ，如果银行应用程序可以把我们的交易进行转换并导出到一个电子表格文件中，以便 进行分析，那么这个导出操作就是应用层SERVICE。文件格式在银行领域中是没有意义的，它也不涉及业务规则。<br> 账户之间的转账功能属于领域层SERVICE，因为它包含重要的业务规则(如处理相应的借方账户和贷方账户)，而资金转账是一个有意义的银行术语。在这种情况下，SERVICE 自己并不会做太多的事情，而只是要求两个Account对象完成大部分工作。但如果将转账操 作强加在Account对象上会很别扭，因为这个操作涉及两个账户和一些全局规则。</p>
+<p>可以创建一个Funds Transfer(资金转账)对象来表示两个账户，外加一些与转账有关的规则和历史记录。但在银行间的网络中进行转账时，仍然需要使用SERVICE。此外，在大多数开发系统中，在一个领域对象和外部资源之间直接建立一个接口是很别扭的。我们可以利用一个FACADE(外观) 将这样的外部SERVICE包装起来，这个外观可能以模型作为输入，并返回一个 Funds Transfer对象(作为它的结果)。但无论中间涉及什么SERVICE，甚至那些超出我们掌控范围的SERVICE，这些SERVICE都是在履行资金转账的领域职责 。</p>
+<p><img src="../images/image-20200515131530306.png" alt="image-20200515131530306"></p>
+<h3 id="AGGREGATE-聚合"><a href="#AGGREGATE-聚合" class="headerlink" title="AGGREGATE(聚合)"></a>AGGREGATE(聚合)</h3><p>聚合是一组相关对象的集合，每个聚合有一个根（root）和边界（boundary），边界定义了聚合内部有什么，根是聚合所包含的一个特定 ENTITY。</p>
+<p>对聚合来说，外部对象只能引用根，边界内部对象之间可以相互引用。除根之外的其它 ENTITY 都有本地标识，这些标识只在聚合内部才需要加以区别。</p>
+<p>根可以把一个VALUE OBJEC传给另一个对象，而不用关心它发生什么变化。因为它只是一个VALUE，不再与AGGREGATE 有什么关联。</p>
+<p>删除操作必须一次性删除AGGREGATE 之内的所有对象(利用垃圾收集机制，这很容易做到。由于除根以外的其他对象都没有外部引用，因此删除了根以后，其他对象均会被回收)</p>
+<p>聚合根的ID在整个软件系统中全局唯一，而其下的子实体对象的ID只需在单个聚合根下唯一即可</p>
+<h3 id="FACTORY（工厂）"><a href="#FACTORY（工厂）" class="headerlink" title="FACTORY（工厂）"></a>FACTORY（工厂）</h3><p>当创建一个对象或创建整个AGGREGATE时，如果创建工作很复杂，或者暴露了过多的内部结 构，则可以使用FACTORY进行封装。</p>
+<p>应该将创建复杂对象的实例和AGGREGATE的职责转移给单独的对象，这个对象本身可能没有 承担领域模型中的职责，但它仍是领域设计的一部分。提供一个封装所有复杂装配操作的接口， 而且这个接口不需要客户引用要被实例化的对象的具体类。</p>
+<p>不要在构造函数中调用其他类的构造函数。构造函数应该保持绝对简单。复杂的装配，特别是AGGREGATE，需要使用FACTORY。</p>
+<p>REPOSITORY（仓库）</p>
+<p>以通过对象之间的关联来找到对象。但当它处于生命周期的中间时，必须要有一个起 点，以便从这个起点遍历到一个ENTITY或VALUE。</p>
+<p>需要一种有效的方式来获取对已存在的领域对象的引用。如果基础设施提供了这方面的 便利，那么开发人员可能会增加很多可遍历的关联，这会使模型变得非常混乱。另一方面，开发 人员可能使用查询从数据库中提取他们所需的数据，或是直接提取具体的对象，而不是通过 AGGREGATE的根来得到这些对象。这样就导致领域逻辑进入查询和客户代码中，而ENTITY和 VALUE OBJECT则变成单纯的数据容器。采用大多数处理数据库访问的技术复杂性很快就会使客 户代码变得混乱，这将导致开发人员简化领域层，最终使模型变得无关紧要。</p>
+<p>除了通过根来遍历查找对象 这种方法以外，禁止用其他方法对AGGREGATE内部的任何对象进行访问。随意的数据库查询会破坏领域对象的封装和 AGGREGATE。技术基础设施和数据库访问机制的暴露会增加客户的复杂度，并妨碍模型驱动的 设计。</p>
+<p>REPOSITORY将某种类型的所有对象表示为一个概念集合(通常是模拟的)。它的行为类似于 集合(collection)，只是具有更复杂的查询功能。在添加或删除相应类型的对象时， REPOSITORY 的后台机制负责将对象添加到数据库中，或从数据库中删除对象。这个定义将一组紧密相关的职 责集中在一起，这些职责提供了对AGGREGATE根的整个生命周期的全程访问。只为那些确实需要直接访问的AGGREGATE根提供REPOSITORY。 让客户始终聚焦于模型，而将所有对象的存储和访问操作交给REPOSITORY来完成。</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+              <a href="/2020/01/15/Storm/" rel="next" title="Storm">
+                <i class="fa fa-chevron-left"></i> Storm
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+          </div>
+        </div>
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+  </div>
+
+
+          </div>
+          
+
+
+        </div>
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Jeffzzf</p>
+  <div class="site-description motion-element" itemprop="description">Do one thing at a time, and do well.</div>
+</div>
+  <nav class="site-state motion-element">
+      <div class="site-state-item site-state-posts">
+        
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">121</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+    
+      
+      
+      <div class="site-state-item site-state-categories">
+        
+          
+            <a href="/categories/">
+          
+        
+        
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+        <span class="site-state-item-count">60</span>
+        <span class="site-state-item-name">分类</span>
+        </a>
+      </div>
+    
+      
+      
+      <div class="site-state-item site-state-tags">
+        
+          
+            <a href="/tags/">
+          
+        
+        
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+        <span class="site-state-item-count">107</span>
+        <span class="site-state-item-name">标签</span>
+        </a>
+      </div>
+    
+  </nav>
+
+
+
+        </div>
+      </div>
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#通用语言"><span class="nav-number">1.</span> <span class="nav-text">通用语言</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#领域"><span class="nav-number">2.</span> <span class="nav-text">领域</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#LAYERED-ARCHITECTURE-（分层架构）"><span class="nav-number">3.</span> <span class="nav-text">LAYERED ARCHITECTURE （分层架构）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ENITY（实体）"><span class="nav-number">4.</span> <span class="nav-text">ENITY（实体）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#VALUE-OBJECT（值对象）"><span class="nav-number">5.</span> <span class="nav-text">VALUE OBJECT（值对象）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SERVICE（服务）"><span class="nav-number">6.</span> <span class="nav-text">SERVICE（服务）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#AGGREGATE-聚合"><span class="nav-number">7.</span> <span class="nav-text">AGGREGATE(聚合)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#FACTORY（工厂）"><span class="nav-number">8.</span> <span class="nav-text">FACTORY（工厂）</span></a></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Jeffzzf</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.9.0</div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> v7.3.0</div>
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+      </div>
+
+    
+
+  </div>
+
+  
+  <script src="/lib/jquery/index.js?v=3.4.1"></script>
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  <script src="/js/utils.js?v=7.3.0"></script>
+  <script src="/js/motion.js?v=7.3.0"></script>
+
+  
+  <script src="/js/schemes/muse.js?v=7.3.0"></script>
+
+
+  
+  <script src="/js/scrollspy.js?v=7.3.0"></script>
+<script src="/js/post-details.js?v=7.3.0"></script>
+
+
+
+  <script src="/js/next-boot.js?v=7.3.0"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
+
+  
+
+  
+
+  
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

@@ -1,0 +1,951 @@
+<!DOCTYPE html>
+
+
+
+
+
+<html class="theme-next muse use-motion" lang="zh-CN">
+<head>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8">
+<meta name="generator" content="Hexo 3.9.0">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.3.0">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.3.0">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.3.0">
+  <link rel="mask-icon" href="/images/logo.svg?v=7.3.0" color="#222">
+
+<link rel="stylesheet" href="/css/main.css?v=7.3.0">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '7.3.0',
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    copycode: {"enable":false,"show_result":false,"style":null},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    search: {
+      root: '/',
+      path: ''
+    },
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    translation: {
+      copy_button: '复制',
+      copy_success: '复制成功',
+      copy_failure: '复制失败'
+    }
+  };
+</script>
+
+  <meta name="description" content="RPC（Remote Procedure Cll）远程过程调用是从一台机器（客户端）上通过参数传递的方式调用另一台机器（服务器）上的一个函数或方法并得到返回结果。 备注：本文源码分析基于dubbo-2.6.4 总体架构 请求流程 服务消费者（client 客户端）以调用本地服务的方式调用需要消费的服务 客户端存根（client stub）接收到调用请求后负责将方法、入参等信息序列化成能够进行网络传">
+<meta name="keywords" content="分布式">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Dubbo原理">
+<meta property="og:url" content="http://jeffzzf.github.io/2019/10/22/Dubbo原理/index.html">
+<meta property="og:site_name" content="Noob">
+<meta property="og:description" content="RPC（Remote Procedure Cll）远程过程调用是从一台机器（客户端）上通过参数传递的方式调用另一台机器（服务器）上的一个函数或方法并得到返回结果。 备注：本文源码分析基于dubbo-2.6.4 总体架构 请求流程 服务消费者（client 客户端）以调用本地服务的方式调用需要消费的服务 客户端存根（client stub）接收到调用请求后负责将方法、入参等信息序列化成能够进行网络传">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://jeffzzf.github.io/images/image-20191203150843596.png">
+<meta property="og:updated_time" content="2020-01-09T14:10:17.581Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Dubbo原理">
+<meta name="twitter:description" content="RPC（Remote Procedure Cll）远程过程调用是从一台机器（客户端）上通过参数传递的方式调用另一台机器（服务器）上的一个函数或方法并得到返回结果。 备注：本文源码分析基于dubbo-2.6.4 总体架构 请求流程 服务消费者（client 客户端）以调用本地服务的方式调用需要消费的服务 客户端存根（client stub）接收到调用请求后负责将方法、入参等信息序列化成能够进行网络传">
+<meta name="twitter:image" content="http://jeffzzf.github.io/images/image-20191203150843596.png">
+  <link rel="canonical" href="http://jeffzzf.github.io/2019/10/22/Dubbo原理/">
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>Dubbo原理 | Noob</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Noob</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+    <ul id="menu" class="menu">
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+      
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+      
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+
+  </li>
+    </ul>
+    
+
+</nav>
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://jeffzzf.github.io/2019/10/22/Dubbo原理/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Jeffzzf">
+      <meta itemprop="description" content="Do one thing at a time, and do well.">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Noob">
+    </span>
+      <header class="post-header">
+
+        
+          <h1 class="post-title" itemprop="name headline">Dubbo原理
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-10-22 11:26:16" itemprop="dateCreated datePublished" datetime="2019-10-22T11:26:16+08:00">2019-10-22</time>
+            </span>
+          
+            
+
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2020-01-09 22:10:17" itemprop="dateModified" datetime="2020-01-09T22:10:17+08:00">2020-01-09</time>
+              </span>
+            
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/分布式/" itemprop="url" rel="index"><span itemprop="name">分布式</span></a></span>
+
+                
+                
+                  ，
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/分布式/Dubbo/" itemprop="url" rel="index"><span itemprop="name">Dubbo</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          <br>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>RPC（Remote Procedure Cll）远程过程调用是从一台机器（客户端）上通过参数传递的方式调用另一台机器（服务器）上的一个函数或方法并得到返回结果。</p>
+<p>备注：本文源码分析基于dubbo-2.6.4</p>
+<h2 id="总体架构"><a href="#总体架构" class="headerlink" title="总体架构"></a>总体架构</h2><p><img src="/images/image-20191203150843596.png" alt="image-20191203150843596"></p>
+<h2 id="请求流程"><a href="#请求流程" class="headerlink" title="请求流程"></a>请求流程</h2><ol>
+<li>服务消费者（client 客户端）以调用本地服务的方式调用需要消费的服务</li>
+<li>客户端存根（client stub）接收到调用请求后负责将方法、入参等信息序列化成能够进行网络传输的消息体</li>
+<li>客户端存根（client stub）找到远程服务地址，将消息通过网络发送给服务端</li>
+<li>服务端存根（server stub）收到消息后进行解码（反序列化）</li>
+<li>服务端存根（server stub）根据解码结果调用本地服务进行相关处理（解码后请求转发给分发器 Dispatcher，Dispatcher 将请求派发到指定线程池）</li>
+<li>本地服务执行具体业务逻辑将处理结果返回给服务端存根（server stub）</li>
+<li>服务端存根（server stub）将返回结果打包成消息（序列化）并通过网络发送给消费方</li>
+<li>客户端存根（client stub）接收到消息，进行反序列化</li>
+<li>服务消费方得到最终结果（根据调用编号从 ConcurrentHashMap 中移除 DefaultFuture 对象并唤醒用户线程（signal/await））</li>
+</ol>
+<p>Dubbo 支持同步和异步两种调用方式，其中异步调用还可以细分为有返回值和无返回值两种。无返回值时，服务消费方只管调用不关心调用结果，Dubbo 返回一个空的 RpcResult。默认为同步方式。</p>
+<p>Dubbo 实现同步和异步调用（DubboInvoker.doInvoke()）关键点在于由谁调用 ResponseFuture 的 get 方法，同步调用模式下，由框架自身调用 FeatureResponse 的 get 方法。异步调用模式下，由用户调用该方法。</p>
+<h2 id="网络通信"><a href="#网络通信" class="headerlink" title="网络通信"></a>网络通信</h2><p>Dubbo 默认使用 Netty 作为底层通信框架，其它可用框架包括 Mina</p>
+<h2 id="动态代理"><a href="#动态代理" class="headerlink" title="动态代理"></a>动态代理</h2><h2 id="负载均衡"><a href="#负载均衡" class="headerlink" title="负载均衡"></a>负载均衡</h2><p>Dubbo 对服务消费者的调用请求进行分配，避免少数服务提供者负载过大，将负载均衡到每个服务提供者上。</p>
+<p>Dubbo 提供了 4 种负载均衡实现：</p>
+<p>RandomLoadBalance 基于权重随机算法（默认负载均衡算法）</p>
+<p>LeastActiveLoadBalance 基于最少活跃调用数算法</p>
+<p>ConsistentHashLoadBalance 基于一致性 Hash</p>
+<p>RoundRobinLoadbalance 基于加权轮询算法</p>
+<h2 id="集群容错"><a href="#集群容错" class="headerlink" title="集群容错"></a>集群容错</h2><p>集群 Cluster 的用途是将多个服务提供者合并为一个 Cluster Invoker，并将这个 Invoker 暴露给服务消费者。</p>
+<p>服务消费者只需要通过这个 Invoker 调用即可，至于具体调用哪个服务提供者以及调用失败后如何处理等问题，都交给集群模块处理。</p>
+<p>Cluster 工作过程分为两个阶段，第一个阶段在消费者初始化期间，CLuster 实现类为消费者创建 Cluster Invoker 实例。第二阶段在消费者远程调用时，首先调用 Directory 的 list 方法列举 Invoker 列表。Directory 的用途是保存 Invoker，可简单类比为 <code>List&lt;Invoker&gt;</code>，其实现类 RegisterDirectory 是一个动态服务目录，可感知注册中心配置的变化，所持有的 Invoker 列表会随着注册中心内容的变化而变化。当 ClusterInvoker 拿到 Directory 返回的 Invoker 列表后，通过 LoadBalance 从 Invoker 列表中选择一个 Invoker。最后 ClusterInvoker 将参数传递给 Loadbalance 选出的 Invoker 方法，进行真正的远程调用。</p>
+<p>Dubbo 提供了五种容错方案：</p>
+<ol>
+<li>Failover：失败自动切换，默认配置，调用失败后自动切换 Invoker 进行重试</li>
+<li>Failfast：快速失败，只进行一次调用，失败后立即抛出异常，适用于幂等操作</li>
+<li>Failsafe：失败安全，调用出现异常时，仅打印异常，不会抛出异常，适用于写入审计日志等操作</li>
+<li>Failback：失败自动恢复，调用失败后返回一个空结果给客户端，通过定时任务对失败的调用进行重传，适用于消息通知等操作</li>
+<li>Forking：并行调用多个服务提供者，运行时通过线程池创建多个线程，并发调用多个服务提供者，只要有一个服务提供者成功返回结果，doInvoker 方法立即结束运行。适用于实时性要求较高的读场景，会耗费更多资源</li>
+<li>Broadcast：逐个调用每个服务提供者，如果其中一台报错，在循环调用结束后抛出异常。适用于通知所有提供者更新缓存或日志等本地资源</li>
+</ol>
+<h2 id="降级"><a href="#降级" class="headerlink" title="降级"></a>降级</h2><p>熔断用于调用下游服务连续失败时，开启熔断器，之后的服务不再调用下游服务，要么返回失败要么降级，直到满足熔断器关闭策略后才再次调用下游。</p>
+<p>Dubbo 中通过对接口或方法配置 Mock 参数来设置对应的降级实现。具体实现在MockClusterInvoker类中。</p>
+<p>降级分 no mock（无降级，直接调用）、force:direct mock（屏蔽，直接调用 mock 方法）、fail-mock（容错，原接口调用失败后走容错逻辑，可返回 null、默认值或降级服务）三种情况。</p>
+<p>Dubbo 本身没有熔断器，需要自己实现或整合 Sentinel 或 Hystrix </p>
+<h2 id="优雅停机"><a href="#优雅停机" class="headerlink" title="优雅停机"></a>优雅停机</h2><p>优雅停机是指在停止应用时，执行的一系列保证应用正常关闭的操作。这些操作往往包括等待已有请求执行完成、关闭线程、关闭连接和释放资源等，优雅停机可以避免非正常关闭程序可能造成数据异常或丢失，应用异常等问题。优雅停机本质上是JVM即将关闭前执行的一些额外的处理代码。</p>
+<h3 id="适用场景"><a href="#适用场景" class="headerlink" title="适用场景"></a>适用场景</h3><ul>
+<li>JVM主动关闭(<code>System.exit(int)</code>；</li>
+<li>JVM由于资源问题退出(<code>OOM</code>)；</li>
+<li>应用程序接受到<code>SIGTERM</code>或<code>SIGINT</code>信号。</li>
+</ul>
+<p>在Dubbo中，优雅停机是默认开启的，停机等待时间为10000毫秒。可以通过配置<code>dubbo.service.shutdown.wait</code>来修改等待时间。</p>
+<h3 id="流程"><a href="#流程" class="headerlink" title="流程"></a>流程</h3><p>Provider在接收到停机指令后</p>
+<ul>
+<li>从注册中心上注销所有服务；</li>
+<li>从配置中心取消监听动态配置；</li>
+<li>向所有连接的客户端发送只读事件，停止接收新请求；</li>
+<li>等待一段时间以处理已到达的请求，然后关闭请求处理线程池；</li>
+<li>断开所有客户端连接。</li>
+</ul>
+<p>Consumer在接收到停机指令后</p>
+<ul>
+<li>拒绝新到请求，直接返回调用异常；</li>
+<li>等待当前已发送请求执行完毕，如果响应超时则强制关闭连接。</li>
+</ul>
+<p>当使用容器方式运行 Dubbo 时，在容器准备退出前，可进行一系列的资源释放和清理工。</p>
+<p>例如使用 SpringContainer时，Dubbo 的ShutdownHook线程会执行<code>ApplicationContext</code>的<code>stop</code>和<code>close</code>方法，保证 Bean的生命周期完整。</p>
+<p>配置的优雅停机等待时间<code>timeout</code>不是所有步骤等待时间的总和，而是每一个<code>destroy</code>执行的最大时间。例如配置等待时间为5秒，则关闭Server、关闭Client等步骤会分别等待5秒。</p>
+<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><ol>
+<li><a href="https://dubbo.apache.org/zh-cn/docs/user/preface/architecture.html" target="_blank" rel="noopener">Dubbo 官方文档</a></li>
+<li><a href="https://juejin.im/post/5cd28d1ee51d453aa44ad6d8" target="_blank" rel="noopener">看了这篇Dubbo RPC面试题，让天下没有难面的面试题</a></li>
+<li><a href="https://zhouj000.github.io/2019/02/18/dubbo-03/" target="_blank" rel="noopener">Dubbo(三):高并发下降级与限流</a></li>
+<li><a href="https://www.jianshu.com/p/ce8de35986cf" target="_blank" rel="noopener">dubbo的Mock功能与源码实现</a></li>
+<li><a href="https://www.cnblogs.com/wuzhenzhao/p/11496627.html" target="_blank" rel="noopener">Sentinel之熔断降级</a></li>
+<li><a href="https://dubbo.apache.org/zh-cn/blog/dubbo-gracefully-shutdown.html" target="_blank" rel="noopener">Dubbo 优雅停机</a></li>
+<li><a href="https://www.cnkirito.moe/rpc-dynamic-proxy/" target="_blank" rel="noopener">深入理解 RPC 之动态代理篇</a></li>
+</ol>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          
+        
+        <div class="post-tags">
+            <a href="/tags/分布式/" rel="tag"># 分布式</a>
+          
+        </div>
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+              <a href="/2019/10/17/synchronized/" rel="next" title="Java并发面试题整理">
+                <i class="fa fa-chevron-left"></i> Java并发面试题整理
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+              <a href="/2019/11/26/问题整理/" rel="prev" title="问题整理">
+                问题整理 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+  </div>
+
+
+          </div>
+          
+
+
+        </div>
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Jeffzzf</p>
+  <div class="site-description motion-element" itemprop="description">Do one thing at a time, and do well.</div>
+</div>
+  <nav class="site-state motion-element">
+      <div class="site-state-item site-state-posts">
+        
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">121</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+    
+      
+      
+      <div class="site-state-item site-state-categories">
+        
+          
+            <a href="/categories/">
+          
+        
+        
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+        <span class="site-state-item-count">60</span>
+        <span class="site-state-item-name">分类</span>
+        </a>
+      </div>
+    
+      
+      
+      <div class="site-state-item site-state-tags">
+        
+          
+            <a href="/tags/">
+          
+        
+        
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+        <span class="site-state-item-count">107</span>
+        <span class="site-state-item-name">标签</span>
+        </a>
+      </div>
+    
+  </nav>
+
+
+
+        </div>
+      </div>
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#总体架构"><span class="nav-number">1.</span> <span class="nav-text">总体架构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#请求流程"><span class="nav-number">2.</span> <span class="nav-text">请求流程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#网络通信"><span class="nav-number">3.</span> <span class="nav-text">网络通信</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#动态代理"><span class="nav-number">4.</span> <span class="nav-text">动态代理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#负载均衡"><span class="nav-number">5.</span> <span class="nav-text">负载均衡</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#集群容错"><span class="nav-number">6.</span> <span class="nav-text">集群容错</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#降级"><span class="nav-number">7.</span> <span class="nav-text">降级</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#优雅停机"><span class="nav-number">8.</span> <span class="nav-text">优雅停机</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#适用场景"><span class="nav-number">8.1.</span> <span class="nav-text">适用场景</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#流程"><span class="nav-number">8.2.</span> <span class="nav-text">流程</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考资料"><span class="nav-number">9.</span> <span class="nav-text">参考资料</span></a></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Jeffzzf</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.9.0</div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> v7.3.0</div>
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+      </div>
+
+    
+
+  </div>
+
+  
+  <script src="/lib/jquery/index.js?v=3.4.1"></script>
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  <script src="/js/utils.js?v=7.3.0"></script>
+  <script src="/js/motion.js?v=7.3.0"></script>
+
+  
+  <script src="/js/schemes/muse.js?v=7.3.0"></script>
+
+
+  
+  <script src="/js/scrollspy.js?v=7.3.0"></script>
+<script src="/js/post-details.js?v=7.3.0"></script>
+
+
+
+  <script src="/js/next-boot.js?v=7.3.0"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
+
+  
+
+  
+
+  
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

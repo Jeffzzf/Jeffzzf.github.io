@@ -1,0 +1,938 @@
+<!DOCTYPE html>
+
+
+
+
+
+<html class="theme-next muse use-motion" lang="zh-CN">
+<head>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8">
+<meta name="generator" content="Hexo 3.9.0">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.3.0">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.3.0">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.3.0">
+  <link rel="mask-icon" href="/images/logo.svg?v=7.3.0" color="#222">
+
+<link rel="stylesheet" href="/css/main.css?v=7.3.0">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '7.3.0',
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    copycode: {"enable":false,"show_result":false,"style":null},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    search: {
+      root: '/',
+      path: ''
+    },
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    translation: {
+      copy_button: '复制',
+      copy_success: '复制成功',
+      copy_failure: '复制失败'
+    }
+  };
+</script>
+
+  <meta name="description" content="关注设计思想、实现原理和实践方法论 消息队列的作用1.异步处理非必要的业务逻辑以异步方式运行，提高响应速度。多个消费者并发执行，提升系统整体性能。 2.流量控制下游来不及处理的流量堆积在消息队列中，起到削峰填谷、保护下游的作用。 3.服务解藕上游将消息写入消息队列，需要消息的系统自己从消息队列中订阅，上游不需要做任何修改 消息队列的缺点增加消息队列这个环节后，消息队列本身的问题可能系统整体的可用">
+<meta name="keywords" content="mq">
+<meta property="og:type" content="article">
+<meta property="og:title" content="消息队列">
+<meta property="og:url" content="http://jeffzzf.github.io/2019/08/17/消息队列/index.html">
+<meta property="og:site_name" content="Noob">
+<meta property="og:description" content="关注设计思想、实现原理和实践方法论 消息队列的作用1.异步处理非必要的业务逻辑以异步方式运行，提高响应速度。多个消费者并发执行，提升系统整体性能。 2.流量控制下游来不及处理的流量堆积在消息队列中，起到削峰填谷、保护下游的作用。 3.服务解藕上游将消息写入消息队列，需要消息的系统自己从消息队列中订阅，上游不需要做任何修改 消息队列的缺点增加消息队列这个环节后，消息队列本身的问题可能系统整体的可用">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://jeffzzf.github.io/source/images/image-20190815175530399.png">
+<meta property="og:updated_time" content="2019-08-29T03:23:45.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="消息队列">
+<meta name="twitter:description" content="关注设计思想、实现原理和实践方法论 消息队列的作用1.异步处理非必要的业务逻辑以异步方式运行，提高响应速度。多个消费者并发执行，提升系统整体性能。 2.流量控制下游来不及处理的流量堆积在消息队列中，起到削峰填谷、保护下游的作用。 3.服务解藕上游将消息写入消息队列，需要消息的系统自己从消息队列中订阅，上游不需要做任何修改 消息队列的缺点增加消息队列这个环节后，消息队列本身的问题可能系统整体的可用">
+<meta name="twitter:image" content="http://jeffzzf.github.io/source/images/image-20190815175530399.png">
+  <link rel="canonical" href="http://jeffzzf.github.io/2019/08/17/消息队列/">
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>消息队列 | Noob</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Noob</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+    <ul id="menu" class="menu">
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+      
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+      
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+
+  </li>
+    </ul>
+    
+
+</nav>
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://jeffzzf.github.io/2019/08/17/消息队列/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Jeffzzf">
+      <meta itemprop="description" content="Do one thing at a time, and do well.">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Noob">
+    </span>
+      <header class="post-header">
+
+        
+          <h1 class="post-title" itemprop="name headline">消息队列
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-08-17 10:44:38" itemprop="dateCreated datePublished" datetime="2019-08-17T10:44:38+08:00">2019-08-17</time>
+            </span>
+          
+            
+
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2019-08-29 11:23:45" itemprop="dateModified" datetime="2019-08-29T11:23:45+08:00">2019-08-29</time>
+              </span>
+            
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/分布式/" itemprop="url" rel="index"><span itemprop="name">分布式</span></a></span>
+
+                
+                
+                  ，
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/分布式/mq/" itemprop="url" rel="index"><span itemprop="name">mq</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          <br>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p><img src="/source/images/image-20190815175530399.png" alt="image-20190815175530399"></p>
+<p>关注设计思想、实现原理和实践方法论</p>
+<h2 id="消息队列的作用"><a href="#消息队列的作用" class="headerlink" title="消息队列的作用"></a>消息队列的作用</h2><h3 id="1-异步处理"><a href="#1-异步处理" class="headerlink" title="1.异步处理"></a>1.异步处理</h3><p>非必要的业务逻辑以异步方式运行，提高响应速度。多个消费者并发执行，提升系统整体性能。</p>
+<h3 id="2-流量控制"><a href="#2-流量控制" class="headerlink" title="2.流量控制"></a>2.流量控制</h3><p>下游来不及处理的流量堆积在消息队列中，起到削峰填谷、保护下游的作用。</p>
+<h3 id="3-服务解藕"><a href="#3-服务解藕" class="headerlink" title="3.服务解藕"></a>3.服务解藕</h3><p>上游将消息写入消息队列，需要消息的系统自己从消息队列中订阅，上游不需要做任何修改</p>
+<h2 id="消息队列的缺点"><a href="#消息队列的缺点" class="headerlink" title="消息队列的缺点"></a>消息队列的缺点</h2><p>增加消息队列这个环节后，消息队列本身的问题可能系统整体的可用性降低。同时，消息队列带来的消息丢失、重复消费、一致性等问题导致系统复杂度变高</p>
+<h2 id="消息队列选型"><a href="#消息队列选型" class="headerlink" title="消息队列选型"></a>消息队列选型</h2><table>
+<thead>
+<tr>
+<th align="left">特性</th>
+<th align="center">ActiveMQ</th>
+<th align="left">RabbitMQ</th>
+<th align="left">RocketMQ</th>
+<th align="left">kafka</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">开发语言</td>
+<td align="center">java</td>
+<td align="left">erlang</td>
+<td align="left">java</td>
+<td align="left">scala</td>
+</tr>
+<tr>
+<td align="left">单机吞吐量</td>
+<td align="center">万级</td>
+<td align="left">万级</td>
+<td align="left">10万级</td>
+<td align="left">10万级</td>
+</tr>
+<tr>
+<td align="left">时效性</td>
+<td align="center">ms级</td>
+<td align="left">us级</td>
+<td align="left">ms级</td>
+<td align="left">ms级以内</td>
+</tr>
+<tr>
+<td align="left">可用性</td>
+<td align="center">高(主从架构)</td>
+<td align="left">高(主从架构)</td>
+<td align="left">非常高(分布式架构)</td>
+<td align="left">非常高(分布式架构)</td>
+</tr>
+<tr>
+<td align="left">功能特性</td>
+<td align="center">成熟的产品，在很多公司得到应用；有较多的文档；各种协议支持较好</td>
+<td align="left">基于erlang开发，所以并发能力很强，性能极其好，延时很低; 管理界面较丰富；对消息积压支持不够好</td>
+<td align="left">MQ功能比较完备，扩展性佳</td>
+<td align="left">只支持主要的MQ功能，像一些消息查询，消息回溯等功能没有提供，毕竟是为大数据准备的，在大数据领域应用广。</td>
+</tr>
+</tbody></table>
+<p>RocketMQ对在线业务的响应时延做了很多优化，大多数情况下可以做到毫秒级响应，适用于处理在线业务，如交易系统中用消息队列传递订单。Kafka设计上大量使用了批量和异步的思想，具有很高的吞吐量和异步收发性能，但同步收发消息的性能稍低，因为客户端发送一条消息时，Kafka并不会立即发送出去，而是等一会儿攒一波再发送。适用于处理海量消息，如收集日志、埋点、监控或大数据、流计算等场景。</p>
+<h2 id="消息积压处理"><a href="#消息积压处理" class="headerlink" title="消息积压处理"></a>消息积压处理</h2><p>消息队列本身一般不会出现积压，一般每个消息队列节点每秒可以处理几万到十几万消息，并且能够通过水平扩展成本提升处理能力。所以出现积压，一般有两种情况：生产端变快了，消费端变慢了。</p>
+<p>如果消费速度一直比生产速度慢，时间一长，整个系统就会出现问题。要么消息队列的存储被填满无法提供服务，要么消息丢失，都是不可接受的。所以在设计系统时一定要保证消费端的消费性能高于生产端的发送性能，这样系统才能健康地持续运行。</p>
+<h3 id="生产者积压"><a href="#生产者积压" class="headerlink" title="生产者积压"></a>生产者积压</h3><p>对于离线场景，可以通过批量发送的方式，提高生产能力；对于在线实时行要求高的场景，通过增加并发度来提高生产消息的能力。</p>
+<h3 id="消费端积压"><a href="#消费端积压" class="headerlink" title="消费端积压"></a>消费端积压</h3><p>消费端性能优化可以优化消费业务逻辑性能，也可以水平扩容，增加消费端的并发数来提升整体的消费性能。</p>
+<p>在扩容Consumer的实例数量时，必须同步扩容主题中的分区（也叫队列）数量，确保Consumer的实例数和分区数量是相等的。如果Consumer的实例数量超过分区数量，扩容实际上没有效果，因为每个分区只能支持单线程消费。</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          
+        
+        <div class="post-tags">
+            <a href="/tags/mq/" rel="tag"># mq</a>
+          
+        </div>
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+              <a href="/2019/08/16/zookeeper原理/" rel="next" title="zookeeper原理">
+                <i class="fa fa-chevron-left"></i> zookeeper原理
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+              <a href="/2019/08/19/Kafka/" rel="prev" title="Kafka">
+                Kafka <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+  </div>
+
+
+          </div>
+          
+
+
+        </div>
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Jeffzzf</p>
+  <div class="site-description motion-element" itemprop="description">Do one thing at a time, and do well.</div>
+</div>
+  <nav class="site-state motion-element">
+      <div class="site-state-item site-state-posts">
+        
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">121</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+    
+      
+      
+      <div class="site-state-item site-state-categories">
+        
+          
+            <a href="/categories/">
+          
+        
+        
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+        <span class="site-state-item-count">60</span>
+        <span class="site-state-item-name">分类</span>
+        </a>
+      </div>
+    
+      
+      
+      <div class="site-state-item site-state-tags">
+        
+          
+            <a href="/tags/">
+          
+        
+        
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+        <span class="site-state-item-count">107</span>
+        <span class="site-state-item-name">标签</span>
+        </a>
+      </div>
+    
+  </nav>
+
+
+
+        </div>
+      </div>
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#消息队列的作用"><span class="nav-number">1.</span> <span class="nav-text">消息队列的作用</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-异步处理"><span class="nav-number">1.1.</span> <span class="nav-text">1.异步处理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-流量控制"><span class="nav-number">1.2.</span> <span class="nav-text">2.流量控制</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-服务解藕"><span class="nav-number">1.3.</span> <span class="nav-text">3.服务解藕</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#消息队列的缺点"><span class="nav-number">2.</span> <span class="nav-text">消息队列的缺点</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#消息队列选型"><span class="nav-number">3.</span> <span class="nav-text">消息队列选型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#消息积压处理"><span class="nav-number">4.</span> <span class="nav-text">消息积压处理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#生产者积压"><span class="nav-number">4.1.</span> <span class="nav-text">生产者积压</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#消费端积压"><span class="nav-number">4.2.</span> <span class="nav-text">消费端积压</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Jeffzzf</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.9.0</div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> v7.3.0</div>
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+      </div>
+
+    
+
+  </div>
+
+  
+  <script src="/lib/jquery/index.js?v=3.4.1"></script>
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  <script src="/js/utils.js?v=7.3.0"></script>
+  <script src="/js/motion.js?v=7.3.0"></script>
+
+  
+  <script src="/js/schemes/muse.js?v=7.3.0"></script>
+
+
+  
+  <script src="/js/scrollspy.js?v=7.3.0"></script>
+<script src="/js/post-details.js?v=7.3.0"></script>
+
+
+
+  <script src="/js/next-boot.js?v=7.3.0"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
+
+  
+
+  
+
+  
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

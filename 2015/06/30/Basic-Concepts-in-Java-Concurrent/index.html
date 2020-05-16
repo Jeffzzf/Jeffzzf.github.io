@@ -1,0 +1,947 @@
+<!DOCTYPE html>
+
+
+
+
+
+<html class="theme-next muse use-motion" lang="zh-CN">
+<head>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8">
+<meta name="generator" content="Hexo 3.9.0">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.3.0">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.3.0">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.3.0">
+  <link rel="mask-icon" href="/images/logo.svg?v=7.3.0" color="#222">
+
+<link rel="stylesheet" href="/css/main.css?v=7.3.0">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '7.3.0',
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    copycode: {"enable":false,"show_result":false,"style":null},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    search: {
+      root: '/',
+      path: ''
+    },
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    translation: {
+      copy_button: '复制',
+      copy_success: '复制成功',
+      copy_failure: '复制失败'
+    }
+  };
+</script>
+
+  <meta name="description" content="The Java platfrom is designed from ground up to support concurrent. There are two units of excution: Processes and Threads. A system normally has multipul processes and threads, even if there is only">
+<meta name="keywords" content="Java,并发">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Basic Concepts in Java Concurrent">
+<meta property="og:url" content="http://jeffzzf.github.io/2015/06/30/Basic-Concepts-in-Java-Concurrent/index.html">
+<meta property="og:site_name" content="Noob">
+<meta property="og:description" content="The Java platfrom is designed from ground up to support concurrent. There are two units of excution: Processes and Threads. A system normally has multipul processes and threads, even if there is only">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-08-28T12:23:34.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Basic Concepts in Java Concurrent">
+<meta name="twitter:description" content="The Java platfrom is designed from ground up to support concurrent. There are two units of excution: Processes and Threads. A system normally has multipul processes and threads, even if there is only">
+  <link rel="canonical" href="http://jeffzzf.github.io/2015/06/30/Basic-Concepts-in-Java-Concurrent/">
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>Basic Concepts in Java Concurrent | Noob</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Noob</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+    <ul id="menu" class="menu">
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+      
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+      
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+
+  </li>
+    </ul>
+    
+
+</nav>
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://jeffzzf.github.io/2015/06/30/Basic-Concepts-in-Java-Concurrent/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Jeffzzf">
+      <meta itemprop="description" content="Do one thing at a time, and do well.">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Noob">
+    </span>
+      <header class="post-header">
+
+        
+          <h1 class="post-title" itemprop="name headline">Basic Concepts in Java Concurrent
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2015-06-30 16:02:45" itemprop="dateCreated datePublished" datetime="2015-06-30T16:02:45+08:00">2015-06-30</time>
+            </span>
+          
+            
+
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2019-08-28 20:23:34" itemprop="dateModified" datetime="2019-08-28T20:23:34+08:00">2019-08-28</time>
+              </span>
+            
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Java/" itemprop="url" rel="index"><span itemprop="name">Java</span></a></span>
+
+                
+                
+                  ，
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Java/并发/" itemprop="url" rel="index"><span itemprop="name">并发</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          <br>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>The Java platfrom is designed from ground up to support concurrent. There are two units of excution: <em>Processes</em> and <em>Threads</em>. A system normally has multipul processes and threads, even if there is only single excution core, because processing time can be shared among threads and processes through time clicing.</p>
+<a id="more"></a>
+
+<h1 id="Processes"><a href="#Processes" class="headerlink" title="Processes"></a>Processes</h1><p>A process generally has a complete, private set of basic run-time resources, for example each process has its own memory space. To facilitate comunication between processes, most systems support <em>Inter Processes communication(IPC)</em> resources, such as pips and sockets. IPC can be used not only between processes on the same system but also processes on different systems.</p>
+<p>Most implements of Java virtual mechine run as single process. A Java application can create additional processes using a ProcessBuilder.</p>
+<h1 id="Threads"><a href="#Threads" class="headerlink" title="Threads"></a>Threads</h1><p>Thread can be called <em>lightweight process</em>, creating a new thread requires fewer resources than creating a process.</p>
+<p>Threads exist within a process, every process has at least one thread. Threads share resources of the process it belongs to, including memory space and open files.</p>
+<p>Every running application has at least sevral threads(<em>system threads</em> and <em>main</em> thread), system threads do thing like memory management and signal handling. From the view of programmer’s view, application start with just one thread(<em>main thread</em>), this thread has the ability to create additional threads.</p>
+<h1 id="Ways-to-use-threads"><a href="#Ways-to-use-threads" class="headerlink" title="Ways to use threads"></a>Ways to use threads</h1><ul>
+<li>Directly create and manage thread, simply instantiate Thread each time the application needs to initiate an asynchronous task.<ul>
+<li>Implement <em>Runnable</em> interface and pass Runnable object to Thread constructor</li>
+<li>Subclass Thread (This way is limited by the fact that the task class can not subclass a class other than Thread. So the way to employ Runnable object is more general)</li>
+</ul>
+</li>
+<li>Pass application’s tasks to an excutor.</li>
+</ul>
+<h1 id="Methods-of-Thread-Class"><a href="#Methods-of-Thread-Class" class="headerlink" title="Methods of Thread Class"></a>Methods of Thread Class</h1><h1 id="Sleep"><a href="#Sleep" class="headerlink" title="Sleep"></a>Sleep</h1><p><em>Thread.sleep()</em> cause the current thread to suspend excution for a specifited period. This is an efficitent means of making processor time available to the other threads of an application or other applications that might be running on the system. These sleep times are not guaranteed to be precise, because the are limit by the facilities provided by the underlying OS. The periods can be terminated by interrupts. </p>
+<h1 id="Interrupt"><a href="#Interrupt" class="headerlink" title="Interrupt"></a>Interrupt</h1><p>The interrupt mechanism is implemented using an internal flag known as <em>interrupt status</em>. Invokeing ThreadObject.interrupt sets this flag. When a thread checks for an interrupt by Thread.interrupted, interrupt status is cleared. The non-static isInterrupt method, which is used by other thread to query status will not clear flag. Any method exits by throwing <em>InterruptedException</em> clears interrupt status when it does so.</p>
+<h1 id="Join"><a href="#Join" class="headerlink" title="Join"></a>Join</h1><p>The <em>join</em> method allows one thread to wait for the completion of another. <em>t.join()</em> cause the current thread to pause execution until t’s thread complete.</p>
+<h1 id="Synchronized"><a href="#Synchronized" class="headerlink" title="Synchronized"></a>Synchronized</h1><p>Constructors can not be synchronized, it is a syntax error and doesn’t make sense, because only the thread that creates an object should have the access to it while it is being constructed.</p>
+<h1 id="Intrinsic-Locks-and-Reentrant-Locks"><a href="#Intrinsic-Locks-and-Reentrant-Locks" class="headerlink" title="Intrinsic Locks and Reentrant Locks"></a>Intrinsic Locks and Reentrant Locks</h1><p>Synchronized is built around an internal entity known as the intrinsic lock or monitor lock. Intrinsic lock paly a role in both aspects of synchronization: enforcing exclusive access to an object’s state and establishing happens-before relationship.</p>
+<p>Every object has a intrinsic lock associated with it. A thread is said to own the object’s intrinsic lock between the time it has acquire the lock and release the lock. As long as the thread owns object’s lock no other thread can acquire the same lock, and will block until the lock has release. When a thread relase an intrinsic lock, a happends-before relationship is established between that action and subsequent acquisition of the same lock.</p>
+<h1 id="Synchronized-methods"><a href="#Synchronized-methods" class="headerlink" title="Synchronized methods"></a>Synchronized methods</h1><p>When a thread invoke a synchronized method, it automatically acquires the intrinsic lock of the method’s object and release it before it return. The lock release even if the return was caused by an uncaught exception.</p>
+<p>As with static methods and fields, the thread acquires the intrinsic lock for the Class object associate with the class.</p>
+<h1 id="Synchronized-statements"><a href="#Synchronized-statements" class="headerlink" title="Synchronized statements"></a>Synchronized statements</h1><p>Synchronized statements must specify the object that provides the instrinsic lock.</p>
+<h1 id="Reentrant-Synchcronized"><a href="#Reentrant-Synchcronized" class="headerlink" title="Reentrant Synchcronized"></a>Reentrant Synchcronized</h1><p>Allowing a thread to acquire the same lock more than once enables Reentrant Synchronized. This describle a situation where synchronized code, directly or indirectly invokes a method that also contains synchronized code, and both sets of code use the same lock.</p>
+<h1 id="Atomic-Access"><a href="#Atomic-Access" class="headerlink" title="Atomic Access"></a>Atomic Access</h1><p>In programming, an atomic action means that it either happens completely or it doesn’t happen at all. It cann’t be interrupt in the middle.</p>
+<p>Some actions can be specify atomic:</p>
+<ul>
+<li>Reads and writes are atomic for reference variables and for most primitive variables(all type except long and double)</li>
+<li>Reads and writes are atomic for all variables declared volatile(including long and double)</li>
+</ul>
+<p>Atomic actions cann’t be interleaved, but this does not eliminate all possible memory consistency errors.</p>
+<h1 id="Deadlock-Starvation-and-livelock"><a href="#Deadlock-Starvation-and-livelock" class="headerlink" title="Deadlock, Starvation and livelock"></a>Deadlock, Starvation and livelock</h1><p>Deaklock describes a situation where two or more threads are blocked forever, waiting for each other.</p>
+<p>Starvation describe a situation where a thread is unable to gain regular access to shared resources and is unable to make progress.</p>
+<h1 id="Thread-communication"><a href="#Thread-communication" class="headerlink" title="Thread communication"></a>Thread communication</h1><h1 id="wait"><a href="#wait" class="headerlink" title="wait()"></a>wait()</h1><p>Object.wait() suspend the current thread, and wait() does not return until another thread has issued a notification that some special event have occured – though not necessarity the event this thread is waiting for.</p>
+<p>When a thread invokes d.wait(), it must own the intrinsic lock for d. When wait() has invoked, the Thread release the lock and suspends execution. At some future time, another thread acquires the same lock and invokes Object.notifyAll(), infroming all threads waiting for that lock that something important has happened.</p>
+<blockquote>
+<p>Always invoke wait inside a loop that tests for the condition being waiting for.</p>
+</blockquote>
+<h1 id="Producer-Consumer"><a href="#Producer-Consumer" class="headerlink" title="Producer-Consumer"></a>Producer-Consumer</h1><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Plate</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> size;</span><br><span class="line">    <span class="keyword">private</span> List&lt;Integer&gt; fruits;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Plate</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        fruits = <span class="keyword">new</span> ArrayList&lt;Integer&gt;();</span><br><span class="line">        size = <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">synchronized</span> <span class="keyword">int</span> <span class="title">take</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">while</span> (size == <span class="number">0</span>) &#123;</span><br><span class="line">            <span class="keyword">try</span> &#123;</span><br><span class="line">                wait();</span><br><span class="line">            &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</span><br><span class="line">                e.printStackTrace();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        --size;</span><br><span class="line">        notifyAll();</span><br><span class="line">        <span class="keyword">return</span> fruits.remove(fruits.size() - <span class="number">1</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">synchronized</span> <span class="keyword">void</span> <span class="title">put</span><span class="params">(<span class="keyword">int</span> num)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">while</span> (size &gt; <span class="number">5</span>) &#123;</span><br><span class="line">            <span class="keyword">try</span> &#123;</span><br><span class="line">                wait();</span><br><span class="line">            &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</span><br><span class="line">                e.printStackTrace();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        ++size;</span><br><span class="line">        fruits.add(num);</span><br><span class="line">        notifyAll();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Producer</span> <span class="keyword">implements</span> <span class="title">Runnable</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> Plate plate;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Producer</span><span class="params">(Plate plate)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.plate = plate;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        Random random = <span class="keyword">new</span> Random();</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">50</span>; ++i) &#123;</span><br><span class="line">            <span class="keyword">int</span> tmp = random.nextInt(<span class="number">50</span>);</span><br><span class="line">            plate.put(tmp);</span><br><span class="line">            System.out.println(<span class="string">"Put "</span> + tmp);</span><br><span class="line">            <span class="keyword">try</span> &#123;</span><br><span class="line">                Thread.sleep(random.nextInt(<span class="number">1000</span>));</span><br><span class="line">            &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</span><br><span class="line">                e.printStackTrace();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Consumer</span> <span class="keyword">implements</span> <span class="title">Runnable</span></span>&#123;</span><br><span class="line">    <span class="keyword">private</span> Plate plate;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Consumer</span><span class="params">(Plate plate)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.plate = plate;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        Random random = <span class="keyword">new</span> Random();</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">50</span>; ++i) &#123;</span><br><span class="line">            System.out.println(<span class="string">"Take "</span> + plate.take());</span><br><span class="line">            <span class="keyword">try</span> &#123;</span><br><span class="line">                Thread.sleep(random.nextInt(<span class="number">5000</span>));</span><br><span class="line">            &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</span><br><span class="line">                e.printStackTrace();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="Locks"><a href="#Locks" class="headerlink" title="Locks"></a>Locks</h1><p>The biggeast advantages of Lock objects over implicit locks is the ability to back out of an attempt to acquire a lock. The tryLock() method backs out if the lock is not availiable immediately or before a timeout expires.</p>
+<h1 id="Executors"><a href="#Executors" class="headerlink" title="Executors"></a>Executors</h1><p>Executors encapsulate threads creation and management, The java.util.concurrent package defines three executor interfaces:</p>
+<ul>
+<li>Executor, a simple interface that supports launching new tasks. The low-level idiom creates a new thread and launches it immediately. Depending on the Executor implementation, execute may do the same thing, but is more likely to use an existing worker thread to run r, or to place r in a queue to wait for a worker thread to become available. </li>
+<li>ExecutorService, a subinterface of Executor, which adds features that help manage the lifecycle, both of the individual tasks and of the executor itself. The ExecutorService interface supplements execute with a similar, but more versatile submit method. Like execute, submit accepts Runnable objects, but also accepts Callable objects, which allow the task to return a value. The submit method returns a Future object, which is used to retrieve the Callable return value and to manage the status of both Callable and Runnable tasks.</li>
+<li>ScheduledExecutorService, a subinterface of ExecutorService, supports future and/or periodic execution of tasks. The ScheduledExecutorService interface supplements the methods of its parent ExecutorService with schedule, which executes a Runnable or Callable task after a specified delay. In addition, the interface defines scheduleAtFixedRate and scheduleWithFixedDelay, which executes specified tasks repeatedly, at defined intervals.</li>
+</ul>
+<h1 id="Thread-Pools"><a href="#Thread-Pools" class="headerlink" title="Thread Pools"></a>Thread Pools</h1><p>Most of the executor implementations in java.util.concurrent use thread pools, which consist of worker threads. This kind of thread exists separately from the Runnable and Callable tasks it executes and is often used to execute multiple tasks.</p>
+<p>Using worker threads minimizes the overhead due to thread creation. Thread objects use a significant amount of memory, and in a large-scale application, allocating and deallocating many thread objects creates a significant memory management overhead.</p>
+<p>One common type of thread pool is the fixed thread pool. This type of pool always has a specified number of threads running; if a thread is somehow terminated while it is still in use, it is automatically replaced with a new thread. Tasks are submitted to the pool via an internal queue, which holds extra tasks whenever there are more active tasks than threads.</p>
+<h1 id="Fork-Join"><a href="#Fork-Join" class="headerlink" title="Fork / Join"></a>Fork / Join</h1><p>The fork/join framework is an implementation of the ExecutorService interface that helps you take advantage of multiple processors. It is designed for work that can be broken into smaller pieces recursively. The goal is to use all the available processing power to enhance the performance of your application.</p>
+<p>As with any ExecutorService implementation, the fork/join framework distributes tasks to worker threads in a thread pool. The fork/join framework is distinct because it uses a work-stealing algorithm. Worker threads that run out of things to do can steal tasks from other threads that are still busy.</p>
+<h1 id="Concurrent-Collections"><a href="#Concurrent-Collections" class="headerlink" title="Concurrent Collections"></a>Concurrent Collections</h1><p>The java.util.concurrent package includes a number of additions to the Java Collections Framework:</p>
+<ul>
+<li><p>BlockingQueue defines a first-in-first-out data structure that blocks or times out when you attempt to add to a full queue, or retrieve from an empty queue.</p>
+</li>
+<li><p>ConcurrentMap is a subinterface of java.util.Map that defines useful atomic operations. These operations remove or replace a key-value pair only if the key is present, or add a key-value pair only if the key is absent. Making these operations atomic helps avoid synchronization. The standard general-purpose implementation of ConcurrentMap is ConcurrentHashMap, which is a concurrent analog of HashMap.</p>
+</li>
+<li><p>ConcurrentNavigableMap is a subinterface of ConcurrentMap that supports approximate matches. The standard general-purpose implementation of ConcurrentNavigableMap is ConcurrentSkipListMap, which is a concurrent analog of TreeMap.</p>
+<p>All of these collections help avoid Memory Consistency Errors by defining a happens-before relationship between an operation that adds an object to the collection with subsequent operations that access or remove that object.</p>
+</li>
+</ul>
+<h1 id="Atomic-Variables"><a href="#Atomic-Variables" class="headerlink" title="Atomic Variables"></a>Atomic Variables</h1><p>The java.util.concurrent.atomic package defines classes that support atomic operations on single variables. All classes have get and set methods that work like reads and writes on volatile variables. That is, a set has a happens-before relationship with any subsequent get on the same variable. The atomic compareAndSet method also has these memory consistency features, as do the simple atomic arithmetic methods that apply to integer atomic variables.</p>
+<h1 id="Concurrent-Random-Numbers"><a href="#Concurrent-Random-Numbers" class="headerlink" title="Concurrent Random Numbers"></a>Concurrent Random Numbers</h1><p>In JDK 7, java.util.concurrent includes a convenience class, ThreadLocalRandom, for applications that expect to use random numbers from multiple threads or ForkJoinTasks.</p>
+<h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><p><a href="http://docs.oracle.com/javase/tutorial/essential/TOC.html" target="_blank" rel="noopener">http://docs.oracle.com/javase/tutorial/essential/TOC.html</a></p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          
+        
+        <div class="post-tags">
+            <a href="/tags/Java/" rel="tag"># Java</a>
+          
+            <a href="/tags/并发/" rel="tag"># 并发</a>
+          
+        </div>
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+              <a href="/2015/06/30/排序算法总结/" rel="next" title="排序算法总结">
+                <i class="fa fa-chevron-left"></i> 排序算法总结
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+              <a href="/2015/07/01/Sort-colors/" rel="prev" title="Sort colors">
+                Sort colors <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+  </div>
+
+
+          </div>
+          
+
+
+        </div>
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Jeffzzf</p>
+  <div class="site-description motion-element" itemprop="description">Do one thing at a time, and do well.</div>
+</div>
+  <nav class="site-state motion-element">
+      <div class="site-state-item site-state-posts">
+        
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">121</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+    
+      
+      
+      <div class="site-state-item site-state-categories">
+        
+          
+            <a href="/categories/">
+          
+        
+        
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+        <span class="site-state-item-count">60</span>
+        <span class="site-state-item-name">分类</span>
+        </a>
+      </div>
+    
+      
+      
+      <div class="site-state-item site-state-tags">
+        
+          
+            <a href="/tags/">
+          
+        
+        
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+        <span class="site-state-item-count">107</span>
+        <span class="site-state-item-name">标签</span>
+        </a>
+      </div>
+    
+  </nav>
+
+
+
+        </div>
+      </div>
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Processes"><span class="nav-number">1.</span> <span class="nav-text">Processes</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Threads"><span class="nav-number">2.</span> <span class="nav-text">Threads</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Ways-to-use-threads"><span class="nav-number">3.</span> <span class="nav-text">Ways to use threads</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Methods-of-Thread-Class"><span class="nav-number">4.</span> <span class="nav-text">Methods of Thread Class</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Sleep"><span class="nav-number">5.</span> <span class="nav-text">Sleep</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Interrupt"><span class="nav-number">6.</span> <span class="nav-text">Interrupt</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Join"><span class="nav-number">7.</span> <span class="nav-text">Join</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Synchronized"><span class="nav-number">8.</span> <span class="nav-text">Synchronized</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Intrinsic-Locks-and-Reentrant-Locks"><span class="nav-number">9.</span> <span class="nav-text">Intrinsic Locks and Reentrant Locks</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Synchronized-methods"><span class="nav-number">10.</span> <span class="nav-text">Synchronized methods</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Synchronized-statements"><span class="nav-number">11.</span> <span class="nav-text">Synchronized statements</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Reentrant-Synchcronized"><span class="nav-number">12.</span> <span class="nav-text">Reentrant Synchcronized</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Atomic-Access"><span class="nav-number">13.</span> <span class="nav-text">Atomic Access</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Deadlock-Starvation-and-livelock"><span class="nav-number">14.</span> <span class="nav-text">Deadlock, Starvation and livelock</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Thread-communication"><span class="nav-number">15.</span> <span class="nav-text">Thread communication</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#wait"><span class="nav-number">16.</span> <span class="nav-text">wait()</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Producer-Consumer"><span class="nav-number">17.</span> <span class="nav-text">Producer-Consumer</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Locks"><span class="nav-number">18.</span> <span class="nav-text">Locks</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Executors"><span class="nav-number">19.</span> <span class="nav-text">Executors</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Thread-Pools"><span class="nav-number">20.</span> <span class="nav-text">Thread Pools</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Fork-Join"><span class="nav-number">21.</span> <span class="nav-text">Fork / Join</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Concurrent-Collections"><span class="nav-number">22.</span> <span class="nav-text">Concurrent Collections</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Atomic-Variables"><span class="nav-number">23.</span> <span class="nav-text">Atomic Variables</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Concurrent-Random-Numbers"><span class="nav-number">24.</span> <span class="nav-text">Concurrent Random Numbers</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Reference"><span class="nav-number">25.</span> <span class="nav-text">Reference</span></a></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Jeffzzf</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.9.0</div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> v7.3.0</div>
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+      </div>
+
+    
+
+  </div>
+
+  
+  <script src="/lib/jquery/index.js?v=3.4.1"></script>
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  <script src="/js/utils.js?v=7.3.0"></script>
+  <script src="/js/motion.js?v=7.3.0"></script>
+
+  
+  <script src="/js/schemes/muse.js?v=7.3.0"></script>
+
+
+  
+  <script src="/js/scrollspy.js?v=7.3.0"></script>
+<script src="/js/post-details.js?v=7.3.0"></script>
+
+
+
+  <script src="/js/next-boot.js?v=7.3.0"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
+
+  
+
+  
+
+  
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

@@ -1,0 +1,940 @@
+<!DOCTYPE html>
+
+
+
+
+
+<html class="theme-next muse use-motion" lang="zh-CN">
+<head>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8">
+<meta name="generator" content="Hexo 3.9.0">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.3.0">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.3.0">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.3.0">
+  <link rel="mask-icon" href="/images/logo.svg?v=7.3.0" color="#222">
+
+<link rel="stylesheet" href="/css/main.css?v=7.3.0">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '7.3.0',
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    copycode: {"enable":false,"show_result":false,"style":null},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    search: {
+      root: '/',
+      path: ''
+    },
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    translation: {
+      copy_button: '复制',
+      copy_success: '复制成功',
+      copy_failure: '复制失败'
+    }
+  };
+</script>
+
+  <meta name="description" content="术语Topic 主题，承载消息的逻辑容器，在实际使用中用于区分业务类型。 Record 消息，Kafka处理的主要对象 Partition 分区，每个topic包含一个或多个partition，是一个有序的消息序列。物理上，每个partition对应一个文件夹，该文件夹下存储该partition的数据和索引文件。每条消息被发送到broker之前，会根据分区规则选择存储到哪个分区。 Offset 消">
+<meta name="keywords" content="mq,kafka">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Kafka">
+<meta property="og:url" content="http://jeffzzf.github.io/2019/08/19/Kafka/index.html">
+<meta property="og:site_name" content="Noob">
+<meta property="og:description" content="术语Topic 主题，承载消息的逻辑容器，在实际使用中用于区分业务类型。 Record 消息，Kafka处理的主要对象 Partition 分区，每个topic包含一个或多个partition，是一个有序的消息序列。物理上，每个partition对应一个文件夹，该文件夹下存储该partition的数据和索引文件。每条消息被发送到broker之前，会根据分区规则选择存储到哪个分区。 Offset 消">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://jeffzzf.github.io/images/image-20190819170404800.png">
+<meta property="og:image" content="http://jeffzzf.github.io/images/KafkaArchitecture.png">
+<meta property="og:image" content="http://jeffzzf.github.io/images/image-20190819220846252.png">
+<meta property="og:updated_time" content="2019-08-29T03:23:45.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Kafka">
+<meta name="twitter:description" content="术语Topic 主题，承载消息的逻辑容器，在实际使用中用于区分业务类型。 Record 消息，Kafka处理的主要对象 Partition 分区，每个topic包含一个或多个partition，是一个有序的消息序列。物理上，每个partition对应一个文件夹，该文件夹下存储该partition的数据和索引文件。每条消息被发送到broker之前，会根据分区规则选择存储到哪个分区。 Offset 消">
+<meta name="twitter:image" content="http://jeffzzf.github.io/images/image-20190819170404800.png">
+  <link rel="canonical" href="http://jeffzzf.github.io/2019/08/19/Kafka/">
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>Kafka | Noob</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Noob</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+    <ul id="menu" class="menu">
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+      
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+      
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+
+  </li>
+    </ul>
+    
+
+</nav>
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://jeffzzf.github.io/2019/08/19/Kafka/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Jeffzzf">
+      <meta itemprop="description" content="Do one thing at a time, and do well.">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Noob">
+    </span>
+      <header class="post-header">
+
+        
+          <h1 class="post-title" itemprop="name headline">Kafka
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-08-19 15:36:48" itemprop="dateCreated datePublished" datetime="2019-08-19T15:36:48+08:00">2019-08-19</time>
+            </span>
+          
+            
+
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2019-08-29 11:23:45" itemprop="dateModified" datetime="2019-08-29T11:23:45+08:00">2019-08-29</time>
+              </span>
+            
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/分布式/" itemprop="url" rel="index"><span itemprop="name">分布式</span></a></span>
+
+                
+                
+                  ，
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/分布式/mq/" itemprop="url" rel="index"><span itemprop="name">mq</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          <br>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="术语"><a href="#术语" class="headerlink" title="术语"></a>术语</h2><p><strong>Topic</strong></p>
+<p>主题，承载消息的逻辑容器，在实际使用中用于区分业务类型。</p>
+<p><strong>Record</strong></p>
+<p>消息，Kafka处理的主要对象</p>
+<p><strong>Partition</strong></p>
+<p>分区，每个topic包含一个或多个partition，是一个有序的消息序列。物理上，每个partition对应一个文件夹，该文件夹下存储该partition的数据和索引文件。每条消息被发送到broker之前，会根据分区规则选择存储到哪个分区。</p>
+<p><strong>Offset</strong></p>
+<p>消息位移，表示分区中每条消息的位置信息，是一个单调递增且不变的值。offset是消息在分区中的唯一标识，kafka通过offset来保证消息在分区中的顺序性，kafka保证的是分区有序而不是主题有序。</p>
+<p><img src="/images/image-20190819170404800.png" alt="image-20190819170404800"></p>
+<p>几种重要的offset：</p>
+<ul>
+<li>LogStartOffset，第一条消息的offset，等于0</li>
+<li>HW（High Watermark），高水位，标识特定的offset，消费者只能拉取这个offset之前的消息</li>
+<li>LEO（Log End Offset）标识当前日志文件下一条待写入消息的offset，等于当前日志分区最后一条消息offset加1</li>
+</ul>
+<p>分区ISR集合中的每个副本都会维护自身的LEO，ISR集合中最小的LEO即为分区的HW。Kafka的复制机制既不是同步复制也不是异步复制，这种ISR的方式有效权衡了数据可靠性和性能之间的关系。</p>
+<p><strong>Replica</strong></p>
+<p>副本，同一条消息被拷贝到多个地方以提供数据冗余，副本分为leader replica（领导者副本）和follower replica（追随者副本）。副本是在分区层级下的，即每个分区可以配置多个副本实现高可用。生产者和消费者只和leader副本交互，follower副本只负责消息同步。副本处于不同的broker中，当leader副本出现故障时，从follower副本中重新选举新的leader副本对外提供服务。</p>
+<p>分区中的所有副本统称为AR(AssignedReplicas)。所有与leader副本保持一定程度同步的副本(包括leader副本在内〕组成ISROn-SyncReplicas),ISR集合是AR集合中的一个子集。消息会先发送到lead巳r副本，然后follower副本才能从leader副本中拉取消息进行同步，同步期间内follower副本相对于leader副本而言会有一定程度的滞后。“一定程度的同步”是指可忍受的滞后范围，这个范围可以通过参数进行配置。与leader副本同步滞后过多的副本(不包括leader副本)组成OSR(Out-of-SyncReplicas)，由此可见，AR=ISR+OSR。在正常情况下，所有的follower副本都应该与leader副本保持一定程度的同步，即AR=ISR,OSR集合为空。</p>
+<p>leader副本负责维护和跟踪ISR集合中所有follower副本的滞后状态，当follower副本落后太多或失效时，leader副本会把它从ISR集合中剔除。如果OSR集合中有follower副本“追上”了leader副本，那么leader副本会把它从OSR集合转移至ISR集合。默认情况下，当leader副本发生故障时，只有在ISR集合中的副本才有资格被选举为新的leader，而在OSR集合中的副本则没有任何机会(不过这个原则也可以通过修改相应的参数配置来改变)。</p>
+<p><strong>Producer</strong></p>
+<p>生产者，向主题发布新消息的应用程序</p>
+<p><strong>Consumer</strong></p>
+<p>消费者，从主题订阅新消息的应用程序。kafka consumer使用拉（pull）模式从服务端拉取消息，并保存消费的具体位置。消费者宕机恢复后可根据之前保存的消费位置重新拉取需要的消息进行消费以避免消息丢失。</p>
+<p><strong>Consumer Offset</strong></p>
+<p>消费者消费进度，每个消费者都有自己的消费者位移</p>
+<p><strong>Consumer Group</strong></p>
+<p>多个消费者实例组成一个组，同时消费多个分区以实现高吞吐</p>
+<p><strong>Rebalance</strong></p>
+<p>重平衡，消费者组内某个消费者实例挂掉后，其它消费者实例自动重新分配订阅主题分区的过程，是Kafka消费端实现高可用的重要手段</p>
+<p><strong>Broker</strong></p>
+<p>服务代理节点，大多数情况下，broker可以看作一台kafka服务器，前提是这台服务器上只部署了一个kafka实例</p>
+<h2 id="架构"><a href="#架构" class="headerlink" title="架构"></a>架构</h2><p>Kafka通过ZooKeeper对元数据进行管理，包括集群、broker、主题、分区等内容。</p>
+<p><img src="/images/KafkaArchitecture.png" alt="kafka architecture æ¶æ"></p>
+<h3 id="生产者"><a href="#生产者" class="headerlink" title="生产者"></a>生产者</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">Properties props = <span class="keyword">new</span> Properties();</span><br><span class="line">props.put(<span class="string">"bootstrap.servers"</span>, <span class="string">"localhost:9092"</span>);</span><br><span class="line">props.put(<span class="string">"acks"</span>, <span class="string">"all"</span>);</span><br><span class="line">props.put(<span class="string">"key.serializer"</span>, <span class="string">"org.apache.kafka.common.serialization.StringSerializer"</span>);</span><br><span class="line">props.put(<span class="string">"value.serializer"</span>, <span class="string">"org.apache.kafka.common.serialization.StringSerializer"</span>);</span><br><span class="line"></span><br><span class="line">Producer&lt;String, String&gt; producer = <span class="keyword">new</span> KafkaProducer&lt;&gt;(props);</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">100</span>; i++)</span><br><span class="line">    producer.send(<span class="keyword">new</span> ProducerRecord&lt;String, String&gt;(<span class="string">"my-topic"</span>, Integer.toString(i), Integer.toString(i)));</span><br><span class="line"></span><br><span class="line">producer.close();</span><br></pre></td></tr></table></figure>
+
+<p>KafkaProducer是线程安全的，在多个线程中使用同一个producer会有更高的性能。</p>
+<p>send本身就是异步的，有两个重载的方法，返回的Future对象可以使调用方稍后获得发送的结果。发送消息一般可能发生两种异常：可重试异常和不可重试异常。常见的可重试异常有NetworkException、LeaderNotAvailableException、UnkonwnTopicOrPartitionException、NotEnoughRepicaException。常见的不可重试异常如RecordTooLargeException。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">Future&lt;RecordMetadata&gt; <span class="title">send</span><span class="params">(ProducerRecord&lt;K, V&gt; record)</span></span>;</span><br><span class="line"><span class="function">Future&lt;RecordMetadata&gt; <span class="title">send</span><span class="params">(ProducerRecord&lt;K, V&gt; record, Callback callback)</span></span>;</span><br></pre></td></tr></table></figure>
+
+<p>对于可重试异常，如果配置了retries参数，只要在规定重试次数内自行恢复就不会抛出异常。默认值是0，配置方式如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">props.put(ProducerConfg.RETRIES_CONFIG, <span class="number">3</span> ) ;</span><br></pre></td></tr></table></figure>
+
+<p>send方法将消息发送给broker时，有可能经过拦截器（Interceptor）、序列化器（Serializer）和分区器（Partitioner）后才真正发往broker。</p>
+<p><img src="/images/image-20190819220846252.png" alt="image-20190819220846252"></p>
+<h4 id="拦截器"><a href="#拦截器" class="headerlink" title="拦截器"></a>拦截器</h4><p>生产者拦截器可以用来在消息发送前做一些准备工作，如按照某个规则过滤不符合要求的消息、修改消息内容等，也可以做一些定制化的需求，如统计类工作。KafkaProducer不仅可以指定一个拦截器，还可以指定多个拦截器组成拦截链。拦截链中，如果某个拦截器执行失败，下一个拦截器会接着从上一个执行成功的拦截器继续执行。</p>
+<h4 id="序列化器"><a href="#序列化器" class="headerlink" title="序列化器"></a>序列化器</h4><p>生产者发送数据时需要通过序列化把对象转换成字节数组，消费者消费消息时要使用与生产者序列化器兼容的反序列化器将字节数组转化为对象。如果Kafka客户端提供的几种序列化器都无法满足需求，可以选择使用Avro、JSON、Thrift、ProtoBuf等通用的序列化工具来实现，或者使用自定义的序列化器实现。</p>
+<h4 id="分区器"><a href="#分区器" class="headerlink" title="分区器"></a>分区器</h4><p>分区器的作用是为消息分配分区，如果消息ProducerRecord中没有指定partition字段，producer将根据key来计算partition的值。如果key不为null，默认的分区器对key进行hash（采用MurmurHash2算法），相同key对应的消息会被写入同一个分区。如果key为null，消息将会以轮询的方式发往主题内各个可用分区。</p>
+<h4 id="消息收集器"><a href="#消息收集器" class="headerlink" title="消息收集器"></a>消息收集器</h4><p>生产者客户端由两个线程协调运行：主线程和Sender线程。在主线程中创建消息、通过可能的拦截器、序列化器和分区器后缓存到消息累加器（RecordAccumulator，也称作消息收集器）中。Sender线程从RecordAccumulator中获取消息并将其发送到Kafka中。</p>
+<p>RecordAccumulator主要用来缓存消息以便于Sender线程可以批量发送，进而减少网络传输资源的消耗以提升性能。缓存大小可以通过生产者客户端参数buffer.memory配置，默认值为32MB。如果生产者发送消息的速度超过发送到服务器的速度，会导致生产者空间不足，send()方法要么被阻塞要么抛出异常。该特性由参数max.block.ms配置，默认值为60s。</p>
+<p>RecordAccumulator内部为每个分区都维护了一个双端队列，消息写入缓存时，追加到双端队列的尾部；sender读取消息时，从双端队列的头部读取。InFlightRequests会缓存已经发出去但还没收到响应的请求，并通过还未确认的请求计算负载最小的Node（leastLoadedNode）。</p>
+<h4 id="元数据更新"><a href="#元数据更新" class="headerlink" title="元数据更新"></a>元数据更新</h4><p>元数据具体记录了集群中有哪些主题，这些主题有哪些分区，每个分区的lead巳r副本分配在哪个节点上，follower副本分配在哪些节点上，哪些副本在AR、ISR等集合中，集群中有哪些节点，控制器节点又是哪一个等信息。</p>
+<p>当客户端中没有需要使用的元数据，如没有指定主题信息或超过metadata.max.age.ms（默认5分钟）时间没有更新元数据都会引起元数据的更新操作。元数据更新操作在客户端内部进行，对客户端外部使用者不可见。更新元数据时，先挑选出leastLoadedNode，向这个Node发送MetadataRequest请求获取元数据信息。这个请求由Sender线程发起，主线程也需要读取这些信息，它们之间通过synchronized和final关键字来保证。</p>
+<h3 id="消费者"><a href="#消费者" class="headerlink" title="消费者"></a>消费者</h3><p>每个消费者（Consumer）对应一个消费组（Consumer Group），可以通过增加/减少消费者个数来提高/降低整体消费能力。当消费者个数大于分区个数时，会有消费者分配不到任何分区。</p>
+<p>消息中间件一般有两种消息投递模式：点对点模式（P2P，Point-to-Point）模式和发布/订阅（Pub/Sub）模式。发布/订阅模式在一对多广播时采用。Kafka同时支持两种消息投递模式，当消费者都属于不同的消费组时，所有消息被广播给所有消费者，每条消息都会被所有消费者处理，相当于发布订阅模式；当所有消费者都属于同一个消费组时，每个消息只会被一个消费者处理，相当于点对点模式。</p>
+<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><p>《深入理解Kafka：核心设计与实践原理》</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          
+        
+        <div class="post-tags">
+            <a href="/tags/mq/" rel="tag"># mq</a>
+          
+            <a href="/tags/kafka/" rel="tag"># kafka</a>
+          
+        </div>
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+              <a href="/2019/08/17/消息队列/" rel="next" title="消息队列">
+                <i class="fa fa-chevron-left"></i> 消息队列
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+              <a href="/2019/08/20/面试题/" rel="prev" title="面试题">
+                面试题 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+  </div>
+
+
+          </div>
+          
+
+
+        </div>
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Jeffzzf</p>
+  <div class="site-description motion-element" itemprop="description">Do one thing at a time, and do well.</div>
+</div>
+  <nav class="site-state motion-element">
+      <div class="site-state-item site-state-posts">
+        
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">121</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+    
+      
+      
+      <div class="site-state-item site-state-categories">
+        
+          
+            <a href="/categories/">
+          
+        
+        
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+        <span class="site-state-item-count">60</span>
+        <span class="site-state-item-name">分类</span>
+        </a>
+      </div>
+    
+      
+      
+      <div class="site-state-item site-state-tags">
+        
+          
+            <a href="/tags/">
+          
+        
+        
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+        <span class="site-state-item-count">107</span>
+        <span class="site-state-item-name">标签</span>
+        </a>
+      </div>
+    
+  </nav>
+
+
+
+        </div>
+      </div>
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#术语"><span class="nav-number">1.</span> <span class="nav-text">术语</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#架构"><span class="nav-number">2.</span> <span class="nav-text">架构</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#生产者"><span class="nav-number">2.1.</span> <span class="nav-text">生产者</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#拦截器"><span class="nav-number">2.1.1.</span> <span class="nav-text">拦截器</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#序列化器"><span class="nav-number">2.1.2.</span> <span class="nav-text">序列化器</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#分区器"><span class="nav-number">2.1.3.</span> <span class="nav-text">分区器</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#消息收集器"><span class="nav-number">2.1.4.</span> <span class="nav-text">消息收集器</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#元数据更新"><span class="nav-number">2.1.5.</span> <span class="nav-text">元数据更新</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#消费者"><span class="nav-number">2.2.</span> <span class="nav-text">消费者</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考资料"><span class="nav-number">3.</span> <span class="nav-text">参考资料</span></a></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Jeffzzf</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.9.0</div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> v7.3.0</div>
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+      </div>
+
+    
+
+  </div>
+
+  
+  <script src="/lib/jquery/index.js?v=3.4.1"></script>
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  <script src="/js/utils.js?v=7.3.0"></script>
+  <script src="/js/motion.js?v=7.3.0"></script>
+
+  
+  <script src="/js/schemes/muse.js?v=7.3.0"></script>
+
+
+  
+  <script src="/js/scrollspy.js?v=7.3.0"></script>
+<script src="/js/post-details.js?v=7.3.0"></script>
+
+
+
+  <script src="/js/next-boot.js?v=7.3.0"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
+
+  
+
+  
+
+  
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

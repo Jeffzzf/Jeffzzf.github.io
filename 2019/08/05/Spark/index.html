@@ -1,0 +1,933 @@
+<!DOCTYPE html>
+
+
+
+
+
+<html class="theme-next muse use-motion" lang="zh-CN">
+<head>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8">
+<meta name="generator" content="Hexo 3.9.0">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.3.0">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.3.0">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.3.0">
+  <link rel="mask-icon" href="/images/logo.svg?v=7.3.0" color="#222">
+
+<link rel="stylesheet" href="/css/main.css?v=7.3.0">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '7.3.0',
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    copycode: {"enable":false,"show_result":false,"style":null},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    search: {
+      root: '/',
+      path: ''
+    },
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    translation: {
+      copy_button: '复制',
+      copy_success: '复制成功',
+      copy_failure: '复制失败'
+    }
+  };
+</script>
+
+  <meta name="description" content="RDDRDD，弹性分布式数据集（Resilient Distributed Dataset）是spark的核心概念，它是集群中跨多个机器分区存储的一个只读对象集合，弹性指spark可以通过重新安排计算来自动重建丢失的分区。在spark程序中，一般加载一个或多个RDD作为输入，通过一系列转换得到一组目标RDD，然后将这些RDD计算出结果或者写入持久存储器。 加载RDD或执行转换并不会立即触发任何数据">
+<meta name="keywords" content="Spark,BigData">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Spark">
+<meta property="og:url" content="http://jeffzzf.github.io/2019/08/05/Spark/index.html">
+<meta property="og:site_name" content="Noob">
+<meta property="og:description" content="RDDRDD，弹性分布式数据集（Resilient Distributed Dataset）是spark的核心概念，它是集群中跨多个机器分区存储的一个只读对象集合，弹性指spark可以通过重新安排计算来自动重建丢失的分区。在spark程序中，一般加载一个或多个RDD作为输入，通过一系列转换得到一组目标RDD，然后将这些RDD计算出结果或者写入持久存储器。 加载RDD或执行转换并不会立即触发任何数据">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://jeffzzf.github.io/images/image-20200110113016921.png">
+<meta property="og:updated_time" content="2020-01-14T08:59:57.422Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Spark">
+<meta name="twitter:description" content="RDDRDD，弹性分布式数据集（Resilient Distributed Dataset）是spark的核心概念，它是集群中跨多个机器分区存储的一个只读对象集合，弹性指spark可以通过重新安排计算来自动重建丢失的分区。在spark程序中，一般加载一个或多个RDD作为输入，通过一系列转换得到一组目标RDD，然后将这些RDD计算出结果或者写入持久存储器。 加载RDD或执行转换并不会立即触发任何数据">
+<meta name="twitter:image" content="http://jeffzzf.github.io/images/image-20200110113016921.png">
+  <link rel="canonical" href="http://jeffzzf.github.io/2019/08/05/Spark/">
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>Spark | Noob</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Noob</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+    <ul id="menu" class="menu">
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+      
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+      
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+
+  </li>
+    </ul>
+    
+
+</nav>
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://jeffzzf.github.io/2019/08/05/Spark/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Jeffzzf">
+      <meta itemprop="description" content="Do one thing at a time, and do well.">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Noob">
+    </span>
+      <header class="post-header">
+
+        
+          <h1 class="post-title" itemprop="name headline">Spark
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-08-05 14:49:13" itemprop="dateCreated datePublished" datetime="2019-08-05T14:49:13+08:00">2019-08-05</time>
+            </span>
+          
+            
+
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2020-01-14 16:59:57" itemprop="dateModified" datetime="2020-01-14T16:59:57+08:00">2020-01-14</time>
+              </span>
+            
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/BigData/" itemprop="url" rel="index"><span itemprop="name">BigData</span></a></span>
+
+                
+                
+                  ，
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/BigData/Spark/" itemprop="url" rel="index"><span itemprop="name">Spark</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          <br>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="RDD"><a href="#RDD" class="headerlink" title="RDD"></a>RDD</h2><p>RDD，弹性分布式数据集（Resilient Distributed Dataset）是spark的核心概念，它是集群中跨多个机器分区存储的一个只读对象集合，弹性指spark可以通过重新安排计算来自动重建丢失的分区。在spark程序中，一般加载一个或多个RDD作为输入，通过一系列转换得到一组目标RDD，然后将这些RDD计算出结果或者写入持久存储器。</p>
+<p>加载RDD或执行转换并不会立即触发任何数据处理的操作，只是创建一个计算计划。只有对RDD执行某个动作（如foreach）时，才会触发真正的计算。通过rdd的map()方法可以对RDD的每个元素应用某个函数，filter()方法的输入是一个过滤谓词，即返回布尔值的函数。</p>
+<p>RDD 具有以下几个特点：</p>
+<ol>
+<li><p>分布在集群中的<strong>只读</strong>对象集合，由多个 partition 构成，这些 partition 可能存储在不同机器上</p>
+</li>
+<li><p>RDD 可以存储在磁盘或内存中（多种存储级别），partition 可以全部存储在内存或磁盘上，也可以部分在内存中，部分在磁盘上</p>
+</li>
+<li><p>Spark 提供了大量 API 通过<strong>并行</strong>的方式构造和生成 RDD</p>
+</li>
+<li><p>失效后自动重构：Spark 通过记录 RDD 的血统，了解每个 RDD 的产生方式（包括父 RDD 以及计算方式），进而能够通过重算的方式构造因机器故障或磁盘损坏导致丢失的 RDD 数据</p>
+<p> HDFS 的任何一个文件也可以认为是分布式数据集，但从一定程度上，HDFS 并不具有弹性，因为所有数据都存储在磁盘上。RDD 则可以将 Partition 部分存储在磁盘部分存储在内存。</p>
+</li>
+</ol>
+<h3 id="转换和动作"><a href="#转换和动作" class="headerlink" title="转换和动作"></a>转换和动作</h3><p>转换（transformation）是从现有RDD生成新的RDD，动作（Action）触发对RDD的计算并对计算结果执行某种操作，要么返回给用户，要么保存到外部存储器中。动作的效果是立竿见影的，但转换不是，转换是惰性的，在对RDD执行一个动作之前不会为该RDD的任何转换操作采取实际行动。判断一个操作是转换还是动作，可以观察返回类型，如果返回的类型是RDD，那么它是一个转换，否则就是一个动作。</p>
+<h2 id="作业"><a href="#作业" class="headerlink" title="作业"></a>作业</h2><p>Spark作业由任意多阶段（stages）有向无环图构成，有的阶段又被spark运行环境分解为多个任务（task），任务并行运行在分布于集群中的RDD分区上。作业始终运行在应用（application）上下文（SparkContext实例表示）中，它提供了RDD分组以及共享变量。一个应用可以串行或并行地运行多个作业，并为这些作业提供访问由同一应用的先前作业所缓存的RDD的机制。</p>
+<p>Task：具体执行的任务，Task 分为 ShuffleMapTask 和 ResultTask 两种，分别类似于 Hadoop 中的 Map、Reduce</p>
+<p>Job：用户提交的作业，一个 Job 可能由一到多个 Task 组成</p>
+<p>Stage：Job 划分的阶段（stage），一个 Job 可能被划分为一到多个 stage</p>
+<p>Partition：数据分区，一个 Rdd 数据可以划分为多个分区</p>
+<p>NarrowDependency：窄依赖，子 RDD 依赖于父 RDD 中固定的 partition，NarrowDependency 分为 OneToOneDependency 和 RangeDependency 两种</p>
+<p>ShuffleDependency：shuffle 依赖，也称为宽依赖，子 Rdd 对父 Rdd 中所有 Partition 都有依赖</p>
+<p>DAG（Directed Acycle graph）：有向无环图，用于描述 Rdd 之间的依赖关系</p>
+<h2 id="运行机制"><a href="#运行机制" class="headerlink" title="运行机制"></a>运行机制</h2><p><img src="/images/image-20200110113016921.png" alt="image-20200110113016921"></p>
+<p>Cluster Manager：在standalone模式中即为Master主节点，控制整个集群，监控worker。在YARN模式中为资源管理器</p>
+<p>Worker节点：从节点，负责控制计算节点，启动Executor或者Driver。</p>
+<p>Driver： 运行Application 的main()函数</p>
+<p>Executor：执行器，是为某个Application运行在worker node上的一个进程</p>
+<p>在最高层，spark有两个独立的实体：driver和executor。driver负责托管应用（SparkContext）并为作业调度提供任务。executor专属于应用，在应用运行期间运行，并执行该应用的任务。通常，driver作为一个不由集群管理器（cluster manager）管理的客户端来运行，而executor则运行在集群的计算机上。</p>
+<h3 id="作业提交"><a href="#作业提交" class="headerlink" title="作业提交"></a>作业提交</h3><p>当对RDD执行一个动作（如count()）时，会自动提交一个spark作业。从内部来看，它导致对SparkContext调用runJob()，然后调用传递给作为driver的一部分运行的调度程序。调度程序由两部分组成：DAG调度程序和任务调度程序。DAG调度程序把作业分解为若干阶段，并由这些阶段构成一个DAG。任务调度程序则负责把每个阶段中的任务提交到集群。</p>
+<h3 id="DAG的构建"><a href="#DAG的构建" class="headerlink" title="DAG的构建"></a>DAG的构建</h3><p>stage中运行的任务分为两种类型：shuffle map和result任务。shuffle map任务类似于MapReduce中shuffle的map端部分。每个shuffle map任务在一个RDD分区上运行计算，并根据分区函数把输出写入一组新的分区中，以允许后面的stage取用（后面的阶段可能由shuffle map任务组成，也可能由result任务组成）。shuffle map任务运行在除最终阶段之外的其它所有阶段中。result任务运行在最终阶段，并将结果返回给用户程序（如count()的结果）。每个result任务在它自己的RDD分区上运行计算，然后把结果发送回driver，再由driver将每个分区的计算结果汇集成最终结果。简单的spark作业可能不需要shuffle，只有一个result任务构成stage，就像MapReduce中仅有map作业一样。</p>
+<p>如果RDD已经被同一应用（SparkContext）中先前的作业持久化保存，那么DAG调度程序将会省掉一些工作，不会再创建stage来重新计算它或它的父RDD。</p>
+<p>DAG调度程序负责将一个阶段分解为若干任务以提交给任务调度程序。DAG调度程序会为每个任务赋予一个位置偏好（placement preference），以允许任务调度程序充分利用数据本地化（data locality）。对于HDFS上的输入RDD分区来说，它的任务位置偏好就是托管了这些分区的数据块的datanode（称为node local），对于在内存中缓存的RDD分区，其任务的位置偏好是那些保存RDD分区的executor（称为process local）。</p>
+<p>一旦DAG调度程序已构建一个完整的多阶段DAG，它就将每个阶段的任务集合提交给任务调度程序，子阶段只有在其父阶段成功完成后才能提交。</p>
+<h3 id="任务调度"><a href="#任务调度" class="headerlink" title="任务调度"></a>任务调度</h3><p>当任务集合被发送到任务调度程序后，任务调度程序将该集合作为应用运行executor的列表，在斟酌位置偏好的同时构建任务到executor的映射。然后，任务调度程序将任务分配给具有可用内核的executor（如果同一应用中的另一个作业正在运行，则有可能分配不完整），并且在executor完成运行任务时继续分配更多的任务，直到任务集合全部完成。默认情况下，每个任务分配一个内核，可通过spark.task.cpus来更改。</p>
+<p>任务调度程序在为某个executor分配任务时，首先分配的是进程本地（process local）任务，再分配节点本地（node local）任务，然后分配机架本地（rack local）任务，最后分配任意（非本地）任务或推测任务（speculative task）。</p>
+<p>这些被分配的任务通过调度程序后端启动，调度程序后端向executor后端发送远程启动任务的消息，以告知executor开始运行任务。当任务启动或失败时，executor都会向driver发送状态更新消息。如果失败了，任务调度程序将在另一个executor上重新提交任务。若是启用了推测任务（默认不启动），它还会为运行缓慢的任务启动推测任务。</p>
+<p>spark利用Akka（一个基于Actor的平台，akka.io/）来构建高度可扩展的事件驱动分布式应用，而不是使用Hadoop RPC进行远程调用。</p>
+<h3 id="任务执行"><a href="#任务执行" class="headerlink" title="任务执行"></a>任务执行</h3><p>executor首先确保任务的jar包和文件依赖关系都是最新的，它在本地高速缓存中保留了先前任务已使用的所有依赖，只有在它们更新的情况下才会重新下载。然后，由于任务代码是以启动任务消息的一部分而发送的序列化字节，需要反序列化代码（包括用户自己的函数）。最后，执行任务代码，任务代码运行在与executor相同的JVM中，任务的启动没有进程开销。</p>
+<p>执行结果被序列化并发送到executor后端，然后以状态更新消息的形式返回driver。shuffle map任务返回的是一些可以让下一阶段检索其输出分区的信息，而result任务则返回其运行的分区结果值，driver将这些结果值收集起来，并把最终结果返回给用户程序。</p>
+<h2 id="集群管理器"><a href="#集群管理器" class="headerlink" title="集群管理器"></a>集群管理器</h2><p>负责管理executor生命周期的是集群管理器（cluster manager），spark提供了多种不同特性的集群管理器。</p>
+<h3 id="本地模式"><a href="#本地模式" class="headerlink" title="本地模式"></a>本地模式</h3><p>使用本地模式时，executor与driver运行在同一个JVM中，一般用于测试或小规模作业。这种模式的主URL为local（使用一个线程）、local[n]（n个线程）或local(*)（机器的每个内核一个线程）</p>
+<h3 id="独立模式"><a href="#独立模式" class="headerlink" title="独立模式"></a>独立模式</h3><p>独立模式是集群管理器的一个简单的分布式实现，它运行一个master以及一个或多个worker。当spark应用启动时，master要求worker代表应用生成多个executor进程。这种模式的主URL为spark://host:port。</p>
+<h3 id="Mesos模式"><a href="#Mesos模式" class="headerlink" title="Mesos模式"></a>Mesos模式</h3><p>Apache Mesos是一个通用的集群资源管理器，它允许根据组织策略在不同的应用之间细化资源共享。默认情况下（细粒度模式），每个spark任务被当作一个Mesos任务运行。这样可以更有效地使用集群资源，但是以额外进程启动开销为代价。在粗粒度模式下，executor在进程中运行任务，spark应用运行期间的集群资源由executor进程来掌管。这种模式的主URL为mesos://host:port</p>
+<h3 id="YARN模式"><a href="#YARN模式" class="headerlink" title="YARN模式"></a>YARN模式</h3><p>YARN是Hadoop中使用的资源管理器，每个运行的Spark应用对应一个YARN应用实例，每个executor在自己的YARN容器中运行。这种模式的主URL为yarn-client或yarn-cluster。</p>
+<p>Mesos和YARN集群管理器优于独立模式的集群管理器，因为它们考虑了集群上运行的其它应用（如MR作业）的资源需求，并统筹实施调度策略。此外，YARN是唯一能够与Hadoop的Kerberos安全机制集成的集群管理器。</p>
+<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><ol>
+<li><a href="https://juejin.im/post/5a73c8386fb9a0635e3cafaa" target="_blank" rel="noopener">深入理解spark之架构与原理</a></li>
+<li><a href="https://mathsyouth.github.io/2017/08/15/spark-on-yarn" target="_blank" rel="noopener">在 macOS 上安装 Spark on YARN</a></li>
+<li><a href="https://www.jianshu.com/p/4b7d07e754fa" target="_blank" rel="noopener">Spark 默认分区数</a></li>
+</ol>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          
+        
+        <div class="post-tags">
+            <a href="/tags/Spark/" rel="tag"># Spark</a>
+          
+            <a href="/tags/BigData/" rel="tag"># BigData</a>
+          
+        </div>
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+              <a href="/2019/08/03/Linux 文件/" rel="next" title="Linux 文件">
+                <i class="fa fa-chevron-left"></i> Linux 文件
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+              <a href="/2019/08/05/Java注解/" rel="prev" title="Java并发">
+                Java并发 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+  </div>
+
+
+          </div>
+          
+
+
+        </div>
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Jeffzzf</p>
+  <div class="site-description motion-element" itemprop="description">Do one thing at a time, and do well.</div>
+</div>
+  <nav class="site-state motion-element">
+      <div class="site-state-item site-state-posts">
+        
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">121</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+    
+      
+      
+      <div class="site-state-item site-state-categories">
+        
+          
+            <a href="/categories/">
+          
+        
+        
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+        <span class="site-state-item-count">60</span>
+        <span class="site-state-item-name">分类</span>
+        </a>
+      </div>
+    
+      
+      
+      <div class="site-state-item site-state-tags">
+        
+          
+            <a href="/tags/">
+          
+        
+        
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+        <span class="site-state-item-count">107</span>
+        <span class="site-state-item-name">标签</span>
+        </a>
+      </div>
+    
+  </nav>
+
+
+
+        </div>
+      </div>
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#RDD"><span class="nav-number">1.</span> <span class="nav-text">RDD</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#转换和动作"><span class="nav-number">1.1.</span> <span class="nav-text">转换和动作</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#作业"><span class="nav-number">2.</span> <span class="nav-text">作业</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#运行机制"><span class="nav-number">3.</span> <span class="nav-text">运行机制</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#作业提交"><span class="nav-number">3.1.</span> <span class="nav-text">作业提交</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#DAG的构建"><span class="nav-number">3.2.</span> <span class="nav-text">DAG的构建</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#任务调度"><span class="nav-number">3.3.</span> <span class="nav-text">任务调度</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#任务执行"><span class="nav-number">3.4.</span> <span class="nav-text">任务执行</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#集群管理器"><span class="nav-number">4.</span> <span class="nav-text">集群管理器</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#本地模式"><span class="nav-number">4.1.</span> <span class="nav-text">本地模式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#独立模式"><span class="nav-number">4.2.</span> <span class="nav-text">独立模式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Mesos模式"><span class="nav-number">4.3.</span> <span class="nav-text">Mesos模式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#YARN模式"><span class="nav-number">4.4.</span> <span class="nav-text">YARN模式</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考资料"><span class="nav-number">5.</span> <span class="nav-text">参考资料</span></a></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Jeffzzf</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.9.0</div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> v7.3.0</div>
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+      </div>
+
+    
+
+  </div>
+
+  
+  <script src="/lib/jquery/index.js?v=3.4.1"></script>
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  <script src="/js/utils.js?v=7.3.0"></script>
+  <script src="/js/motion.js?v=7.3.0"></script>
+
+  
+  <script src="/js/schemes/muse.js?v=7.3.0"></script>
+
+
+  
+  <script src="/js/scrollspy.js?v=7.3.0"></script>
+<script src="/js/post-details.js?v=7.3.0"></script>
+
+
+
+  <script src="/js/next-boot.js?v=7.3.0"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
+
+  
+
+  
+
+  
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>
