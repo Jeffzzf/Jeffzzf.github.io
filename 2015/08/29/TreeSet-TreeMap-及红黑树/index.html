@@ -28,7 +28,7 @@
 <meta property="og:description" content="TreeSet和TreeMapJava 中的TreeSet直接使用了TreeMap来实现，当向TreeSet中存放值时，实际保存在TreeMap的Key中，所有的value都是同一个Object对象。 123public TreeSet() &amp;#123;    this(new TreeMap&lt;E,Object&gt;());&amp;#125; 对于 TreeMap 来说，它采用一种被称为“红黑树">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2015-08-29T07:16:27.000Z">
-<meta property="article:modified_time" content="2020-05-16T10:18:43.769Z">
+<meta property="article:modified_time" content="2020-05-25T09:30:49.892Z">
 <meta property="article:author" content="Jeffzzf">
 <meta property="article:tag" content="Tree">
 <meta name="twitter:card" content="summary">
@@ -195,7 +195,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-05-16 18:18:43" itemprop="dateModified" datetime="2020-05-16T18:18:43+08:00">2020-05-16</time>
+                <time title="修改时间：2020-05-25 17:30:49" itemprop="dateModified" datetime="2020-05-25T17:30:49+08:00">2020-05-25</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -262,7 +262,7 @@
 <li>左右子树高度差小于1</li>
 <li>每一个子树均为平衡二叉树</li>
 </ol>
-<p>为了保证二叉树的平衡，AVL树引入监督机制，在树的某一部分的不平衡度超过一个阈值后触发相应的平衡炒作，保证树的平衡度在可接受的范围内。二叉树的平衡化有两大基础操作：左旋和右旋。左旋是逆时针旋转，右旋是顺时针旋转。旋转在整个平衡化过程中可能进行一次或多次。这两种操作都是从失去平衡的最小树根节点开始的（离插入节点最近且平衡因子超过1的祖节点）。</p>
+<p>为了保证二叉树的平衡，AVL树引入监督机制，在树的某一部分的不平衡度超过一个阈值后触发相应的平衡操作，保证树的平衡度在可接受的范围内。二叉树的平衡化有两大基础操作：左旋和右旋。左旋是逆时针旋转，右旋是顺时针旋转。旋转在整个平衡化过程中可能进行一次或多次。这两种操作都是从失去平衡的最小树根节点开始的（离插入节点最近且平衡因子超过1的祖节点）。</p>
 <p>由于AVL树维护高度平衡所付出的代价较高，实际应用不如红黑树广泛。如果应用场景中对插入删除不频繁，只对查找要求高，那么AVL树优于红黑树。红黑树广泛用于C++的STL中，如地图和集；Linux的进程调度完全公平调度程序用红黑树管理进程控制块，进程的虚拟内存区域存储在一棵红黑树上，每个虚拟地址区域对应红黑树的一个节点，左指针指向相邻地址虚拟存储区域，右指针指向相邻的高地址虚拟地址空间；IO多路复用的epoll的实现采用红黑树组织管理socketId，用以支持快速的增删改查；Nginx中用红黑树管理定时器，由于红黑树是有序的，可以快速得到距离当前最小的定时器；Java中的TreeMap、TreeSet以及jdk1.8之后的hashMap底层都用到了红黑树。</p>
 <h3 id="插入后的修复"><a href="#插入后的修复" class="headerlink" title="插入后的修复"></a>插入后的修复</h3><p>新插入的节点是红色的，插入修复操作遇到父节点为黑结束。也就是只有父节点为红色时需要插入修复操作</p>
 <p>在插入操作中，红黑树的性质 1 和性质 3 两个永远不会发生改变，因此无需考虑红黑树的这两个特性。</p>
@@ -385,20 +385,20 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">123</span>
+          <span class="site-state-item-count">125</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">60</span>
+        <span class="site-state-item-count">63</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">108</span>
+        <span class="site-state-item-count">110</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>

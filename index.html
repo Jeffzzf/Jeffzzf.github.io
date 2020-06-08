@@ -161,6 +161,270 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://jeffzzf.github.io/2020/05/26/%E5%88%86%E5%B8%83%E5%BC%8F%E5%8E%9F%E7%90%86/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Jeffzzf">
+      <meta itemprop="description" content="Do one thing at a time, and do well.">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Noob">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/05/26/%E5%88%86%E5%B8%83%E5%BC%8F%E5%8E%9F%E7%90%86/" class="post-title-link" itemprop="url">分布式原理</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2020-05-26 13:00:01 / 修改时间：19:57:23" itemprop="dateCreated datePublished" datetime="2020-05-26T13:00:01+08:00">2020-05-26</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>分布式系统里，最重要的事情，就是如何选择或设计适合的算法，解决一致性和可用性相关的问题了。InfluxDB企业版本的技术壁垒就是以分布式算法为核心的分布式集群能力。有些人在接入性能敏感的场景，该使用反熵（Anti-Entropy）算法的时候，却用了 Raft 算法，使得集群性能约等同于单机。</p>
+<p>CAP 理论对分布式系统的特性做了高度抽象，形成了三个指标：</p>
+<ul>
+<li>一致性（Consistency）</li>
+<li>可用性（Availability）</li>
+<li>分区容错性（Partition Tolerance）</li>
+</ul>
+<p>一致性说的是客户端的每次读操作，不管访问哪个节点，要么读到的都是同一份最新写入的数据，要么读取失败。一致性这个指标，描述的是分布式系统非常重要的一个特性，强调的是数据正确。也就是说，对客户端而言，每次读都能读取到最新写入的数据。</p>
+<p>可用性说的是任何来自客户端的请求，不管访问哪个非故障节点，都能得到响应数据，但不保证是同一份最新数据。我尽力给你返回数据，不会不响应你，但是我不保证每个节点给你的数据都是最新的。这个指标强调的是服务可用，但不保证数据正确。</p>
+<p>分布式系统与单机系统不同，它涉及到多节点间的通讯和交互，节点间的分区故障是必然发生的，所以我要提醒你的是，在分布式系统中分区容错性是必须要考虑的。</p>
+<p>只要有网络交互就一定会有延迟和数据丢失，而这种状况我们必须接受，还必须保证系统不能挂掉。所以就像我上面提到的，节点间的分区故障是必然发生的。也就是说，分区容错性（P）是前提，是必须要保证的。</p>
+<p>只剩下一致性（C）和可用性（A）可以选择了：要么选择一致性，保证数据正确；要么选择可用性，保证服务可用。那么 CP 和 AP 的含义是什么呢？</p>
+<ul>
+<li>当选择了一致性（C）的时候，一定会读到最新的数据，不会读到旧数据，但如果因为消息丢失、延迟过高发生了网络分区，那么这个时候，当集群节点接收到来自客户端的读请求时，为了不破坏一致性，可能会因为无法响应最新数据，而返回出错信息。</li>
+<li>当选择了可用性（A）的时候，系统将始终处理客户端的查询，返回特定信息，如果发生了网络分区，一些节点将无法返回最新的特定信息，它们将返回自己当前的相对新的信息。</li>
+</ul>
+<p>在不存在网络分区的情况下，也就是分布式系统正常运行时（这也是系统在绝大部分时候所处的状态），就是说在不需要 P 时，C 和 A 能够同时保证。只有当发生分区故障的时候，也就是说需要 P 时，才会在 C 和 A 之间做出选择。而且如果读操作会读到旧数据，影响到了系统运行或业务运行（也就是说会有负面的影响），推荐选择 C，否则选 A。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2020/05/26/%E5%88%86%E5%B8%83%E5%BC%8F%E5%8E%9F%E7%90%86/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://jeffzzf.github.io/2020/05/19/%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Jeffzzf">
+      <meta itemprop="description" content="Do one thing at a time, and do well.">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Noob">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/05/19/%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95/" class="post-title-link" itemprop="url">单元测试</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-05-19 11:41:59" itemprop="dateCreated datePublished" datetime="2020-05-19T11:41:59+08:00">2020-05-19</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-05-25 17:17:51" itemprop="dateModified" datetime="2020-05-25T17:17:51+08:00">2020-05-25</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%B5%8B%E8%AF%95/" itemprop="url" rel="index"><span itemprop="name">测试</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%B5%8B%E8%AF%95/%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95/" itemprop="url" rel="index"><span itemprop="name">单元测试</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p><strong>junit常见注解含义以及执行顺序</strong></p>
+<p>@Before：初始化方法   对于每一个测试方法都要执行一次（注意与BeforeClass区别，后者是对于所有方法执行一次）</p>
+<p>@After：释放资源  对于每一个测试方法都要执行一次（注意与AfterClass区别，后者是对于所有方法执行一次）</p>
+<p>@Test：测试方法，在这里可以测试期望异常和超时时间 </p>
+<p>@Test(expected=ArithmeticException.class)检查被测方法是否抛出ArithmeticException异常 </p>
+<p>@Ignore：忽略的测试方法 </p>
+<p>@BeforeClass：针对所有测试，只执行一次，且必须为static void </p>
+<p>@AfterClass：针对所有测试，只执行一次，且必须为static void </p>
+<p>一个JUnit4的单元测试用例执行顺序为： </p>
+<p>@BeforeClass -&gt; @Before -&gt; @Test -&gt; @After -&gt; @AfterClass; </p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2020/05/19/%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://jeffzzf.github.io/2020/05/17/%E7%A7%92%E6%9D%80%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Jeffzzf">
+      <meta itemprop="description" content="Do one thing at a time, and do well.">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Noob">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/05/17/%E7%A7%92%E6%9D%80%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1/" class="post-title-link" itemprop="url">秒杀系统设计</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-05-17 10:42:37" itemprop="dateCreated datePublished" datetime="2020-05-17T10:42:37+08:00">2020-05-17</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-05-26 13:00:28" itemprop="dateModified" datetime="2020-05-26T13:00:28+08:00">2020-05-26</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1/" itemprop="url" rel="index"><span itemprop="name">系统设计</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="一、需求分析"><a href="#一、需求分析" class="headerlink" title="一、需求分析"></a>一、需求分析</h2><p>秒杀系统是电商系统常见的一个功能，电商平台通过推出秒杀性价比高的活动短时间内吸引大量用户参与。从技术角度看，秒杀系统需要应对如下几个挑战：</p>
+<ol>
+<li>高并发：由于商品性价比很高，大量用户都想抢到商品，秒杀活动开始的瞬间可能涌入大量流量，如 QPS 可能达到数万甚至几十万。</li>
+<li>高性能：作为线上活动，秒杀系统需要在短时间内返回秒杀结果，如果性能过低，用户会失去耐心，降低用户体验</li>
+<li>高可用：秒杀系统不可用会严重影响平台形象，引起用户和商户不满，造成平台损失</li>
+<li>高可用：秒杀活动涉及用户支付、口径库存等关键过程，不一致问题可能引起超卖、库存积压等问题，给商户和用户造成损失</li>
+</ol>
+<h2 id="二、系统设计"><a href="#二、系统设计" class="headerlink" title="二、系统设计"></a>二、系统设计</h2><h3 id="1-高性能"><a href="#1-高性能" class="headerlink" title="1. 高性能"></a>1. 高性能</h3>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2020/05/17/%E7%A7%92%E6%9D%80%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://jeffzzf.github.io/2020/05/15/%E3%80%8A%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1%EF%BC%9A%E8%BD%AF%E4%BB%B6%E6%A0%B8%E5%BF%83%E5%A4%8D%E6%9D%82%E6%80%A7%E5%BA%94%E5%AF%B9%E4%B9%8B%E9%81%93%E3%80%8B%E7%AC%94%E8%AE%B0/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -192,7 +456,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-05-16 20:17:26" itemprop="dateModified" datetime="2020-05-16T20:17:26+08:00">2020-05-16</time>
+                <time title="修改时间：2020-05-17 09:42:32" itemprop="dateModified" datetime="2020-05-17T09:42:32+08:00">2020-05-17</time>
               </span>
 
           
@@ -211,7 +475,7 @@
 <p><strong>抽象</strong>：对业务进行高度的归纳概括，对具体场景总结提炼，提取出关键的特征。</p>
 <p><strong>知识：</strong> 模型是对知识的提炼与转换，领域驱动中设计的模型本身是具备业务含义的。</p>
 <h3 id="通用语言"><a href="#通用语言" class="headerlink" title="通用语言"></a>通用语言</h3><p>通用语言是团队，包括产品、开发、测试共享的语言。由于通用语言最初来自业务方或者产品，在技术人员评审的过程中，产生分歧是难免的，这需要反复沟通来确认是否达成了共识。通用语言不仅仅是领域驱动设计开发的基础，也是软件开发的基础。通用语言不仅仅是词汇表，它要表达具体的业务场景，以及该场景的意图以及价值。<strong>通用语言形成是开发和产品不断的基于业务的目标和价值来挖掘业务场景，并将其准确表达出来的过程</strong>。</p>
-<h3 id="领域"><a href="#领域" class="headerlink" title="领域"></a>领域</h3><p><strong>领域</strong>具体指一种特定的<strong>范围</strong>或区域。<strong>领域是用来确定范围的，范围即边界</strong>。在研究和解决业务问题时，领域驱动设计会按照一定的规则将业务领域进行细分，当领域细分到一定的程度后，领域驱动设计会将问题范围限定在特定的边界内，在这个边界内建立领域模型，进而用代码实现该领域模型，解决相应的业务问题。一个大的领域可以先划分为子领域，我们把划分出来的多个子领域称为子域，每个子域对应一个更小的问题域或更小的业务范围。领域建模的核心思想就<strong>是将问题域逐步分解</strong>，降低业务理解和系统实现的复杂度。</p>
+<h3 id="领域"><a href="#领域" class="headerlink" title="领域"></a>领域</h3><p><strong>领域</strong>具体指一种特定的<strong>范围</strong>或区域。<strong>领域是用来确定范围的，范围即边界</strong>。广义上讲，领域（Domain）是一个组织所做的事情以及其中所包含的一切。每个组织都有自己的业务范围和做事方式，这个业务范围及在其中所做的活动便是领域。在研究和解决业务问题时，领域驱动设计会按照一定的规则将业务领域进行细分，当领域细分到一定的程度后，领域驱动设计会将问题范围限定在特定的边界内，在这个边界内建立领域模型，进而用代码实现该领域模型，解决相应的业务问题。一个大的领域可以先划分为子领域，我们把划分出来的多个子领域称为子域，每个子域对应一个更小的问题域或更小的业务范围。领域建模的核心思想就<strong>是将问题域逐步分解</strong>，降低业务理解和系统实现的复杂度。</p>
 <p>通过子域划分，根据不同子域对业务的不同功能属性和重要性可以区分为核心域、支撑域和通用域。对于核心域，是业务成功的主要促成因素；支撑域是相对于通用域来说的，某些领域不能通用而需要定制化，这样的领域被称为支撑域。如果一个领域能够应用于整个业务系统便是通用子域。以打车软件为例，它的核心域应该是连接距离最近的用户和司机，而软件中的地图系统则为通用域，地图系统可以使用腾讯地图提供的开放接口；而对于腾讯地图来说，地图系统则是他们的核心域。</p>
 <p><strong>限界上下文是一个显式的边界，领域模型便存在于这个边界之内</strong>。领域模型把通用语言表达成软件模型。创建边界的原因在于：每一个模型概念，包括它的属性和方法，在边界之内都具有特殊含义，而在另一个边界里面可能表达不同的含义。</p>
           <!--noindex-->
@@ -771,293 +1035,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://jeffzzf.github.io/2019/11/01/%E8%A1%A1%E9%87%8F%E6%8C%87%E6%A0%87/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Jeffzzf">
-      <meta itemprop="description" content="Do one thing at a time, and do well.">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Noob">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2019/11/01/%E8%A1%A1%E9%87%8F%E6%8C%87%E6%A0%87/" class="post-title-link" itemprop="url">衡量指标</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2019-11-01 09:16:01" itemprop="dateCreated datePublished" datetime="2019-11-01T09:16:01+08:00">2019-11-01</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-05-16 18:18:43" itemprop="dateModified" datetime="2020-05-16T18:18:43+08:00">2020-05-16</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/AI/" itemprop="url" rel="index"><span itemprop="name">AI</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>准确率</p>
-<p>TP / (TP + FP)</p>
-<p>召回率</p>
-<p>TP / (TP + FN)</p>
-<p>P-R 曲线</p>
-<p>将样本按照是正例的概率排序，概率越大的样本排在最前面。将样本逐个加入正例集合计算准确率和召回率，并以准确率为纵轴，召回率为横轴，绘制曲线图即可得到 P-R 曲线。</p>
-<p>ROC（受试者工作特征，Receiver Operating Characteristic） 曲线的纵轴是真正例率（True Positive Rate，TPR），横轴是假正例率（False Positive Rate，FPR）</p>
-<p>TPR = TP / (TP + FN)</p>
-<p>FPR = FP / (FP + TN)</p>
-<p>如果一个学习器的 ROC 曲线被另一个学习器 ROC 曲线完全包住，那么后者的性能优于前者，如果两个 ROC 曲线发生交叉，可以通过 AUC（Area Under ROC Curve）来比较。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2019/11/01/%E8%A1%A1%E9%87%8F%E6%8C%87%E6%A0%87/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://jeffzzf.github.io/2019/10/22/Dubbo%E5%8E%9F%E7%90%86/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Jeffzzf">
-      <meta itemprop="description" content="Do one thing at a time, and do well.">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Noob">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2019/10/22/Dubbo%E5%8E%9F%E7%90%86/" class="post-title-link" itemprop="url">Dubbo原理</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2019-10-22 11:26:16" itemprop="dateCreated datePublished" datetime="2019-10-22T11:26:16+08:00">2019-10-22</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-05-16 18:18:43" itemprop="dateModified" datetime="2020-05-16T18:18:43+08:00">2020-05-16</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E5%88%86%E5%B8%83%E5%BC%8F/" itemprop="url" rel="index"><span itemprop="name">分布式</span></a>
-                </span>
-                  ，
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E5%88%86%E5%B8%83%E5%BC%8F/Dubbo/" itemprop="url" rel="index"><span itemprop="name">Dubbo</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>RPC（Remote Procedure Cll）远程过程调用是从一台机器（客户端）上通过参数传递的方式调用另一台机器（服务器）上的一个函数或方法并得到返回结果。</p>
-<p>备注：本文源码分析基于dubbo-2.6.4</p>
-<h2 id="总体架构"><a href="#总体架构" class="headerlink" title="总体架构"></a>总体架构</h2><p><img src="/images/image-20191203150843596.png" alt="image-20191203150843596"></p>
-<h2 id="请求流程"><a href="#请求流程" class="headerlink" title="请求流程"></a>请求流程</h2><ol>
-<li>服务消费者（client 客户端）以调用本地服务的方式调用需要消费的服务</li>
-<li>客户端存根（client stub）接收到调用请求后负责将方法、入参等信息序列化成能够进行网络传输的消息体</li>
-<li>客户端存根（client stub）找到远程服务地址，将消息通过网络发送给服务端</li>
-<li>服务端存根（server stub）收到消息后进行解码（反序列化）</li>
-<li>服务端存根（server stub）根据解码结果调用本地服务进行相关处理（解码后请求转发给分发器 Dispatcher，Dispatcher 将请求派发到指定线程池）</li>
-<li>本地服务执行具体业务逻辑将处理结果返回给服务端存根（server stub）</li>
-<li>服务端存根（server stub）将返回结果打包成消息（序列化）并通过网络发送给消费方</li>
-<li>客户端存根（client stub）接收到消息，进行反序列化</li>
-<li>服务消费方得到最终结果（根据调用编号从 ConcurrentHashMap 中移除 DefaultFuture 对象并唤醒用户线程（signal/await））</li>
-</ol>
-<p>Dubbo 支持同步和异步两种调用方式，其中异步调用还可以细分为有返回值和无返回值两种。无返回值时，服务消费方只管调用不关心调用结果，Dubbo 返回一个空的 RpcResult。默认为同步方式。</p>
-<p>Dubbo 实现同步和异步调用（DubboInvoker.doInvoke()）关键点在于由谁调用 ResponseFuture 的 get 方法，同步调用模式下，由框架自身调用 FeatureResponse 的 get 方法。异步调用模式下，由用户调用该方法。</p>
-<h2 id="源码解析"><a href="#源码解析" class="headerlink" title="源码解析"></a>源码解析</h2><h2 id="网络通信"><a href="#网络通信" class="headerlink" title="网络通信"></a>网络通信</h2>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2019/10/22/Dubbo%E5%8E%9F%E7%90%86/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://jeffzzf.github.io/2019/10/17/synchronized/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Jeffzzf">
-      <meta itemprop="description" content="Do one thing at a time, and do well.">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Noob">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2019/10/17/synchronized/" class="post-title-link" itemprop="url">Java并发面试题整理</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2019-10-17 19:57:44" itemprop="dateCreated datePublished" datetime="2019-10-17T19:57:44+08:00">2019-10-17</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2019-12-20 13:07:53" itemprop="dateModified" datetime="2019-12-20T13:07:53+08:00">2019-12-20</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Java/" itemprop="url" rel="index"><span itemprop="name">Java</span></a>
-                </span>
-                  ，
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Java/%E5%B9%B6%E5%8F%91/" itemprop="url" rel="index"><span itemprop="name">并发</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>背景知识</p>
-<p>CPU 指令：CPU 的一些指令是非常危险的，误用可能导致严重后果，如清理内存、设置时钟等。Intel 将 CPU 指令分为4 个级别，RING0,RING1,RING2,RING3。Linux 使用 RING3级别运行用户态，RING0运行内核态。RING3 不能访问 RING0 的RING0 的地址空间，包括代码和数据。当用户态程序要执行文件操作、发送数据等操作时，需要通过 write、send 等系统调用，这些系统调用会调用内核中的代码来完成操作，必须切换到 RING0，完成后切换回 RING3，这样用户态程序就不能随意操作内核地址空间，有一定的安全保护作用。</p>
-<p>从用户态到内核态有两种触发手段：</p>
-<ol>
-<li>用户空间的应用程序通过提醒调用进入内核空间，用户空间进程将参数传递给内核，内核空间运行时也需要保存用户进程的寄存器、变量等。“进程上下文”可以看做用户进程传递给内核的参数、内核要保存的变量、寄存器和当时的环境等。</li>
-<li>硬件通过触发信号，导致内核调用中断处理程序，进入内核空间。硬件的变量和参数也要传递给内核，内核通过这些参数进行中断处理。“中断上下文”可以看做硬件传递过来的参数和内核需要保存的环境。</li>
-</ol>
-<h2 id="Synchronized"><a href="#Synchronized" class="headerlink" title="Synchronized"></a>Synchronized</h2><p><strong>synchronized 同步语句块的实现使用的是 monitorenter 和 monitorexit 指令，其中 monitorenter 指令指向同步代码块的开始位置，monitorexit 指令则指明同步代码块的结束位置。</strong> 当执行 monitorenter 指令时，线程试图获取锁也就是获取 monitor(monitor对象存在于每个Java对象的对象头中，synchronized 锁便是通过这种方式获取锁的，也是为什么Java中任意对象可以作为锁的原因) 的持有权。当计数器为0则可以成功获取，获取后将锁计数器设为1也就是加1。相应的在执行 monitorexit 指令后，将锁计数器设为0，表明锁被释放。如果获取对象锁失败，那当前线程就要阻塞等待，直到锁被另外一个线程释放为止。</p>
-<p>synchronized 同步方法比普通方法多了 ACC_SYNCHRONIZED 标识，JVM 根据这个标识实现同步。调用方法时先检查是否有 ACC_SYNCHRONIZED标识，有的话线程先获取 monitor，获取成功才继续执行方法，方法执行完成后线程再释放 monitor，同一个 monitor 同一时刻只能被一个线程拥有。</p>
-<p>两种方式都通过 monitor 来实现同步，monitor 的实现依赖底层操作系统的 mutex 互斥原语，操作系统实现线程之间的切换需要从用户态转到内核态，切换成本较大。</p>
-<p>wait、notify 和 notifyAll 也依赖于 monitor 对象来完成的，所以要在同步方法或同步代码块中调用的原因（需要先获取对象的锁，才能执行）否则抛出 IllegalMonitorStateException 异常。</p>
-<p><strong>jdk1.6之后 synchronized 优化</strong></p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2019/10/17/synchronized/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1127,20 +1104,20 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">123</span>
+          <span class="site-state-item-count">125</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">60</span>
+        <span class="site-state-item-count">63</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">108</span>
+        <span class="site-state-item-count">110</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>

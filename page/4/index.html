@@ -161,6 +161,280 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://jeffzzf.github.io/2019/08/05/Spark/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Jeffzzf">
+      <meta itemprop="description" content="Do one thing at a time, and do well.">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Noob">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/08/05/Spark/" class="post-title-link" itemprop="url">Spark</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2019-08-05 14:49:13" itemprop="dateCreated datePublished" datetime="2019-08-05T14:49:13+08:00">2019-08-05</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-01-14 16:59:57" itemprop="dateModified" datetime="2020-01-14T16:59:57+08:00">2020-01-14</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/BigData/" itemprop="url" rel="index"><span itemprop="name">BigData</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/BigData/Spark/" itemprop="url" rel="index"><span itemprop="name">Spark</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="RDD"><a href="#RDD" class="headerlink" title="RDD"></a>RDD</h2><p>RDD，弹性分布式数据集（Resilient Distributed Dataset）是spark的核心概念，它是集群中跨多个机器分区存储的一个只读对象集合，弹性指spark可以通过重新安排计算来自动重建丢失的分区。在spark程序中，一般加载一个或多个RDD作为输入，通过一系列转换得到一组目标RDD，然后将这些RDD计算出结果或者写入持久存储器。</p>
+<p>加载RDD或执行转换并不会立即触发任何数据处理的操作，只是创建一个计算计划。只有对RDD执行某个动作（如foreach）时，才会触发真正的计算。通过rdd的map()方法可以对RDD的每个元素应用某个函数，filter()方法的输入是一个过滤谓词，即返回布尔值的函数。</p>
+<p>RDD 具有以下几个特点：</p>
+<ol>
+<li><p>分布在集群中的<strong>只读</strong>对象集合，由多个 partition 构成，这些 partition 可能存储在不同机器上</p>
+</li>
+<li><p>RDD 可以存储在磁盘或内存中（多种存储级别），partition 可以全部存储在内存或磁盘上，也可以部分在内存中，部分在磁盘上</p>
+</li>
+<li><p>Spark 提供了大量 API 通过<strong>并行</strong>的方式构造和生成 RDD</p>
+</li>
+<li><p>失效后自动重构：Spark 通过记录 RDD 的血统，了解每个 RDD 的产生方式（包括父 RDD 以及计算方式），进而能够通过重算的方式构造因机器故障或磁盘损坏导致丢失的 RDD 数据</p>
+<p> HDFS 的任何一个文件也可以认为是分布式数据集，但从一定程度上，HDFS 并不具有弹性，因为所有数据都存储在磁盘上。RDD 则可以将 Partition 部分存储在磁盘部分存储在内存。</p>
+</li>
+</ol>
+<h3 id="转换和动作"><a href="#转换和动作" class="headerlink" title="转换和动作"></a>转换和动作</h3><p>转换（transformation）是从现有RDD生成新的RDD，动作（Action）触发对RDD的计算并对计算结果执行某种操作，要么返回给用户，要么保存到外部存储器中。动作的效果是立竿见影的，但转换不是，转换是惰性的，在对RDD执行一个动作之前不会为该RDD的任何转换操作采取实际行动。判断一个操作是转换还是动作，可以观察返回类型，如果返回的类型是RDD，那么它是一个转换，否则就是一个动作。</p>
+<h2 id="作业"><a href="#作业" class="headerlink" title="作业"></a>作业</h2><p>Spark作业由任意多阶段（stages）有向无环图构成，有的阶段又被spark运行环境分解为多个任务（task），任务并行运行在分布于集群中的RDD分区上。作业始终运行在应用（application）上下文（SparkContext实例表示）中，它提供了RDD分组以及共享变量。一个应用可以串行或并行地运行多个作业，并为这些作业提供访问由同一应用的先前作业所缓存的RDD的机制。</p>
+<p>Task：具体执行的任务，Task 分为 ShuffleMapTask 和 ResultTask 两种，分别类似于 Hadoop 中的 Map、Reduce</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2019/08/05/Spark/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://jeffzzf.github.io/2019/08/03/Linux%20%E6%96%87%E4%BB%B6/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Jeffzzf">
+      <meta itemprop="description" content="Do one thing at a time, and do well.">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Noob">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/08/03/Linux%20%E6%96%87%E4%BB%B6/" class="post-title-link" itemprop="url">Linux 文件</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2019-08-03 17:11:56" itemprop="dateCreated datePublished" datetime="2019-08-03T17:11:56+08:00">2019-08-03</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2019-08-28 20:23:34" itemprop="dateModified" datetime="2019-08-28T20:23:34+08:00">2019-08-28</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Linux/" itemprop="url" rel="index"><span itemprop="name">Linux</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>2. </p>
+
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2019/08/03/Linux%20%E6%96%87%E4%BB%B6/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://jeffzzf.github.io/2019/08/03/Linux%20IO/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Jeffzzf">
+      <meta itemprop="description" content="Do one thing at a time, and do well.">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Noob">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/08/03/Linux%20IO/" class="post-title-link" itemprop="url">Linux IO</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2019-08-03 14:11:56" itemprop="dateCreated datePublished" datetime="2019-08-03T14:11:56+08:00">2019-08-03</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2019-08-28 20:23:34" itemprop="dateModified" datetime="2019-08-28T20:23:34+08:00">2019-08-28</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Linux/" itemprop="url" rel="index"><span itemprop="name">Linux</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>Linux内核把所有管理的资源，如网卡、磁盘驱动器、打印机、输入输出设备、普通文件或目录都当作一个文件。对文件的读写操作会调用内核提供的命令，返回一个文件描述符。文件描述符是一个非负整数索引值，指向内核为每个进程所维护的该进程打开的文件记录表，表中的项是一个结构体（包含文件路径、数据区等属性）。套接字是通信端点的抽象，套接字描述符是一种用来访问套接字的文件描述符，很多处理文件描述符的函数（如read和write）都可以用来处理套接字描述符。</p>
+<p>一次IO过程可以分为两个阶段：</p>
+<ol>
+<li>等待数据准备（数据先读到内核的缓冲区）</li>
+<li>将数据从内核拷贝到进程中</li>
+</ol>
+<p>Unix提供了五种IO模型，分别是阻塞IO、非阻塞IO、IO复用、信号驱动IO和异步IO。IO编程中，当需要处理多个客户端接入时，可以利用多线程或IO多路复用技术。IO多路复用是把多个IO的阻塞复用到同一个select的阻塞上，从而使得系统在单线程的情况下可以同时处理多个客户端请求。模型使用一个进程监视多个描述符，一旦某个描述符就绪（一般是读就绪或写就绪），能够通知程序进行相应的读写操作。</p>
+<p><img src="/images/21095604_vhHX.png" alt="五种IO模型"></p>
+<p>Linux支持IO多路复用的系统调用有select、pselect、poll和epoll，IO多路复用需要使用两个系统调用（select/pselect/poll/epoll和recvfrom），而阻塞IO只需要一个系统调用（recvfrom）。但多路复用的优势是可以同时处理多个connection，系统开销小，不需要创建和维护新的额外进程或线程。适用于需要同时处理多个（可以是不同状态或协议）套接字。如果处理连接数不是很高的情况下，IO多路复用不一定比阻塞IO+多线程性能好。这两种IO模型都是进程主动等待并向内核检查状态，所以都是同步阻塞模型。</p>
+<h2 id="select"><a href="#select" class="headerlink" title="select"></a>select</h2><p>调用select后进程阻塞，直到有fd就绪（可读、可写或except）或超时后返回。select几乎支持所有的平台，具有良好的跨平台性，但最大的缺陷是单个进程对监控的fd有数量限制。这个限制由<code>FD_SETSIZE</code>定义，32位默认值是1024，64位默认值2048.</p>
+<h2 id="poll"><a href="#poll" class="headerlink" title="poll"></a>poll</h2><p>poll和select没有本质区别，它基于链表存储fd，没有最大数限制。与select一样，监控到描述符就绪并返回后，通过遍历文件描述符获取已经就绪的scoket。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2019/08/03/Linux%20IO/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://jeffzzf.github.io/2019/07/29/Java%20IO/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -588,7 +862,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-01-06 14:58:23" itemprop="dateModified" datetime="2020-01-06T14:58:23+08:00">2020-01-06</time>
+                <time title="修改时间：2020-05-27 11:57:56" itemprop="dateModified" datetime="2020-05-27T11:57:56+08:00">2020-05-27</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -743,333 +1017,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://jeffzzf.github.io/2019/07/10/Es%E5%9F%BA%E6%9C%AC%E7%94%A8%E6%B3%95/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Jeffzzf">
-      <meta itemprop="description" content="Do one thing at a time, and do well.">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Noob">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2019/07/10/Es%E5%9F%BA%E6%9C%AC%E7%94%A8%E6%B3%95/" class="post-title-link" itemprop="url">Es基本用法</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2019-07-10 17:09:25" itemprop="dateCreated datePublished" datetime="2019-07-10T17:09:25+08:00">2019-07-10</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2019-08-28 20:23:34" itemprop="dateModified" datetime="2019-08-28T20:23:34+08:00">2019-08-28</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E5%AD%98%E5%82%A8/" itemprop="url" rel="index"><span itemprop="name">存储</span></a>
-                </span>
-                  ，
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E5%AD%98%E5%82%A8/es/" itemprop="url" rel="index"><span itemprop="name">es</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="字段类型"><a href="#字段类型" class="headerlink" title="字段类型"></a>字段类型</h2><p>简单字段类型：text、keyword、date、long、double、boolean、ip</p>
-<p>嵌套类型：object、nested</p>
-<p>特殊类型：geo_point，geo_shape 或 completion</p>
-<h2 id="动态映射"><a href="#动态映射" class="headerlink" title="动态映射"></a>动态映射</h2><p>包括动态字段映射、动态模版和索引模版</p>
-<p>如果文档中有新的字段（值不为null或空数组），es会把这个字段添加到mapping中</p>
-<table>
-<thead>
-<tr>
-<th>JSON datatype</th>
-<th>Elasticsearch datatype</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>null</td>
-<td>No field is added.</td>
-</tr>
-<tr>
-<td>true or false</td>
-<td><a href="https://www.elastic.co/guide/en/elasticsearch/reference/6.4/boolean.html" target="_blank" rel="noopener">boolean</a> field</td>
-</tr>
-<tr>
-<td>floating point number</td>
-<td><a href="https://www.elastic.co/guide/en/elasticsearch/reference/6.4/number.html" target="_blank" rel="noopener">float</a> field</td>
-</tr>
-<tr>
-<td>integer</td>
-<td><a href="https://www.elastic.co/guide/en/elasticsearch/reference/6.4/number.html" target="_blank" rel="noopener">long</a> field</td>
-</tr>
-<tr>
-<td>object</td>
-<td><a href="https://www.elastic.co/guide/en/elasticsearch/reference/6.4/object.html" target="_blank" rel="noopener">object</a> field</td>
-</tr>
-<tr>
-<td>array</td>
-<td>Depends on the first non-null value in the array.</td>
-</tr>
-<tr>
-<td>string</td>
-<td>Either a <a href="https://www.elastic.co/guide/en/elasticsearch/reference/6.4/date.html" target="_blank" rel="noopener">date</a> field (if the value passes <a href="https://www.elastic.co/guide/en/elasticsearch/reference/6.4/dynamic-field-mapping.html#date-detection" target="_blank" rel="noopener">date detection</a>), a <a href="https://www.elastic.co/guide/en/elasticsearch/reference/6.4/number.html" target="_blank" rel="noopener">double</a> or <a href="https://www.elastic.co/guide/en/elasticsearch/reference/6.4/number.html" target="_blank" rel="noopener">long</a>field (if the value passes <a href="https://www.elastic.co/guide/en/elasticsearch/reference/6.4/dynamic-field-mapping.html#numeric-detection" target="_blank" rel="noopener">numeric detection</a>) or a <a href="https://www.elastic.co/guide/en/elasticsearch/reference/6.4/text.html" target="_blank" rel="noopener">text</a> field, with a <a href="https://www.elastic.co/guide/en/elasticsearch/reference/6.4/keyword.html" target="_blank" rel="noopener">keyword</a>sub-field.</td>
-</tr>
-</tbody></table>
-<p>索引模版只在创建索引时生效，修改模版不会对已创建的索引生效。使用创建索引API创建索引时，API指定的同名字段优先于模版定义的字段。</p>
-<p>Lucene不理解内部对象，Lucene文档是由一组键值对列表组成的，为了能让es有效地索引内部类，它把文档转化成类似如下结构的文档</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2019/07/10/Es%E5%9F%BA%E6%9C%AC%E7%94%A8%E6%B3%95/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://jeffzzf.github.io/2019/07/10/Es%E6%90%9C%E7%B4%A2%E8%BF%87%E7%A8%8B/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Jeffzzf">
-      <meta itemprop="description" content="Do one thing at a time, and do well.">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Noob">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2019/07/10/Es%E6%90%9C%E7%B4%A2%E8%BF%87%E7%A8%8B/" class="post-title-link" itemprop="url">Es搜索过程</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2019-07-10 14:44:35" itemprop="dateCreated datePublished" datetime="2019-07-10T14:44:35+08:00">2019-07-10</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-01-06 14:36:39" itemprop="dateModified" datetime="2020-01-06T14:36:39+08:00">2020-01-06</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E5%AD%98%E5%82%A8/" itemprop="url" rel="index"><span itemprop="name">存储</span></a>
-                </span>
-                  ，
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E5%AD%98%E5%82%A8/es/" itemprop="url" rel="index"><span itemprop="name">es</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="查询原理"><a href="#查询原理" class="headerlink" title="查询原理"></a>查询原理</h2><ol>
-<li><h3 id="Term-查询"><a href="#Term-查询" class="headerlink" title="Term 查询"></a>Term 查询</h3><p> FST(Finite State Transducer)</p>
-<p> 从 Lucene4 开始，为了实现 rangequery 或前缀、后缀等复杂的查询语句，Lucene 使用 FST 数据结构来存储 term 字典。</p>
-</li>
-<li><h3 id="倒排链的存储"><a href="#倒排链的存储" class="headerlink" title="倒排链的存储"></a>倒排链的存储</h3><p> 为了快速查找 docId，Lucene 采用 SkipList 数据结构，它具有以下特征：</p>
-<p> A. 元素是排序的，lucene 按 docid 从小到大排序</p>
-<p> B. 跳跃有固定间隔，在建立 skiplist 时指定</p>
-<p> C. skiplist 的层次，指整个 skiplist 有几层</p>
-</li>
-<li><h3 id="倒排链合并"><a href="#倒排链合并" class="headerlink" title="倒排链合并"></a>倒排链合并</h3><p> 如果某个链很短，会大幅减少比对次数，并且由于 SkipList 结构的存在，在某个倒排中定位某个 docid 的速度会比较快不需要一个个遍历。可以很快的返回最终的结果。从倒排的定位，查询，合并整个流程组成了 lucene 的查询过程，和传统数据库的索引相比，lucene 合并过程中的优化减少了读取数据的 IO，倒排合并的灵活性也解决了传统索引较难支持多条件查询的问题。</p>
-</li>
-<li><h3 id="倒排链合并-1"><a href="#倒排链合并-1" class="headerlink" title="倒排链合并"></a>倒排链合并</h3><p> 如果是数值类型的范围查询，如整形、浮点型，采用 FST term 查询，潜在的 term 会非常多，查询效率很低。为了支持高效的多维数值查询，lucene 引入 BKDTree。BKDTree 基于 KDTree，对数据按照维度划分建立一棵二叉树确保树两边节点数目平衡。在一维场景下，KDTree 退化成二叉树，在二叉树中查询叶子节点对应倒排链需要 logn 时间。</p>
-<p> 在多维场景下，kdtree 建立流程如下：</p>
-<p> A.确定切分维度，选取顺序是数据分散越开的维度，越先切分</p>
-<p> B.切分点选择维度最中间的点</p>
-<p> C.递归进行 A、B，可以设置阈值，点的数据少于多少后就不再切分，直到所有的点都切分好停止    </p>
-<p> BKD 是多个 KDTree 持续 merge 最终合并成一个</p>
-</li>
-</ol>
-<h2 id="写入流程"><a href="#写入流程" class="headerlink" title="写入流程"></a>写入流程</h2><p>Es 的任意节点都可以作为协调节点（coordinating node）接受请求，通过_routing字段找到对应的 primary shard，并将请求转发给 primary shard， primary shard 完成写入后，将写入并发发送给 replica，replica 执行写入操作后返回给 primary shard，primary shard 再讲请求返回给协调节点。</p>
-<h2 id="查询流程"><a href="#查询流程" class="headerlink" title="查询流程"></a>查询流程</h2><p>Es 通过分区实现分布式，数据写入时，根据 routing 规则将数据写入某个 Shard，这样能将海量数据分布在多个 Shard和多台机器上。</p>
-<p>在查询时，数据可能分布在 index 的所有 Shard 中，所以需要查询所有 Shard，同一个 Shard 的 Primary 和 Replica 选择一个就可以，查询请求分发给所有 Shard，每个 Shard 中都是一个独立的查询引擎，如果需要返回 TopN 的结果，每个 Shard 都会查询返回 TopN，然后在 Client Node 中通过优先队列二次排序，找出 top N 结果返回给用户。</p>
-<p>一般搜索系统都是两阶段查询，第一阶段查询到匹配的 DocId，第二阶段再查询 DocId 对应的完整文档，这种在 Es 称为 query_then_fetch，还有一种是一阶段查询返回完整 Doc，es 称为 query_and_fetch，一般第二种适用于只需要查询一个 Shard 的请求。</p>
-<p>除了一阶段，两阶段外，还有一种三阶段查询的情况。搜索里面有一种算分逻辑是根据TF（Term Frequency）和DF（Document Frequency）计算基础分，但是Elasticsearch中查询的时候，是在每个Shard中独立查询的，每个Shard中的TF和DF也是独立的，虽然在写入的时候通过_routing保证Doc分布均匀，但是没法保证TF和DF均匀，那么就有会导致局部的TF和DF不准的情况出现，这个时候基于TF、DF的算分就不准。为了解决这个问题，Elasticsearch中引入了DFS查询，比如DFS_query_then_fetch，会先收集所有Shard中的TF和DF值，然后将这些值带入请求中，再次执行query_then_fetch，这样算分的时候TF和DF就是准确的，类似的有DFS_query_and_fetch。这种查询的优势是算分更加精准，但是效率会变差。另一种选择是用BM25代替TF/DF模型。</p>
-<h4 id="查询阶段"><a href="#查询阶段" class="headerlink" title="查询阶段"></a>查询阶段</h4>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2019/07/10/Es%E6%90%9C%E7%B4%A2%E8%BF%87%E7%A8%8B/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://jeffzzf.github.io/2018/12/22/%E5%88%86%E5%B8%83%E5%BC%8F%E7%B3%BB%E7%BB%9F/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Jeffzzf">
-      <meta itemprop="description" content="Do one thing at a time, and do well.">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Noob">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2018/12/22/%E5%88%86%E5%B8%83%E5%BC%8F%E7%B3%BB%E7%BB%9F/" class="post-title-link" itemprop="url">分布式系统</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2018-12-22 10:38:24" itemprop="dateCreated datePublished" datetime="2018-12-22T10:38:24+08:00">2018-12-22</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2019-08-28 20:23:34" itemprop="dateModified" datetime="2019-08-28T20:23:34+08:00">2019-08-28</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E5%88%86%E5%B8%83%E5%BC%8F%E7%B3%BB%E7%BB%9F/" itemprop="url" rel="index"><span itemprop="name">分布式系统</span></a>
-                </span>
-                  ，
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E5%88%86%E5%B8%83%E5%BC%8F%E7%B3%BB%E7%BB%9F/%E6%A6%82%E8%BF%B0/" itemprop="url" rel="index"><span itemprop="name">概述</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>分布式系统是一个硬件或软件组成分布在不同的网络计算机上，彼此之间仅仅通过消息传递进行通信和协调的系统。</p>
-<p>分布式系统是一群独立计算机集合共同对外提供服务，对于系统的用户来说，像一台计算机在提供服务一样。分布式意味着可以采用更多的普通计算机（相对于昂贵的大型机）组成分布式集群对外提供服务。计算机越多，CPU、内存、存储资源等也就越多，能够处理的并发访问量也就越大。</p>
-<p>分布式系统的各个主机之间通信和协调主要通过网络进行，计算机在空间上几乎没有任何限制，这些计算机可能被放在不同的机柜上，也可能被部署在不同的机房中，还可能在不同的城市中，对于大型的网站甚至可能分布在不同的国家和地区。</p>
-<p>常用的分布式方案：</p>
-<h3 id="1-分布式应用和服务"><a href="#1-分布式应用和服务" class="headerlink" title="1. 分布式应用和服务"></a>1. 分布式应用和服务</h3><p>将应用和服务进行分层或分割，并进行分布式部署。这样不仅可以突破单机性能瓶颈，提高并发访问能力，还能复用分布式部署的模块，使业务易于扩展。</p>
-<h3 id="2-分布式静态资源"><a href="#2-分布式静态资源" class="headerlink" title="2. 分布式静态资源"></a>2. 分布式静态资源</h3><p>对JS、CSS、图片等资源进行分布式部署可以减轻服务器的压力，提高访问速度</p>
-<h3 id="3-分布式数据和存储"><a href="#3-分布式数据和存储" class="headerlink" title="3. 分布式数据和存储"></a>3. 分布式数据和存储</h3><p>随着互联网应用需要存储越来越多的数据，单台机器往往无法提供足够的存储空间，需要对这些数据进行分布式存储。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2018/12/22/%E5%88%86%E5%B8%83%E5%BC%8F%E7%B3%BB%E7%BB%9F/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1139,20 +1086,20 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">123</span>
+          <span class="site-state-item-count">125</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">60</span>
+        <span class="site-state-item-count">63</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">108</span>
+        <span class="site-state-item-count">110</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>

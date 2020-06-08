@@ -29,7 +29,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="http://jeffzzf.github.io/images/image-20200515131530306.png">
 <meta property="article:published_time" content="2020-05-15T05:12:00.000Z">
-<meta property="article:modified_time" content="2020-05-16T12:17:26.647Z">
+<meta property="article:modified_time" content="2020-05-17T01:42:32.522Z">
 <meta property="article:author" content="Jeffzzf">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="http://jeffzzf.github.io/images/image-20200515131530306.png">
@@ -196,7 +196,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-05-16 20:17:26" itemprop="dateModified" datetime="2020-05-16T20:17:26+08:00">2020-05-16</time>
+                <time title="修改时间：2020-05-17 09:42:32" itemprop="dateModified" datetime="2020-05-17T09:42:32+08:00">2020-05-17</time>
               </span>
 
           
@@ -215,9 +215,10 @@
 <p><strong>抽象</strong>：对业务进行高度的归纳概括，对具体场景总结提炼，提取出关键的特征。</p>
 <p><strong>知识：</strong> 模型是对知识的提炼与转换，领域驱动中设计的模型本身是具备业务含义的。</p>
 <h3 id="通用语言"><a href="#通用语言" class="headerlink" title="通用语言"></a>通用语言</h3><p>通用语言是团队，包括产品、开发、测试共享的语言。由于通用语言最初来自业务方或者产品，在技术人员评审的过程中，产生分歧是难免的，这需要反复沟通来确认是否达成了共识。通用语言不仅仅是领域驱动设计开发的基础，也是软件开发的基础。通用语言不仅仅是词汇表，它要表达具体的业务场景，以及该场景的意图以及价值。<strong>通用语言形成是开发和产品不断的基于业务的目标和价值来挖掘业务场景，并将其准确表达出来的过程</strong>。</p>
-<h3 id="领域"><a href="#领域" class="headerlink" title="领域"></a>领域</h3><p><strong>领域</strong>具体指一种特定的<strong>范围</strong>或区域。<strong>领域是用来确定范围的，范围即边界</strong>。在研究和解决业务问题时，领域驱动设计会按照一定的规则将业务领域进行细分，当领域细分到一定的程度后，领域驱动设计会将问题范围限定在特定的边界内，在这个边界内建立领域模型，进而用代码实现该领域模型，解决相应的业务问题。一个大的领域可以先划分为子领域，我们把划分出来的多个子领域称为子域，每个子域对应一个更小的问题域或更小的业务范围。领域建模的核心思想就<strong>是将问题域逐步分解</strong>，降低业务理解和系统实现的复杂度。</p>
+<h3 id="领域"><a href="#领域" class="headerlink" title="领域"></a>领域</h3><p><strong>领域</strong>具体指一种特定的<strong>范围</strong>或区域。<strong>领域是用来确定范围的，范围即边界</strong>。广义上讲，领域（Domain）是一个组织所做的事情以及其中所包含的一切。每个组织都有自己的业务范围和做事方式，这个业务范围及在其中所做的活动便是领域。在研究和解决业务问题时，领域驱动设计会按照一定的规则将业务领域进行细分，当领域细分到一定的程度后，领域驱动设计会将问题范围限定在特定的边界内，在这个边界内建立领域模型，进而用代码实现该领域模型，解决相应的业务问题。一个大的领域可以先划分为子领域，我们把划分出来的多个子领域称为子域，每个子域对应一个更小的问题域或更小的业务范围。领域建模的核心思想就<strong>是将问题域逐步分解</strong>，降低业务理解和系统实现的复杂度。</p>
 <p>通过子域划分，根据不同子域对业务的不同功能属性和重要性可以区分为核心域、支撑域和通用域。对于核心域，是业务成功的主要促成因素；支撑域是相对于通用域来说的，某些领域不能通用而需要定制化，这样的领域被称为支撑域。如果一个领域能够应用于整个业务系统便是通用子域。以打车软件为例，它的核心域应该是连接距离最近的用户和司机，而软件中的地图系统则为通用域，地图系统可以使用腾讯地图提供的开放接口；而对于腾讯地图来说，地图系统则是他们的核心域。</p>
 <p><strong>限界上下文是一个显式的边界，领域模型便存在于这个边界之内</strong>。领域模型把通用语言表达成软件模型。创建边界的原因在于：每一个模型概念，包括它的属性和方法，在边界之内都具有特殊含义，而在另一个边界里面可能表达不同的含义。</p>
+<h3 id="子域和限界上下文"><a href="#子域和限界上下文" class="headerlink" title="子域和限界上下文"></a>子域和限界上下文</h3><p>DDD 中一个领域被分为若干子域，领域模型在限界上下文中完成开发。实际在开发一个领域模型时，关注的通常是业务系统的某个方面，试图创建一个全功能的领域模型是非常困难的，并且很容易失败。</p>
 <h3 id="LAYERED-ARCHITECTURE-（分层架构）"><a href="#LAYERED-ARCHITECTURE-（分层架构）" class="headerlink" title="LAYERED ARCHITECTURE （分层架构）"></a>LAYERED ARCHITECTURE （分层架构）</h3><p>给复杂的应用程序划分层次。在每一层内分别进行设计，使其具有内聚性并且只依赖于 它的下层。采用标准的架构模式，只与上层进行松散的耦合。将所有与领域模型相关的代码 放在一个层中，并把它与用户界面层、应用层以及基础设施层的代码分开。领域对象应该将 重点放在如何表达领域模型上，而不需要考虑自己的显示和存储问题，也无需管理应用任务 等内容。这使得模型的含义足够丰富，结构足够清晰，可以捕捉到基本的业务知识，并有效 地使用这些知识。 </p>
 <p>如果一个架构能够把那些与领域相关的代码隔离出来，得到一个内聚的领域 设计，同时又使领域与系统其他部分保持松散耦合 </p>
 <h3 id="ENITY（实体）"><a href="#ENITY（实体）" class="headerlink" title="ENITY（实体）"></a>ENITY（实体）</h3><p>主要由标识定义的对象，具有生命周期，在生命周期中它们的形式和内容可能发生变化，但必须保持一种内在的连续性。为了有效跟踪这些对象，必须定义它们的标识。</p>
@@ -242,11 +243,12 @@
 <h3 id="FACTORY（工厂）"><a href="#FACTORY（工厂）" class="headerlink" title="FACTORY（工厂）"></a>FACTORY（工厂）</h3><p>当创建一个对象或创建整个AGGREGATE时，如果创建工作很复杂，或者暴露了过多的内部结 构，则可以使用FACTORY进行封装。</p>
 <p>应该将创建复杂对象的实例和AGGREGATE的职责转移给单独的对象，这个对象本身可能没有 承担领域模型中的职责，但它仍是领域设计的一部分。提供一个封装所有复杂装配操作的接口， 而且这个接口不需要客户引用要被实例化的对象的具体类。</p>
 <p>不要在构造函数中调用其他类的构造函数。构造函数应该保持绝对简单。复杂的装配，特别是AGGREGATE，需要使用FACTORY。</p>
-<p>REPOSITORY（仓库）</p>
-<p>以通过对象之间的关联来找到对象。但当它处于生命周期的中间时，必须要有一个起 点，以便从这个起点遍历到一个ENTITY或VALUE。</p>
+<p>为了减少调用者的负担，同时也为了约束生命周期，通常都会引入工厂来创建聚合。严格控制聚合的生命周期，可以禁止任何外部对象绕开聚合根直接创建其内部的对象。</p>
+<h3 id="REPOSITORY（仓库）"><a href="#REPOSITORY（仓库）" class="headerlink" title="REPOSITORY（仓库）"></a>REPOSITORY（仓库）</h3><p>以通过对象之间的关联来找到对象。但当它处于生命周期的中间时，必须要有一个起 点，以便从这个起点遍历到一个ENTITY或VALUE。</p>
 <p>需要一种有效的方式来获取对已存在的领域对象的引用。如果基础设施提供了这方面的 便利，那么开发人员可能会增加很多可遍历的关联，这会使模型变得非常混乱。另一方面，开发 人员可能使用查询从数据库中提取他们所需的数据，或是直接提取具体的对象，而不是通过 AGGREGATE的根来得到这些对象。这样就导致领域逻辑进入查询和客户代码中，而ENTITY和 VALUE OBJECT则变成单纯的数据容器。采用大多数处理数据库访问的技术复杂性很快就会使客 户代码变得混乱，这将导致开发人员简化领域层，最终使模型变得无关紧要。</p>
 <p>除了通过根来遍历查找对象 这种方法以外，禁止用其他方法对AGGREGATE内部的任何对象进行访问。随意的数据库查询会破坏领域对象的封装和 AGGREGATE。技术基础设施和数据库访问机制的暴露会增加客户的复杂度，并妨碍模型驱动的 设计。</p>
-<p>REPOSITORY将某种类型的所有对象表示为一个概念集合(通常是模拟的)。它的行为类似于 集合(collection)，只是具有更复杂的查询功能。在添加或删除相应类型的对象时， REPOSITORY 的后台机制负责将对象添加到数据库中，或从数据库中删除对象。这个定义将一组紧密相关的职 责集中在一起，这些职责提供了对AGGREGATE根的整个生命周期的全程访问。只为那些确实需要直接访问的AGGREGATE根提供REPOSITORY。 让客户始终聚焦于模型，而将所有对象的存储和访问操作交给REPOSITORY来完成。</p>
+<p>REPOSITORY将某种类型的所有对象表示为一个概念集合(通常是模拟的)。它的行为类似于 集合(collection)，只是具有更复杂的查询功能。在添加或删除相应类型的对象时， REPOSITORY 的后台机制负责将对象添加到数据库中，或从数据库中删除对象。这个定义将一组紧密相关的职 责集中在一起，这些职责提供了对AGGREGATE根的整个生命周期的全程访问。只为那些确实需要直接访问的AGGREGATE根提供REPOSITORY。 让客户始终聚焦于模型，而将所有对象的存储和访问操作交给REPOSITORY来完成。<strong>保证一个聚合对应一个资源库非常重要</strong></p>
+<h3 id="领域建模过程"><a href="#领域建模过程" class="headerlink" title="领域建模过程"></a>领域建模过程</h3><p>领域驱动设计的过程描述为：面对客户的业务需求，由领域专家(产品或者业务负责人，最理解业务的人)与开发团队展开充分的交流，经过需求分析与知识提炼，获得清晰的问题域。通过对问题域进行分析和建模，识别限界上下文，利用它划分相对独立的领域，再通过上下文映射建立它们之间的关系，辅以分层架构、六边形架构划分系统的逻辑边界与物理边界，界定领域与技术之间的界限。之后进入战术设计阶段，深入到限界上下文内对领域进行建模，并以领域模型指导程序的设计与编码实现。若实现过程中，发现领域模型存在重复、错误或缺失时，再进而对已有模型进行重构，甚至重新划分限界上下文。</p>
 
     </div>
 
@@ -265,7 +267,10 @@
     <a href="/2020/01/15/Storm/" rel="prev" title="Storm">
       <i class="fa fa-chevron-left"></i> Storm
     </a></div>
-      <div class="post-nav-item"></div>
+      <div class="post-nav-item">
+    <a href="/2020/05/17/%E7%A7%92%E6%9D%80%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1/" rel="next" title="秒杀系统设计">
+      秒杀系统设计 <i class="fa fa-chevron-right"></i>
+    </a></div>
     </div>
       </footer>
     
@@ -324,7 +329,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#通用语言"><span class="nav-number">1.</span> <span class="nav-text">通用语言</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#领域"><span class="nav-number">2.</span> <span class="nav-text">领域</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#LAYERED-ARCHITECTURE-（分层架构）"><span class="nav-number">3.</span> <span class="nav-text">LAYERED ARCHITECTURE （分层架构）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ENITY（实体）"><span class="nav-number">4.</span> <span class="nav-text">ENITY（实体）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#VALUE-OBJECT（值对象）"><span class="nav-number">5.</span> <span class="nav-text">VALUE OBJECT（值对象）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SERVICE（服务）"><span class="nav-number">6.</span> <span class="nav-text">SERVICE（服务）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#AGGREGATE-聚合"><span class="nav-number">7.</span> <span class="nav-text">AGGREGATE(聚合)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#FACTORY（工厂）"><span class="nav-number">8.</span> <span class="nav-text">FACTORY（工厂）</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#通用语言"><span class="nav-number">1.</span> <span class="nav-text">通用语言</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#领域"><span class="nav-number">2.</span> <span class="nav-text">领域</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#子域和限界上下文"><span class="nav-number">3.</span> <span class="nav-text">子域和限界上下文</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#LAYERED-ARCHITECTURE-（分层架构）"><span class="nav-number">4.</span> <span class="nav-text">LAYERED ARCHITECTURE （分层架构）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ENITY（实体）"><span class="nav-number">5.</span> <span class="nav-text">ENITY（实体）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#VALUE-OBJECT（值对象）"><span class="nav-number">6.</span> <span class="nav-text">VALUE OBJECT（值对象）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SERVICE（服务）"><span class="nav-number">7.</span> <span class="nav-text">SERVICE（服务）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#AGGREGATE-聚合"><span class="nav-number">8.</span> <span class="nav-text">AGGREGATE(聚合)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#FACTORY（工厂）"><span class="nav-number">9.</span> <span class="nav-text">FACTORY（工厂）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#REPOSITORY（仓库）"><span class="nav-number">10.</span> <span class="nav-text">REPOSITORY（仓库）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#领域建模过程"><span class="nav-number">11.</span> <span class="nav-text">领域建模过程</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -338,20 +343,20 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">123</span>
+          <span class="site-state-item-count">125</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">60</span>
+        <span class="site-state-item-count">63</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">108</span>
+        <span class="site-state-item-count">110</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
