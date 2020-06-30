@@ -161,6 +161,329 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://jeffzzf.github.io/2015/09/24/Divide-two-integers/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Jeffzzf">
+      <meta itemprop="description" content="Do one thing at a time, and do well.">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Noob">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2015/09/24/Divide-two-integers/" class="post-title-link" itemprop="url">Divide two integers</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2015-09-24 10:06:29" itemprop="dateCreated datePublished" datetime="2015-09-24T10:06:29+08:00">2015-09-24</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2019-08-28 20:23:34" itemprop="dateModified" datetime="2019-08-28T20:23:34+08:00">2019-08-28</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E7%AE%97%E6%B3%95/" itemprop="url" rel="index"><span itemprop="name">算法</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E7%AE%97%E6%B3%95/%E6%95%B0%E8%AE%BA/" itemprop="url" rel="index"><span itemprop="name">数论</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>Divide two integers without using multiplication, division and mod operator.</p>
+<p>If it is overflow, return MAX_INT.<br><a href="https://leetcode.com/problems/divide-two-integers/" target="_blank" rel="noopener">https://leetcode.com/problems/divide-two-integers/</a></p>
+<p>需要注意的点：</p>
+<ol>
+<li>除数为零的情况</li>
+<li>被除数为Integer.MIN_VALUE，除数为-1时会超出Integer的表示范围，可以把被除数和除数都转换成long</li>
+<li>被除数和除数的符号问题：先计算结果的符号（如果被除数和除数异号，那么结果为负），然后把被除数和除数取绝对值</li>
+<li>被除数减除数的过程可以通过除数左移来加速</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">divide</span><span class="params">(<span class="keyword">int</span> dividend, <span class="keyword">int</span> divisor)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(divisor == <span class="number">0</span>) <span class="keyword">return</span> Integer.MAX_VALUE;</span><br><span class="line">    <span class="keyword">long</span> a = dividend, b = divisor;</span><br><span class="line">    <span class="keyword">boolean</span> positive = <span class="keyword">true</span>;</span><br><span class="line">    <span class="keyword">if</span>(a &lt; <span class="number">0</span> &amp;&amp; b &gt; <span class="number">0</span> || a &gt; <span class="number">0</span> &amp;&amp; b &lt; <span class="number">0</span>) positive = <span class="keyword">false</span>;</span><br><span class="line">    a = Math.abs(a);</span><br><span class="line">    b = Math.abs(b);</span><br><span class="line">    <span class="keyword">long</span> res = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">while</span>(a &gt;= b) &#123;</span><br><span class="line">        <span class="keyword">long</span> bt = b, rt = <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">while</span>((bt &lt;&lt; <span class="number">1</span>) &lt;= a) &#123;</span><br><span class="line">            bt = bt &lt;&lt; <span class="number">1</span>;</span><br><span class="line">            rt = rt &lt;&lt; <span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        a -= bt;</span><br><span class="line">        res += rt;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span>(positive &amp;&amp; res &gt; Integer.MAX_VALUE) <span class="keyword">return</span> Integer.MAX_VALUE;</span><br><span class="line">    <span class="keyword">return</span> positive ? (<span class="keyword">int</span>)res : -(<span class="keyword">int</span>)res;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2015/09/24/Divide-two-integers/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://jeffzzf.github.io/2015/09/09/Container-with-most-water/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Jeffzzf">
+      <meta itemprop="description" content="Do one thing at a time, and do well.">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Noob">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2015/09/09/Container-with-most-water/" class="post-title-link" itemprop="url">Container with most water</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2015-09-09 15:18:12" itemprop="dateCreated datePublished" datetime="2015-09-09T15:18:12+08:00">2015-09-09</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2019-08-28 20:23:34" itemprop="dateModified" datetime="2019-08-28T20:23:34+08:00">2019-08-28</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E7%AE%97%E6%B3%95/" itemprop="url" rel="index"><span itemprop="name">算法</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E7%AE%97%E6%B3%95/%E6%95%B0%E7%BB%84/" itemprop="url" rel="index"><span itemprop="name">数组</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="Container-With-Most-Water"><a href="#Container-With-Most-Water" class="headerlink" title="Container With Most Water"></a>Container With Most Water</h1><p>Given n non-negative integers a1, a2, …, an, where each represents a point at coordinate (i, ai). n vertical lines are drawn such that the two endpoints of line i is at (i, ai) and (i, 0). Find two lines, which together with x-axis forms a container, such that the container contains the most water.</p>
+<p>Note: You may not slant the container.<br><a href="https://leetcode.com/problems/container-with-most-water/" target="_blank" rel="noopener">https://leetcode.com/problems/container-with-most-water/</a></p>
+<p>使用首尾两个指针，每次收缩高度较小的那个。因为如果收缩高度大的那端，无论收缩后高度变高还是变低，收缩后面积一定变小（因为收缩后宽度减1，高度不会大于高度小的那端）。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">maxArea</span><span class="params">(<span class="keyword">int</span>[] height)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(height == <span class="keyword">null</span> || height.length &lt;= <span class="number">1</span>) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">int</span> left = <span class="number">0</span>, right = height.length - <span class="number">1</span>, max = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">while</span>(left &lt; right) &#123;</span><br><span class="line">        max = Math.max(max, (right - left) * Math.min(height[left], height[right]));</span><br><span class="line">        <span class="keyword">if</span>(height[left] &lt; height[right])</span><br><span class="line">            ++left;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">            --right;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> max;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2015/09/09/Container-with-most-water/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://jeffzzf.github.io/2015/09/07/MySQL%E8%A6%81%E7%82%B9%E6%8B%BE%E9%81%97/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Jeffzzf">
+      <meta itemprop="description" content="Do one thing at a time, and do well.">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Noob">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2015/09/07/MySQL%E8%A6%81%E7%82%B9%E6%8B%BE%E9%81%97/" class="post-title-link" itemprop="url">MySQL要点拾遗</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2015-09-07 09:06:22" itemprop="dateCreated datePublished" datetime="2015-09-07T09:06:22+08:00">2015-09-07</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2019-08-28 20:23:34" itemprop="dateModified" datetime="2019-08-28T20:23:34+08:00">2019-08-28</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/" itemprop="url" rel="index"><span itemprop="name">数据库</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/MySQL/" itemprop="url" rel="index"><span itemprop="name">MySQL</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="LIMIT"><a href="#LIMIT" class="headerlink" title="LIMIT"></a>LIMIT</h1><p>LIMIT 5 表示返回不多于5行的结果，带一个值的LIMIT总是从第一行开始，返回指定的行数<br>LIMIT 5, 5表示返回从第5行开始的5行，第一个数为开始位置，第二个数为要检索的行数</p>
+<blockquote>
+<p>检索出来的第一行为行0而不是行1，因此，LIMIT 1，1将检索出第二行而不是第一行。LIMIT 3，4表示从第三行开始4行，LIMIT 4 OFFSET3表示同样意思</p>
+</blockquote>
+<h1 id="LIKE"><a href="#LIKE" class="headerlink" title="LIKE"></a>LIKE</h1><p>LIKE用于过滤部分匹配的情况，可以使用通配符表示若干字符，其中%表示任何字符出现任何次数（包括0次），但是%不能匹配NULL。下划线_可以匹配单个字符。</p>
+<h1 id="SELECT子句及其顺序"><a href="#SELECT子句及其顺序" class="headerlink" title="SELECT子句及其顺序"></a>SELECT子句及其顺序</h1><table>
+<thead>
+<tr>
+<th>子句</th>
+<th>说明</th>
+<th>是否必须</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>SELECT</td>
+<td>返回列或表达式</td>
+<td>是</td>
+</tr>
+<tr>
+<td>FROM</td>
+<td>指定要检索的表</td>
+<td>仅在从表选择数据时使用</td>
+</tr>
+<tr>
+<td>WHERE</td>
+<td>过滤行</td>
+<td>否</td>
+</tr>
+<tr>
+<td>GROUP BY</td>
+<td>分组</td>
+<td>仅在按组计算聚集时使用</td>
+</tr>
+<tr>
+<td>HAVING</td>
+<td>组级过滤</td>
+<td>否</td>
+</tr>
+<tr>
+<td>ORDER BY</td>
+<td>输出排序顺序</td>
+<td>否</td>
+</tr>
+<tr>
+<td>LIMIT</td>
+<td>限制结果数</td>
+<td>否</td>
+</tr>
+</tbody></table>
+<h1 id="联结"><a href="#联结" class="headerlink" title="联结"></a>联结</h1><ol>
+<li>等值联结（内部联结），等值联结是在WHERE子句中指定两表中联结的字段：SELECT id FROM ta, tb WHERE ta.vid = tb.vid，内联结可以达到同样的效果：SELECT id FROM ta INNER JOIN tb ON ta.vid = tb.vid。ANSI SQL规范首选INNER JOIN语法。</li>
+<li>自联结，如果需要多次使用同一个表，可以用表别名和自联结来实现：SELCT p1.proc_id, p1.proc_name FROM products AS p1, product AS p2 WHERE p1.vend_id = p2.vend_id AND p2.proc_id = “DTNTR”</li>
+<li>外部联结，外部联结可以查询到没有关联在一起的行，使用OUTER JOIN时，必须使用RIGHT或LEFT关键字指定包括其所有行的表，RIGHT指出是OUTER JOIN右边的表，LEFT指出是OUTER JOIN左边的表。</li>
+</ol>
+<h1 id="UNION"><a href="#UNION" class="headerlink" title="UNION"></a>UNION</h1>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2015/09/07/MySQL%E8%A6%81%E7%82%B9%E6%8B%BE%E9%81%97/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://jeffzzf.github.io/2015/08/31/TCP%E6%80%BB%E7%BB%93/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -803,299 +1126,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://jeffzzf.github.io/2015/08/26/Spring-AOP%E5%8E%9F%E7%90%86/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Jeffzzf">
-      <meta itemprop="description" content="Do one thing at a time, and do well.">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Noob">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2015/08/26/Spring-AOP%E5%8E%9F%E7%90%86/" class="post-title-link" itemprop="url">Spring AOP原理</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2015-08-26 22:36:43" itemprop="dateCreated datePublished" datetime="2015-08-26T22:36:43+08:00">2015-08-26</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2019-11-06 14:30:30" itemprop="dateModified" datetime="2019-11-06T14:30:30+08:00">2019-11-06</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Java-Web/" itemprop="url" rel="index"><span itemprop="name">Java Web</span></a>
-                </span>
-                  ，
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Java-Web/Spring/" itemprop="url" rel="index"><span itemprop="name">Spring</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="什么是AOP"><a href="#什么是AOP" class="headerlink" title="什么是AOP"></a>什么是AOP</h1><p>AOP（Aspect-Oriented Programming，面向方面编程）是对OOP（Object-Oriented Programming，面向对象编程）的补充和完善。OOP引入封装、继承和多态等概念来建立对象层次结构，当需要为分散的对象引入公共行为时，OOP就显得无能为力。OOP适合定义从上到下的关系，但不适合定义从左到右的关系。例如日志功能的代码往往水平地分散在所有对象层次中，这种水平分布的代码称为横切（cross-cutting）代码，在OOP设计中会导致大量的代码重复，不利于代码复用和系统维护。</p>
-<p>AOP采用“横切”技术，将那些影响了多个类的公共行为封装到一个可重用的模块（Aspect即方面）中。如果对象是一个空心的圆柱体，其中封装的是对象的属性和行为，那么AOP就像一把利刃，将这些空心圆柱体剖开，剖开的切面就是Aspect切面。</p>
-<p>AOP把软件分为两个部分：核心关注点和横切关注点。业务处理的主要流程是核心关注点，与之关系不大的部分是横切关注点。横切关注点经常发生在核心关注点的多处，各处基本相似。比如权限认证、日志、事务处理。AOP的核心思想就是将业务逻辑同对其提供支持的通用服务进行分离。</p>
-<p>实现AOP的技术分为两类：一是采用动态代理技术，利用截取消息的方式，对消息进行装饰，以取代原有对象行为的执行；二是采用静态织入的方式，引入特定的语法创建Aspect，从而使编译器可以在编译期间织入Aspect代码。</p>
-<h1 id="AOP使用场景"><a href="#AOP使用场景" class="headerlink" title="AOP使用场景"></a>AOP使用场景</h1><ol>
-<li>Authentication权限</li>
-<li>Caching缓存</li>
-<li>Context passing内容传递</li>
-<li>Error handling错误处理</li>
-<li>Lazy loading懒加载</li>
-<li>Debugging调试</li>
-<li>logging，tracing，profiling and monitoring记录，追踪，优化校准</li>
-<li>Performanceoptimization性能优化</li>
-<li>Persistence持久化</li>
-<li>Resource polling资源池</li>
-<li>Synchronization同步</li>
-<li>Transaction事务</li>
-</ol>
-<h1 id="AOP中的概念"><a href="#AOP中的概念" class="headerlink" title="AOP中的概念"></a>AOP中的概念</h1><p><strong>切面（Aspect）</strong>：切面用于组织多个Advice，Advice放在切面中定义。在Spring AOP 底层来, Aspect 的概念使用 Advisor 代替, 一个 Advisor 只有一个 Pointcut 和 相应的 Advice。<br><strong>连接点（Joinpoint）</strong>：程序执行中明确的点，如方法的调用，或者异常的抛出。<br><strong>增强处理（Advice）</strong>：AOP框架在特定的切入点执行增强处理，有Before、After、Around、Throws、Introduction等类型<br><strong>切入点（Pointcut）</strong>：可以插入增强处理的连接点，当某个连接点满足指定要求时，该切入点被添加增强处理，该连接点也就变成了切入点<br><strong>引入（Introduction）</strong>：将方法或字段添加到被处理的类中，Spring允许将新的接口引入到任何被处理的对象中，例如，可以使用一个引入使任何对象实现IsModified接口，以简化缓存<br><strong>目标对象（Target Object）</strong>：包含连接点的对象，也被称为增强的对象，如果AOP采用动态AOP实现，那么该对象就是一个被代理的对象<br><strong>AOP代理（AOP Proxy）</strong>：AOP框架创建的对象，代理就是对目标对象的加强。Spring AOP中使用JDK动态代理为实现接口创建代理，cglib为没有实现接口的目标创建代理。<br><strong>织入（Weaving）</strong>：将增强处理添加到目标对象中，并创建一个被增强的对象（AOP代理）的过程就是织入。织入有两种方式：编译时增强（AspectJ）和运行时增强（如Spring AOP）</p>
-<h1 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h1>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2015/08/26/Spring-AOP%E5%8E%9F%E7%90%86/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://jeffzzf.github.io/2015/08/25/Spring-IoC%E5%8E%9F%E7%90%86/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Jeffzzf">
-      <meta itemprop="description" content="Do one thing at a time, and do well.">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Noob">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2015/08/25/Spring-IoC%E5%8E%9F%E7%90%86/" class="post-title-link" itemprop="url">Spring IoC原理</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2015-08-25 17:21:48" itemprop="dateCreated datePublished" datetime="2015-08-25T17:21:48+08:00">2015-08-25</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2019-09-04 15:04:11" itemprop="dateModified" datetime="2019-09-04T15:04:11+08:00">2019-09-04</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Java-Web/" itemprop="url" rel="index"><span itemprop="name">Java Web</span></a>
-                </span>
-                  ，
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Java-Web/Spring/" itemprop="url" rel="index"><span itemprop="name">Spring</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>控制反转IoC（Inverse of Control）与依赖注入DI（Dependency Injection）：依赖注入和控制反转是对同一件事情的不同描述，从某个方面讲，就是它们描述的角度不同。依赖注入是从应用程序的角度在描述，可以把依赖注入描述完整点：应用程序依赖容器创建并注入它所需要的外部资源；而控制反转是从容器的角度在描述，描述完整点：容器控制应用程序，由容器反向的向应用程序注入应用程序所需要的外部资源。</p>
-<p>其实IoC/DI对编程带来的最大改变不是从代码上，而是从思想上，发生了“主从换位”的变化。应用程序原本是老大，要获取什么资源都是主动出击，但是在IoC/DI思想中，应用程序就变成被动的了，被动的等待IoC/DI容器来创建并注入它所需要的资源了。</p>
-<p>这么小小的一个改变其实是编程思想的一个大进步，这样就有效的分离了对象和它所需要的外部资源，使得它们松散耦合，有利于功能复用，更重要的是使得程序的整个体系结构变得非常灵活。</p>
-<h2 id="BeanFactory与ApplicationContext"><a href="#BeanFactory与ApplicationContext" class="headerlink" title="BeanFactory与ApplicationContext"></a>BeanFactory与ApplicationContext</h2><p>Spring IoC有两个主要的容器系列：</p>
-<ol>
-<li>实现BeanFactory接口的简单容器系列，这一系列容器只实现了容器的最基本功能</li>
-<li>ApplicationContext应用上下文，它作为容器的高级形态存在。应用上下文在简单容器的基础上，增加了许多面向框架的特性，同时对应用环境做了许多适配</li>
-</ol>
-<p><strong>BeanFactory</strong>是IoC容器体系结构中最基本的接口类<br><strong>BeanDefinition</strong>是对依赖反转模式中管理对象依赖关系的数据抽象，也是容器实现依赖反转功能的核心数据结构</p>
-<p>BeanFactory接口定义了基本的IoC容器的规范，包含了getBean()这样的IoC容器的基本方法（通过这个方法可以从容器中取得Bean）。HierarchicalBeanFactory接口继承了BeanFactory接口之后，增加了getParentFactory()接口功能，使BeanFactory具备了双亲IoC管理的功能。在ConfigurableBeanFactory接口中，定义了一些对BeanFactory的配置功能，比如通过setParentBeanFactory()设置双亲IoC容器，通过addBeanPostProcessor()配置bean后置处理器等等。通过这些接口设计的叠加，定义了BeanFactory就是简单IoC容器的基本功能。</p>
-<p>在ApplicationContext设计中，一方面它继承了BeanFactory接口体系中的ListableBeanFactor、HierachicalBeanFactory等BeanFactory的接口，具备了BeanFactory IoC的基本功能（并未继承AutowireCapableBeanFactory接口，因为几乎不会被程序用到，但是可以通过ApplicationContext的getAutowireCapableBeanFactory()获得）；另一方面，通过继承MessageSource、ResourceLoader、ApplicationEventPublisher这些接口，为ApplicationContext赋予更高级的IoC容器特性。</p>
-<h2 id="BeanFactory容器设计原理（以XmlBeanFactory为例）"><a href="#BeanFactory容器设计原理（以XmlBeanFactory为例）" class="headerlink" title="BeanFactory容器设计原理（以XmlBeanFactory为例）"></a>BeanFactory容器设计原理（以XmlBeanFactory为例）</h2>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2015/08/25/Spring-IoC%E5%8E%9F%E7%90%86/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://jeffzzf.github.io/2015/08/25/RTTI%E3%80%81%E5%8F%8D%E5%B0%84/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Jeffzzf">
-      <meta itemprop="description" content="Do one thing at a time, and do well.">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Noob">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2015/08/25/RTTI%E3%80%81%E5%8F%8D%E5%B0%84/" class="post-title-link" itemprop="url">RTTI、反射</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2015-08-25 16:11:47" itemprop="dateCreated datePublished" datetime="2015-08-25T16:11:47+08:00">2015-08-25</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2019-08-28 20:23:34" itemprop="dateModified" datetime="2019-08-28T20:23:34+08:00">2019-08-28</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Java/" itemprop="url" rel="index"><span itemprop="name">Java</span></a>
-                </span>
-                  ，
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Java/Basic/" itemprop="url" rel="index"><span itemprop="name">Basic</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="运行时类型信息（RTTI）的作用"><a href="#运行时类型信息（RTTI）的作用" class="headerlink" title="运行时类型信息（RTTI）的作用"></a>运行时类型信息（RTTI）的作用</h1><p>通过运行时类型信息可以在程序运行时使用类型信息，这一特性使程序员从只能在编译期执行面向类型的操作中解脱出来，从而可以构建更加强大的程序。</p>
-<h1 id="Class对象"><a href="#Class对象" class="headerlink" title="Class对象"></a>Class对象</h1><p>类的运行时类型信息由Class对象表示的，每个类都有一个Class对象，每当编写并编译一个新类，就会产生一个Class对象。</p>
-<blockquote>
-<p>Instances of the class Class represent classes and interfaces in a running Java application. An enum is a kind of class and an annotation is a kind of interface. Every array also belongs to a class that is reflected as a Class object that is shared by all arrays with the same element type and number of dimensions. The primitive Java types (boolean, byte, char, short, int, long, float, and double), and the keyword void are also represented as Class objects.</p>
-</blockquote>
-<p>Class类没有构造器，当某个类被加载时，这个类的Class对象由虚拟机自动创建。</p>
-<h1 id="反射"><a href="#反射" class="headerlink" title="反射"></a>反射</h1><p>Class类与java.lang.reflect类一起实现了Java的反射，reflect类库包含了Field、Method以及Constructor类（都实现了Member接口）、这些类型的对象是由JVM在运行时创建的，用以表示未知类对应的成员。可以通过Constructor创建新的对象，用get()和set()方法读取和修改与Field对象关联的字段，用invoke()方法调用与Method对象关联的字段，还可以调用getField()、getMethod()和getConstructor()返回字段、方法以及构造器的数组。这样匿名对象的类信息就能在运行时被确定下来，在编译期不需要知道任何信息。</p>
-<p>当通过反射与一个未知类型的对象打交道时，JVM只是简单地检查这个对象，看它属于哪个特定的类（与RTTI一样）。RTTI与反射之间的区别只在于：对RTTI来说，编译器在编译时打开和检查.class文件，可以用普通方式调用对象的所有方法；而对于反射机制来说，.Class文件在编译时是不可获取的，只能在运行时打开和检查.class 文件。</p>
-<h1 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h1>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2015/08/25/RTTI%E3%80%81%E5%8F%8D%E5%B0%84/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1165,7 +1195,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">125</span>
+          <span class="site-state-item-count">128</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -1178,7 +1208,7 @@
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">110</span>
+        <span class="site-state-item-count">111</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>

@@ -161,6 +161,260 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://jeffzzf.github.io/2020/06/30/%E6%97%A5%E5%BF%97%E6%94%B6%E9%9B%86%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Jeffzzf">
+      <meta itemprop="description" content="Do one thing at a time, and do well.">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Noob">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/06/30/%E6%97%A5%E5%BF%97%E6%94%B6%E9%9B%86%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1/" class="post-title-link" itemprop="url">日志收集系统设计</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2020-06-30 16:18:38 / 修改时间：17:48:28" itemprop="dateCreated datePublished" datetime="2020-06-30T16:18:38+08:00">2020-06-30</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1/" itemprop="url" rel="index"><span itemprop="name">系统设计</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="使用场景"><a href="#使用场景" class="headerlink" title="使用场景"></a>使用场景</h2><ol>
+<li>问题排查</li>
+</ol>
+<p>在分布式系统中，同一个应用可能部署在多台机器上，如果日志没有集中搜集起来，通过日志排查问题时需要查找每台机器上的日志，排查过程也会消耗性能，可能影响线上业务。</p>
+<ol start="2">
+<li>离线场景</li>
+</ol>
+<p>日志可用来统计PV、UV 等指标，用于 OLAP、机器学习模型训练等场景。</p>
+<ol start="3">
+<li>实时场景</li>
+</ol>
+<p>可用日志流中实时解析出有价值的信息，用于实时 OLAP、实时模型训练、风控等。</p>
+<h2 id="问题挑战"><a href="#问题挑战" class="headerlink" title="问题挑战"></a>问题挑战</h2><ol>
+<li>数据量大</li>
+<li>业务线多</li>
+<li>易用性，无侵入</li>
+</ol>
+<h2 id="架构设计"><a href="#架构设计" class="headerlink" title="架构设计"></a>架构设计</h2>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2020/06/30/%E6%97%A5%E5%BF%97%E6%94%B6%E9%9B%86%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://jeffzzf.github.io/2020/06/12/Flink/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Jeffzzf">
+      <meta itemprop="description" content="Do one thing at a time, and do well.">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Noob">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/06/12/Flink/" class="post-title-link" itemprop="url">Flink</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-06-12 11:17:57" itemprop="dateCreated datePublished" datetime="2020-06-12T11:17:57+08:00">2020-06-12</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-06-30 11:59:22" itemprop="dateModified" datetime="2020-06-30T11:59:22+08:00">2020-06-30</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>Flink 核心是一个流式的数据流执行引擎，针对数据流的分布式计算提供了数据分布、数据通信以及容错机制等功能。</p>
+<p>在执行引擎这一层，流处理系统与批处理系统最大不同在于节点间的数据传输方式。对于一个流处理系统，其节点间数据传输的标准模型是：当一条数据被处理完成后，序列化到缓存中，然后立刻通过网络传输到下一个节点，由下一个节点继续处理。而对于一个批处理系统，其节点间数据传输的标准模型是：当一条数据被处理完成后，序列化到缓存中，并不会立刻通过网络传输到下一个节点，当缓存写满，就持久化到本地硬盘上，当所有数据都被处理完成后，才开始将处理后的数据通过网络传输到下一个节点。这两种数据传输模式是两个极端，对应的是流处理系统对低延迟的要求和批处理系统对高吞吐量的要求。Flink的执行引擎采用了一种十分灵活的方式，同时支持了这两种数据传输模型。Flink以固定的缓存块为单位进行网络数据传输，用户可以通过缓存块超时值指定缓存块的传输时机。如果缓存块的超时值为0，则Flink的数据传输方式类似上文所提到流处理系统的标准模型，此时系统可以获得最低的处理延迟。如果缓存块的超时值为无限大，则Flink的数据传输方式类似上文所提到批处理系统的标准模型，此时系统可以获得最高的吞吐量。同时缓存块的超时值也可以设置为0到无限大之间的任意值。缓存块的超时阈值越小，则Flink流处理执行引擎的数据处理延迟越低，但吞吐量也会降低，反之亦然。通过调整缓存块的超时阈值，用户可根据需求灵活地权衡系统延迟和吞吐量。</p>
+<p>Flink 在流式引擎的基础上实现了流处理和批处理。窗口（window）是从 Streaming 到 Batch 的一个桥梁。</p>
+<h2 id="容错机制"><a href="#容错机制" class="headerlink" title="容错机制"></a>容错机制</h2>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2020/06/12/Flink/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://jeffzzf.github.io/2020/06/08/%E5%88%86%E5%B8%83%E5%BC%8F%E4%B8%80%E8%87%B4%E6%80%A7%E7%AE%97%E6%B3%95/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Jeffzzf">
+      <meta itemprop="description" content="Do one thing at a time, and do well.">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Noob">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/06/08/%E5%88%86%E5%B8%83%E5%BC%8F%E4%B8%80%E8%87%B4%E6%80%A7%E7%AE%97%E6%B3%95/" class="post-title-link" itemprop="url">分布式一致性算法</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-06-08 16:49:25" itemprop="dateCreated datePublished" datetime="2020-06-08T16:49:25+08:00">2020-06-08</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-06-09 14:19:18" itemprop="dateModified" datetime="2020-06-09T14:19:18+08:00">2020-06-09</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%88%86%E5%B8%83%E5%BC%8F/" itemprop="url" rel="index"><span itemprop="name">分布式</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="分布式一致性算法"><a href="#分布式一致性算法" class="headerlink" title="分布式一致性算法"></a>分布式一致性算法</h2><p>在分布式系统中，不能把数据放在同一个节点上导致单点故障。但是把同一份数据存放在多个节点，可能引起不同节点数据不一致问题。</p>
+<p>分布式一致性算法就是为了解决分布式系统中不同节点的一致性问题。</p>
+<p>分布式一致性算法可以分为强一致性算法和弱一致性算法两类。</p>
+<h3 id="强一致性算法"><a href="#强一致性算法" class="headerlink" title="强一致性算法"></a>强一致性算法</h3><p>数据跟新后同步到集群中所有节点，客户端不会查询到不一致数据，常见的强一致性算法有：<strong>Paxos</strong>、<strong>Raft（muti-paxos）</strong>和 <strong>ZAB（muti-paxos）</strong></p>
+<h3 id="弱一致性算法"><a href="#弱一致性算法" class="headerlink" title="弱一致性算法"></a>弱一致性算法</h3><p>集群各节点数据达到完全一致需要一个过程，该过程中客户端可能查询到不一致数据，常见的弱一致性算法有</p>
+<p>zk 写不是可扩展的，不可以通过加节点来解决水平扩展的问题                    </p>
+
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2020/06/08/%E5%88%86%E5%B8%83%E5%BC%8F%E4%B8%80%E8%87%B4%E6%80%A7%E7%AE%97%E6%B3%95/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://jeffzzf.github.io/2020/05/26/%E5%88%86%E5%B8%83%E5%BC%8F%E5%8E%9F%E7%90%86/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -368,7 +622,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-05-26 13:00:28" itemprop="dateModified" datetime="2020-05-26T13:00:28+08:00">2020-05-26</time>
+                <time title="修改时间：2020-06-30 19:42:37" itemprop="dateModified" datetime="2020-06-30T19:42:37+08:00">2020-06-30</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -396,9 +650,13 @@
 <li>高并发：由于商品性价比很高，大量用户都想抢到商品，秒杀活动开始的瞬间可能涌入大量流量，如 QPS 可能达到数万甚至几十万。</li>
 <li>高性能：作为线上活动，秒杀系统需要在短时间内返回秒杀结果，如果性能过低，用户会失去耐心，降低用户体验</li>
 <li>高可用：秒杀系统不可用会严重影响平台形象，引起用户和商户不满，造成平台损失</li>
-<li>高可用：秒杀活动涉及用户支付、口径库存等关键过程，不一致问题可能引起超卖、库存积压等问题，给商户和用户造成损失</li>
+<li>高一致：秒杀活动涉及用户支付、口径库存等关键过程，不一致问题可能引起超卖、库存积压等问题，给商户和用户造成损失</li>
 </ol>
-<h2 id="二、系统设计"><a href="#二、系统设计" class="headerlink" title="二、系统设计"></a>二、系统设计</h2><h3 id="1-高性能"><a href="#1-高性能" class="headerlink" title="1. 高性能"></a>1. 高性能</h3>
+<h2 id="二、系统设计"><a href="#二、系统设计" class="headerlink" title="二、系统设计"></a>二、系统设计</h2><h3 id="1-前端和接入层"><a href="#1-前端和接入层" class="headerlink" title="1. 前端和接入层"></a>1. 前端和接入层</h3><p>前端动静分离，把90%的静态数据缓存在用户端或者CDN上，当真正秒杀时用户只需要点击特殊的按钮“刷新抢宝”即可，而不需要刷新整个页面，这样只向服务端请求很少的有效数据，而不需要重复请求大量静态数据。</p>
+<p>网站负载均衡层或业务网关层需要能够对访问请求按用户粒度进行流量限制，以降低抢购脚本对系统带来的压力。</p>
+<p>在安全方面，通过高防CDN或高防IP，降低DDOS攻击的影响。</p>
+<p>在业务方面，通过引入答题环节，将突然涌入的压力平滑到3s左右的时间段内。</p>
+<h3 id="2-业务层：隔离、限流与弹性伸缩"><a href="#2-业务层：隔离、限流与弹性伸缩" class="headerlink" title="2. 业务层：隔离、限流与弹性伸缩"></a>2. 业务层：隔离、限流与弹性伸缩</h3>
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/2020/05/17/%E7%A7%92%E6%9D%80%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1/#more" rel="contents">
@@ -767,274 +1025,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://jeffzzf.github.io/2019/12/10/Bert/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Jeffzzf">
-      <meta itemprop="description" content="Do one thing at a time, and do well.">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Noob">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2019/12/10/Bert/" class="post-title-link" itemprop="url">Bert</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2019-12-10 16:29:49" itemprop="dateCreated datePublished" datetime="2019-12-10T16:29:49+08:00">2019-12-10</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2019-12-30 19:09:48" itemprop="dateModified" datetime="2019-12-30T19:09:48+08:00">2019-12-30</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/AI/" itemprop="url" rel="index"><span itemprop="name">AI</span></a>
-                </span>
-                  ，
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/AI/NLP/" itemprop="url" rel="index"><span itemprop="name">NLP</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>目前大部分 NLP 任务深度学习任务中都会使用预训练好的词向量（Word2Vec等）进行网络初始化（而非随机初始化），从而加快网络的收敛速度。预训练词向量通常只编码词汇之间的关系，对上下文信息考虑不足，并且无法处理一词多义问题。如 bank 既可以表示银行，也可以表示岸边，却对应相同的词向量，这显然是不合理的。为了更好地考虑词上下文信息，Context2Vec 使用两个双向长短时记忆网络（Long Short Term Memory， LSTM）来分别编码单词左到右（Left to right），右到左（right to left）的上下文信息。这种使用预训练语言模型的词向量作为特征输入到下游目标任务的方法称为 feature-based。</p>
-<p>另一种方法是微调（Fine-tuning），GPT、BERT 和后续预训练工作都属于这一范畴，直接在深层 Transformer 网络上进行语言模型训练，收敛后针对下游目标进行微调，不需要再为目标任务设计 Task-specific 网络重头训练。</p>
-<p>BERT（Bidirectional Encoder Representations from Transformers）是基于 Transformer 的深度双向语言表征模型，本质上利用 Transformer 结构构造了一个多层双向的 Encoder 网络。Transformer 是 Google 2017 年提出的基于自注意力机制（self-attention）的深层模型，在包括机器翻译在内的多项 NLP 任务上效果显著，超过 RNN 且训练速度更快。不到一年时间内，Transformer已经取代RNN成为神经网络机器翻译的State-Of-The-Art（SOTA）模型。</p>
-<h2 id="输入表示"><a href="#输入表示" class="headerlink" title="输入表示"></a>输入表示</h2><p>针对不同的任务，BERT模型的输入可以是单句或者句对。对于每一个输入的Token，它的表征由其对应的词表征（Token Embedding）、段表征（Segment Embedding）和位置表征（Position Embedding）相加产生。</p>
-<ul>
-<li>对于英文模型，使用了Wordpiece模型来产生Subword从而减小词表规模；对于中文模型，直接训练基于字的模型。</li>
-<li>模型输入需要附加一个起始Token，记为[CLS]，对应最终的Hidden State（即Transformer的输出）可以用来表征整个句子，用于下游的分类任务。</li>
-<li>模型能够处理句间关系。为区别两个句子，用一个特殊标记符[SEP]进行分隔，另外针对不同的句子，将学习到的Segment Embeddings 加到每个Token的Embedding上。</li>
-<li>对于单句输入，只有一种Segment Embedding；对于句对输入，会有两种Segment Embedding。</li>
-</ul>
-<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><ol>
-<li><a href="https://www.cnblogs.com/rucwxb/p/10277217.html" target="_blank" rel="noopener"><a href="https://www.cnblogs.com/rucwxb/p/10277217.html" target="_blank" rel="noopener">【NLP】彻底搞懂BERT</a></a></li>
-<li><a href="https://tech.meituan.com/2019/11/14/nlp-bert-practice.html" target="_blank" rel="noopener"><a href="https://tech.meituan.com/2019/11/14/nlp-bert-practice.html" target="_blank" rel="noopener">美团BERT的探索和实践</a></a></li>
-</ol>
-
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2019/12/10/Bert/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://jeffzzf.github.io/2019/11/27/%E6%95%B0%E6%8D%AE%E5%BA%93%E8%AE%BE%E8%AE%A1/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Jeffzzf">
-      <meta itemprop="description" content="Do one thing at a time, and do well.">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Noob">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2019/11/27/%E6%95%B0%E6%8D%AE%E5%BA%93%E8%AE%BE%E8%AE%A1/" class="post-title-link" itemprop="url">数据库设计</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2019-11-27 17:34:29 / 修改时间：17:53:41" itemprop="dateCreated datePublished" datetime="2019-11-27T17:34:29+08:00">2019-11-27</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E5%AD%98%E5%82%A8/" itemprop="url" rel="index"><span itemprop="name">存储</span></a>
-                </span>
-                  ，
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E5%AD%98%E5%82%A8/RDBMS/" itemprop="url" rel="index"><span itemprop="name">RDBMS</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>数据库设计三范式</p>
-<p>第一范式（1NF）：原子性，数据不可再分，表中每一列不可再分</p>
-<p>第二范式（2NF）：唯一性，消除部分依赖，每行数据具有唯一性。在第一范式基础上，每个表必须有主键，并且没有包含在主键中的列完全依赖主键，而不能部分依赖主键。如果存在部分依赖，这些属性和关键字应该分离出来形成一个新的实体。不满足第二范式的设计容易产生冗余数据。</p>
-<p>第三范式（3NF）：独立性，消除传递依赖。在满足第二范式的基础上，非主键列必须直接依赖主键，不能存在传递依赖。</p>
-<p>区分第二范式还是第三范式：2NF非主键列是完全依赖主键还是依赖主键的一部分，3NF 非主键列是直接依赖主键还是直接依赖非主键列。</p>
-<h2 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h2><p>1.<a href="https://blog.csdn.net/dream_angel_z/article/details/45175621" target="_blank" rel="noopener">数据库（第一范式，第二范式，第三范式）</a></p>
-
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2019/11/27/%E6%95%B0%E6%8D%AE%E5%BA%93%E8%AE%BE%E8%AE%A1/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://jeffzzf.github.io/2019/11/26/%E9%97%AE%E9%A2%98%E6%95%B4%E7%90%86/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Jeffzzf">
-      <meta itemprop="description" content="Do one thing at a time, and do well.">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Noob">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2019/11/26/%E9%97%AE%E9%A2%98%E6%95%B4%E7%90%86/" class="post-title-link" itemprop="url">问题整理</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2019-11-26 13:02:03" itemprop="dateCreated datePublished" datetime="2019-11-26T13:02:03+08:00">2019-11-26</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-01-02 11:13:47" itemprop="dateModified" datetime="2020-01-02T11:13:47+08:00">2020-01-02</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <ol>
-<li>什么是僵死进程，什么时候出现</li>
-</ol>
-<p>子进程退出时，父进程没有对子进程发出的 SIGCHLD 信号进行适当处理（waitpid或忽略），导致子进程停留在僵死状态等待父进程收尸，这种状态下的子进程称为僵死进程。</p>
-<p>如果进程父进程不调用 wait / waitpid，那么保留的子进程信息（进程号，退出状态，运行时间等）不会释放，进程号会一致占用。由于系统的进程号是有限的，如果产生大量僵死进程，可能出现没有可用进程号，导致系统无法创建新的进程。</p>
-<p>如何清除：</p>
-<p>①改写父进程，</p>
-<p>②把父进程杀掉，僵死进程成为孤儿进程，过继给 1 号进程 init，init 始终会负责清理僵死进程</p>
-<ol start="2">
-<li>什么是孤儿进程</li>
-</ol>
-<p>父进程退出后，它的子进程还在运行，这些子进程将成为孤儿进程。孤儿进程将被 init 进程（进程 id 为 1）收养，并由 init 进程对它们进程状态收集工作。</p>
-
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2019/11/26/%E9%97%AE%E9%A2%98%E6%95%B4%E7%90%86/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1104,7 +1094,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">125</span>
+          <span class="site-state-item-count">128</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -1117,7 +1107,7 @@
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">110</span>
+        <span class="site-state-item-count">111</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>

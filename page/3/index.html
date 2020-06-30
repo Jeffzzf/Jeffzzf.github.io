@@ -161,6 +161,297 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://jeffzzf.github.io/2019/09/11/Redis%E7%9F%A5%E8%AF%86%E7%82%B9%E6%95%B4%E7%90%86/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Jeffzzf">
+      <meta itemprop="description" content="Do one thing at a time, and do well.">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Noob">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/09/11/Redis%E7%9F%A5%E8%AF%86%E7%82%B9%E6%95%B4%E7%90%86/" class="post-title-link" itemprop="url">Redis知识点整理</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2019-09-11 14:19:58" itemprop="dateCreated datePublished" datetime="2019-09-11T14:19:58+08:00">2019-09-11</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-05-27 17:17:21" itemprop="dateModified" datetime="2020-05-27T17:17:21+08:00">2020-05-27</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%AD%98%E5%82%A8/" itemprop="url" rel="index"><span itemprop="name">存储</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%AD%98%E5%82%A8/Redis/" itemprop="url" rel="index"><span itemprop="name">Redis</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="缓存的用途"><a href="#缓存的用途" class="headerlink" title="缓存的用途"></a>缓存的用途</h2><h3 id="高性能"><a href="#高性能" class="headerlink" title="高性能"></a>高性能</h3><p>用户直接访问数据库时，需要从硬盘上读取数据，速度较慢。如果将用户查询数据库中的数据存在缓存中，下次可以直接从内存的缓存中读取，性能更高。</p>
+<h3 id="高并发"><a href="#高并发" class="headerlink" title="高并发"></a>高并发</h3><p>直接操作缓存能承受的请求远远大于直接访问数据库，将数据库中的数据存放在缓存中能显著提高系统的并发能力</p>
+<h2 id="常见数据类型"><a href="#常见数据类型" class="headerlink" title="常见数据类型"></a>常见数据类型</h2><p>Redis常见的数据结构包括：String、List、Set、SortedSet、Hash、HyperLogLog</p>
+<p>Redis支持的数据结构可以与Java中对应的类来理解，String对应Object类，因为任意对象都可以以string的形式来存储。List数据结构对应java.util.List接口的实现类LinkedList，Set数据结构对应HashSet类，SortedSet对应SortedSet接口，Hash数据结构对应HashMap类。</p>
+<p><strong>string</strong>：最基础的数据类型，Redis中String类型的value最多可容纳数据长度为512M。适用于value较小、模型简单的value。</p>
+<p><strong>List</strong>：按插入顺序排序的字符串链表。可以在头部（left）和尾部（right）添加新元素。头尾添加元素效率很高，中间插入效率较低。适用于新闻列表、评论列表等列表类型数据存储。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2019/09/11/Redis%E7%9F%A5%E8%AF%86%E7%82%B9%E6%95%B4%E7%90%86/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://jeffzzf.github.io/2019/09/04/Java%E5%B9%B6%E5%8F%91%E7%9F%A5%E8%AF%86%E7%82%B9/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Jeffzzf">
+      <meta itemprop="description" content="Do one thing at a time, and do well.">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Noob">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/09/04/Java%E5%B9%B6%E5%8F%91%E7%9F%A5%E8%AF%86%E7%82%B9/" class="post-title-link" itemprop="url">Java并发知识点</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2019-09-04 16:34:42" itemprop="dateCreated datePublished" datetime="2019-09-04T16:34:42+08:00">2019-09-04</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-05-16 18:18:43" itemprop="dateModified" datetime="2020-05-16T18:18:43+08:00">2020-05-16</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Java/" itemprop="url" rel="index"><span itemprop="name">Java</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Java/%E5%B9%B6%E5%8F%91/" itemprop="url" rel="index"><span itemprop="name">并发</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="线程池"><a href="#线程池" class="headerlink" title="线程池"></a>线程池</h2><h3 id="线程池的优点"><a href="#线程池的优点" class="headerlink" title="线程池的优点"></a>线程池的优点</h3><ul>
+<li>通过复用线程减少创建和销毁线程的资源消耗</li>
+<li>不用重新创建线程，提高响应速度</li>
+<li>方便管理，线程是系统稀缺资源，如果无限制创建会消耗系统资源，降低稳定性。使用线程池可以进行统一分配、调优和监控</li>
+</ul>
+<h3 id="线程池创建"><a href="#线程池创建" class="headerlink" title="线程池创建"></a>线程池创建</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="title">ThreadPoolExecutor</span><span class="params">(<span class="keyword">int</span> corePoolSize,</span></span></span><br><span class="line"><span class="function"><span class="params">                              <span class="keyword">int</span> maximumPoolSize,</span></span></span><br><span class="line"><span class="function"><span class="params">                              <span class="keyword">long</span> keepAliveTime,</span></span></span><br><span class="line"><span class="function"><span class="params">                              TimeUnit unit,</span></span></span><br><span class="line"><span class="function"><span class="params">                              BlockingQueue&lt;Runnable&gt; workQueue,</span></span></span><br><span class="line"><span class="function"><span class="params">                              ThreadFactory threadFactory,</span></span></span><br><span class="line"><span class="function"><span class="params">                              RejectedExecutionHandler handler)</span></span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><strong>corePoolSize</strong>: 线程池核心线程数</li>
+<li><strong>maximumPoolSize</strong>：线程池最大线程数大小</li>
+<li><strong>keepAliveTime</strong>：线程池中非核心线程空闲的存活时间</li>
+<li><strong>unit</strong>：线程空闲存活时间单位</li>
+<li><strong>workQueue</strong>：存放任务的阻塞队列</li>
+<li><strong>threadFactory</strong>：创建线程的工厂，可以给创建的线程设置有意义的名字，便于排查问题</li>
+<li><strong>handler</strong>：线程池的饱和策略</li>
+</ul>
+<h3 id="线程池组成"><a href="#线程池组成" class="headerlink" title="线程池组成"></a>线程池组成</h3><p>线程池由工作线程、任务队列组成，其中工作线程 Worker 继承AQS，维护在一个HashSet 中任务队列是 BlockingQueue，防止在多线程环境下出现并发问题。</p>
+<h3 id="线程池执行"><a href="#线程池执行" class="headerlink" title="线程池执行"></a>线程池执行</h3><ul>
+<li>提交一个任务，线程池里存活的核心线程数小于线程数corePoolSize时，线程池会创建一个核心线程去处理提交的任务。</li>
+<li>如果线程池核心线程数已满，即线程数已经等于corePoolSize，一个新提交的任务，会被放进任务队列workQueue排队等待执行。</li>
+<li>当线程池里面存活的线程数已经等于corePoolSize了, 并且任务队列workQueue也满，判断线程数是否达到maximumPoolSize，即最大线程数是否已满，如果没到达，创建一个非核心线程执行提交的任务。</li>
+<li>如果当前的线程数达到了maximumPoolSize，还有新的任务过来的话，直接采用拒绝策略处理。</li>
+</ul>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2019/09/04/Java%E5%B9%B6%E5%8F%91%E7%9F%A5%E8%AF%86%E7%82%B9/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://jeffzzf.github.io/2019/09/02/Spring%E4%B8%AD%E7%9A%84%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Jeffzzf">
+      <meta itemprop="description" content="Do one thing at a time, and do well.">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Noob">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/09/02/Spring%E4%B8%AD%E7%9A%84%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" class="post-title-link" itemprop="url">Spring中的设计模式</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2019-09-02 21:40:31" itemprop="dateCreated datePublished" datetime="2019-09-02T21:40:31+08:00">2019-09-02</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2019-09-03 11:58:13" itemprop="dateModified" datetime="2019-09-03T11:58:13+08:00">2019-09-03</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Java-Web/" itemprop="url" rel="index"><span itemprop="name">Java Web</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Java-Web/Spring/" itemprop="url" rel="index"><span itemprop="name">Spring</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="工厂模式"><a href="#工厂模式" class="headerlink" title="工厂模式"></a>工厂模式</h2><p>Spring工厂模式通过BeanFactory或ApplicationContext创建对象，BeanFactory仅提供最基本的依赖注入支持，ApplicationContext扩展了BeanFactory，除了具有BeanFactory的功能外还有更多额外功能，因此一般使用ApplicationContext。</p>
+<h2 id="单例模式"><a href="#单例模式" class="headerlink" title="单例模式"></a>单例模式</h2><p>单例模式的好处：</p>
+<ol>
+<li>减少创建对象花费的时间，对于频繁使用的重量级对象来说，是非常可观的系统开销</li>
+<li>由于new操作的次数减少，系统内存的使用频率也会降低，可以降低GC压力，缩短GC停顿时间</li>
+</ol>
+<p>Spring中bean的默认作用域是singleton的，它通过ConcurrentHashMap实现单例模式。</p>
+<h2 id="代理模式"><a href="#代理模式" class="headerlink" title="代理模式"></a>代理模式</h2><p>AOP（Aspect Oriented Programming，面向切面编程）将那些与业务无关的、被业务模块共同调用的逻辑（事务处理、日志管理、权限控制等）封装起来，便于减少系统的重复代码，降低模块间的耦合度，有利于未来的可扩展性和可维护性。</p>
+<p>Spring AOP基于动态代理，如果要代理的对象实现了某个接口，Spring AOP会使用JDK Proxy创建代理对象，对于没有实现接口的对象，无法使用JDK Proxy进行代理，Spring AOP会使用Cglib生成被代理对象的子类来作为代理。</p>
+<p>也可以使用AspectJ在编译时做静态代理，这种代理方式基于字节码操作（Bytecode Manipulation）。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2019/09/02/Spring%E4%B8%AD%E7%9A%84%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://jeffzzf.github.io/2019/08/31/Spring%E6%BA%90%E7%A0%81/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -820,265 +1111,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://jeffzzf.github.io/2019/08/09/Hadoop/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Jeffzzf">
-      <meta itemprop="description" content="Do one thing at a time, and do well.">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Noob">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2019/08/09/Hadoop/" class="post-title-link" itemprop="url">Hadoop MapReduce</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2019-08-09 21:43:27" itemprop="dateCreated datePublished" datetime="2019-08-09T21:43:27+08:00">2019-08-09</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2019-08-28 20:23:34" itemprop="dateModified" datetime="2019-08-28T20:23:34+08:00">2019-08-28</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Hadoop/" itemprop="url" rel="index"><span itemprop="name">Hadoop</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>Hadoop提供了一个可靠、可扩展的存储和分析平台，是一个由多个项目组成的生态系统，这些项目都属于分布式计算和大规模数据处理范畴。</p>
-<p>寻址速度的提升远远跟不上传输速度的提升，寻址是将磁头移动到特定磁盘位置进行读写操作的过程，它是导致硬盘操作延迟的主要原因，而传输速度取决于硬盘的带宽。如果数据访问中包含大量硬盘寻址，那么读取大量数据集就需要花费更长时间。如果只更新少量数据，传统的基于B树的数据库更有优势，如果需要更新大量数据，B树的速度将明显落后于MapReduce，因为需要使用排序/合并来重建数据库。</p>
-<p>Hadoop尽量在计算节点上存储数据，以实现数据的本地快速访问，数据本地化（data locality）特性是Hadoop数据处理的核心。</p>
-<p>MapReduce是对大量分布式处理问题的总结和抽象，核心思想是分而治之。主要由两部分组成：编程模型和运行时环境，编程模型为用户提供了非常易用的编程接口，用户只需要像编写串行程序一样实现几个简单的函数即可实现分布式程序，其它复杂的工作，如节点间通信、节点失效、数据切分等都由MapReduce运行时环境完成。</p>
-<p>一个分布式计算过程可以拆解成两个阶段：</p>
-<p>第一阶段：Map阶段，由多个可并行的Map Task构成，主要功能是将待处理数据集按照数据量大小切分成等大的数据分片，每个分片交由一个任务处理。</p>
-<p>第二阶段：Reduce阶段，由多个可并行的Reduce Task构成，主要功能是对前一阶段中各任务产生的结果进行规约，得到最终结果。                                                                </p>
-
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2019/08/09/Hadoop/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://jeffzzf.github.io/2019/08/09/HDFS/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Jeffzzf">
-      <meta itemprop="description" content="Do one thing at a time, and do well.">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Noob">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2019/08/09/HDFS/" class="post-title-link" itemprop="url">HDFS</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2019-08-09 15:04:04" itemprop="dateCreated datePublished" datetime="2019-08-09T15:04:04+08:00">2019-08-09</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2019-08-28 20:23:34" itemprop="dateModified" datetime="2019-08-28T20:23:34+08:00">2019-08-28</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E5%A4%A7%E6%95%B0%E6%8D%AE/" itemprop="url" rel="index"><span itemprop="name">大数据</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>Hadoop自带一个分布式文件系统——HDFS（Hadoop Distributed Filesystem），有时也简称DFS。</p>
-<h2 id="数据块"><a href="#数据块" class="headerlink" title="数据块"></a>数据块</h2><p>构建于单个磁盘的文件系统通过磁盘块来管理该文件系统的块，该文件系统块的大小可以是磁盘块的整数倍。文件系统块一般是几千字节，而磁盘块一般是512字节。HDFS的块（block）作为独立的存储单元默认是128MB，HDFS上的文件也被划分为多个分块（chunk）。与单一磁盘文件系统不同，HDFS小于一个块大小的文件不会占据整个块空间。</p>
-<h2 id="namenode和datanode"><a href="#namenode和datanode" class="headerlink" title="namenode和datanode"></a>namenode和datanode</h2><p>HDFS集群以一个管理节点（namenode）和多个工作节点（datanode）模式运行，namenode管理文件系统的命名空间，它维护着文件系统树及整颗树内所有的文件和目录。这些信息以两个文件形式永久保存在本地磁盘上：命名空间镜像文件和编辑日志文件。namenode也记录着每个文件中各个块所在数据节点信息，但它并不永久保存块的位置信息，因为这些信息会在系统启动时根据数据节点信息重建。datanode是HDFS的工作节点，用于存储和检索数据块，并定期向namenode发送所存储块的列表。</p>
-<p>客户端（client）提供一个类似POSIX（可移植操作系统界面）的文件系统接口，用户访问HDFS时无需感知namenode和datanode。</p>
-
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2019/08/09/HDFS/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://jeffzzf.github.io/2019/08/05/Java%E6%B3%A8%E8%A7%A3/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Jeffzzf">
-      <meta itemprop="description" content="Do one thing at a time, and do well.">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Noob">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2019/08/05/Java%E6%B3%A8%E8%A7%A3/" class="post-title-link" itemprop="url">Java并发</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2019-08-05 17:42:39" itemprop="dateCreated datePublished" datetime="2019-08-05T17:42:39+08:00">2019-08-05</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2019-08-28 20:23:34" itemprop="dateModified" datetime="2019-08-28T20:23:34+08:00">2019-08-28</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Java/" itemprop="url" rel="index"><span itemprop="name">Java</span></a>
-                </span>
-                  ，
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Java/%E5%B9%B6%E5%8F%91/" itemprop="url" rel="index"><span itemprop="name">并发</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h1><p>《Java编程思想》</p>
-
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2019/08/05/Java%E6%B3%A8%E8%A7%A3/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1148,7 +1180,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">125</span>
+          <span class="site-state-item-count">128</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -1161,7 +1193,7 @@
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">110</span>
+        <span class="site-state-item-count">111</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>

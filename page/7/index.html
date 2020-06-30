@@ -161,6 +161,324 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://jeffzzf.github.io/2015/10/26/File-System/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Jeffzzf">
+      <meta itemprop="description" content="Do one thing at a time, and do well.">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Noob">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2015/10/26/File-System/" class="post-title-link" itemprop="url">File System</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2015-10-26 21:59:38" itemprop="dateCreated datePublished" datetime="2015-10-26T21:59:38+08:00">2015-10-26</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2019-08-28 20:23:34" itemprop="dateModified" datetime="2019-08-28T20:23:34+08:00">2019-08-28</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Linux/" itemprop="url" rel="index"><span itemprop="name">Linux</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Linux/File-System/" itemprop="url" rel="index"><span itemprop="name">File System</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="File-Types"><a href="#File-Types" class="headerlink" title="File Types"></a>File Types</h1><ol>
+<li>Regular file. There is no distinction to the Unix kernel whether this data is text or binary. Any interpretation of the contents of a regular fiel is left to the application processing the file.<blockquote>
+<p>To execute a program, the kernel must understand its format. All binary executable files conform to a format that allows the kernel to identify where to load a program’s text and data.</p>
+</blockquote>
+</li>
+<li>Directory file. A file that contains the name of other files and pointers to information on these files. Any process that has read permission for a directory file can read the contents of the directory, but only the kernel can write directly to a directory file. Processes must use specify functions to make change to a directory.</li>
+<li>Block special file. A type of file proving buffered I/O access in fixed-size units to devices as disk drives.</li>
+<li>Character special file. A type of file providing unbuffered I/O access in variable-sized units to devices. All devices on a system are either block-special files or character special files.</li>
+<li>FIFO. A type of file used for communication between process. It’s sometimes called a named pipe.</li>
+<li>Socket. A type of file used for network commucation between processes. A socket can also be used for non-network communication between processes on a single host.</li>
+<li>Symbolic link. A type of file that points to another file.</li>
+</ol>
+<h1 id="File-Access"><a href="#File-Access" class="headerlink" title="File Access"></a>File Access</h1><p>The file access tests that the kernel perform each time a process opens, creates or deletes a file. The tests depend on the owners of the file and the effective IDs of the process. The tests performed by the kernel are as follows:</p>
+<ol>
+<li>If the effective Id of the process is 0(the superuser), access is allowed.</li>
+<li>If the effective user ID of the process equals the owner ID of the file, access is allowed if the appropriate access permission bit is set. Otherwise, permission is denied.</li>
+<li>If the effective user ID of the process of one of the supplementary group IDs of the process equals the group ID of the file, access is allowed if the appropriate group access permission bit is set. Otherwise, permission is denied.</li>
+<li>If the appropriate other access permission bit is set, access is allowed. Otherwise, permission is denied.</li>
+</ol>
+<p>These four steps are tried in sequence. For example, if the process owns the file, access is granted or denied based only on the user access permission; the froup permission are never looked at.</p>
+<h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><p>Adcanced Programming in the Unix Environment(Third Edition)</p>
+
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2015/10/26/File-System/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://jeffzzf.github.io/2015/10/25/Unbuffered-I-O/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Jeffzzf">
+      <meta itemprop="description" content="Do one thing at a time, and do well.">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Noob">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2015/10/25/Unbuffered-I-O/" class="post-title-link" itemprop="url">Buffered I/O</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2015-10-25 19:46:16" itemprop="dateCreated datePublished" datetime="2015-10-25T19:46:16+08:00">2015-10-25</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2019-08-28 20:23:34" itemprop="dateModified" datetime="2019-08-28T20:23:34+08:00">2019-08-28</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Linux/" itemprop="url" rel="index"><span itemprop="name">Linux</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Linux/IO/" itemprop="url" rel="index"><span itemprop="name">IO</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>The term unbuffered means that each read or write invokes a system call in the kernel. These unbuffered I/O functions are not part of ISO C, but are part of POSIX.1.</p>
+<h1 id="File-descriptors"><a href="#File-descriptors" class="headerlink" title="File descriptors"></a>File descriptors</h1><p>To the kernel, all open files are refered to by file descriptors. A file descriptor is a non-negative integer. When we open an existing file or create a new file, the kernel returns a file descriptor to the process. When we want to read or write a file, we identify the file with the file descriptor that was returned by the open or create as an argument.</p>
+<p>By convention, Unix shells associate file descriptor 0 with standard input of a process, file descriptor 1 with the standard output, and file descriptor 2 with the standard error.</p>
+<p>The file descriptors returned by open and openat is guaranteed to be the lowest-numbered unused descriptor.</p>
+<h1 id="File-sharing"><a href="#File-sharing" class="headerlink" title="File sharing"></a>File sharing</h1><p>The Unix supports the sharing of open files among different processes. The kernel uses three data structures to present an open file, and the relationships among them determine the effect one process has on another with regard to file sharing.</p>
+<ol>
+<li>Every process has an entry in the process table. Within each process table entry is a table of open file descriptors, which we can think of as a vector, with one entry per descriptor. Associated with each file descriptor are:</li>
+</ol>
+<ul>
+<li>The file descriptor flags(close-on-exec)</li>
+<li>A pointer to a file table entry</li>
+</ul>
+<ol start="2">
+<li>The kernel maintains a file table for all open files. Each file table entry contains</li>
+</ol>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2015/10/25/Unbuffered-I-O/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://jeffzzf.github.io/2015/10/06/%E5%9B%BE%E5%9F%BA%E7%A1%80%E7%AE%97%E6%B3%95%E6%80%BB%E7%BB%93/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Jeffzzf">
+      <meta itemprop="description" content="Do one thing at a time, and do well.">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Noob">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2015/10/06/%E5%9B%BE%E5%9F%BA%E7%A1%80%E7%AE%97%E6%B3%95%E6%80%BB%E7%BB%93/" class="post-title-link" itemprop="url">图基础算法总结</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2015-10-06 19:46:41" itemprop="dateCreated datePublished" datetime="2015-10-06T19:46:41+08:00">2015-10-06</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2019-08-28 20:23:34" itemprop="dateModified" datetime="2019-08-28T20:23:34+08:00">2019-08-28</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E7%AE%97%E6%B3%95/" itemprop="url" rel="index"><span itemprop="name">算法</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E7%AE%97%E6%B3%95/%E5%9B%BE/" itemprop="url" rel="index"><span itemprop="name">图</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="数据结构"><a href="#数据结构" class="headerlink" title="数据结构"></a>数据结构</h1><p>对于点稠密的图，可以使用邻接矩阵表示g[n][n]，其中n表示图中的节点数，g[i][j]表示是否存在从i到j的路径（无权图）或者从节点i到节点j的权重（有权图）。</p>
+<p>对于边稠密的图，如果是无权图可以使用邻接表<code>List&lt;Integer&gt;[] g</code>表示，其中g[i]表示与节点i邻接的点；如果是有权图，可以使用邻接表’List&lt;Integer, Map&lt;Integer, Integer&gt;&gt; g`或者</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Edge</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> to;</span><br><span class="line">    <span class="keyword">int</span> cost;</span><br><span class="line">&#125;</span><br><span class="line">List&lt;Integer, Edge&gt; g;</span><br></pre></td></tr></table></figure>
+
+<p>两种表示图的数据结构方法的算法分析如下：</p>
+<table>
+<thead>
+<tr>
+<th>ADT</th>
+<th>空间复杂度</th>
+<th>检查w是否与v邻接</th>
+<th>遍历所有与v邻接的点</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>邻接矩阵</td>
+<td>V * V</td>
+<td>1</td>
+<td>V</td>
+</tr>
+<tr>
+<td>连接表</td>
+<td>E + V</td>
+<td>degree(v)</td>
+<td>degree(v)</td>
+</tr>
+</tbody></table>
+<h1 id="搜索"><a href="#搜索" class="headerlink" title="搜索"></a>搜索</h1><h1 id="深度优先搜索（DFS）"><a href="#深度优先搜索（DFS）" class="headerlink" title="深度优先搜索（DFS）"></a>深度优先搜索（DFS）</h1><p>使用一个标记数组标记已被访问过的节点，每次递归标记当前节点并访问与当前节点邻接的节点。可使用并查集记录dfs过程中节点的前驱节点，需要求源点到某节点路径时，从并查集中恢复即可。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">dfs</span><span class="params">(List&lt;Integer&gt;[] g, <span class="keyword">boolean</span>[] marked, <span class="keyword">int</span> cur)</span> </span>&#123;</span><br><span class="line">    marked[cur] = <span class="keyword">true</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i : g[cur]) &#123;</span><br><span class="line">        <span class="keyword">if</span>(!marked[i])</span><br><span class="line">            dfs(g, marked, i);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2015/10/06/%E5%9B%BE%E5%9F%BA%E7%A1%80%E7%AE%97%E6%B3%95%E6%80%BB%E7%BB%93/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://jeffzzf.github.io/2015/10/06/%E5%85%A8%E6%8E%92%E5%88%97/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -813,329 +1131,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://jeffzzf.github.io/2015/09/24/Divide-two-integers/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Jeffzzf">
-      <meta itemprop="description" content="Do one thing at a time, and do well.">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Noob">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2015/09/24/Divide-two-integers/" class="post-title-link" itemprop="url">Divide two integers</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2015-09-24 10:06:29" itemprop="dateCreated datePublished" datetime="2015-09-24T10:06:29+08:00">2015-09-24</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2019-08-28 20:23:34" itemprop="dateModified" datetime="2019-08-28T20:23:34+08:00">2019-08-28</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E7%AE%97%E6%B3%95/" itemprop="url" rel="index"><span itemprop="name">算法</span></a>
-                </span>
-                  ，
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E7%AE%97%E6%B3%95/%E6%95%B0%E8%AE%BA/" itemprop="url" rel="index"><span itemprop="name">数论</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>Divide two integers without using multiplication, division and mod operator.</p>
-<p>If it is overflow, return MAX_INT.<br><a href="https://leetcode.com/problems/divide-two-integers/" target="_blank" rel="noopener">https://leetcode.com/problems/divide-two-integers/</a></p>
-<p>需要注意的点：</p>
-<ol>
-<li>除数为零的情况</li>
-<li>被除数为Integer.MIN_VALUE，除数为-1时会超出Integer的表示范围，可以把被除数和除数都转换成long</li>
-<li>被除数和除数的符号问题：先计算结果的符号（如果被除数和除数异号，那么结果为负），然后把被除数和除数取绝对值</li>
-<li>被除数减除数的过程可以通过除数左移来加速</li>
-</ol>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">divide</span><span class="params">(<span class="keyword">int</span> dividend, <span class="keyword">int</span> divisor)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(divisor == <span class="number">0</span>) <span class="keyword">return</span> Integer.MAX_VALUE;</span><br><span class="line">    <span class="keyword">long</span> a = dividend, b = divisor;</span><br><span class="line">    <span class="keyword">boolean</span> positive = <span class="keyword">true</span>;</span><br><span class="line">    <span class="keyword">if</span>(a &lt; <span class="number">0</span> &amp;&amp; b &gt; <span class="number">0</span> || a &gt; <span class="number">0</span> &amp;&amp; b &lt; <span class="number">0</span>) positive = <span class="keyword">false</span>;</span><br><span class="line">    a = Math.abs(a);</span><br><span class="line">    b = Math.abs(b);</span><br><span class="line">    <span class="keyword">long</span> res = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">while</span>(a &gt;= b) &#123;</span><br><span class="line">        <span class="keyword">long</span> bt = b, rt = <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">while</span>((bt &lt;&lt; <span class="number">1</span>) &lt;= a) &#123;</span><br><span class="line">            bt = bt &lt;&lt; <span class="number">1</span>;</span><br><span class="line">            rt = rt &lt;&lt; <span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        a -= bt;</span><br><span class="line">        res += rt;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span>(positive &amp;&amp; res &gt; Integer.MAX_VALUE) <span class="keyword">return</span> Integer.MAX_VALUE;</span><br><span class="line">    <span class="keyword">return</span> positive ? (<span class="keyword">int</span>)res : -(<span class="keyword">int</span>)res;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2015/09/24/Divide-two-integers/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://jeffzzf.github.io/2015/09/09/Container-with-most-water/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Jeffzzf">
-      <meta itemprop="description" content="Do one thing at a time, and do well.">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Noob">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2015/09/09/Container-with-most-water/" class="post-title-link" itemprop="url">Container with most water</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2015-09-09 15:18:12" itemprop="dateCreated datePublished" datetime="2015-09-09T15:18:12+08:00">2015-09-09</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2019-08-28 20:23:34" itemprop="dateModified" datetime="2019-08-28T20:23:34+08:00">2019-08-28</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E7%AE%97%E6%B3%95/" itemprop="url" rel="index"><span itemprop="name">算法</span></a>
-                </span>
-                  ，
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E7%AE%97%E6%B3%95/%E6%95%B0%E7%BB%84/" itemprop="url" rel="index"><span itemprop="name">数组</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="Container-With-Most-Water"><a href="#Container-With-Most-Water" class="headerlink" title="Container With Most Water"></a>Container With Most Water</h1><p>Given n non-negative integers a1, a2, …, an, where each represents a point at coordinate (i, ai). n vertical lines are drawn such that the two endpoints of line i is at (i, ai) and (i, 0). Find two lines, which together with x-axis forms a container, such that the container contains the most water.</p>
-<p>Note: You may not slant the container.<br><a href="https://leetcode.com/problems/container-with-most-water/" target="_blank" rel="noopener">https://leetcode.com/problems/container-with-most-water/</a></p>
-<p>使用首尾两个指针，每次收缩高度较小的那个。因为如果收缩高度大的那端，无论收缩后高度变高还是变低，收缩后面积一定变小（因为收缩后宽度减1，高度不会大于高度小的那端）。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">maxArea</span><span class="params">(<span class="keyword">int</span>[] height)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(height == <span class="keyword">null</span> || height.length &lt;= <span class="number">1</span>) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">int</span> left = <span class="number">0</span>, right = height.length - <span class="number">1</span>, max = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">while</span>(left &lt; right) &#123;</span><br><span class="line">        max = Math.max(max, (right - left) * Math.min(height[left], height[right]));</span><br><span class="line">        <span class="keyword">if</span>(height[left] &lt; height[right])</span><br><span class="line">            ++left;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">            --right;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> max;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2015/09/09/Container-with-most-water/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://jeffzzf.github.io/2015/09/07/MySQL%E8%A6%81%E7%82%B9%E6%8B%BE%E9%81%97/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Jeffzzf">
-      <meta itemprop="description" content="Do one thing at a time, and do well.">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Noob">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2015/09/07/MySQL%E8%A6%81%E7%82%B9%E6%8B%BE%E9%81%97/" class="post-title-link" itemprop="url">MySQL要点拾遗</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2015-09-07 09:06:22" itemprop="dateCreated datePublished" datetime="2015-09-07T09:06:22+08:00">2015-09-07</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2019-08-28 20:23:34" itemprop="dateModified" datetime="2019-08-28T20:23:34+08:00">2019-08-28</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/" itemprop="url" rel="index"><span itemprop="name">数据库</span></a>
-                </span>
-                  ，
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/MySQL/" itemprop="url" rel="index"><span itemprop="name">MySQL</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="LIMIT"><a href="#LIMIT" class="headerlink" title="LIMIT"></a>LIMIT</h1><p>LIMIT 5 表示返回不多于5行的结果，带一个值的LIMIT总是从第一行开始，返回指定的行数<br>LIMIT 5, 5表示返回从第5行开始的5行，第一个数为开始位置，第二个数为要检索的行数</p>
-<blockquote>
-<p>检索出来的第一行为行0而不是行1，因此，LIMIT 1，1将检索出第二行而不是第一行。LIMIT 3，4表示从第三行开始4行，LIMIT 4 OFFSET3表示同样意思</p>
-</blockquote>
-<h1 id="LIKE"><a href="#LIKE" class="headerlink" title="LIKE"></a>LIKE</h1><p>LIKE用于过滤部分匹配的情况，可以使用通配符表示若干字符，其中%表示任何字符出现任何次数（包括0次），但是%不能匹配NULL。下划线_可以匹配单个字符。</p>
-<h1 id="SELECT子句及其顺序"><a href="#SELECT子句及其顺序" class="headerlink" title="SELECT子句及其顺序"></a>SELECT子句及其顺序</h1><table>
-<thead>
-<tr>
-<th>子句</th>
-<th>说明</th>
-<th>是否必须</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>SELECT</td>
-<td>返回列或表达式</td>
-<td>是</td>
-</tr>
-<tr>
-<td>FROM</td>
-<td>指定要检索的表</td>
-<td>仅在从表选择数据时使用</td>
-</tr>
-<tr>
-<td>WHERE</td>
-<td>过滤行</td>
-<td>否</td>
-</tr>
-<tr>
-<td>GROUP BY</td>
-<td>分组</td>
-<td>仅在按组计算聚集时使用</td>
-</tr>
-<tr>
-<td>HAVING</td>
-<td>组级过滤</td>
-<td>否</td>
-</tr>
-<tr>
-<td>ORDER BY</td>
-<td>输出排序顺序</td>
-<td>否</td>
-</tr>
-<tr>
-<td>LIMIT</td>
-<td>限制结果数</td>
-<td>否</td>
-</tr>
-</tbody></table>
-<h1 id="联结"><a href="#联结" class="headerlink" title="联结"></a>联结</h1><ol>
-<li>等值联结（内部联结），等值联结是在WHERE子句中指定两表中联结的字段：SELECT id FROM ta, tb WHERE ta.vid = tb.vid，内联结可以达到同样的效果：SELECT id FROM ta INNER JOIN tb ON ta.vid = tb.vid。ANSI SQL规范首选INNER JOIN语法。</li>
-<li>自联结，如果需要多次使用同一个表，可以用表别名和自联结来实现：SELCT p1.proc_id, p1.proc_name FROM products AS p1, product AS p2 WHERE p1.vend_id = p2.vend_id AND p2.proc_id = “DTNTR”</li>
-<li>外部联结，外部联结可以查询到没有关联在一起的行，使用OUTER JOIN时，必须使用RIGHT或LEFT关键字指定包括其所有行的表，RIGHT指出是OUTER JOIN右边的表，LEFT指出是OUTER JOIN左边的表。</li>
-</ol>
-<h1 id="UNION"><a href="#UNION" class="headerlink" title="UNION"></a>UNION</h1>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2015/09/07/MySQL%E8%A6%81%E7%82%B9%E6%8B%BE%E9%81%97/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1205,7 +1200,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">125</span>
+          <span class="site-state-item-count">128</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -1218,7 +1213,7 @@
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">110</span>
+        <span class="site-state-item-count">111</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>

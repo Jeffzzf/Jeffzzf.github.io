@@ -161,6 +161,265 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://jeffzzf.github.io/2019/08/09/Hadoop/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Jeffzzf">
+      <meta itemprop="description" content="Do one thing at a time, and do well.">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Noob">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/08/09/Hadoop/" class="post-title-link" itemprop="url">Hadoop MapReduce</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2019-08-09 21:43:27" itemprop="dateCreated datePublished" datetime="2019-08-09T21:43:27+08:00">2019-08-09</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2019-08-28 20:23:34" itemprop="dateModified" datetime="2019-08-28T20:23:34+08:00">2019-08-28</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Hadoop/" itemprop="url" rel="index"><span itemprop="name">Hadoop</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>Hadoop提供了一个可靠、可扩展的存储和分析平台，是一个由多个项目组成的生态系统，这些项目都属于分布式计算和大规模数据处理范畴。</p>
+<p>寻址速度的提升远远跟不上传输速度的提升，寻址是将磁头移动到特定磁盘位置进行读写操作的过程，它是导致硬盘操作延迟的主要原因，而传输速度取决于硬盘的带宽。如果数据访问中包含大量硬盘寻址，那么读取大量数据集就需要花费更长时间。如果只更新少量数据，传统的基于B树的数据库更有优势，如果需要更新大量数据，B树的速度将明显落后于MapReduce，因为需要使用排序/合并来重建数据库。</p>
+<p>Hadoop尽量在计算节点上存储数据，以实现数据的本地快速访问，数据本地化（data locality）特性是Hadoop数据处理的核心。</p>
+<p>MapReduce是对大量分布式处理问题的总结和抽象，核心思想是分而治之。主要由两部分组成：编程模型和运行时环境，编程模型为用户提供了非常易用的编程接口，用户只需要像编写串行程序一样实现几个简单的函数即可实现分布式程序，其它复杂的工作，如节点间通信、节点失效、数据切分等都由MapReduce运行时环境完成。</p>
+<p>一个分布式计算过程可以拆解成两个阶段：</p>
+<p>第一阶段：Map阶段，由多个可并行的Map Task构成，主要功能是将待处理数据集按照数据量大小切分成等大的数据分片，每个分片交由一个任务处理。</p>
+<p>第二阶段：Reduce阶段，由多个可并行的Reduce Task构成，主要功能是对前一阶段中各任务产生的结果进行规约，得到最终结果。                                                                </p>
+
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2019/08/09/Hadoop/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://jeffzzf.github.io/2019/08/09/HDFS/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Jeffzzf">
+      <meta itemprop="description" content="Do one thing at a time, and do well.">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Noob">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/08/09/HDFS/" class="post-title-link" itemprop="url">HDFS</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2019-08-09 15:04:04" itemprop="dateCreated datePublished" datetime="2019-08-09T15:04:04+08:00">2019-08-09</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2019-08-28 20:23:34" itemprop="dateModified" datetime="2019-08-28T20:23:34+08:00">2019-08-28</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%A4%A7%E6%95%B0%E6%8D%AE/" itemprop="url" rel="index"><span itemprop="name">大数据</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>Hadoop自带一个分布式文件系统——HDFS（Hadoop Distributed Filesystem），有时也简称DFS。</p>
+<h2 id="数据块"><a href="#数据块" class="headerlink" title="数据块"></a>数据块</h2><p>构建于单个磁盘的文件系统通过磁盘块来管理该文件系统的块，该文件系统块的大小可以是磁盘块的整数倍。文件系统块一般是几千字节，而磁盘块一般是512字节。HDFS的块（block）作为独立的存储单元默认是128MB，HDFS上的文件也被划分为多个分块（chunk）。与单一磁盘文件系统不同，HDFS小于一个块大小的文件不会占据整个块空间。</p>
+<h2 id="namenode和datanode"><a href="#namenode和datanode" class="headerlink" title="namenode和datanode"></a>namenode和datanode</h2><p>HDFS集群以一个管理节点（namenode）和多个工作节点（datanode）模式运行，namenode管理文件系统的命名空间，它维护着文件系统树及整颗树内所有的文件和目录。这些信息以两个文件形式永久保存在本地磁盘上：命名空间镜像文件和编辑日志文件。namenode也记录着每个文件中各个块所在数据节点信息，但它并不永久保存块的位置信息，因为这些信息会在系统启动时根据数据节点信息重建。datanode是HDFS的工作节点，用于存储和检索数据块，并定期向namenode发送所存储块的列表。</p>
+<p>客户端（client）提供一个类似POSIX（可移植操作系统界面）的文件系统接口，用户访问HDFS时无需感知namenode和datanode。</p>
+
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2019/08/09/HDFS/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://jeffzzf.github.io/2019/08/05/Java%E6%B3%A8%E8%A7%A3/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Jeffzzf">
+      <meta itemprop="description" content="Do one thing at a time, and do well.">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Noob">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/08/05/Java%E6%B3%A8%E8%A7%A3/" class="post-title-link" itemprop="url">Java并发</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2019-08-05 17:42:39" itemprop="dateCreated datePublished" datetime="2019-08-05T17:42:39+08:00">2019-08-05</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2019-08-28 20:23:34" itemprop="dateModified" datetime="2019-08-28T20:23:34+08:00">2019-08-28</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Java/" itemprop="url" rel="index"><span itemprop="name">Java</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Java/%E5%B9%B6%E5%8F%91/" itemprop="url" rel="index"><span itemprop="name">并发</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h1><p>《Java编程思想》</p>
+
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2019/08/05/Java%E6%B3%A8%E8%A7%A3/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://jeffzzf.github.io/2019/08/05/Spark/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -763,260 +1022,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://jeffzzf.github.io/2019/07/11/Es%E5%88%86%E5%B8%83%E5%BC%8F%E5%8E%9F%E7%90%86/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Jeffzzf">
-      <meta itemprop="description" content="Do one thing at a time, and do well.">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Noob">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2019/07/11/Es%E5%88%86%E5%B8%83%E5%BC%8F%E5%8E%9F%E7%90%86/" class="post-title-link" itemprop="url">Es分布式原理</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2019-07-11 15:28:09" itemprop="dateCreated datePublished" datetime="2019-07-11T15:28:09+08:00">2019-07-11</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2019-08-28 20:23:34" itemprop="dateModified" datetime="2019-08-28T20:23:34+08:00">2019-08-28</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://jeffzzf.github.io/2019/07/10/Es%20%E9%9B%86%E7%BE%A4%E5%8E%9F%E7%90%86/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Jeffzzf">
-      <meta itemprop="description" content="Do one thing at a time, and do well.">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Noob">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2019/07/10/Es%20%E9%9B%86%E7%BE%A4%E5%8E%9F%E7%90%86/" class="post-title-link" itemprop="url">Es索引原理</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2019-07-10 19:51:56" itemprop="dateCreated datePublished" datetime="2019-07-10T19:51:56+08:00">2019-07-10</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-05-27 11:57:56" itemprop="dateModified" datetime="2020-05-27T11:57:56+08:00">2020-05-27</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E5%AD%98%E5%82%A8/" itemprop="url" rel="index"><span itemprop="name">存储</span></a>
-                </span>
-                  ，
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E5%AD%98%E5%82%A8/es/" itemprop="url" rel="index"><span itemprop="name">es</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="Es-集群构成"><a href="#Es-集群构成" class="headerlink" title="Es 集群构成"></a>Es 集群构成</h2><p>Es 集群由多个节点（Node）构成，Node可以有不同的类型，通过以下配置可以产生四种不同类型的 Node：</p>
-<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">conf/elasticsearch.yml:</span></span><br><span class="line">    <span class="attr">node.master:</span> <span class="literal">true</span><span class="string">/false</span></span><br><span class="line">    <span class="attr">node.data:</span> <span class="literal">true</span><span class="string">/false</span></span><br></pre></td></tr></table></figure>
-
-<p>四种不同类型的Node是一个node.master和node.data的true/false的两两组合。当然还有其他类型的Node，比如IngestNode(用于数据预处理等)，不在本文讨论范围内。</p>
-<p>当node.master 为 true 时，表示这个 node 是一个 master 的候选节点，可以参与选举，类似于 MasterCandidate。Es 正常工作时只能有一个 master（leader），多于 1 个时发生脑裂。</p>
-<p>当 node.data 为 true 时，这个节点作为一个数据节点，会存储分配在该 node 上的 shard 数据，并负责这些 shard 的写入、查询等。</p>
-<p>此外，集群内 node 都可以执行任何请求，负责将请求转发给对应的 node 进行处理。当 node.master 和 node.data 都是 false 时，这个节点可以作为一个类似 proxy 的节点，接受请求并进行转发、结果聚合等。</p>
-<h3 id="Es-选主"><a href="#Es-选主" class="headerlink" title="Es 选主"></a>Es 选主</h3><p>ZenDiscovery是ES自己实现的一套用于节点发现和选主等功能的模块，没有依赖Zookeeper等工具</p>
-<p>在本节点到每个hosts中的节点建立一条边，当整个集群所有的node形成一个联通图时，所有节点都可以知道集群中有哪些节点，不会形成孤岛。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2019/07/10/Es%20%E9%9B%86%E7%BE%A4%E5%8E%9F%E7%90%86/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://jeffzzf.github.io/2019/07/10/Es%E7%B4%A2%E5%BC%95%E5%8E%9F%E7%90%86/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Jeffzzf">
-      <meta itemprop="description" content="Do one thing at a time, and do well.">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Noob">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2019/07/10/Es%E7%B4%A2%E5%BC%95%E5%8E%9F%E7%90%86/" class="post-title-link" itemprop="url">Es索引原理</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2019-07-10 19:51:56" itemprop="dateCreated datePublished" datetime="2019-07-10T19:51:56+08:00">2019-07-10</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2019-08-28 20:23:34" itemprop="dateModified" datetime="2019-08-28T20:23:34+08:00">2019-08-28</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E5%AD%98%E5%82%A8/" itemprop="url" rel="index"><span itemprop="name">存储</span></a>
-                </span>
-                  ，
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E5%AD%98%E5%82%A8/es/" itemprop="url" rel="index"><span itemprop="name">es</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="倒排序索引的不变性"><a href="#倒排序索引的不变性" class="headerlink" title="倒排序索引的不变性"></a>倒排序索引的不变性</h2><p>es的json文档中，每个被索引的字段都有自己的倒排索引，倒排索引会保存每个词项出现过的文档总数，在对应文档中一个具体词项出现的总次数，词项在文档中的顺序，每个文档的长度，所有文档的平均长度等。这些统计信息用于计算哪些词比其它词更重要，哪些文档比其它文档更重要。</p>
-<p>倒排序索引被写入磁盘后是不可变的，不可变性可以带来以下好处：</p>
-<ul>
-<li>不需要锁，不用担心多进程同时修改数据的问题</li>
-<li>一旦索引被读入内核的文件系统缓存便会留在那里，由于不变性，大部分请求会直接请求内存而不会命中磁盘，提升性能</li>
-<li>其它缓存（如filter缓存）在索引的生命周期内始终有效，不需要在每次数据改变时被重建</li>
-<li>写入单个大的倒排序索引允许数据被压缩，减少磁盘I/O和需要被缓存到内存的使用量</li>
-</ul>
-<h2 id="倒排序索引的更新"><a href="#倒排序索引的更新" class="headerlink" title="倒排序索引的更新"></a>倒排序索引的更新</h2><p>es基于lucene，lucene引入按段搜索的概念，每一个段本身都是一个倒排索引，索引在lucene中除了表示所有段的集合外，还增加了提交点的概念——提交点是一个列出所有已知段的文件。</p>
-<p>新的文档首先被添加到内存索引缓存中，然后写入到一个基于磁盘的段。当一个查询被触发，所有已知的段按顺序被查询。词项统计会对所有段的结果进行聚合，以保证每个词和每个文档的管理都被准确计算。</p>
-<p>每个提交点会包含一个.del 文件，文件中会列出这些被删除文档的段信息。当一个文档被删除时，它实际只是在.del文件中被标记删除。一个被标记删除的文档仍然可以被查询匹配到，但它会在最终结果被返回前从结果集中移除。</p>
-<p>文档更新时，旧版本文档被标记删除，文档的新版本被索引到一个新的段中。可能两个版本的文档都会被一个查询匹配到，但被删除的旧版本文档在结果集返回前被移除了。</p>
-<h2 id="段合并"><a href="#段合并" class="headerlink" title="段合并"></a>段合并</h2>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2019/07/10/Es%E7%B4%A2%E5%BC%95%E5%8E%9F%E7%90%86/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1086,7 +1091,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">125</span>
+          <span class="site-state-item-count">128</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -1099,7 +1104,7 @@
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">110</span>
+        <span class="site-state-item-count">111</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>

@@ -28,7 +28,7 @@
 <meta property="og:description" content="一、需求分析秒杀系统是电商系统常见的一个功能，电商平台通过推出秒杀性价比高的活动短时间内吸引大量用户参与。从技术角度看，秒杀系统需要应对如下几个挑战：  高并发：由于商品性价比很高，大量用户都想抢到商品，秒杀活动开始的瞬间可能涌入大量流量，如 QPS 可能达到数万甚至几十万。 高性能：作为线上活动，秒杀系统需要在短时间内返回秒杀结果，如果性能过低，用户会失去耐心，降低用户体验 高可用：秒杀系统不可">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2020-05-17T02:42:37.000Z">
-<meta property="article:modified_time" content="2020-05-26T05:00:28.713Z">
+<meta property="article:modified_time" content="2020-06-30T11:42:37.258Z">
 <meta property="article:author" content="Jeffzzf">
 <meta property="article:tag" content="秒杀">
 <meta name="twitter:card" content="summary">
@@ -195,7 +195,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-05-26 13:00:28" itemprop="dateModified" datetime="2020-05-26T13:00:28+08:00">2020-05-26</time>
+                <time title="修改时间：2020-06-30 19:42:37" itemprop="dateModified" datetime="2020-06-30T19:42:37+08:00">2020-06-30</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -223,9 +223,64 @@
 <li>高并发：由于商品性价比很高，大量用户都想抢到商品，秒杀活动开始的瞬间可能涌入大量流量，如 QPS 可能达到数万甚至几十万。</li>
 <li>高性能：作为线上活动，秒杀系统需要在短时间内返回秒杀结果，如果性能过低，用户会失去耐心，降低用户体验</li>
 <li>高可用：秒杀系统不可用会严重影响平台形象，引起用户和商户不满，造成平台损失</li>
-<li>高可用：秒杀活动涉及用户支付、口径库存等关键过程，不一致问题可能引起超卖、库存积压等问题，给商户和用户造成损失</li>
+<li>高一致：秒杀活动涉及用户支付、口径库存等关键过程，不一致问题可能引起超卖、库存积压等问题，给商户和用户造成损失</li>
 </ol>
-<h2 id="二、系统设计"><a href="#二、系统设计" class="headerlink" title="二、系统设计"></a>二、系统设计</h2><h3 id="1-高性能"><a href="#1-高性能" class="headerlink" title="1. 高性能"></a>1. 高性能</h3>
+<h2 id="二、系统设计"><a href="#二、系统设计" class="headerlink" title="二、系统设计"></a>二、系统设计</h2><h3 id="1-前端和接入层"><a href="#1-前端和接入层" class="headerlink" title="1. 前端和接入层"></a>1. 前端和接入层</h3><p>前端动静分离，把90%的静态数据缓存在用户端或者CDN上，当真正秒杀时用户只需要点击特殊的按钮“刷新抢宝”即可，而不需要刷新整个页面，这样只向服务端请求很少的有效数据，而不需要重复请求大量静态数据。</p>
+<p>网站负载均衡层或业务网关层需要能够对访问请求按用户粒度进行流量限制，以降低抢购脚本对系统带来的压力。</p>
+<p>在安全方面，通过高防CDN或高防IP，降低DDOS攻击的影响。</p>
+<p>在业务方面，通过引入答题环节，将突然涌入的压力平滑到3s左右的时间段内。</p>
+<h3 id="2-业务层：隔离、限流与弹性伸缩"><a href="#2-业务层：隔离、限流与弹性伸缩" class="headerlink" title="2. 业务层：隔离、限流与弹性伸缩"></a>2. 业务层：隔离、限流与弹性伸缩</h3><p>通过对后台系统的微服务化改造和数据库层面的拆分（SOA），实现微服务之间的隔离，避免相互影响，实现不同核心服务相互独立的容量评估和紧急情况下的限流熔断。</p>
+<p>在活动进行过程中，如果业务流量过大，业务需要紧急扩容，底层容器服务需要能够支持分钟内的快速弹性扩容，因此容器调度、镜像分发、服务发现的效率都需要相应的进行提升和优化。</p>
+<p>在处理业务弹性扩容的过程中，还有一点也需要考虑到，即数据库的连接数风险，在没有类似dbproxy（数据库代理中间件）这样的服务进行连接池收敛的情况下，业务的弹性扩容能力需要考虑数据库的对连接数的承载力。</p>
+<h3 id="3-缓存层：数据读取加速"><a href="#3-缓存层：数据读取加速" class="headerlink" title="3. 缓存层：数据读取加速"></a>3. 缓存层：数据读取加速</h3><p>在抢购业务中，对商品库存数量的更改主要通过数据库进行，但是由于读取流量过大，一般需要通过两级缓存的机制进行优化，即：Java服务进程内本地缓存–&gt;分布式缓存服务–&gt;数据库服务。</p>
+<p>由于库存数据更新非常频繁，再加上后面要提到的库存拆分设计，缓存一致性在系统设计时是需要折中考虑的，库存数据的缓存往往被设计为延后定时刷新，而不是在每次成功扣减库存后去刷新，用户可能会看到商品仍有剩余库存，但是实际下单时返回售罄；更进一步甚至可以像12306那样只缓存“有余票”或“没有余票”两个状态。</p>
+<h3 id="4-数据层：数据库并发扣减库存"><a href="#4-数据层：数据库并发扣减库存" class="headerlink" title="4. 数据层：数据库并发扣减库存"></a>4. 数据层：数据库并发扣减库存</h3><p>先简单介绍扣减库存在数据库上操作的例子，SQL可以抽象为这种形式：“update stock_table set inventory=inventory-1 where item_id=xxxx and inventory&gt;0;” 即指定商品ID（item_id），并判断库存充足情况下，扣减库存，隔离级别大于等于ReadCommitted的关系数据库可以保证这条语句执行的原子性。在处理对少量热点商品高并发扣减库存的业务时，关系数据库都会面临如下几个难题：</p>
+<ol>
+<li><p><strong>并发冲突代价</strong>：当前主流的关系数据库，无论是老牌商业产品Oracle、流行开源项目MySQL、还是国产开源新秀TiDB，它们都使用经典的WAL（write ahead log）方式来实现数据的持久化，即在事务提交时保证被更新的数据（WAL）写到硬盘后，才能给客户端返回成功。而硬盘写入的latency比内存操作大几个数量级，为了优化性能，大家都引入了组提交机制（group commit），即将同时提交的多个事务的数据，合并为一条WAL写入硬盘，对于每个事务来说，latency还是一次硬盘写入IO的耗时，但是对于整个系统来说，可以将TPS从原来与硬盘IOPS相近的水平，提升几倍甚至几十倍。</p>
+<p> 但是并不是所有的并发事务都能够合并成组提交，如果两个事务之间存在冲突（比如并发修改同一行），那么无论是基于悲观锁进行并发控制的Oracle/MySQL，还是基于乐观锁进行并发控制的TiDB，对于相互冲突的事务，他们本质上的处理方式，都只能是排队执行，即后一个事务要等前一个事务提交完成后才能执行。使用扣减库存的SQL举例如下：</p>
+<p> 找到并对商品记录加锁  –&gt;  判断库存余额  –&gt;  修改库存余额  –&gt;  提交WAL写盘  –&gt;  释放锁</p>
+<p> 针对同一个热点商品的多个并发事务，在上面加锁和释放锁之间的这段操作是无法做到并发执行的，因此在不引入任何优化的情况下，在同一个数据表中针对一个热点商品扣减库存TPS的天花板就是硬盘的IOPS，而在大量并发事务都在争抢行锁的情况下，情况会进一步恶化，较高的系统负载，叠加上锁冲突检测等额外代价，可能造成系统的整体吞吐降低至个位数。</p>
+</li>
+<li><p><strong>可能存在超卖风险</strong>：考虑到上述并发事务提交WAL的问题，在实际系统上，为了降低写WAL的latency，保证系统吞吐，一般会将写硬盘和同步备机调整为异步方式，而这个调整又会带来新的问题，即主库宕机情况下的数据不一致，主库重启或者备库切换为主库后，可能存在宕机前部分WAL没有被持久化的风险，反映到扣减库存的逻辑上就是已经被扣减的库存又被恢复了回来，最终在业务上形成超卖。2012年阿里双11由于商品超卖给商家的赔付，产生了较大的经济损失。</p>
+</li>
+<li><p><strong>复杂事务恶化冲突</strong>：上面所举的例子是单行事务的update，行锁的临界区（“找到并对商品记录加锁  –&gt;  判断库存余额  –&gt;  修改库存余额  –&gt;  提交WAL写盘  –&gt;  释放锁”）都在数据库处理的边界之内，但是在某些复杂场景下，在库存扣减的事务中可能存在多条语句的情况，比如扣减库存（update）+生成订单（insert）在一个事务内完成，这种情况下行锁的临界区扩大到受业务网络交互的影响，整体冲突加剧、吞吐进一步降低。</p>
+</li>
+</ol>
+<p>数据库层面对于并发扣减库存的优化思路：</p>
+<ol>
+<li><strong>库存拆分</strong>：在业务层将同一个商品的库存记录拆分为多行甚至多个表里面去，降低在同一行或同一个数据表上的并发冲突，比如针对业务请求中的userid计算hash取模后确定要扣减哪个库存记录。这个方案能够很大程度的降低并发冲突，不需要数据库内核配合做修改，是行业内的主流方案，它的问题是：同一个商品不同库存记录的扣减速度不均衡（热点商品往往在几十秒内被强光，这个不均衡问题并不严重），给总库余额计数带来的复杂度，业务需要预先感知热点商品并且针对性的进行库存拆分。</li>
+<li><strong>批处理</strong>：通过修改数据库内核代码，将相互冲突的事务，合并为一个事务或者一次WAL组提交，达到批处理的效果，AliSQL的做法是在MySQL server层识别这类update语句，将它们解析后合并成为一条SQL再执行，比如10个扣减库存语句，合并为一个扣减库存的语句一次性扣减数量为10，这个做法的优势是对数据库内核代码修改不多、复杂度可控，局限是只能在特定语句的基础上进行优化，没有比较好的普适性；OceanBase则选择了另外一个优化思路，即提前释放锁，在事务确定要提交（比如单行事务执行成功或者用户在事务最后一条语句上标记“Commit on success”）的情况下，不需要等WAL同步，而先把事务涉及的行锁先释放掉，这样可以使得其他并发事务能够进入临界区，最终效果可以达到对同一行修改的多个并发事务的WAL，可能在一次组提交内完成。</li>
+<li><strong>请求排队</strong>：即使我们在数据库内核层面引入了上述“批处理”的优化，对热点行的并发扣减库存业务仍然会面临多个事务并发争抢进入临界区的情况，并发等锁的事务会占据宝贵的连接和线程资源，系统负载可能持续恶化；这里的一个优化思路是，在数据库内核层面将并发扣减同一个商品库存的事务排到一个队列处理（比如让用户在SQL注释上标记这个事务划分队列的依据，一般来说可以用商品ID取模），降低并发冲突，减少对连接和线程资源的占用，降低系统负载。这个优化目前已经在AliSQL上开源，效果还是比较明显的。</li>
+<li><strong>存储过程或类似命令</strong>：对于一个事务里要执行多条语句的情况，会造成临界区的扩大，严重影响并发度，一个最有效的方案是数据库层面支持存储过程，多个语句放在存储过程里一次性提交给数据库；但是MySQL并不支持存储过程，因此可以针对具体场景引入一些类似存储过程的优化，当然核心仍然是将一个事务中的多条语句合并，实现与数据库在一次交互中完成。比如AliSQL的Commit on success，可以用在扣减库存+生成订单的场景中，即开启事务后先执行几乎没有并发冲突的insert语句生成订单，然后带上Commit on success标记执行扣减库存命令，库存扣减成功后就立即提交事务，不需要等待客户端再发commit，这样一来热点行冲突的临界区仍然与单行事务一样了。再比如OceanBase引入的… when row_affected()语法，允许在一个语句内先执行update，然后根据受影响的函数来决定事务执行其他修改，这已经很像存储过程了。</li>
+</ol>
+<h3 id="5-业务架构：减库存与生成订单一致性"><a href="#5-业务架构：减库存与生成订单一致性" class="headerlink" title="5. 业务架构：减库存与生成订单一致性"></a>5. 业务架构：减库存与生成订单一致性</h3><p>在上面的例子中，扣减库存与生成订单的事务是在同一个数据库实例完成的，但是随着业务的拆分、业务逻辑的变化，扣减库存与生成订单可能被拆到不同的服务中去，那么如何保证扣减库存与生成订单的一致性，也成为一个有挑战的问题。</p>
+<p>需要注意的是这种场景下，产生的数据不一致，不会造成商品超卖，而是会造成用户下单成功，却看不到待支付订单。4.20我们在台州发放政府券的活动中，有约30%的券没有及时发放到用户钱包中，本质上就是这样问题，当时的直接原因是扣减库存的金融业务撑住了压力，但是券系统超时触发了熔断，很多券没有成功发给用户，造成大量客诉，事后也花费了几个小时来使用hive上的日志数据进行补偿。</p>
+<p>针对这类问题，一般通过DRC/DTS这类中间件来配合实现数据一致性，即扣减库存成功后，MySQL就会有相应的binlog，DRC/DTS订阅库存中心的binlog，订单中心再根据DRC/DTS订阅的数据来生成订单。因为MySQL binlog有多份副本不会丢失，所以即使订单中心出现超时抖动等问题，在恢复正常后，就能够继续生成订单。当然，引入这类优化后，也意味着系统要进行异步化改造，因为生成订单的逻辑本质上变成了异步操作。</p>
+<h3 id="6-技术保障"><a href="#6-技术保障" class="headerlink" title="6. 技术保障"></a>6. 技术保障</h3><ul>
+<li><strong>业务全链路压测</strong></li>
+</ul>
+<p>全链路压测是阿里2013年在双11压力之下被逼出来的技能，由于线上线下环境多少都会有些不同，很多问题只有在实际生产环境才能暴露，对于秒杀类业务，线上压测也能够实际评估出系统的真实承载力，为容量预估给出重要参考。</p>
+<p>同时阿里的全链路压测是真正的“全链路”，淘宝、天猫、支付宝的系统都会一同参与。</p>
+<ul>
+<li><strong>准实时监控</strong></li>
+</ul>
+<p>这里的技术挑战主要是在海量业务和数据库的场景下，如何做到全局有效而实时的监控数据采集和分析，一方面是为了实时监控系统健康度，另一方面则是pr需求。比如阿里张瑞说的：</p>
+<p>“在零点前有一个倒计时环节，连线杭州光明顶作战指挥室，逍遥子会为大家揭幕2015双11启动，然后直接切换到我们的媒体大屏，所以对GMV数字的要求基本上是零延迟，这个挑战有多大不言而喻。”</p>
+<ul>
+<li><strong>实时热点发现</strong></li>
+</ul>
+<p>与准实时的监控类似，技术团队需要及时发现系统中的热点和瓶颈，并作出调整。实时热点的发现，需要业务层监控、数据库层监控一起配合改进优化，才能准确分析出热点。</p>
+<ul>
+<li><strong>容灾与高可用</strong></li>
+</ul>
+<p>业务容器宕机、数据库主库宕机、机房级宕机都可能出现，技术团队需要通过有效的容灾规划、set化、分库分表等，降低“爆炸半径”，并且要做到快速切换。</p>
+<p>因此这里的技术挑战是容器的快速扩容，容器镜像快速分发，数据库分库分表尽量降低单个集群主备切换的影响，业务层面的set化和灵活的流量切换。</p>
+<ul>
+<li><strong>系统预热</strong></li>
+</ul>
+<p>大量流量会在大促开始的第0秒集中涌入，活动开始前需要完成 JVM预加载代码、缓存预热、数据库连接池预热等系统预热工作。</p>
+<p>同时在各个系统的设计时也要做到避免对单点的依赖，原则仍然是降低“爆照半径”，防止大量流量进入后，把系统中的某个单点压垮，比如2016年美团Tair的故障，configserver被自己的客户端压垮后造成整个系统的风暴。</p>
+
     </div>
 
     
@@ -308,7 +363,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#一、需求分析"><span class="nav-number">1.</span> <span class="nav-text">一、需求分析</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二、系统设计"><span class="nav-number">2.</span> <span class="nav-text">二、系统设计</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-高性能"><span class="nav-number">2.1.</span> <span class="nav-text">1. 高性能</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#一、需求分析"><span class="nav-number">1.</span> <span class="nav-text">一、需求分析</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二、系统设计"><span class="nav-number">2.</span> <span class="nav-text">二、系统设计</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-前端和接入层"><span class="nav-number">2.1.</span> <span class="nav-text">1. 前端和接入层</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-业务层：隔离、限流与弹性伸缩"><span class="nav-number">2.2.</span> <span class="nav-text">2. 业务层：隔离、限流与弹性伸缩</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-缓存层：数据读取加速"><span class="nav-number">2.3.</span> <span class="nav-text">3. 缓存层：数据读取加速</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-数据层：数据库并发扣减库存"><span class="nav-number">2.4.</span> <span class="nav-text">4. 数据层：数据库并发扣减库存</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-业务架构：减库存与生成订单一致性"><span class="nav-number">2.5.</span> <span class="nav-text">5. 业务架构：减库存与生成订单一致性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-技术保障"><span class="nav-number">2.6.</span> <span class="nav-text">6. 技术保障</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -322,7 +377,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">125</span>
+          <span class="site-state-item-count">128</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -335,7 +390,7 @@
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">110</span>
+        <span class="site-state-item-count">111</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>

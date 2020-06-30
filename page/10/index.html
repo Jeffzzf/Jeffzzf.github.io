@@ -161,6 +161,262 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://jeffzzf.github.io/2015/07/29/MySQL%E9%AB%98%E7%BA%A7%E7%89%B9%E6%80%A7/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Jeffzzf">
+      <meta itemprop="description" content="Do one thing at a time, and do well.">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Noob">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2015/07/29/MySQL%E9%AB%98%E7%BA%A7%E7%89%B9%E6%80%A7/" class="post-title-link" itemprop="url">MySQL高级特性</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2015-07-29 15:37:30" itemprop="dateCreated datePublished" datetime="2015-07-29T15:37:30+08:00">2015-07-29</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2019-08-28 20:23:34" itemprop="dateModified" datetime="2019-08-28T20:23:34+08:00">2019-08-28</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/" itemprop="url" rel="index"><span itemprop="name">数据库</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/MySQL/" itemprop="url" rel="index"><span itemprop="name">MySQL</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="分区表"><a href="#分区表" class="headerlink" title="分区表"></a>分区表</h1><p>MySQL分区表的底层由多个物理子表组成，每个分区表都有一个使用#分隔命名的表文件。分区表对SQL层是透明的，，对分区表的请求会通过分区表的句柄（Handler Object）转化成对存储引擎接口的调用。每个分区表有自己的独立索引，整个表没有全局索引。查询时，优化器根据分区定义过滤不包含查询数据的分区。分区表是一种粗粒度的索引策略，单表最多1024个分区（最好不超过150），分区表无法使用外键约束。</p>
+<p>分区表适用于以下场景：</p>
+<ol>
+<li>在没有合适索引时，对其中几个分区进行全表扫描</li>
+<li>表太大，无法放入内存</li>
+<li>部分分区是热点域（例如按时间分区时，只有最近的记录是热点域）</li>
+<li>需要对分区表进行独立操作（清除、检查、优化、备份、恢复或者使用不同的物理设备）</li>
+<li>使用分区表规避特殊限制（如InnoDB的单个索引互斥访问，ext3文件系统的inode锁竞争等）</li>
+</ol>
+<p>分区表使用方法</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">create</span> <span class="keyword">table</span> sales &#123;</span><br><span class="line">    order_date DATATIME <span class="keyword">NOT</span> <span class="literal">NULL</span>,</span><br><span class="line">    ...</span><br><span class="line">&#125;<span class="keyword">ENGINE</span>=InnoDN <span class="keyword">PARTITION</span> <span class="keyword">BY</span> <span class="keyword">RANGE</span>(<span class="keyword">YEAR</span>(order_date)) &#123;</span><br><span class="line">    <span class="keyword">PARTITION</span> p2012 <span class="keyword">VALUES</span> <span class="keyword">LESS</span> <span class="keyword">THEN</span>(<span class="number">2012</span>),</span><br><span class="line">    <span class="keyword">PARTITION</span> p2013 <span class="keyword">VALUES</span> <span class="keyword">LESS</span> <span class="keyword">THEN</span>(<span class="number">2013</span>),</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="视图"><a href="#视图" class="headerlink" title="视图"></a>视图</h1><p>视图是一种虚拟的数据表，它的行为和数据表一样，但是并不真正包含数据，<strong>但是不能对视图创建索引和触发器</strong>。实现视图的两种方法：</p>
+<ol>
+<li>将SELECT语句的结果放到临时表中，即临时表算法（TEMPTABE），使用这种算法会有明显的性能问题。</li>
+<li>重写使用视图的查询语句，将视图定义SQL合并到查询SQL中，即合并算法（MERGE）。</li>
+</ol>
+<p>如果视图中包含GROUP BY，DISTINCT，聚合函数，UNION，子查询等，原表记录和视图记录中无法建立一一映射，MySQL将使用临时表算法来实现视图。可以通过视图来更新视图相关数据表的视图成为<strong>可更新视图</strong>，更新视图查询也可以是关联语句，但是被更新的列必须来自同一个表，<strong>所有使用临时表算法的视图都无法被更新</strong>。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2015/07/29/MySQL%E9%AB%98%E7%BA%A7%E7%89%B9%E6%80%A7/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://jeffzzf.github.io/2015/07/23/MySql%E6%80%BB%E7%BB%93-%E6%A6%82%E8%BF%B0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Jeffzzf">
+      <meta itemprop="description" content="Do one thing at a time, and do well.">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Noob">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2015/07/23/MySql%E6%80%BB%E7%BB%93-%E6%A6%82%E8%BF%B0/" class="post-title-link" itemprop="url">MySQL总结-概述</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2015-07-23 15:03:08" itemprop="dateCreated datePublished" datetime="2015-07-23T15:03:08+08:00">2015-07-23</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2019-10-14 15:05:02" itemprop="dateModified" datetime="2019-10-14T15:05:02+08:00">2019-10-14</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/" itemprop="url" rel="index"><span itemprop="name">数据库</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/MySQL/" itemprop="url" rel="index"><span itemprop="name">MySQL</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="Mysql服务器逻辑架构"><a href="#Mysql服务器逻辑架构" class="headerlink" title="Mysql服务器逻辑架构"></a>Mysql服务器逻辑架构</h2><p>最上层：连接/线程处理，提供连接处理、授权认证、安全等服务（与其他客户端/服务器C/S架构类似）</p>
+<p>第二层：包含了MySql大多数的核心服务功能，包括查询解析、分析、优化、缓存以及所有内置函数（日期、时间、数学、加密……），所有跨存储引擎的功能都在这一层实现：存储过程、触发器、视图等。</p>
+<p>最下层：存储引擎，存储引擎负责Mysql中数据的存储和提取，上层通过存储引擎API与存储引擎通信，这些API屏蔽了不同存储引擎之间的差异，执行诸如“开始一个事务”或者“根据主键提取一行记录”等操作。除了InnoDB外，存储引擎不会解析SQL（InnoDB会解析外键定义，因为MySql服务器本身没有实现这一功能），不同存储引擎之间不会相互通信。</p>
+<h3 id="连接管理与安全性"><a href="#连接管理与安全性" class="headerlink" title="连接管理与安全性"></a>连接管理与安全性</h3><p>每个客户端连接都会在服务器进程中拥有一个线程，这个连接查询只会在这个单独的线程中执行，该线程只能轮流在某个CPU核中执行。</p>
+<h3 id="并发读写"><a href="#并发读写" class="headerlink" title="并发读写"></a>并发读写</h3><p>在处理并发读写时，可以通过共享锁（Shared Lock，也叫读锁read lock）和排它锁（Exclusive Lock，也叫写锁write lock）来控制。</p>
+<p>读锁是共享的，读锁之间互不阻塞，多个客户端可以在同一个时刻读取同一个资源而互不干扰；写锁是排它的，写锁会阻塞其它写锁或读锁。这样可以保证在某个时刻只有一个用户能执行写入。<strong>锁策略</strong>就是在锁的开销和数据安全性之间寻求平衡，大多数商业数据库都是在表上施加行级锁（row-level lock），并以多种方式实现，以便在锁比较多的情况下提供尽可能好的性能。MySql则提供了更多的选择，MySql存储引擎可以实现自己的锁策略和锁粒度。</p>
+<p><strong>表锁（table lock）</strong>是MySql中最基本的锁，也是开销最小的锁，它会锁定整个表。写操作（插入、删除、更新）时必须先获取写锁，这会阻塞其它用户对该表的所有读写操作。写锁比读锁有更高的优先级，写锁请求可能会被插入到读锁队列前面。除了存储引擎可以管理自己的锁外，MySql本身也会使用表锁来实现不同的目的，例如Alter Table时MySql会使用表锁。<strong>行锁(row lock)</strong>可以最大程度地支持并发处理，同时也带来了最大的锁开销（InnoDB和XtraDb）中实现了行锁，行锁只在存储引擎中实现，MySql服务器中没有实现。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2015/07/23/MySql%E6%80%BB%E7%BB%93-%E6%A6%82%E8%BF%B0/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://jeffzzf.github.io/2015/07/17/%E5%88%86%E8%AF%8D%E7%AE%97%E6%B3%95%E6%80%BB%E7%BB%93/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Jeffzzf">
+      <meta itemprop="description" content="Do one thing at a time, and do well.">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Noob">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2015/07/17/%E5%88%86%E8%AF%8D%E7%AE%97%E6%B3%95%E6%80%BB%E7%BB%93/" class="post-title-link" itemprop="url">分词算法总结</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2015-07-17 21:45:40" itemprop="dateCreated datePublished" datetime="2015-07-17T21:45:40+08:00">2015-07-17</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2019-08-28 20:23:34" itemprop="dateModified" datetime="2019-08-28T20:23:34+08:00">2019-08-28</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://jeffzzf.github.io/2015/07/17/Simhash%E7%AE%97%E6%B3%95%E5%AE%9E%E7%8E%B0%E5%8E%BB%E9%87%8D/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -876,288 +1132,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://jeffzzf.github.io/2015/07/07/Unique-Paths/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Jeffzzf">
-      <meta itemprop="description" content="Do one thing at a time, and do well.">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Noob">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2015/07/07/Unique-Paths/" class="post-title-link" itemprop="url">Unique Paths</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2015-07-07 10:50:39" itemprop="dateCreated datePublished" datetime="2015-07-07T10:50:39+08:00">2015-07-07</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2019-08-28 20:23:34" itemprop="dateModified" datetime="2019-08-28T20:23:34+08:00">2019-08-28</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E7%AE%97%E6%B3%95/" itemprop="url" rel="index"><span itemprop="name">算法</span></a>
-                </span>
-                  ，
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E7%AE%97%E6%B3%95/DP/" itemprop="url" rel="index"><span itemprop="name">DP</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>Follow up for “Unique Paths”:</p>
-<p>Now consider if some obstacles are added to the grids. How many unique paths would there be?</p>
-<p>An obstacle and empty space is marked as 1 and 0 respectively in the grid.</p>
-<p>For example,<br>There is one obstacle in the middle of a 3x3 grid as illustrated below.</p>
-<p>[<br>  [0,0,0],<br>  [0,1,0],<br>  [0,0,0]<br>]<br>The total number of unique paths is 2.</p>
-<p>Note: m and n will be at most 100.<br><a href="https://leetcode.com/problems/unique-paths-ii/" target="_blank" rel="noopener">https://leetcode.com/problems/unique-paths-ii/</a></p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">uniquePathsWithObstacles</span><span class="params">(<span class="keyword">int</span>[][] ob)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(ob == <span class="keyword">null</span> || ob.length == <span class="number">0</span> || ob[<span class="number">0</span>].length == <span class="number">0</span>) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">int</span> m = ob.length, n = ob[<span class="number">0</span>].length;</span><br><span class="line">    <span class="keyword">int</span>[] dp = <span class="keyword">new</span> <span class="keyword">int</span>[n + <span class="number">1</span>];</span><br><span class="line">    dp[<span class="number">1</span>] = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; m; ++i) &#123;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">1</span>; j &lt;= n; ++j) &#123;</span><br><span class="line">            dp[j] = ob[i][j - <span class="number">1</span>] == <span class="number">1</span> ? <span class="number">0</span> : dp[j] + dp[j - <span class="number">1</span>];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> dp[n];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2015/07/07/Unique-Paths/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://jeffzzf.github.io/2015/07/04/Java%E5%B9%B6%E5%8F%91%E9%9D%A2%E8%AF%95%E9%A2%98%E6%95%B4%E7%90%86/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Jeffzzf">
-      <meta itemprop="description" content="Do one thing at a time, and do well.">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Noob">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2015/07/04/Java%E5%B9%B6%E5%8F%91%E9%9D%A2%E8%AF%95%E9%A2%98%E6%95%B4%E7%90%86/" class="post-title-link" itemprop="url">Java并发面试题整理</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2015-07-04 19:57:44" itemprop="dateCreated datePublished" datetime="2015-07-04T19:57:44+08:00">2015-07-04</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2019-08-28 20:23:34" itemprop="dateModified" datetime="2019-08-28T20:23:34+08:00">2019-08-28</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Java/" itemprop="url" rel="index"><span itemprop="name">Java</span></a>
-                </span>
-                  ，
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Java/%E5%B9%B6%E5%8F%91/" itemprop="url" rel="index"><span itemprop="name">并发</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="Wait-和-sleep-的比较"><a href="#Wait-和-sleep-的比较" class="headerlink" title="Wait() 和 sleep()的比较"></a>Wait() 和 sleep()的比较</h1><p>wait() 和 sleep()都可以使线程阻塞，它们的区别如下：</p>
-<ol>
-<li>wait是Object的方法，而sleep是Thread类的静态方法</li>
-<li>sleep使线程阻塞指定时间，这段时间当前线程让出CPU时间，时间结束后继续执行，该过程不释放线程持有的对象锁；wait方法被调用后线程释放持有的锁并进入该锁的等待队列，当收到持有锁的其它线程释放notify或notifyAll信号后，wait方法返回。所以，一般wait方法放在检查某个变量的循环中。</li>
-</ol>
-<h1 id="notify和notifyAll的区别"><a href="#notify和notifyAll的区别" class="headerlink" title="notify和notifyAll的区别"></a>notify和notifyAll的区别</h1><p>notify随机唤醒一个等待锁的线程，notifyAll唤醒所有等待锁的线程</p>
-<h1 id="什么是Daemon线程"><a href="#什么是Daemon线程" class="headerlink" title="什么是Daemon线程"></a>什么是Daemon线程</h1><p>Daemon线程（守护线程，后台线程）是值程序运行时在后台提供一种通用服务的线程，并且这种线程不是程序中不可或缺的部分（例如垃圾回收线程就是一种后台线程）。所有非后台线程结束时会杀死所有的后台线程。只要有非后台线程没结束，程序就不会结束。</p>
-<ol>
-<li>可以通过Thread的setDaemon方法将线程设置为Daemon线程，该方法必须在线程启动之前调用</li>
-<li>Daemon线程创建的线程也是Daemon线程</li>
-<li>Daemon不应该访问数据库、文件等资源，因为它随时有可能被中断（甚至无法执行finall中的语句）</li>
-</ol>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2015/07/04/Java%E5%B9%B6%E5%8F%91%E9%9D%A2%E8%AF%95%E9%A2%98%E6%95%B4%E7%90%86/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://jeffzzf.github.io/2015/07/03/Trie%E6%A0%91%E7%9A%84%E5%AE%9E%E7%8E%B0%E5%8F%8A%E5%BA%94%E7%94%A8/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Jeffzzf">
-      <meta itemprop="description" content="Do one thing at a time, and do well.">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Noob">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2015/07/03/Trie%E6%A0%91%E7%9A%84%E5%AE%9E%E7%8E%B0%E5%8F%8A%E5%BA%94%E7%94%A8/" class="post-title-link" itemprop="url">Trie树的实现及应用</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2015-07-03 13:04:39" itemprop="dateCreated datePublished" datetime="2015-07-03T13:04:39+08:00">2015-07-03</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2019-08-28 20:23:34" itemprop="dateModified" datetime="2019-08-28T20:23:34+08:00">2019-08-28</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E7%AE%97%E6%B3%95/" itemprop="url" rel="index"><span itemprop="name">算法</span></a>
-                </span>
-                  ，
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E7%AE%97%E6%B3%95/Trie%E6%A0%91/" itemprop="url" rel="index"><span itemprop="name">Trie树</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="Trie树的实现"><a href="#Trie树的实现" class="headerlink" title="Trie树的实现"></a>Trie树的实现</h1><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">TrieNode</span> </span>&#123;</span><br><span class="line">    <span class="comment">// Initialize your data structure here.</span></span><br><span class="line">    <span class="keyword">boolean</span> isLeaf;</span><br><span class="line">    TrieNode[] nodes;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">TrieNode</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        isLeaf = <span class="keyword">false</span>;</span><br><span class="line">        nodes = <span class="keyword">new</span> TrieNode[<span class="number">26</span>];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Trie</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> TrieNode root;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Trie</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        root = <span class="keyword">new</span> TrieNode();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Inserts a word into the trie.</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">insert</span><span class="params">(String word)</span> </span>&#123;</span><br><span class="line">        TrieNode node = root;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; word.length(); ++i) &#123;</span><br><span class="line">            <span class="keyword">int</span> index = word.charAt(i) - <span class="string">'a'</span>;</span><br><span class="line">            <span class="comment">/***错误的写法，node信息丢失 </span></span><br><span class="line"><span class="comment">            * node = node.nodes[index];</span></span><br><span class="line"><span class="comment">            * if(node == null)</span></span><br><span class="line"><span class="comment">            *     node = new TrieNode();</span></span><br><span class="line"><span class="comment">            ***/</span></span><br><span class="line">            <span class="keyword">if</span>(node.nodes[index] == <span class="keyword">null</span>)</span><br><span class="line">                node.nodes[index] = <span class="keyword">new</span> TrieNode();</span><br><span class="line">            node = node.nodes[index];</span><br><span class="line">            <span class="keyword">if</span>(i == word.length() - <span class="number">1</span>)</span><br><span class="line">                node.isLeaf = <span class="keyword">true</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Returns if the word is in the trie.</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">search</span><span class="params">(String word)</span> </span>&#123;</span><br><span class="line">        TrieNode node = root;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; word.length(); ++i) &#123;</span><br><span class="line">            <span class="keyword">int</span> index = word.charAt(i) - <span class="string">'a'</span>;</span><br><span class="line">            node = node.nodes[index];</span><br><span class="line">            <span class="keyword">if</span>(node == <span class="keyword">null</span>)</span><br><span class="line">                <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">            <span class="keyword">if</span>(i == word.length() - <span class="number">1</span> &amp;&amp; node.isLeaf)</span><br><span class="line">                <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Returns if there is any word in the trie</span></span><br><span class="line">    <span class="comment">// that starts with the given prefix.</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">startsWith</span><span class="params">(String word)</span> </span>&#123;</span><br><span class="line">        TrieNode node = root;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; word.length(); ++i) &#123;</span><br><span class="line">            <span class="keyword">int</span> index = word.charAt(i) - <span class="string">'a'</span>;</span><br><span class="line">            node = node.nodes[index];</span><br><span class="line">            <span class="keyword">if</span>(node == <span class="keyword">null</span>)</span><br><span class="line">                <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// Your Trie object will be instantiated and called as such:</span></span><br><span class="line"><span class="comment">// Trie trie = new Trie();</span></span><br><span class="line"><span class="comment">// trie.insert("somestring");</span></span><br><span class="line"><span class="comment">// trie.search("key");</span></span><br></pre></td></tr></table></figure>
-
-<h1 id="Word-Search-II"><a href="#Word-Search-II" class="headerlink" title="Word Search II"></a>Word Search II</h1><p>Given a 2D board and a list of words from the dictionary, find all words in the board.</p>
-<p>Each word must be constructed from letters of sequentially adjacent cell, where “adjacent” cells are those horizontally or vertically neighboring. The same letter cell may not be used more than once in a word.</p>
-<p>For example,<br>Given words = [“oath”,”pea”,”eat”,”rain”] and board =</p>
-<p>[<br>  [‘o’,’a’,’a’,’n’],<br>  [‘e’,’t’,’a’,’e’],<br>  [‘i’,’h’,’k’,’r’],<br>  [‘i’,’f’,’l’,’v’]<br>]<br>Return [“eat”,”oath”].<br>Note:<br>You may assume that all inputs are consist of lowercase letters a-z.<br><a href="https://leetcode.com/problems/word-search-ii/" target="_blank" rel="noopener">https://leetcode.com/problems/word-search-ii/</a></p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Trie</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="class"><span class="keyword">class</span> <span class="title">TrieNode</span> </span>&#123;</span><br><span class="line">        <span class="keyword">boolean</span> isLeaf;</span><br><span class="line">        TrieNode[] nodes;</span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="title">TrieNode</span><span class="params">()</span> </span>&#123;</span><br><span class="line">            isLeaf = <span class="keyword">false</span>;</span><br><span class="line">            nodes = <span class="keyword">new</span> TrieNode[<span class="number">26</span>];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">private</span> TrieNode root;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Trie</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        root = <span class="keyword">new</span> TrieNode();</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">insert</span><span class="params">(String word)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(word == <span class="keyword">null</span> || word.length() == <span class="number">0</span>) <span class="keyword">return</span>;</span><br><span class="line">        TrieNode node = root;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; word.length(); ++i) &#123;</span><br><span class="line">            <span class="keyword">char</span> ch = word.charAt(i);</span><br><span class="line">            <span class="keyword">if</span>(node.nodes[ch - <span class="string">'a'</span>] == <span class="keyword">null</span>)</span><br><span class="line">                node.nodes[ch - <span class="string">'a'</span>] = <span class="keyword">new</span> TrieNode();</span><br><span class="line">            node = node.nodes[ch - <span class="string">'a'</span>];</span><br><span class="line">            <span class="keyword">if</span>(i == word.length() - <span class="number">1</span>)</span><br><span class="line">                node.isLeaf = <span class="keyword">true</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">search</span><span class="params">(String word)</span> </span>&#123;</span><br><span class="line">        TrieNode node = root;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; word.length(); ++i) &#123;</span><br><span class="line">            <span class="keyword">int</span> index = word.charAt(i) - <span class="string">'a'</span>;</span><br><span class="line">            <span class="keyword">if</span>(node.nodes[index] == <span class="keyword">null</span>)</span><br><span class="line">                <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">            node = node.nodes[index];</span><br><span class="line">            <span class="keyword">if</span>(i == word.length() - <span class="number">1</span> &amp;&amp;  node.isLeaf)</span><br><span class="line">                <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">startWith</span><span class="params">(String word)</span> </span>&#123;</span><br><span class="line">        TrieNode node = root;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; word.length(); ++i) &#123;</span><br><span class="line">            <span class="keyword">int</span> index = word.charAt(i) - <span class="string">'a'</span>;</span><br><span class="line">            <span class="keyword">if</span>(node.nodes[index] == <span class="keyword">null</span>)</span><br><span class="line">                <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">            node = node.nodes[index];</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> List&lt;String&gt; <span class="title">findWords</span><span class="params">(<span class="keyword">char</span>[][] board, String[] words)</span> </span>&#123;</span><br><span class="line">        List&lt;String&gt; result = <span class="keyword">new</span> ArrayList&lt;String&gt;();</span><br><span class="line">        <span class="keyword">if</span>(board == <span class="keyword">null</span> || board.length == <span class="number">0</span> || words == <span class="keyword">null</span>) <span class="keyword">return</span> result;</span><br><span class="line">        Trie dict = <span class="keyword">new</span> Trie();</span><br><span class="line">        <span class="keyword">for</span>(String word : words)</span><br><span class="line">            dict.insert(word);</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; board.length; ++i) &#123;</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; board[<span class="number">0</span>].length; ++j) &#123;</span><br><span class="line">                dfs(board, i, j, dict, result, <span class="keyword">new</span> StringBuilder());       </span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> result;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">dfs</span><span class="params">(<span class="keyword">char</span>[][] board, <span class="keyword">int</span> x, <span class="keyword">int</span> y, Trie dict, List&lt;String&gt; result, StringBuilder s)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(x &lt; <span class="number">0</span> || x &gt;= board.length || y &lt; <span class="number">0</span> || y &gt;= board[<span class="number">0</span>].length || board[x][y] == <span class="string">'#'</span>) <span class="keyword">return</span>;</span><br><span class="line">        <span class="keyword">if</span>(!dict.startWith(s.toString())) <span class="keyword">return</span>;</span><br><span class="line">        <span class="keyword">char</span> tmp = board[x][y];</span><br><span class="line">        s.append(tmp);</span><br><span class="line">        String cur = s.toString();</span><br><span class="line">        <span class="keyword">if</span>(dict.search(cur) &amp;&amp; !result.contains(cur))</span><br><span class="line">            result.add(cur);</span><br><span class="line">        board[x][y] = <span class="string">'#'</span>;</span><br><span class="line">        dfs(board, x + <span class="number">1</span>, y, dict, result, s);</span><br><span class="line">        dfs(board, x - <span class="number">1</span>, y, dict, result, s);</span><br><span class="line">        dfs(board, x, y - <span class="number">1</span>, dict, result, s);</span><br><span class="line">        dfs(board, x, y + <span class="number">1</span>, dict, result, s);</span><br><span class="line">        board[x][y] = tmp;</span><br><span class="line">        s.deleteCharAt(s.length() - <span class="number">1</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2015/07/03/Trie%E6%A0%91%E7%9A%84%E5%AE%9E%E7%8E%B0%E5%8F%8A%E5%BA%94%E7%94%A8/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1227,7 +1201,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">125</span>
+          <span class="site-state-item-count">128</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -1240,7 +1214,7 @@
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">110</span>
+        <span class="site-state-item-count">111</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>

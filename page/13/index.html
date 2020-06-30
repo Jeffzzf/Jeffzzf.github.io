@@ -161,6 +161,285 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://jeffzzf.github.io/2015/06/05/Permutation-%E6%8E%92%E5%88%97%E7%9B%B8%E5%85%B3%E7%9A%84%E7%AE%97%E6%B3%95/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Jeffzzf">
+      <meta itemprop="description" content="Do one thing at a time, and do well.">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Noob">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2015/06/05/Permutation-%E6%8E%92%E5%88%97%E7%9B%B8%E5%85%B3%E7%9A%84%E7%AE%97%E6%B3%95/" class="post-title-link" itemprop="url">Permutation(排列相关的算法)</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2015-06-05 11:31:34" itemprop="dateCreated datePublished" datetime="2015-06-05T11:31:34+08:00">2015-06-05</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2019-08-28 20:23:34" itemprop="dateModified" datetime="2019-08-28T20:23:34+08:00">2019-08-28</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E7%AE%97%E6%B3%95/" itemprop="url" rel="index"><span itemprop="name">算法</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E7%AE%97%E6%B3%95/%E5%AD%97%E7%AC%A6%E4%B8%B2/" itemprop="url" rel="index"><span itemprop="name">字符串</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="All-Permutations-Recursive"><a href="#All-Permutations-Recursive" class="headerlink" title="All Permutations(Recursive)"></a>All Permutations(Recursive)</h1><blockquote>
+<p>该算法采用DFS递归的方法，每次从当前元素出发，依次与它后面的元素交换，到序列结尾时表示完成一次全排列，输出结果。注意，每次递归返回后再把元素交换回来，否则会出现重复序列。该算法时间复杂度为O(n!)，序列不是递增的。例如对“123”全排列的结果为：123 132 213 231 321 312。</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">swap</span><span class="params">(StringBuilder sb, <span class="keyword">int</span> i, <span class="keyword">int</span> j)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">char</span> c = sb.charAt(i);</span><br><span class="line">        sb.setCharAt(i, sb.charAt(j));</span><br><span class="line">        sb.setCharAt(j, c);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">nextPermutation</span><span class="params">(StringBuilder sb, <span class="keyword">int</span> start)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(start == sb.length())</span><br><span class="line">        println(sb);</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = start; i &lt; sb.length(); ++i) &#123;</span><br><span class="line">        swap(sb, start, i);</span><br><span class="line">        nextPermutation(sb, start + <span class="number">1</span>);</span><br><span class="line">        swap(sb, start, i);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2015/06/05/Permutation-%E6%8E%92%E5%88%97%E7%9B%B8%E5%85%B3%E7%9A%84%E7%AE%97%E6%B3%95/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://jeffzzf.github.io/2015/06/04/Linux%E7%B3%BB%E7%BB%9F%E8%B0%83%E7%94%A8%E7%9A%84%E5%AE%9E%E7%8E%B0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Jeffzzf">
+      <meta itemprop="description" content="Do one thing at a time, and do well.">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Noob">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2015/06/04/Linux%E7%B3%BB%E7%BB%9F%E8%B0%83%E7%94%A8%E7%9A%84%E5%AE%9E%E7%8E%B0/" class="post-title-link" itemprop="url">Linux系统调用的实现</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2015-06-04 22:41:25" itemprop="dateCreated datePublished" datetime="2015-06-04T22:41:25+08:00">2015-06-04</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2019-08-28 20:23:34" itemprop="dateModified" datetime="2019-08-28T20:23:34+08:00">2019-08-28</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Linux/" itemprop="url" rel="index"><span itemprop="name">Linux</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Linux/%E5%9F%BA%E7%A1%80/" itemprop="url" rel="index"><span itemprop="name">基础</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="Linux系统结构"><a href="#Linux系统结构" class="headerlink" title="Linux系统结构"></a>Linux系统结构</h1><p>Linux系统结构如图所示，位于最内层的kernel管理计算机的硬件资源，提供硬件访问、内存管理、进程调度、文件管理、用户管理和网络等系统服务。为了保护系统，进程不能直接访问内核的内存空间和内核函数，当进程需要内核提供的服务时，通过内核与外界的接口（也就是系统调用）来实现。</p>
+<p><img src="http://img.blog.csdn.net/20150417200000896" alt="Linux系统结构图"></p>
+<h1 id="用户态和内核态"><a href="#用户态和内核态" class="headerlink" title="用户态和内核态"></a>用户态和内核态</h1><p>进程运行的状态可以分为内核态和用户态，当进程处于内核态时，它可以访问内核的内存空间和硬件资源；当进程处于用户态时，进程只能访问用户空间的内存空间，不能访问内核内存空间和硬件资源，不能关闭中断。用户态到内核态的切换有三种方式：</p>
+<ol>
+<li>系统调用，当用户态通过系统调用申请使用系统服务时，进程由用户态切换到内核态</li>
+<li>异常，当CPU在执行运行在用户态下的程序时，发生了某些事先不可知的异常，这时会触发由当前运行进程切换到处理此异常的内核相关程序中，也就转到了内核态，比如缺页异常。</li>
+<li>外围设备中断，当外围设备完成用户请求的操作时，会向CPU发送相应的中断信号，如果此时进程处于用户态，将切换到内核态。</li>
+</ol>
+<h1 id="系统调用的实现"><a href="#系统调用的实现" class="headerlink" title="系统调用的实现"></a>系统调用的实现</h1><p>系统调用通过软件中断的方式实现，每个系统调用都有相应的系统调用号作为唯一的标识，内核维护一张系统调用表，表中的元素是系统调用函数的起始地址，而系统调用号就是系统调用在调用表的偏移量。在进行系统调用是只要指定对应的系统调用号，就可以明确的要调用哪个系统调用。对于参数传递，Linux是通过寄存器完成的。Linux最多允许向系统调用传递6个参数，分别依次由%ebx，%ecx，%edx，%esi，%edi和%ebp这个6个寄存器完成。</p>
+<p>在用户态和内核态运行的进程使用的栈是不同的，分别叫做用户栈和内核栈，两者各自负责相应特权级别状态下的函数调用。当进行系统调用时，进程不仅要从用户态切换到内核态，同时也要完成栈切换，这样处于内核态的系统调用才能在内核栈上完成调用。系统调用返回时，还要切换回用户栈，继续完成用户态下的函数调用。</p>
+<p>寄存器%esp（栈指针，指向栈顶）所在的内存空间叫做当前栈，比如%esp在用户空间则当前栈就是用户栈，否则是内核栈。栈切换主要就是%esp在用户空间和内核空间间的来回赋值。在Linux中，每个进程都有一个私有的内核栈，当从用户栈切换到内核栈时，需完成保存%esp以及相关寄存器的值（%ebx，%ecx…）并将%esp设置成内核栈的相应值。而从内核栈切换会用户栈时，需要恢复用户栈的%esp及相关寄存器的值以及保存内核栈的信息。一个问题就是用户栈的%esp和寄存器的值保存到什么地方，以便于恢复呢？答案就是内核栈，在调用int指令机型系统调用后会把用户栈的%esp的值及相关寄存器压入内核栈中，系统调用通过iret指令返回，在返回之前会从内核栈弹出用户栈的%esp和寄存器的状态，然后进行恢复。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2015/06/04/Linux%E7%B3%BB%E7%BB%9F%E8%B0%83%E7%94%A8%E7%9A%84%E5%AE%9E%E7%8E%B0/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://jeffzzf.github.io/2015/06/03/Java%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E5%99%A8/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Jeffzzf">
+      <meta itemprop="description" content="Do one thing at a time, and do well.">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Noob">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2015/06/03/Java%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E5%99%A8/" class="post-title-link" itemprop="url">Java垃圾回收器</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2015-06-03 21:38:34" itemprop="dateCreated datePublished" datetime="2015-06-03T21:38:34+08:00">2015-06-03</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2019-12-23 17:54:37" itemprop="dateModified" datetime="2019-12-23T17:54:37+08:00">2019-12-23</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Java/" itemprop="url" rel="index"><span itemprop="name">Java</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Java/JVM/" itemprop="url" rel="index"><span itemprop="name">JVM</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="自动内存管理的优缺点"><a href="#自动内存管理的优缺点" class="headerlink" title="自动内存管理的优缺点"></a>自动内存管理的优缺点</h2><h3 id="优点"><a href="#优点" class="headerlink" title="优点"></a>优点</h3><p>在C/C++等语言中，内存管理是程序员的责任，程序员需要在内存的分配和释放上花费大量的时间，手动内存管理过程中容易出现以下问题：</p>
+<ol>
+<li>悬垂指针问题（Dangling references，tries to access the original object, but the space has been reallocated to a new object, the result is unpredictable and not what was intended）</li>
+<li>内存泄露问题（Memory/Space Leaks， memory is allocated and no longer referenced but not released)<br>包括Java在内的现代面向对象语言中都提供了自动内存管理机制，垃圾回收器保证正在使用的对象不会被回收从而解决悬垂指针问题；通过自动释放不再使用对象占用的内存空间来解决内存泄露问题。内存管理机制有助于程序员将精力集中在业务实现上并且可以写出更加可靠的代码。</li>
+</ol>
+<h3 id="缺点"><a href="#缺点" class="headerlink" title="缺点"></a>缺点</h3><p>自动内存管理机制的缺点在于，垃圾回收器本身需要CPU时间和其它资源，从一定程度上降低了性能。</p>
+<h2 id="垃圾回收器的职责"><a href="#垃圾回收器的职责" class="headerlink" title="垃圾回收器的职责"></a>垃圾回收器的职责</h2><p>在JVM运行时数据区中，线程私有的虚拟机栈，本地方法栈和程序计数器随着线程的启动而创建，线程结束后资源就被回收了，所以一般不需要对线程私有的数据进行垃圾回收。JVM主要对各线程共享的方法区和堆进行垃圾回收，方法区（也叫永久代）中的垃圾主要包括废弃的常量和无用的类，由于永久代垃圾回收的效率较低，一般在大量使用反射、动态代理、CGLib等ByteCode框架、动态生成JSP以及OSGI这类频繁自定义ClassLoader是场景下使用，垃圾回收器的工作主要包括：</p>
+<ol>
+<li>分配内存</li>
+<li>保证所有被引用的对象保存在内存中</li>
+<li>回收从正在执行的代码中引用的对象出发不可达的对象占用的空间</li>
+</ol>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2015/06/03/Java%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E5%99%A8/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://jeffzzf.github.io/2015/06/01/JVM%E8%BF%90%E8%A1%8C%E6%97%B6%E6%95%B0%E6%8D%AE%E5%8C%BA/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -682,7 +961,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">125</span>
+          <span class="site-state-item-count">128</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -695,7 +974,7 @@
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">110</span>
+        <span class="site-state-item-count">111</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>

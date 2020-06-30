@@ -161,6 +161,260 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://jeffzzf.github.io/2019/07/11/Es%E5%88%86%E5%B8%83%E5%BC%8F%E5%8E%9F%E7%90%86/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Jeffzzf">
+      <meta itemprop="description" content="Do one thing at a time, and do well.">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Noob">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/07/11/Es%E5%88%86%E5%B8%83%E5%BC%8F%E5%8E%9F%E7%90%86/" class="post-title-link" itemprop="url">Es分布式原理</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2019-07-11 15:28:09" itemprop="dateCreated datePublished" datetime="2019-07-11T15:28:09+08:00">2019-07-11</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2019-08-28 20:23:34" itemprop="dateModified" datetime="2019-08-28T20:23:34+08:00">2019-08-28</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://jeffzzf.github.io/2019/07/10/Es%20%E9%9B%86%E7%BE%A4%E5%8E%9F%E7%90%86/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Jeffzzf">
+      <meta itemprop="description" content="Do one thing at a time, and do well.">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Noob">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/07/10/Es%20%E9%9B%86%E7%BE%A4%E5%8E%9F%E7%90%86/" class="post-title-link" itemprop="url">Es索引原理</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2019-07-10 19:51:56" itemprop="dateCreated datePublished" datetime="2019-07-10T19:51:56+08:00">2019-07-10</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-05-27 11:57:56" itemprop="dateModified" datetime="2020-05-27T11:57:56+08:00">2020-05-27</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%AD%98%E5%82%A8/" itemprop="url" rel="index"><span itemprop="name">存储</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%AD%98%E5%82%A8/es/" itemprop="url" rel="index"><span itemprop="name">es</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="Es-集群构成"><a href="#Es-集群构成" class="headerlink" title="Es 集群构成"></a>Es 集群构成</h2><p>Es 集群由多个节点（Node）构成，Node可以有不同的类型，通过以下配置可以产生四种不同类型的 Node：</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">conf/elasticsearch.yml:</span></span><br><span class="line">    <span class="attr">node.master:</span> <span class="literal">true</span><span class="string">/false</span></span><br><span class="line">    <span class="attr">node.data:</span> <span class="literal">true</span><span class="string">/false</span></span><br></pre></td></tr></table></figure>
+
+<p>四种不同类型的Node是一个node.master和node.data的true/false的两两组合。当然还有其他类型的Node，比如IngestNode(用于数据预处理等)，不在本文讨论范围内。</p>
+<p>当node.master 为 true 时，表示这个 node 是一个 master 的候选节点，可以参与选举，类似于 MasterCandidate。Es 正常工作时只能有一个 master（leader），多于 1 个时发生脑裂。</p>
+<p>当 node.data 为 true 时，这个节点作为一个数据节点，会存储分配在该 node 上的 shard 数据，并负责这些 shard 的写入、查询等。</p>
+<p>此外，集群内 node 都可以执行任何请求，负责将请求转发给对应的 node 进行处理。当 node.master 和 node.data 都是 false 时，这个节点可以作为一个类似 proxy 的节点，接受请求并进行转发、结果聚合等。</p>
+<h3 id="Es-选主"><a href="#Es-选主" class="headerlink" title="Es 选主"></a>Es 选主</h3><p>ZenDiscovery是ES自己实现的一套用于节点发现和选主等功能的模块，没有依赖Zookeeper等工具</p>
+<p>在本节点到每个hosts中的节点建立一条边，当整个集群所有的node形成一个联通图时，所有节点都可以知道集群中有哪些节点，不会形成孤岛。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2019/07/10/Es%20%E9%9B%86%E7%BE%A4%E5%8E%9F%E7%90%86/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://jeffzzf.github.io/2019/07/10/Es%E7%B4%A2%E5%BC%95%E5%8E%9F%E7%90%86/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Jeffzzf">
+      <meta itemprop="description" content="Do one thing at a time, and do well.">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Noob">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/07/10/Es%E7%B4%A2%E5%BC%95%E5%8E%9F%E7%90%86/" class="post-title-link" itemprop="url">Es索引原理</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2019-07-10 19:51:56" itemprop="dateCreated datePublished" datetime="2019-07-10T19:51:56+08:00">2019-07-10</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2019-08-28 20:23:34" itemprop="dateModified" datetime="2019-08-28T20:23:34+08:00">2019-08-28</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%AD%98%E5%82%A8/" itemprop="url" rel="index"><span itemprop="name">存储</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%AD%98%E5%82%A8/es/" itemprop="url" rel="index"><span itemprop="name">es</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="倒排序索引的不变性"><a href="#倒排序索引的不变性" class="headerlink" title="倒排序索引的不变性"></a>倒排序索引的不变性</h2><p>es的json文档中，每个被索引的字段都有自己的倒排索引，倒排索引会保存每个词项出现过的文档总数，在对应文档中一个具体词项出现的总次数，词项在文档中的顺序，每个文档的长度，所有文档的平均长度等。这些统计信息用于计算哪些词比其它词更重要，哪些文档比其它文档更重要。</p>
+<p>倒排序索引被写入磁盘后是不可变的，不可变性可以带来以下好处：</p>
+<ul>
+<li>不需要锁，不用担心多进程同时修改数据的问题</li>
+<li>一旦索引被读入内核的文件系统缓存便会留在那里，由于不变性，大部分请求会直接请求内存而不会命中磁盘，提升性能</li>
+<li>其它缓存（如filter缓存）在索引的生命周期内始终有效，不需要在每次数据改变时被重建</li>
+<li>写入单个大的倒排序索引允许数据被压缩，减少磁盘I/O和需要被缓存到内存的使用量</li>
+</ul>
+<h2 id="倒排序索引的更新"><a href="#倒排序索引的更新" class="headerlink" title="倒排序索引的更新"></a>倒排序索引的更新</h2><p>es基于lucene，lucene引入按段搜索的概念，每一个段本身都是一个倒排索引，索引在lucene中除了表示所有段的集合外，还增加了提交点的概念——提交点是一个列出所有已知段的文件。</p>
+<p>新的文档首先被添加到内存索引缓存中，然后写入到一个基于磁盘的段。当一个查询被触发，所有已知的段按顺序被查询。词项统计会对所有段的结果进行聚合，以保证每个词和每个文档的管理都被准确计算。</p>
+<p>每个提交点会包含一个.del 文件，文件中会列出这些被删除文档的段信息。当一个文档被删除时，它实际只是在.del文件中被标记删除。一个被标记删除的文档仍然可以被查询匹配到，但它会在最终结果被返回前从结果集中移除。</p>
+<p>文档更新时，旧版本文档被标记删除，文档的新版本被索引到一个新的段中。可能两个版本的文档都会被一个查询匹配到，但被删除的旧版本文档在结果集返回前被移除了。</p>
+<h2 id="段合并"><a href="#段合并" class="headerlink" title="段合并"></a>段合并</h2>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2019/07/10/Es%E7%B4%A2%E5%BC%95%E5%8E%9F%E7%90%86/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://jeffzzf.github.io/2019/07/10/Es%E5%9F%BA%E6%9C%AC%E7%94%A8%E6%B3%95/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -839,303 +1093,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://jeffzzf.github.io/2017/04/20/JVM%E8%B0%83%E4%BC%98/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Jeffzzf">
-      <meta itemprop="description" content="Do one thing at a time, and do well.">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Noob">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2017/04/20/JVM%E8%B0%83%E4%BC%98/" class="post-title-link" itemprop="url">JVM调优</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2017-04-20 17:08:08" itemprop="dateCreated datePublished" datetime="2017-04-20T17:08:08+08:00">2017-04-20</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-05-16 18:18:43" itemprop="dateModified" datetime="2020-05-16T18:18:43+08:00">2020-05-16</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Java/" itemprop="url" rel="index"><span itemprop="name">Java</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>定位JVM相关的问题时，知识和经验是关键基础，数据是依据，工具是运用知识处理数据的手段。JVM数据包括运行日志、异常堆栈、GC日志、线程快照(threaddump/javacore文件)、堆转储快照(heapdump/hprof文件)等。使用JVM监控和分析工具可以提高分析数据、定位解决问题的效率，常用监控工具如下表所示，具体各工具的用法可以Google对应JDK版本的文档。</p>
-<table>
-<thead>
-<tr>
-<th align="left">名称</th>
-<th align="left">用途</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="left">jps</td>
-<td align="left">JVM Process Status Tool显示系统内所有Hotspot虚拟机进程</td>
-</tr>
-<tr>
-<td align="left">jstat</td>
-<td align="left">JVM Statistics Monitoring Tool，收集Hotspot虚拟机各方面运行数据</td>
-</tr>
-<tr>
-<td align="left">jinfo</td>
-<td align="left">Configuration Info for Java，显示虚拟机配置信息</td>
-</tr>
-<tr>
-<td align="left">jmap</td>
-<td align="left">Memory Map for Java，生成虚拟机内存转储快照(heapdump文件)</td>
-</tr>
-<tr>
-<td align="left">jhat</td>
-<td align="left">JVM Statistics Heap ，用于分析heapdump文件，它会建立一个HTTP/HTML服务器，可以在浏览器中查看分析结果</td>
-</tr>
-<tr>
-<td align="left">jstack</td>
-<td align="left">Stack Trace for Java，显示虚拟机的线程快照</td>
-</tr>
-</tbody></table>
-<h2 id="JDK可视化工具"><a href="#JDK可视化工具" class="headerlink" title="JDK可视化工具"></a>JDK可视化工具</h2><p>Java虚拟机规范详细描述了虚拟机指令级中每条指令的执行过程，执行前后对操作数栈、局部变量表的影响等细节。但随着技术的发展，虚拟机规范中的描述逐渐成为虚拟机实现的概念模型，即实际实现的虚拟机只能保证与规范实现等效。在分析程序执行语义时（虚拟机做了什么）时，在字节码层面上分析完全可行，但分析程序的执行行为时（虚拟机是怎么做的、性能如何）时，在字节码层面上分析就没有什么意义了。需要使用HSDIS这类反汇编插件，把动态生成的本地代码还原为汇编代码输出。</p>
-<h2 id="方法区溢出"><a href="#方法区溢出" class="headerlink" title="方法区溢出"></a>方法区溢出</h2><p>方法区溢出也是一种常见的内存溢出异常，一个类如果要被垃圾收集器回收掉，判定条件是非常苛刻的。在经常动态生成大量 Class 的应用中，需要特别注意类的回收状况。这类场景除了上面提到的程序使用了 GCLib 字节码增强外，常见的还有：大量 JSP 或动态产生 JSP 文件的应用（ JSP 第一次运行时需要编译为Java 类）、基于 OSGi 的应用（即使是同一个类文件，被不同的加载器加载也会视为不同的类）等。</p>
-<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><p>1.<a href="https://blog.csdn.net/xlgen157387/article/details/45046537" target="_blank" rel="noopener">Java虚拟机OOM之方法区溢出</a></p>
-
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2017/04/20/JVM%E8%B0%83%E4%BC%98/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://jeffzzf.github.io/2017/04/18/Spring-Boot%E5%85%A5%E9%97%A8/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Jeffzzf">
-      <meta itemprop="description" content="Do one thing at a time, and do well.">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Noob">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2017/04/18/Spring-Boot%E5%85%A5%E9%97%A8/" class="post-title-link" itemprop="url">Spring Boot入门</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2017-04-18 11:26:41" itemprop="dateCreated datePublished" datetime="2017-04-18T11:26:41+08:00">2017-04-18</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2019-08-28 20:23:34" itemprop="dateModified" datetime="2019-08-28T20:23:34+08:00">2019-08-28</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E5%BE%AE%E6%9C%8D%E5%8A%A1/" itemprop="url" rel="index"><span itemprop="name">微服务</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="Starters"><a href="#Starters" class="headerlink" title="Starters"></a>Starters</h1><p>Starters是Spring Boot提供的一系列开箱即用的依赖描述符，每个starter包含所需的所有相关依赖。</p>
-
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2017/04/18/Spring-Boot%E5%85%A5%E9%97%A8/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://jeffzzf.github.io/2017/04/14/Java%E5%B9%B6%E5%8F%91/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Jeffzzf">
-      <meta itemprop="description" content="Do one thing at a time, and do well.">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Noob">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2017/04/14/Java%E5%B9%B6%E5%8F%91/" class="post-title-link" itemprop="url">Java注解</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2017-04-14 17:42:39" itemprop="dateCreated datePublished" datetime="2017-04-14T17:42:39+08:00">2017-04-14</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2019-08-28 20:23:34" itemprop="dateModified" datetime="2019-08-28T20:23:34+08:00">2019-08-28</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Java/" itemprop="url" rel="index"><span itemprop="name">Java</span></a>
-                </span>
-                  ，
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Java/Basic/" itemprop="url" rel="index"><span itemprop="name">Basic</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>注解又叫元数据，可以提供代码难以描述的信息，有助于减轻编写“样板”代码的负担，编写更加简洁易读的代码。</p>
-<h1 id="注解定义"><a href="#注解定义" class="headerlink" title="注解定义"></a>注解定义</h1><p>注解的定义类似接口的定义，除了<code>@</code>符号外，注解很像一个空的接口，并且也会被编译成class文件。定义注解时需要一些元注解(meta-annotation)，例如@Target和@Retention，@Target用来定义注解用于什么地方（例如一个方法还是一个域），@Retention用来定义注解在哪一个级别可用（源代码中、类文件中还是运行时）。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Target</span>(ElementType.TYPE)</span><br><span class="line"><span class="meta">@Retention</span>(RetentionPolicy.RUNTIME)</span><br><span class="line"><span class="keyword">public</span> <span class="meta">@interface</span> UserCase &#123;</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">id</span><span class="params">()</span></span>;</span><br><span class="line">    <span class="function">String <span class="title">description</span><span class="params">()</span> <span class="keyword">default</span> "Default description"</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>注解中一般会包含一些元素表示一些值。分析处理注解时，可以利用这些值。注解的元素看起来就像接口的方法，唯一的区别是可以指定默认值。注解元素的可用类型包括：</p>
-<ol>
-<li>所有基本类型(int, float, boolean等),不能使用包装类</li>
-<li>String</li>
-<li>Class</li>
-<li>enum</li>
-<li>Annotation</li>
-<li>以上类型的数组<br>对于非基本类型元素，无论在源代码声明时，还是在注解接口定义默认值时，都不能以null作为值。如果需要表示对应值不存在，可以用特殊的值表示， 例如空字符串、负数等。</li>
-</ol>
-<h1 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h1><p>《Java编程思想》</p>
-
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2017/04/14/Java%E5%B9%B6%E5%8F%91/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1205,7 +1162,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">125</span>
+          <span class="site-state-item-count">128</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -1218,7 +1175,7 @@
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">110</span>
+        <span class="site-state-item-count">111</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>

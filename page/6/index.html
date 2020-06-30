@@ -161,6 +161,303 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://jeffzzf.github.io/2017/04/20/JVM%E8%B0%83%E4%BC%98/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Jeffzzf">
+      <meta itemprop="description" content="Do one thing at a time, and do well.">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Noob">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2017/04/20/JVM%E8%B0%83%E4%BC%98/" class="post-title-link" itemprop="url">JVM调优</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2017-04-20 17:08:08" itemprop="dateCreated datePublished" datetime="2017-04-20T17:08:08+08:00">2017-04-20</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-05-16 18:18:43" itemprop="dateModified" datetime="2020-05-16T18:18:43+08:00">2020-05-16</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Java/" itemprop="url" rel="index"><span itemprop="name">Java</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>定位JVM相关的问题时，知识和经验是关键基础，数据是依据，工具是运用知识处理数据的手段。JVM数据包括运行日志、异常堆栈、GC日志、线程快照(threaddump/javacore文件)、堆转储快照(heapdump/hprof文件)等。使用JVM监控和分析工具可以提高分析数据、定位解决问题的效率，常用监控工具如下表所示，具体各工具的用法可以Google对应JDK版本的文档。</p>
+<table>
+<thead>
+<tr>
+<th align="left">名称</th>
+<th align="left">用途</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">jps</td>
+<td align="left">JVM Process Status Tool显示系统内所有Hotspot虚拟机进程</td>
+</tr>
+<tr>
+<td align="left">jstat</td>
+<td align="left">JVM Statistics Monitoring Tool，收集Hotspot虚拟机各方面运行数据</td>
+</tr>
+<tr>
+<td align="left">jinfo</td>
+<td align="left">Configuration Info for Java，显示虚拟机配置信息</td>
+</tr>
+<tr>
+<td align="left">jmap</td>
+<td align="left">Memory Map for Java，生成虚拟机内存转储快照(heapdump文件)</td>
+</tr>
+<tr>
+<td align="left">jhat</td>
+<td align="left">JVM Statistics Heap ，用于分析heapdump文件，它会建立一个HTTP/HTML服务器，可以在浏览器中查看分析结果</td>
+</tr>
+<tr>
+<td align="left">jstack</td>
+<td align="left">Stack Trace for Java，显示虚拟机的线程快照</td>
+</tr>
+</tbody></table>
+<h2 id="JDK可视化工具"><a href="#JDK可视化工具" class="headerlink" title="JDK可视化工具"></a>JDK可视化工具</h2><p>Java虚拟机规范详细描述了虚拟机指令级中每条指令的执行过程，执行前后对操作数栈、局部变量表的影响等细节。但随着技术的发展，虚拟机规范中的描述逐渐成为虚拟机实现的概念模型，即实际实现的虚拟机只能保证与规范实现等效。在分析程序执行语义时（虚拟机做了什么）时，在字节码层面上分析完全可行，但分析程序的执行行为时（虚拟机是怎么做的、性能如何）时，在字节码层面上分析就没有什么意义了。需要使用HSDIS这类反汇编插件，把动态生成的本地代码还原为汇编代码输出。</p>
+<h2 id="方法区溢出"><a href="#方法区溢出" class="headerlink" title="方法区溢出"></a>方法区溢出</h2><p>方法区溢出也是一种常见的内存溢出异常，一个类如果要被垃圾收集器回收掉，判定条件是非常苛刻的。在经常动态生成大量 Class 的应用中，需要特别注意类的回收状况。这类场景除了上面提到的程序使用了 GCLib 字节码增强外，常见的还有：大量 JSP 或动态产生 JSP 文件的应用（ JSP 第一次运行时需要编译为Java 类）、基于 OSGi 的应用（即使是同一个类文件，被不同的加载器加载也会视为不同的类）等。</p>
+<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><p>1.<a href="https://blog.csdn.net/xlgen157387/article/details/45046537" target="_blank" rel="noopener">Java虚拟机OOM之方法区溢出</a></p>
+
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2017/04/20/JVM%E8%B0%83%E4%BC%98/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://jeffzzf.github.io/2017/04/18/Spring-Boot%E5%85%A5%E9%97%A8/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Jeffzzf">
+      <meta itemprop="description" content="Do one thing at a time, and do well.">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Noob">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2017/04/18/Spring-Boot%E5%85%A5%E9%97%A8/" class="post-title-link" itemprop="url">Spring Boot入门</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2017-04-18 11:26:41" itemprop="dateCreated datePublished" datetime="2017-04-18T11:26:41+08:00">2017-04-18</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2019-08-28 20:23:34" itemprop="dateModified" datetime="2019-08-28T20:23:34+08:00">2019-08-28</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%BE%AE%E6%9C%8D%E5%8A%A1/" itemprop="url" rel="index"><span itemprop="name">微服务</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="Starters"><a href="#Starters" class="headerlink" title="Starters"></a>Starters</h1><p>Starters是Spring Boot提供的一系列开箱即用的依赖描述符，每个starter包含所需的所有相关依赖。</p>
+
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2017/04/18/Spring-Boot%E5%85%A5%E9%97%A8/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://jeffzzf.github.io/2017/04/14/Java%E5%B9%B6%E5%8F%91/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Jeffzzf">
+      <meta itemprop="description" content="Do one thing at a time, and do well.">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Noob">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2017/04/14/Java%E5%B9%B6%E5%8F%91/" class="post-title-link" itemprop="url">Java注解</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2017-04-14 17:42:39" itemprop="dateCreated datePublished" datetime="2017-04-14T17:42:39+08:00">2017-04-14</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2019-08-28 20:23:34" itemprop="dateModified" datetime="2019-08-28T20:23:34+08:00">2019-08-28</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Java/" itemprop="url" rel="index"><span itemprop="name">Java</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Java/Basic/" itemprop="url" rel="index"><span itemprop="name">Basic</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>注解又叫元数据，可以提供代码难以描述的信息，有助于减轻编写“样板”代码的负担，编写更加简洁易读的代码。</p>
+<h1 id="注解定义"><a href="#注解定义" class="headerlink" title="注解定义"></a>注解定义</h1><p>注解的定义类似接口的定义，除了<code>@</code>符号外，注解很像一个空的接口，并且也会被编译成class文件。定义注解时需要一些元注解(meta-annotation)，例如@Target和@Retention，@Target用来定义注解用于什么地方（例如一个方法还是一个域），@Retention用来定义注解在哪一个级别可用（源代码中、类文件中还是运行时）。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Target</span>(ElementType.TYPE)</span><br><span class="line"><span class="meta">@Retention</span>(RetentionPolicy.RUNTIME)</span><br><span class="line"><span class="keyword">public</span> <span class="meta">@interface</span> UserCase &#123;</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">id</span><span class="params">()</span></span>;</span><br><span class="line">    <span class="function">String <span class="title">description</span><span class="params">()</span> <span class="keyword">default</span> "Default description"</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>注解中一般会包含一些元素表示一些值。分析处理注解时，可以利用这些值。注解的元素看起来就像接口的方法，唯一的区别是可以指定默认值。注解元素的可用类型包括：</p>
+<ol>
+<li>所有基本类型(int, float, boolean等),不能使用包装类</li>
+<li>String</li>
+<li>Class</li>
+<li>enum</li>
+<li>Annotation</li>
+<li>以上类型的数组<br>对于非基本类型元素，无论在源代码声明时，还是在注解接口定义默认值时，都不能以null作为值。如果需要表示对应值不存在，可以用特殊的值表示， 例如空字符串、负数等。</li>
+</ol>
+<h1 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h1><p>《Java编程思想》</p>
+
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2017/04/14/Java%E5%B9%B6%E5%8F%91/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://jeffzzf.github.io/2017/03/31/Web%E6%9E%B6%E6%9E%84%E6%BC%94%E5%8C%96/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -773,324 +1070,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://jeffzzf.github.io/2015/10/26/File-System/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Jeffzzf">
-      <meta itemprop="description" content="Do one thing at a time, and do well.">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Noob">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2015/10/26/File-System/" class="post-title-link" itemprop="url">File System</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2015-10-26 21:59:38" itemprop="dateCreated datePublished" datetime="2015-10-26T21:59:38+08:00">2015-10-26</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2019-08-28 20:23:34" itemprop="dateModified" datetime="2019-08-28T20:23:34+08:00">2019-08-28</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Linux/" itemprop="url" rel="index"><span itemprop="name">Linux</span></a>
-                </span>
-                  ，
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Linux/File-System/" itemprop="url" rel="index"><span itemprop="name">File System</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="File-Types"><a href="#File-Types" class="headerlink" title="File Types"></a>File Types</h1><ol>
-<li>Regular file. There is no distinction to the Unix kernel whether this data is text or binary. Any interpretation of the contents of a regular fiel is left to the application processing the file.<blockquote>
-<p>To execute a program, the kernel must understand its format. All binary executable files conform to a format that allows the kernel to identify where to load a program’s text and data.</p>
-</blockquote>
-</li>
-<li>Directory file. A file that contains the name of other files and pointers to information on these files. Any process that has read permission for a directory file can read the contents of the directory, but only the kernel can write directly to a directory file. Processes must use specify functions to make change to a directory.</li>
-<li>Block special file. A type of file proving buffered I/O access in fixed-size units to devices as disk drives.</li>
-<li>Character special file. A type of file providing unbuffered I/O access in variable-sized units to devices. All devices on a system are either block-special files or character special files.</li>
-<li>FIFO. A type of file used for communication between process. It’s sometimes called a named pipe.</li>
-<li>Socket. A type of file used for network commucation between processes. A socket can also be used for non-network communication between processes on a single host.</li>
-<li>Symbolic link. A type of file that points to another file.</li>
-</ol>
-<h1 id="File-Access"><a href="#File-Access" class="headerlink" title="File Access"></a>File Access</h1><p>The file access tests that the kernel perform each time a process opens, creates or deletes a file. The tests depend on the owners of the file and the effective IDs of the process. The tests performed by the kernel are as follows:</p>
-<ol>
-<li>If the effective Id of the process is 0(the superuser), access is allowed.</li>
-<li>If the effective user ID of the process equals the owner ID of the file, access is allowed if the appropriate access permission bit is set. Otherwise, permission is denied.</li>
-<li>If the effective user ID of the process of one of the supplementary group IDs of the process equals the group ID of the file, access is allowed if the appropriate group access permission bit is set. Otherwise, permission is denied.</li>
-<li>If the appropriate other access permission bit is set, access is allowed. Otherwise, permission is denied.</li>
-</ol>
-<p>These four steps are tried in sequence. For example, if the process owns the file, access is granted or denied based only on the user access permission; the froup permission are never looked at.</p>
-<h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><p>Adcanced Programming in the Unix Environment(Third Edition)</p>
-
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2015/10/26/File-System/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://jeffzzf.github.io/2015/10/25/Unbuffered-I-O/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Jeffzzf">
-      <meta itemprop="description" content="Do one thing at a time, and do well.">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Noob">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2015/10/25/Unbuffered-I-O/" class="post-title-link" itemprop="url">Buffered I/O</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2015-10-25 19:46:16" itemprop="dateCreated datePublished" datetime="2015-10-25T19:46:16+08:00">2015-10-25</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2019-08-28 20:23:34" itemprop="dateModified" datetime="2019-08-28T20:23:34+08:00">2019-08-28</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Linux/" itemprop="url" rel="index"><span itemprop="name">Linux</span></a>
-                </span>
-                  ，
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Linux/IO/" itemprop="url" rel="index"><span itemprop="name">IO</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>The term unbuffered means that each read or write invokes a system call in the kernel. These unbuffered I/O functions are not part of ISO C, but are part of POSIX.1.</p>
-<h1 id="File-descriptors"><a href="#File-descriptors" class="headerlink" title="File descriptors"></a>File descriptors</h1><p>To the kernel, all open files are refered to by file descriptors. A file descriptor is a non-negative integer. When we open an existing file or create a new file, the kernel returns a file descriptor to the process. When we want to read or write a file, we identify the file with the file descriptor that was returned by the open or create as an argument.</p>
-<p>By convention, Unix shells associate file descriptor 0 with standard input of a process, file descriptor 1 with the standard output, and file descriptor 2 with the standard error.</p>
-<p>The file descriptors returned by open and openat is guaranteed to be the lowest-numbered unused descriptor.</p>
-<h1 id="File-sharing"><a href="#File-sharing" class="headerlink" title="File sharing"></a>File sharing</h1><p>The Unix supports the sharing of open files among different processes. The kernel uses three data structures to present an open file, and the relationships among them determine the effect one process has on another with regard to file sharing.</p>
-<ol>
-<li>Every process has an entry in the process table. Within each process table entry is a table of open file descriptors, which we can think of as a vector, with one entry per descriptor. Associated with each file descriptor are:</li>
-</ol>
-<ul>
-<li>The file descriptor flags(close-on-exec)</li>
-<li>A pointer to a file table entry</li>
-</ul>
-<ol start="2">
-<li>The kernel maintains a file table for all open files. Each file table entry contains</li>
-</ol>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2015/10/25/Unbuffered-I-O/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://jeffzzf.github.io/2015/10/06/%E5%9B%BE%E5%9F%BA%E7%A1%80%E7%AE%97%E6%B3%95%E6%80%BB%E7%BB%93/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Jeffzzf">
-      <meta itemprop="description" content="Do one thing at a time, and do well.">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Noob">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2015/10/06/%E5%9B%BE%E5%9F%BA%E7%A1%80%E7%AE%97%E6%B3%95%E6%80%BB%E7%BB%93/" class="post-title-link" itemprop="url">图基础算法总结</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2015-10-06 19:46:41" itemprop="dateCreated datePublished" datetime="2015-10-06T19:46:41+08:00">2015-10-06</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2019-08-28 20:23:34" itemprop="dateModified" datetime="2019-08-28T20:23:34+08:00">2019-08-28</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E7%AE%97%E6%B3%95/" itemprop="url" rel="index"><span itemprop="name">算法</span></a>
-                </span>
-                  ，
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E7%AE%97%E6%B3%95/%E5%9B%BE/" itemprop="url" rel="index"><span itemprop="name">图</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="数据结构"><a href="#数据结构" class="headerlink" title="数据结构"></a>数据结构</h1><p>对于点稠密的图，可以使用邻接矩阵表示g[n][n]，其中n表示图中的节点数，g[i][j]表示是否存在从i到j的路径（无权图）或者从节点i到节点j的权重（有权图）。</p>
-<p>对于边稠密的图，如果是无权图可以使用邻接表<code>List&lt;Integer&gt;[] g</code>表示，其中g[i]表示与节点i邻接的点；如果是有权图，可以使用邻接表’List&lt;Integer, Map&lt;Integer, Integer&gt;&gt; g`或者</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Edge</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> to;</span><br><span class="line">    <span class="keyword">int</span> cost;</span><br><span class="line">&#125;</span><br><span class="line">List&lt;Integer, Edge&gt; g;</span><br></pre></td></tr></table></figure>
-
-<p>两种表示图的数据结构方法的算法分析如下：</p>
-<table>
-<thead>
-<tr>
-<th>ADT</th>
-<th>空间复杂度</th>
-<th>检查w是否与v邻接</th>
-<th>遍历所有与v邻接的点</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>邻接矩阵</td>
-<td>V * V</td>
-<td>1</td>
-<td>V</td>
-</tr>
-<tr>
-<td>连接表</td>
-<td>E + V</td>
-<td>degree(v)</td>
-<td>degree(v)</td>
-</tr>
-</tbody></table>
-<h1 id="搜索"><a href="#搜索" class="headerlink" title="搜索"></a>搜索</h1><h1 id="深度优先搜索（DFS）"><a href="#深度优先搜索（DFS）" class="headerlink" title="深度优先搜索（DFS）"></a>深度优先搜索（DFS）</h1><p>使用一个标记数组标记已被访问过的节点，每次递归标记当前节点并访问与当前节点邻接的节点。可使用并查集记录dfs过程中节点的前驱节点，需要求源点到某节点路径时，从并查集中恢复即可。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">dfs</span><span class="params">(List&lt;Integer&gt;[] g, <span class="keyword">boolean</span>[] marked, <span class="keyword">int</span> cur)</span> </span>&#123;</span><br><span class="line">    marked[cur] = <span class="keyword">true</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i : g[cur]) &#123;</span><br><span class="line">        <span class="keyword">if</span>(!marked[i])</span><br><span class="line">            dfs(g, marked, i);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2015/10/06/%E5%9B%BE%E5%9F%BA%E7%A1%80%E7%AE%97%E6%B3%95%E6%80%BB%E7%BB%93/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1160,7 +1139,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">125</span>
+          <span class="site-state-item-count">128</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -1173,7 +1152,7 @@
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">110</span>
+        <span class="site-state-item-count">111</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
